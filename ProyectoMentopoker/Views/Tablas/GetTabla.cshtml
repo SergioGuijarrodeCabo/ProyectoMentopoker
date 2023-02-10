@@ -1,0 +1,34 @@
+﻿@model List<Celda>
+
+
+
+<table>
+<tbody>
+
+        @{
+            int i = 1;
+        }
+        @foreach(Celda celda in Model){
+           
+            if(i == 0)
+            {
+                @:<tr>
+            }
+              <td style="background-color: @celda.Background_color; color:@celda.Color" id="@celda.Cell_id">@celda.Cell_id</td>
+            if (i == 13)
+            {
+                @:</tr>
+                i = 0;
+            }
+           i++;
+            
+
+
+    }
+
+
+
+</tbody>
+
+
+</table>
