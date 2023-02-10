@@ -2,7 +2,7 @@
 
 
 
-<table>
+<table class="table table-bordered">
 <tbody>
 
         @{
@@ -14,7 +14,7 @@
             {
                 @:<tr>
             }
-              <td style="background-color: @celda.Background_color; color:@celda.Color" id="@celda.Cell_id">@celda.Cell_id</td>
+              <td style="background-color: @celda.Background_color; color:@celda.Color" id="@celda.Cell_id"><button style="background-color: @celda.Background_color; color:@celda.Color; font-weight:500; border: none;">@celda.Cell_id</button></td>
             if (i == 13)
             {
                 @:</tr>
