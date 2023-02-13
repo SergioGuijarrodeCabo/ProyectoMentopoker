@@ -5,7 +5,7 @@ using ProyectoMentopoker.Models;
 //CREATE OR ALTER PROCEDURE SP_GET_TABLA
 //(@ID INT)
 //AS
-//SELECT * FROM Tablas WHERE table_id=@ID
+//SELECT * FROM celdas WHERE table_id=@ID
 //GO
 
 
@@ -38,7 +38,7 @@ namespace ProyectoMentopoker.Repositories
         public List<Celda> GetTabla(int id)
         {
             List<Celda> tabla = new List<Celda>();
-            string sql = "select * from Tablas where table_id=@ID";
+            string sql = "select * from Celdas where table_id=@ID";
 
             SqlParameter pamid = new SqlParameter("@ID", id);
 
@@ -55,13 +55,14 @@ namespace ProyectoMentopoker.Repositories
          
             while (this.reader.Read())
             {
-                
+
+                int identificador = int.Parse(this.reader["Identificador"].ToString());
                 int table_id = int.Parse(this.reader["table_id"].ToString());
                 string cell_id = this.reader["cell_id"].ToString();
                 string background_color = this.reader["background_color"].ToString();
                 string text_color = this.reader["text_color"].ToString();
 
-                Celda celda = new Celda(table_id, cell_id, background_color, text_color);
+                Celda celda = new Celda(identificador, table_id, cell_id, background_color, text_color);
                 tabla.Add(celda);
             }
 

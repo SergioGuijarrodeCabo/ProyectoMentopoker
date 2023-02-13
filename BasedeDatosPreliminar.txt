@@ -1,0 +1,50 @@
+CREATE TABLE Tablas(
+Table_id int primary key,
+Condicion NVARCHAR(50) NOT NULL);
+
+
+CREATE TABLE Celdas (
+    Identificador int NOT NULL PRIMARY KEY,
+    Table_id int FOREIGN KEY REFERENCES Tablas(Table_id),
+    Cell_id NVARCHAR(4) NOT NULL,
+	Background_color NVARCHAR(20) NOT NULL
+);
+
+CREATE TABLE Usuarios(
+	Usuario_id NVARCHAR(50) NOT NULL PRIMARY KEY,
+	Email	NVARCHAR(50)	NOT NULL,
+	Pass	NVARCHAR(50) NOT NULL,
+	Rol		NVARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Partidas(
+	Partida_id NVARCHAR(50) NOT NULL PRIMARY KEY,
+	Cash_inicial	FLOAT	NOT NULL,
+	Cash_final		FLOAT	NOT NULL,
+	Fecha			DATE	NOT NULL,
+	Comentarios	NVARCHAR(200) NULL,
+	Usuario_id	NVARCHAR(50)	FOREIGN KEY REFERENCES Usuarios(Usuario_id),
+	);
+
+
+CREATE TABLE Rondas(
+	Ronda_id NVARCHAR(50) PRIMARY KEY,
+	Cantidad_jugada FLOAT null,
+	Ganancias	FLOAT not null,
+	Partida_id NVARCHAR(50) FOREIGN KEY REFERENCES Partidas(Partida_id),
+	);
+
+CREATE TABLE Jugadas (
+    Jugada_id NVARCHAR(50) NOT NULL PRIMARY KEY,
+	Cantidad_jugada	FLOAT null,
+	Seguimiento_Tabla	bit	not null,
+    Identificador int FOREIGN KEY REFERENCES Celdas(Identificador),
+	Ronda_id NVARCHAR(50) FOREIGN KEY REFERENCES RondaS(Ronda_id),
+);
+
+
+ALTER TABLE Celdas 
+    
+	ADD Text_color NVARCHAR(20) NOT NULL;
+
+
