@@ -15,6 +15,13 @@ namespace ProyectoMentopoker.Controllers
         }
 
 
+        public IActionResult GetTabla()
+        {
+         
+            return View();
+        }
+
+        [HttpPost]
         public IActionResult GetTabla(int id)
         {
             this.repo = new RepositoryTablas();
