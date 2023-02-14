@@ -1,0 +1,781 @@
+﻿@model List<Celda>
+
+@{
+    var i = 1;
+    var y = 1;
+}
+
+    <form method="post">
+        <label>SELECCIONE UNA TABLA</label>
+        <select name="id" class="form-control">
+        @for ( i = 1; i <= 249; i++)
+        {
+            <option value="@i">@i</option>
+        }
+            
+        </select>
+    <button class="btn btn-outline-dark">
+        Mostrar Tabla
+    </button>
+
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     <div id="botones">
+    
+    <div id="botonesPrincipales">
+  <input type="button" id="BBvsLimp" value="BB vs Limp" onclick="mostrarBotones('dBBvsLimp')" style="color: white; background-color: red">
+  <input type="button" id="DefendBB" value="Defend BB" onclick="mostrarBotones('dDefendBB')"style="color: white; background-color: red">
+  <input type="button" id="Flat+3B" value="Flat + 3B" onclick="mostrarBotones('dFlat3B')"style="color: white; background-color: red">
+  <input type="button" id="SQZ+CCMW" value="SQZ + CC MW" onclick="mostrarBotones('dSQZ')"style="color: white; background-color: red">
+  <input type="button" id="OS" value="OS" onclick="mostrarBotones('dOS')"style="color: white; background-color: red">
+  <input type="button" id="OR" value="OR" onclick="mostrarBotones('dOR')"style="color: white; background-color: red">
+  <input type="button" id="Reshove" value="Reshove"  onclick="mostrarBotones('dReshove')"style="color: white; background-color: red">
+  <input type="button" id="vsOS" value="vs OS" onclick="mostrarBotones('dvsOS')"style="color: white; background-color: red"> 
+  <input type="button" id="SBLimpia" value="SB Limpia" onclick="mostrarBotones('dSBLimpia')"style="color: white; background-color: red">
+  <input type="button" id="vs3Bet" value="vs 3Bet" onclick="mostrarBotones('dVs3BET')"style="color: white; background-color: red">
+    </div>
+
+  <div id="botonesSecundarios">
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="dBBvsLimp">
+
+    <input type="button" id="bBBvsLimp_100BB" value="100 BB" onclick="generarTabla(1, 'dBBvsLimp', '', '', 1001)"style="color: white; background-color: blue">
+    <input type="button" id="bBBvsLimp_50BB" value="50 BB" onclick="generarTabla(2, 'dBBvsLimp', '', '', 1001)"style="color: white; background-color: blue">
+    <input type="button" id="bBBvsLimp_30BB" value="30 BB" onclick="generarTabla(3, 'dBBvsLimp', '', '', 1001)"style="color: white; background-color: blue">
+    <input type="button" id="bBBvsLimp_20BB" value="20 BB" onclick="generarTabla(4, 'dBBvsLimp', '', '', 1001)"style="color: white; background-color: blue">
+    <input type="button" id="bBBvsLimp_15BB" value="15 BB" onclick="generarTabla(5, 'dBBvsLimp', '', '', 1001)"style="color: white; background-color: blue">
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div id="dDefendBB">
+    <input type="button" id="bDefendBB_100BB" value="100 BB" onclick="mostrarBotones('d100BB', 'dDefendBB')"style="color: white; background-color: blue">
+    <input type="button" id="bDefendBB_50BB" value="50 BB" onclick="mostrarBotones('d50BB', 'dDefendBB')"style="color: white; background-color: blue">
+    <input type="button" id="bDefendBB_30BB" value="30 BB" onclick="mostrarBotones('d30BB', 'dDefendBB')"style="color: white; background-color: blue">
+    <input type="button" id="bDefendBB_20BB" value="20 BB" onclick="mostrarBotones('d20BB', 'dDefendBB')"style="color: white; background-color: blue">
+    <input type="button" id="bDefendBB_15BB" value="15 BB" onclick="mostrarBotones('d15BB', 'dDefendBB')"style="color: white; background-color: blue">
+    </div>
+
+  <div id="d100BB">
+    <input type="button" id="b100BB_BBvsEP" value="BB vs EP" onclick="generarTabla(6, 'd100BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b100BB_BBvsMP" value="BB vs MP" onclick="generarTabla(7, 'd100BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b100BB_BBvsHJ" value="BB vs HJ" onclick="generarTabla(8, 'd100BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b100BB_BBvsCO" value="BB vs CO" onclick="generarTabla(9, 'd100BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b100BB_BBvsBTN" value="BB vs BTN" onclick="generarTabla(10, 'd100BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b100BB_BBvsSB" value="BB vs SB" onclick="generarTabla(11, 'd100BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    </div>
+
+  <div id="d50BB">
+    <input type="button" id="b50BB_BBvsEP" value="BB vs EP" onclick="generarTabla(12, 'd50BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b50BB_BBvsMP" value="BB vs MP" onclick="generarTabla(13, 'd50BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b50BB_BBvsHJ" value="BB vs HJ" onclick="generarTabla(14, 'd50BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b50BB_BBvsCO" value="BB vs CO" onclick="generarTabla(15, 'd50BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b50BB_BBvsBTN" value="BB vs BTN" onclick="generarTabla(16, 'd50BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b50BB_BBvsSB" value="BB vs SB" onclick="generarTabla(17, 'd50BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    </div>
+
+     <div id="d30BB">
+    <input type="button" id="b30BB_BBvsEP" value="BB vs EP" onclick="generarTabla(18, 'd30BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b30BB_BBvsMP" value="BB vs MP" onclick="generarTabla(19, 'd30BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b30BB_BBvsHJ" value="BB vs HJ" onclick="generarTabla(20, 'd30BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b30BB_BBvsCO" value="BB vs CO" onclick="generarTabla(21, 'd30BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b30BB_BBvsBTN" value="BB vs BTN" onclick="generarTabla(2200, 'd30BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b30BB_BBvsSB" value="BB vs SB" onclick="generarTabla(23, 'd30BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    </div>
+
+    <div id="d20BB">
+    <input type="button" id="b20BB_BBvsEP" value="BB vs EP" onclick="generarTabla(24, 'd20BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b20BB_BBvsMP" value="BB vs MP" onclick="generarTabla(25, 'd20BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b20BB_BBvsHJ" value="BB vs HJ" onclick="generarTabla(26, 'd20BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b20BB_BBvsCO" value="BB vs CO" onclick="generarTabla(27, 'd20BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b20BB_BBvsBTN" value="BB vs BTN" onclick="generarTabla(28, 'd20BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b20BB_BBvsSB" value="BB vs SB" onclick="generarTabla(29, 'd20BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    </div>
+
+    <div id="d15BB">
+    <input type="button" id="b15BB_BBvsEP" value="BB vs EP" onclick="generarTabla(30, 'd15BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b15BB_BBvsMP" value="BB vs MP" onclick="generarTabla(31, 'd15BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b15BB_BBvsHJ" value="BB vs HJ" onclick="generarTabla(32, 'd15BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b15BB_BBvsCO" value="BB vs CO" onclick="generarTabla(3300, 'd15BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b15BB_BBvsBTN" value="BB vs BTN" onclick="generarTabla(34, 'd15BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    <input type="button" id="b15BB_BBvsSB" value="BB vs SB" onclick="generarTabla(35, 'd15BB', 'dDefendBB', '', 1002)"style="color: white; background-color: green">
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+<div id="dFlat3B">
+ <input type="button" id="bFlat3B_100BB" value="100 BB" onclick="mostrarBotones('dFlat100BB', 'dFlat3B')"style="color: white; background-color: blue">
+    <input type="button" id="bFlat3B_50BB" value="50 BB" onclick="mostrarBotones('dFlat50BB', 'dFlat3B')"style="color: white; background-color: blue">
+    <input type="button" id="bFlat3B_30BB" value="30 BB" onclick="mostrarBotones('dFlat30BB', 'dFlat3B')"style="color: white; background-color: blue">
+    <input type="button" id="bFlat3B_20BB" value="20 BB" onclick="mostrarBotones('dFlat20BB', 'dFlat3B')"style="color: white; background-color: blue">
+</div>
+
+
+<div id="dFlat100BB">
+ <input type="button" id="bFlat100BB_SB" value="SB" onclick="mostrarBotones('dFlat100BB_SB', 'dFlat100BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat100BB_BTN" value="BTN" onclick="mostrarBotones('dFlat100BB_BTN', 'dFlat100BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat100BB_CO" value="CO" onclick="mostrarBotones('dFlat100BB_CO', 'dFlat100BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat100BB_HJ" value="HJ" onclick="mostrarBotones('dFlat100BB_HJ', 'dFlat100BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat100BB_MP" value="MP" onclick="generarTabla(36, 'dFlat100BB', 'dFlat3B', '', 1003)"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat100BB_EP" value="EP" onclick="generarTabla(37, 'dFlat100BB', 'dFlat3B', '', 1003)"style="color: white; background-color: yellow">
+</div>
+
+<div id="dFlat100BB_SB">
+ <input type="button" id="bFlat100BB_SB_SBvsEP" value="SB vs EP" onclick="generarTabla(38, 'dFlat100BB_SB', 'dFlat100BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat100BB_SB_SBvsHJ" value="SB vs HJ" onclick="generarTabla(39, 'dFlat100BB_SB', 'dFlat100BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat100BB_SB_SBvsCO" value="SB vs CO" onclick="generarTabla(40, 'dFlat100BB_SB', 'dFlat100BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat100BB_SB_SBvsBTN" value="SB vs BTN" onclick="generarTabla(41, 'dFlat100BB_SB', 'dFlat100BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+
+<div id="dFlat100BB_BTN">
+ <input type="button" id="bFlat100BB_BTN_BTNvsEP" value="BTN vs EP" onclick="generarTabla(42, 'dFlat100BB_BTN', 'dFlat100BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat100BB_BTN_BTNvsHJ" value="BTN vs HJ" onclick="generarTabla(43, 'dFlat100BB_BTN', 'dFlat100BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat100BB_BTN_BTNvsCO" value="BTN vs CO" onclick="generarTabla(4400, 'dFlat100BB_BTN', 'dFlat100BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+
+<div id="dFlat100BB_CO">
+    <input type="button" id="bFlat100BB_CO_COvsEP" value="CO vs EP" onclick="generarTabla(45, 'dFlat100BB_CO', 'dFlat100BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat100BB_CO_COvsHJ" value="CO vs HJ" onclick="generarTabla(46, 'dFlat100BB_CO', 'dFlat100BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+
+<div id="dFlat100BB_HJ">
+    <input type="button" id="bFlat100BB_HJ_HJvsEP" value="HJ vs EP" onclick="generarTabla(47, 'dFlat100BB_HJ', 'dFlat100BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat100BB_HJ_HJ-MP" value="HJ-MP" onclick="generarTabla(48, 'dFlat100BB_HJ', 'dFlat100BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+
+
+
+<div id="dFlat50BB">
+ <input type="button" id="bFlat50BB_SB" value="SB" onclick="mostrarBotones('dFlat50BB_SB', 'dFlat50BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat50BB_BTN" value="BTN" onclick="mostrarBotones('dFlat50BB_BTN', 'dFlat50BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat50BB_CO" value="CO" onclick="mostrarBotones('dFlat50BB_CO', 'dFlat50BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat50BB_HJ" value="HJ" onclick="mostrarBotones('dFlat50BB_HJ', 'dFlat50BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat50BB_MP" value="MP" onclick="generarTabla(49,'dFlat50BB', 'dFlat3B', '', 1003)"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat50BB_EP" value="EP" onclick="generarTabla(50,'dFlat50BB', 'dFlat3B', '', 1003)"style="color: white; background-color: yellow">
+</div>
+
+<div id="dFlat50BB_SB">
+ <input type="button" id="bFlat50BB_SB_SBvsEP" value="SB vs EP" onclick="generarTabla(51, 'dFlat50BB_SB', 'dFlat50BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat50BB_SB_SBvsHJ" value="SB vs HJ" onclick="generarTabla(52, 'dFlat50BB_SB', 'dFlat50BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat50BB_SB_SBvsCO" value="SB vs CO" onclick="generarTabla(53, 'dFlat50BB_SB', 'dFlat50BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat50BB_SB_SBvsBTN" value="SB vs BTN" onclick="generarTabla(54, 'dFlat50BB_SB', 'dFlat50BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+<div id="dFlat50BB_BTN">
+ <input type="button" id="bFlat50BB_BTN_BTNvsEP" value="BTN vs EP" onclick="generarTabla(5500, 'dFlat50BB_BTN', 'dFlat50BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat50BB_BTN_BTNvsHJ" value="BTN vs HJ" onclick="generarTabla(56, 'dFlat50BB_BTN', 'dFlat50BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat50BB_BTN_BTNvsCO" value="BTN vs CO" onclick="generarTabla(57, 'dFlat50BB_BTN', 'dFlat50BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+<div id="dFlat50BB_CO">
+    <input type="button" id="bFlat50BB_CO_COvsEP" value="CO vs EP" onclick="generarTabla(58, 'dFlat50BB_CO', 'dFlat50BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat50BB_CO_COvsHJ" value="CO vs HJ" onclick="generarTabla(59, 'dFlat50BB_CO', 'dFlat50BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+
+<div id="dFlat50BB_HJ">
+    <input type="button" id="bFlat50BB_HJ_HJvsEP" value="HJ vs EP" onclick="generarTabla(60, 'dFlat50BB_HJ', 'dFlat50BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat50BB_HJ_HJ-MP" value="HJ-MP" onclick="generarTabla(61, 'dFlat50BB_HJ', 'dFlat50BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+
+
+
+
+<div id="dFlat30BB">
+ <input type="button" id="bFlat30BB_SB" value="SB" onclick="mostrarBotones('dFlat30BB_SB', 'dFlat30BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat30BB_BTN" value="BTN" onclick="mostrarBotones('dFlat30BB_BTN', 'dFlat30BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat30BB_CO" value="CO" onclick="mostrarBotones('dFlat30BB_CO', 'dFlat30BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat30BB_HJ" value="HJ" onclick="mostrarBotones('dFlat30BB_HJ', 'dFlat30BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat30BB_MP" value="MP" onclick="generarTabla(62,'dFlat30BB', 'dFlat3B', '', 1003)"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat30BB_EP" value="EP" onclick="generarTabla(63,'dFlat30BB', 'dFlat3B', '', 1003)"style="color: white; background-color: yellow">
+</div>
+
+<div id="dFlat30BB_SB">
+ <input type="button" id="bFlat30BB_SB_SBvsEP" value="SB vs EP" onclick="generarTabla(64, 'dFlat30BB_SB', 'dFlat30BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat30BB_SB_SBvsMP" value="SB vs HJ" onclick="generarTabla(65, 'dFlat30BB_SB', 'dFlat30BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat30BB_SB_SBvsCO" value="SB vs CO" onclick="generarTabla(6600, 'dFlat30BB_SB', 'dFlat30BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat30BB_SB_SBvsBTN" value="SB vs BTN" onclick="generarTabla(67, 'dFlat30BB_SB', 'dFlat30BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+<div id="dFlat30BB_BTN">
+ <input type="button" id="bFlat30BB_BTN_BTNvsEP" value="BTN vs EP" onclick="generarTabla(68, 'dFlat30BB_BTN', 'dFlat30BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat30BB_BTN_BTNvsHJ" value="BTN vs HJ" onclick="generarTabla(69, 'dFlat30BB_BTN', 'dFlat30BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat30BB_BTN_BTNvsCO" value="BTN vs CO" onclick="generarTabla(70, 'dFlat30BB_BTN', 'dFlat30BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+<div id="dFlat30BB_CO">
+    <input type="button" id="bFlat30BB_CO_COvsEP" value="CO vs EP" onclick="generarTabla(71, 'dFlat30BB_CO', 'dFlat30BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat30BB_CO_COvsHJ" value="CO vs HJ" onclick="generarTabla(72, 'dFlat30BB_CO', 'dFlat30BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+
+<div id="dFlat30BB_HJ">
+    <input type="button" id="bFlat30BB_HJ_HJvsEP" value="HJ vs EP" onclick="generarTabla(73, 'dFlat30BB_HJ', 'dFlat30BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat30BB_HJ_HJ-MP" value="HJ-MP" onclick="generarTabla(74, 'dFlat30BB_HJ', 'dFlat30BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+
+
+
+<div id="dFlat20BB">
+ <input type="button" id="bFlat20BB_SB" value="SB" onclick="mostrarBotones('dFlat20BB_SB', 'dFlat20BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat20BB_BTN" value="BTN" onclick="mostrarBotones('dFlat20BB_BTN', 'dFlat20BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat20BB_CO" value="CO" onclick="mostrarBotones('dFlat20BB_CO', 'dFlat20BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat20BB_HJ" value="HJ" onclick="mostrarBotones('dFlat20BB_HJ', 'dFlat20BB', 'dFlat3B')"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat20BB_MP" value="MP" onclick="generarTabla(75,'dFlat20BB', 'dFlat3B', '', 1003)"style="color: white; background-color: yellow">
+    <input type="button" id="bFlat20BB_EP" value="EP" onclick="generarTabla(76,'dFlat20BB', 'dFlat3B', '', 1003)"style="color: white; background-color: yellow">
+</div>
+
+<div id="dFlat20BB_SB">
+ <input type="button" id="bFlat20BB_SB_SBvsEP" value="SB vs EP" onclick="generarTabla(7700, 'dFlat20BB_SB', 'dFlat20BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat20BB_SB_SBvsMP" value="SB vs MP" onclick="generarTabla(78, 'dFlat20BB_SB', 'dFlat20BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat20BB_SB_SBvsHJ" value="SB vs HJ" onclick="generarTabla(79, 'dFlat20BB_SB', 'dFlat20BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat20BB_SB_SBvsCO" value="SB vs CO" onclick="generarTabla(80, 'dFlat20BB_SB', 'dFlat20BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat20BB_BTN_SBvsBTN" value="SB vs BTN" onclick="generarTabla(81, 'dFlat20BB_BTN', 'dFlat20BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+<div id="dFlat20BB_BTN">
+ <input type="button" id="bFlat20BB_BTN_BTNvsEP" value="BTN vs EP" onclick="generarTabla(82, 'dFlat20BB_BTN', 'dFlat20BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+  <input type="button" id="bFlat20BB_BTN_BTNvsMP" value="BTN vs MP" onclick="generarTabla(83, 'dFlat20BB_BTN', 'dFlat20BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+  <input type="button" id="bFlat20BB_BTN_BTNvsHJ" value="BTN vs HJ" onclick="generarTabla(84, 'dFlat20BB_BTN', 'dFlat20BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+  <input type="button" id="bFlat20BB_BTN_BTNvsCO" value="BTN vs CO" onclick="generarTabla(85, 'dFlat20BB_BTN', 'dFlat20BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+
+
+</div>
+
+<div id="dFlat20BB_CO">
+    <input type="button" id="bFlat20BB_CO_COvsEP" value="CO vs EP" onclick="generarTabla(86, 'dFlat20BB_CO', 'dFlat20BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat20BB_CO_COvsHJ" value="CO vs HJ" onclick="generarTabla(87, 'dFlat20BB_CO', 'dFlat20BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+
+<div id="dFlat20BB_HJ">
+    <input type="button" id="bFlat20BB_HJ_HJvsUTG" value="HJ vs EP" onclick="generarTabla(8800, 'dFlat20BB_HJ', 'dFlat20BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+    <input type="button" id="bFlat20BB_HJ_HJvsMP" value="HJ-MP" onclick="generarTabla(89, 'dFlat20BB_HJ', 'dFlat20BB', 'dFlat3B', 1003)"style="color: white; background-color: green">
+</div>
+
+
+
+<div id="dSQZ">
+ <input type="button" id="bSQZ100BB" value="100 BB" onclick="mostrarBotones('dSQZ100BB', 'dSQZ')"style="color: white; background-color: blue">
+    <input type="button" id="bSQZ50BB" value="50 BB" onclick="mostrarBotones('dSQZ50BB', 'dSQZ')"style="color: white; background-color: blue">
+    <input type="button" id="bSQZ30BB" value="30 BB" onclick="mostrarBotones('dSQZ30BB', 'dSQZ')"style="color: white; background-color: blue">
+    <input type="button" id="bSQZ20BB" value="20 BB" onclick="mostrarBotones('dSQZ20BB', 'dSQZ')"style="color: white; background-color: blue">
+</div>
+
+<div id="dSQZ100BB">
+ <input type="button" id="bSQZ100BB_BB" value="BB" onclick="mostrarBotones('dSQZ100BB_BB', 'dSQZ100BB', 'dSQZ')"style="color: white; background-color: yellow">
+ <input type="button" id="bSQZ100BB_SB" value="SB" onclick="mostrarBotones('dSQZ100BB_SB', 'dSQZ100BB', 'dSQZ')"style="color: white; background-color: yellow">
+ <input type="button" id="bSQZ100BB_BTN" value="BTN" onclick="mostrarBotones('dSQZ100BB_BTN', 'dSQZ100BB', 'dSQZ')"style="color: white; background-color: yellow">
+</div>
+
+<div id="dSQZ100BB_BB">
+ <input type="button" id="bSQZ100BB_BB_vsBTN&SB" value="BB vs BTN&SB" onclick="generarTabla(90, 'dSQZ100BB_BB', 'dSQZ100BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ100BB_BB_HJ+BTN-CO" value="BB vs HJ+BTN-CO" onclick="generarTabla(91, 'dSQZ100BB_BB', 'dSQZ100BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ100BB_BB_EP+LP" value="BB vs EP+LP" onclick="generarTabla(92, 'dSQZ100BB_BB', 'dSQZ100BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+</div>
+
+<div id="dSQZ100BB_SB">
+ <input type="button" id="bSQZ100BB_SB_HJ+BTN-CO" value="SB vs HJ+BTN-CO" onclick="generarTabla(93, 'dSQZ100BB_SB', 'dSQZ100BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ100BB_SB_SBvsEP+MP" value="SB vs EP+MP" onclick="generarTabla(94, 'dSQZ100BB_SB', 'dSQZ100BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+</div>
+
+<div id="dSQZ100BB_BTN">
+ <input type="button" id="bSQZ100BB_BTN_BuvsEP+MP" value="Bu vs EP+MP" onclick="generarTabla(95, 'dSQZ100BB_BTN', 'dSQZ100BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ100BB_BTN_BuvsLP+LP" value="Bu vs LP+LP" onclick="generarTabla(96, 'dSQZ100BB_BTN', 'dSQZ100BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+</div>
+
+
+<div id="dSQZ50BB">
+ <input type="button" id="bSQZ50BB_BB" value="BB" onclick="mostrarBotones('dSQZ50BB_BB', 'dSQZ50BB', 'dSQZ')"style="color: white; background-color: yellow">
+ <input type="button" id="bSQZ50BB_SB" value="SB" onclick="mostrarBotones('dSQZ50BB_SB', 'dSQZ50BB', 'dSQZ')"style="color: white; background-color: yellow">
+ <input type="button" id="bSQZ50BB_BTN" value="BTN" onclick="mostrarBotones('dSQZ50BB_BTN', 'dSQZ50BB', 'dSQZ')"style="color: white; background-color: yellow">
+</div>
+
+<div id="dSQZ50BB_BB">
+ <input type="button" id="bSQZ50BB_BB_vsBTN&SB" value="BB vs BTN&SB" onclick="generarTabla(97, 'dSQZ50BB_BB', 'dSQZ50BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ50BB_BB_HJ+BTN-CO" value="BB vs HJ+BTN-CO" onclick="generarTabla(98, 'dSQZ50BB_BB', 'dSQZ50BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ50BB_BB_EP+LP" value="BB vs EP+LP" onclick="generarTabla(9900, 'dSQZ50BB_BB', 'dSQZ50BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+</div>
+
+<div id="dSQZ50BB_SB">
+ <input type="button" id="bSQZ50BB_SB_HJ+BTN-CO" value="SB vs HJ+BTN-CO" onclick="generarTabla(100, 'dSQZ50BB_SB', 'dSQZ50BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ50BB_SB_SBvsEP+MP" value="SB vs EP+MP" onclick="generarTabla(10100, 'dSQZ50BB_SB', 'dSQZ50BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+</div>
+
+<div id="dSQZ50BB_BTN">
+ <input type="button" id="bSQZ50BB_BTN_BuvsEP+MP" value="Bu vs EP+MP" onclick="generarTabla(102, 'dSQZ50BB_BTN', 'dSQZ50BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ50BB_BTN_BuvsLP+LP" value="Bu vs LP+LP" onclick="generarTabla(103, 'dSQZ50BB_BTN', 'dSQZ50BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+</div>
+
+
+
+<div id="dSQZ30BB">
+ <input type="button" id="bSQZ30BB_BB" value="BB" onclick="mostrarBotones('dSQZ30BB_BB', 'dSQZ30BB', 'dSQZ')"style="color: white; background-color: yellow">
+ <input type="button" id="bSQZ30BB_SB" value="SB" onclick="mostrarBotones('dSQZ30BB_SB', 'dSQZ30BB', 'dSQZ')"style="color: white; background-color: yellow">
+ <input type="button" id="bSQZ30BB_BTN" value="BTN" onclick="mostrarBotones('dSQZ30BB_BTN', 'dSQZ30BB', 'dSQZ')"style="color: white; background-color: yellow">
+</div>
+
+<div id="dSQZ30BB_BB">
+ <input type="button" id="bSQZ30BB_BB_vsBTN&SB" value="BB vs BTN&SB" onclick="generarTabla(104, 'dSQZ30BB_BB', 'dSQZ30BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ30BB_BB_HJ+BTN-CO" value="BB vs HJ+BTN-CO" onclick="generarTabla(105, 'dSQZ30BB_BB', 'dSQZ30BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ30BB_BB_EP+LP" value="BB vs EP+LP" onclick="generarTabla(106, 'dSQZ30BB_BB', 'dSQZ30BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+</div>
+
+<div id="dSQZ30BB_SB">
+ <input type="button" id="bSQZ30BB_SB_HJ+BTN-CO" value="SB vs HJ+BTN-CO" onclick="generarTabla(107, 'dSQZ30BB_SB', 'dSQZ30BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ30BB_SB_SBvsEP+MP" value="SB vs EP+MP" onclick="generarTabla(108, 'dSQZ30BB_SB', 'dSQZ30BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+</div>
+
+<div id="dSQZ30BB_BTN">
+ <input type="button" id="bSQZ30BB_BTN_BuvsEP+MP" value="Bu vs EP+MP" onclick="generarTabla(109, 'dSQZ30BB_BTN', 'dSQZ30BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ30BB_BTN_BuvsLP+LP" value="Bu vs LP+LP" onclick="generarTabla(110, 'dSQZ30BB_BTN', 'dSQZ30BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+</div>
+
+
+<div id="dSQZ20BB">
+ <input type="button" id="bSQZ20BB_BB" value="BB" onclick="mostrarBotones('dSQZ20BB_BB', 'dSQZ20BB', 'dSQZ')"style="color: white; background-color: yellow">
+ <input type="button" id="bSQZ20BB_SB" value="SB" onclick="mostrarBotones('dSQZ20BB_SB', 'dSQZ20BB', 'dSQZ')"style="color: white; background-color: yellow">
+ <input type="button" id="bSQZ20BB_BTN" value="BTN" onclick="mostrarBotones('dSQZ20BB_BTN', 'dSQZ20BB', 'dSQZ')"style="color: white; background-color: yellow">
+</div>
+
+<div id="dSQZ20BB_BB">
+ <input type="button" id="bSQZ20BB_BB_vsBTN&SB" value="BB vs BTN&SB" onclick="generarTabla(11100, 'dSQZ20BB_BB', 'dSQZ20BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ20BB_BB_HJ+BTN-CO" value="BB vs HJ+BTN-CO" onclick="generarTabla(112, 'dSQZ20BB_BB', 'dSQZ20BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ20BB_BB_EP+LP" value="BB vs EP+LP" onclick="generarTabla(113, 'dSQZ20BB_BB', 'dSQZ20BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+</div>
+
+<div id="dSQZ20BB_SB">
+ <input type="button" id="bSQZ20BB_SB_HJ+BTN-CO" value="SB vs HJ+BTN-CO" onclick="generarTabla(114, 'dSQZ20BB_SB', 'dSQZ20BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ20BB_SB_SBvsEP+MP" value="SB vs EP+MP" onclick="generarTabla(115, 'dSQZ20BB_SB', 'dSQZ20BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+</div>
+
+<div id="dSQZ20BB_BTN">
+ <input type="button" id="bSQZ20BB_BTN_BuvsEP+MP" value="Bu vs EP+MP" onclick="generarTabla(116, 'dSQZ20BB_BTN', 'dSQZ20BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+<input type="button" id="bSQZ20BB_BTN_BuvsLP+LP" value="Bu vs LP+LP" onclick="generarTabla(117, 'dSQZ20BB_BTN', 'dSQZ20BB', 'dSQZ', 1002)"style="color: white; background-color: green">
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="dOS">
+<input type="button" id="bOS15BB" value="15 BB" onclick="mostrarBotones('dOS15BB', 'dOS')"style="color: white; background-color: blue">
+<input type="button" id="bOS14BB" value="14 BB" onclick="mostrarBotones('dOS14BB', 'dOS')"style="color: white; background-color: blue">
+<input type="button" id="bOS13BB" value="13 BB" onclick="mostrarBotones('dOS13BB', 'dOS')"style="color: white; background-color: blue">
+<input type="button" id="bOS12BB" value="12 BB" onclick="mostrarBotones('dOS12BB', 'dOS')"style="color: white; background-color: blue">
+<input type="button" id="bOS11BB" value="11 BB" onclick="mostrarBotones('dOS11BB', 'dOS')"style="color: white; background-color: blue">
+<input type="button" id="bOS10BB" value="10 BB" onclick="mostrarBotones('dOS10BB', 'dOS')"style="color: white; background-color: blue">
+<input type="button" id="bOS9BB" value="9 BB" onclick="mostrarBotones('dOS9BB', 'dOS')"style="color: white; background-color: blue">
+<input type="button" id="bOS8BB" value="8 BB" onclick="mostrarBotones('dOS8BB', 'dOS')"style="color: white; background-color: blue">
+<input type="button" id="bOS7BB" value="7 BB" onclick="mostrarBotones('dOS7BB', 'dOS')"style="color: white; background-color: blue">
+<input type="button" id="bOS6BB" value="6 BB" onclick="mostrarBotones('dOS6BB', 'dOS')"style="color: white; background-color: blue">
+<input type="button" id="bOS5BB" value="5 BB" onclick="mostrarBotones('dOS5BB', 'dOS')"style="color: white; background-color: blue">
+</div>
+
+
+<div id="dOS15BB">
+<input type="button" id="bOS15BB_UTG" value="UTG" onclick="generarTabla(118,'dOS15BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS15BB_UTG1" value="UTG1" onclick="generarTabla(119,'dOS15BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS15BB_MP" value="MP" onclick="generarTabla(120,'dOS15BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS15BB_LJ" value="LJ" onclick="generarTabla(12100,'dOS15BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS15BB_HJ" value="HJ" onclick="generarTabla(122,'dOS15BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS15BB_CO" value="CO" onclick="generarTabla(123,'dOS15BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS15BB_BTN" value="BTN" onclick="generarTabla(124,'dOS15BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS15BB_SB" value="SB" onclick="generarTabla(125,'dOS15BB', 'dOS', '', '')"style="color: white; background-color: green">
+</div>
+
+<div id="dOS14BB">
+<input type="button" id="bOS14BB_UTG" value="UTG" onclick="generarTabla(126,'dOS14BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS14BB_UTG1" value="UTG1" onclick="generarTabla(127,'dOS14BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS14BB_MP" value="MP" onclick="generarTabla(128,'dOS14BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS14BB_LJ" value="LJ" onclick="generarTabla(129,'dOS14BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS14BB_HJ" value="HJ" onclick="generarTabla(130,'dOS14BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS14BB_CO" value="CO" onclick="generarTabla(13100,'dOS14BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS14BB_BTN" value="BTN" onclick="generarTabla(132,'dOS14BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS14BB_SB" value="SB" onclick="generarTabla(133,'dOS14BB', 'dOS', '', '')"style="color: white; background-color: green">
+</div>
+
+<div id="dOS13BB">
+<input type="button" id="bOS13BB_UTG" value="UTG" onclick="generarTabla(134,'dOS13BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS13BB_UTG1" value="UTG1" onclick="generarTabla(135,'dOS13BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS13BB_MP" value="MP" onclick="generarTabla(136,'dOS13BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS13BB_LJ" value="LJ" onclick="generarTabla(137,'dOS13BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS13BB_HJ" value="HJ" onclick="generarTabla(138,'dOS13BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS13BB_CO" value="CO" onclick="generarTabla(139,'dOS13BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS13BB_BTN" value="BTN" onclick="generarTabla(140,'dOS13BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS13BB_SB" value="SB" onclick="generarTabla(14100,'dOS13BB', 'dOS', '', '')"style="color: white; background-color: green">
+</div>
+
+<div id="dOS12BB">
+<input type="button" id="bOS12BB_UTG" value="UTG" onclick="generarTabla(142,'dOS12BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS12BB_UTG1" value="UTG1" onclick="generarTabla(143,'dOS12BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS12BB_MP" value="MP" onclick="generarTabla(144,'dOS12BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS12BB_LJ" value="LJ" onclick="generarTabla(145,'dOS12BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS12BB_HJ" value="HJ" onclick="generarTabla(146,'dOS12BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS12BB_CO" value="CO" onclick="generarTabla(147,'dOS12BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS12BB_BTN" value="BTN" onclick="generarTabla(148,'dOS12BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS12BB_SB" value="SB" onclick="generarTabla(149,'dOS12BB', 'dOS', '', '')"style="color: white; background-color: green">
+</div>
+
+<div id="dOS11BB">
+<input type="button" id="bOS11BB_UTG" value="UTG" onclick="generarTabla(150,'dOS11BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS11BB_UTG1" value="UTG1" onclick="generarTabla(15100,'dOS11BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS11BB_MP" value="MP" onclick="generarTabla(152,'dOS11BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS11BB_LJ" value="LJ" onclick="generarTabla(153,'dOS11BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS11BB_HJ" value="HJ" onclick="generarTabla(154,'dOS11BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS11BB_CO" value="CO" onclick="generarTabla(155,'dOS11BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS11BB_BTN" value="BTN" onclick="generarTabla(156,'dOS11BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS11BB_SB" value="SB" onclick="generarTabla(157,'dOS11BB', 'dOS', '', '')"style="color: white; background-color: green">
+</div>
+
+<div id="dOS10BB">
+<input type="button" id="bOS10BB_UTG" value="UTG" onclick="generarTabla(158,'dOS10BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS10BB_UTG1" value="UTG1" onclick="generarTabla(159,'dOS10BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS10BB_MP" value="MP" onclick="generarTabla(160,'dOS10BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS10BB_LJ" value="LJ" onclick="generarTabla(16100,'dOS10BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS10BB_HJ" value="HJ" onclick="generarTabla(162,'dOS10BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS10BB_CO" value="CO" onclick="generarTabla(163,'dOS10BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS10BB_BTN" value="BTN" onclick="generarTabla(164,'dOS10BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS10BB_SB" value="SB" onclick="generarTabla(165,'dOS10BB', 'dOS', '', '')"style="color: white; background-color: green">
+</div>
+
+<div id="dOS9BB">
+<input type="button" id="bOS9BB_UTG" value="UTG" onclick="generarTabla(166,'dOS9BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS9BB_UTG1" value="UTG1" onclick="generarTabla(167,'dOS9BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS9BB_MP" value="MP" onclick="generarTabla(168,'dOS9BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS9BB_LJ" value="LJ" onclick="generarTabla(169,'dOS9BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS9BB_HJ" value="HJ" onclick="generarTabla(170,'dOS9BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS9BB_CO" value="CO" onclick="generarTabla(17100,'dOS9BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS9BB_BTN" value="BTN" onclick="generarTabla(172,'dOS9BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS9BB_SB" value="SB" onclick="generarTabla(173,'dOS9BB', 'dOS', '', '')"style="color: white; background-color: green">
+</div>
+
+
+<div id="dOS8BB">
+<input type="button" id="bOS8BB_UTG" value="UTG" onclick="generarTabla(174,'dOS8BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS8BB_UTG1" value="UTG1" onclick="generarTabla(175,'dOS8BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS8BB_MP" value="MP" onclick="generarTabla(176,'dOS8BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS8BB_LJ" value="LJ" onclick="generarTabla(177,'dOS8BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS8BB_HJ" value="HJ" onclick="generarTabla(178,'dOS8BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS8BB_CO" value="CO" onclick="generarTabla(179,'dOS8BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS8BB_BTN" value="BTN" onclick="generarTabla(180,'dOS8BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS8BB_SB" value="SB" onclick="generarTabla(18100,'dOS8BB', 'dOS', '', '')"style="color: white; background-color: green">
+</div>
+
+
+<div id="dOS7BB">
+<input type="button" id="bOS7BB_UTG" value="UTG" onclick="generarTabla(182,'dOS7BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS7BB_UTG1" value="UTG1" onclick="generarTabla(183,'dOS7BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS7BB_MP" value="MP" onclick="generarTabla(184,'dOS7BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS7BB_LJ" value="LJ" onclick="generarTabla(185,'dOS7BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS7BB_HJ" value="HJ" onclick="generarTabla(186,'dOS7BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS7BB_CO" value="CO" onclick="generarTabla(187,'dOS7BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS7BB_BTN" value="BTN" onclick="generarTabla(188,'dOS7BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS7BB_SB" value="SB" onclick="generarTabla(189,'dOS7BB', 'dOS', '', '')"style="color: white; background-color: green">
+</div>
+
+
+<div id="dOS6BB">
+<input type="button" id="bOS6BB_UTG" value="UTG" onclick="generarTabla(190,'dOS6BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS6BB_UTG1" value="UTG1" onclick="generarTabla(19100,'dOS6BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS6BB_MP" value="MP" onclick="generarTabla(192,'dOS6BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS6BB_LJ" value="LJ" onclick="generarTabla(193,'dOS6BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS6BB_HJ" value="HJ" onclick="generarTabla(194,'dOS6BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS6BB_CO" value="CO" onclick="generarTabla(195,'dOS6BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS6BB_BTN" value="BTN" onclick="generarTabla(196,'dOS6BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS6BB_SB" value="SB" onclick="generarTabla(197,'dOS6BB', 'dOS', '', '')"style="color: white; background-color: green">
+</div>
+
+
+<div id="dOS5BB">
+<input type="button" id="bOS5BB_UTG" value="UTG" onclick="generarTabla(198,'dOS5BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS5BB_UTG1" value="UTG1" onclick="generarTabla(199,'dOS5BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS5BB_MP" value="MP" onclick="generarTabla(200,'dOS5BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS5BB_LJ" value="LJ" onclick="generarTabla(201,'dOS5BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS5BB_HJ" value="HJ" onclick="generarTabla(20200,'dOS5BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS5BB_CO" value="CO" onclick="generarTabla(203,'dOS5BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS5BB_BTN" value="BTN" onclick="generarTabla(204,'dOS5BB', 'dOS', '', '')"style="color: white; background-color: green">
+<input type="button" id="bOS5BB_SB" value="SB" onclick="generarTabla(205,'dOS5BB', 'dOS', '', '')"style="color: white; background-color: green">
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="dOR">
+<input type="button" id="bOR10025BB" value="100-25BB" onclick="mostrarBotones('dOR10025BB', 'dOR')"style="color: white; background-color: blue">
+<input type="button" id="bOR15BB" value="15 BB" onclick="mostrarBotones('dOR15BB', 'dOR')"style="color: white; background-color: blue">
+</div>
+
+<div id="dOR10025BB">
+  <input type="button" id="bOR10025BB_100BB" value="100BB" onclick="generarTabla(206,'dOR10025BB', 'dOR', '', 1004)"style="color: white; background-color: green">
+  <input type="button" id="bOR10025BB_50BB" value="50BB" onclick="generarTabla(207,'dOR10025BB', 'dOR', '', 1004)"style="color: white; background-color: green">
+  <input type="button" id="bOR10025BB_250BB" value="25BB" onclick="generarTabla(208,'dOR10025BB', 'dOR', '', 1004)"style="color: white; background-color: green">
+</div>
+
+<div id="dOR15BB">
+
+  <input type="button" id="bOR15BB_UTG" value="UTG" onclick="generarTabla(209,'dOR15BB', 'dOR', '', 1010)"style="color: white; background-color: green">
+  <input type="button" id="bOR15BB_MP" value="MP" onclick="generarTabla(210,'dOR15BB', 'dOR', '', 1010)"style="color: white; background-color: green">
+  <input type="button" id="bOR15BB_LJ" value="LJ" onclick="generarTabla(211,'dOR15BB', 'dOR', '', 1010)"style="color: white; background-color: green">
+  <input type="button" id="bOR15BB_HJ" value="HJ" onclick="generarTabla(21200,'dOR15BB', 'dOR', '', 1010)"style="color: white; background-color: green"> 
+  <input type="button" id="bOR15BB_CO" value="CO" onclick="generarTabla(213,'dOR15BB', 'dOR', '', 1010)"style="color: white; background-color: green">
+  <input type="button" id="bOR15BB_BU" value="BU" onclick="generarTabla(214,'dOR15BB', 'dOR', '', 1010)"style="color: white; background-color: green">
+</div>
+
+
+
+
+
+
+<div id="dReshove">
+ <input type="button" id="bReshove_SB" value="SB" onclick="mostrarBotones('dReshoveSB', 'dReshove')"style="color: white; background-color: yellow">
+ <input type="button" id="bReshove_BTN" value="BTN" onclick="mostrarBotones('dReshoveBTN', 'dReshove')"style="color: white; background-color: yellow">
+ <input type="button" id="bReshove_HJ-CO" value="HJ-CO" onclick="mostrarBotones('dReshoveHJCO', 'dReshove')"style="color: white; background-color: yellow">
+  <input type="button" id="bReshove_MP" value="MP" onclick="generarTabla(215,'dReshove', '', '', 1005)"style="color: white; background-color: yellow">
+ <input type="button" id="bReshove_EP" value="EP" onclick="generarTabla(216,'dReshove', '', '', 1005)"style="color: white; background-color: yellow">
+</div>
+
+
+
+<div id="dReshoveSB">
+ <input type="button" id="bReshoveSB_vsEP" value="SB vs EP"  onclick="generarTabla(217,'dReshoveSB', 'dReshove', '', 1005)"style="color: white; background-color: green">
+ <input type="button" id="bReshoveSB_vsMP" value="SB vs MP"  onclick="generarTabla(218,'dReshoveSB', 'dReshove', '', 1005)"style="color: white; background-color: green">
+ <input type="button" id="bReshoveSB_vsCO" value="SB vs CO" onclick="generarTabla(219,'dReshoveSB', 'dReshove', '', 1005)"style="color: white; background-color: green">
+ <input type="button" id="bReshoveSB_vsBTN" value="SB vs BTN"  onclick="generarTabla(220,'dReshoveSB', 'dReshove', '', 1005)"style="color: white; background-color: green">
+</div>
+
+<div id="dReshoveBTN">
+ <input type="button" id="bReshoveBTN_vsEP" value="BTN vs EP"  onclick="generarTabla(221,'dReshoveBTN', 'dReshove', '', 1005)"style="color: white; background-color: green">
+ <input type="button" id="bReshoveBTN_vsMP" value="BTN vs MP"  onclick="generarTabla(22200,'dReshoveBTN', 'dReshove', '', 1005)"style="color: white; background-color: green">
+ <input type="button" id="bReshoveBTN_vsCO" value="BTN vs CO" onclick="generarTabla(223,'dReshoveBTN', 'dReshove', '', 1005)"style="color: white; background-color: green">
+</div>
+
+<div id="dReshoveHJCO">
+ <input type="button" id="bReshoveHJCO_HJvsEP" value="HJ vs EP"  onclick="generarTabla(224,'dReshoveHJCO', 'dReshove', '', 1005)"style="color: white; background-color: green">
+ <input type="button" id="bReshoveHJCO_HJvsMP" value="HJ vs MP"  onclick="generarTabla(225,'dReshoveHJCO', 'dReshove', '', 1005)"style="color: white; background-color: green">
+ <input type="button" id="bReshoveHJCO_COvsEP" value="CO vs EP" onclick="generarTabla(226,'dReshoveHJCO', 'dReshove', '', 1005)"style="color: white; background-color: green">
+</div>
+
+
+
+<div id="dvsOS">
+ <input type="button" id="bvsOS20BB" value="20BB" onclick="generarImagen(251, 'dvsOS', '', '')"style="color: white; background-color: yellow">
+ <input type="button" id="bvsOS18BB" value="18BB" onclick="generarImagen(25200, 'dvsOS', '', '')"style="color: white; background-color: yellow">
+ <input type="button" id="bvsOS16BB" value="16BB" onclick="generarImagen(253, 'dvsOS', '', '')"style="color: white; background-color: yellow">
+ <input type="button" id="bvsOS14BB" value="14BB" onclick="generarImagen(254, 'dvsOS', '', '')"style="color: white; background-color: yellow">
+ <input type="button" id="bvsOS12BB" value="12BB" onclick="generarImagen(255, 'dvsOS', '', '')"style="color: white; background-color: yellow">
+ <input type="button" id="bvsOS10BB" value="10BB"  onclick="generarImagen(256, 'dvsOS', '', '')"style="color: white; background-color: yellow">
+ <input type="button" id="bvsOS8BB" value="8BB"  onclick="generarImagen(257, 'dvsOS', '', '')"style="color: white; background-color: yellow">
+ <input type="button" id="bvsOS6BB" value="6BB" onclick="generarImagen(258, 'dvsOS', '', '')"style="color: white; background-color: yellow">
+</div>
+
+
+<div id="dSBLimpia">
+  
+  <input type="button" id="bBBvsLimp_100BB" value="100 BB" onclick="generarTabla(227, 'dSBLimpia', '', '', 1006)"style="color: white; background-color: blue">
+  <input type="button" id="bBBvsLimp_50BB" value="50 BB" onclick="generarTabla(228, 'dSBLimpia', '', '', 1006)"style="color: white; background-color: blue">
+  <input type="button" id="bBBvsLimp_30BB" value="30 BB" onclick="generarTabla(229, 'dSBLimpia', '', '', 1006)"style="color: white; background-color: blue">
+  <input type="button" id="bBBvsLimp_20BB" value="20 BB" onclick="generarTabla(230, 'dSBLimpia', '', '', 1006)"style="color: white; background-color: blue">
+  <input type="button" id="bBBvsLimp_15BB" value="15 BB" onclick="generarTabla(231, 'dSBLimpia', '', '', 1007)"style="color: white; background-color: blue">
+
+</div>
+
+
+
+
+
+
+
+
+<div id="dVs3BET">
+<input type="button" id="bVs3BET_100BBIP" value="15 BB" onclick="mostrarBotones('dVs3BET100BBIP', 'dVs3BET')"style="color: white; background-color: blue">
+<input type="button" id="bVs3BET_100BBOOP" value="14 BB" onclick="mostrarBotones('dVs3BET100BBOOP', 'dVs3BET')"style="color: white; background-color: blue">
+<input type="button" id="bVs3BET_50BBIP" value="13 BB" onclick="mostrarBotones('dVs3BET50BBIP', 'dVs3BET')"style="color: white; background-color: blue">
+<input type="button" id="bVs3BET_50BBOOP" value="12 BB" onclick="mostrarBotones('dVs3BET50BBOOP', 'dVs3BET')"style="color: white; background-color: blue">
+<input type="button" id="bVs3BET_3525BBIP" value="11 BB" onclick="mostrarBotones('dVs3BET3525BBIP', 'dVs3BET')"style="color: white; background-color: blue">
+<input type="button" id="bVs3BET_3525BBOOP" value="10 BB" onclick="mostrarBotones('dVs3BET3525BBOOP', 'dVs3BET')"style="color: white; background-color: blue">
+</div>
+
+<div id="dVs3BET100BBIP">
+  <input type="button" id="bVs3BET100BBIP_vs13" value="vs 13+%" onclick="generarTabla(23200, 'dVs3BET100BBIP', 'dVs3BET', '', 1008)"style="color: white; background-color: green">
+  <input type="button" id="bVs3BET100BBIP_vs811" value="vs 8-11%" onclick="generarTabla(233, 'dVs3BET100BBIP', 'dVs3BET', '', 1008)"style="color: white; background-color: green">
+  <input type="button" id="bVs3BET100BBIP_vs46" value="vs 4-6%" onclick="generarTabla(234, 'dVs3BET100BBIP', 'dVs3BET', '', 1008)"style="color: white; background-color: green">
+</div>
+
+
+
+<div id="dVs3BET100BBOOP">
+  <input type="button" id="bVs3BET100BBOOP_vs13" value="vs 13+%" onclick="generarTabla(235, 'dVs3BET100BBOOP', 'dVs3BET', '', 1009)"style="color: white; background-color: green">
+  <input type="button" id="bVs3BET100BBOOP_vs811" value="vs 8-11%" onclick="generarTabla(236, 'dVs3BET100BBOOP', 'dVs3BET', '', 1009)"style="color: white; background-color: green">
+  <input type="button" id="bVs3BET100BBOOP_vs46" value="vs 4-6%" onclick="generarTabla(237, 'dVs3BET100BBOOP', 'dVs3BET', '', 1009)"style="color: white; background-color: green">
+</div>
+
+
+<div id="dVs3BET50BBIP">
+  <input type="button" id="bVs3BET50BBIP_vs13" value="vs 13+%" onclick="generarTabla(238, 'dVs3BET50BBIP', 'dVs3BET', '', 1008)"style="color: white; background-color: green">
+  <input type="button" id="bVs3BET50BBIP_vs811" value="vs 8-11%" onclick="generarTabla(239, 'dVs3BET50BBIP', 'dVs3BET', '', 1008)"style="color: white; background-color: green">
+  <input type="button" id="bVs3BET50BBIP_vs46" value="vs 4-6%" onclick="generarTabla(240, 'dVs3BET50BBIP', 'dVs3BET', '', 1008)"style="color: white; background-color: green">
+</div>
+
+
+<div id="dVs3BET50BBOOP">
+  <input type="button" id="bVs3BET50BBOOP_vs13" value="vs 13+%" onclick="generarTabla(241, 'dVs3BET50BBOOP', 'dVs3BET', '', 1009)"style="color: white; background-color: green">
+  <input type="button" id="bVs3BET50BBOOP_vs811" value="vs 8-11%" onclick="generarTabla(24200, 'dVs3BET50BBOOP', 'dVs3BET', '', 1009)"style="color: white; background-color: green">
+  <input type="button" id="bVs3BET50BBOOP_vs46" value="vs 4-6%" onclick="generarTabla(243, 'dVs3BET50BBOOP', 'dVs3BET', '', 1009)"style="color: white; background-color: green">
+</div>
+
+
+<div id="dVs3BET3525BBIP">
+  <input type="button" id="bVs3BET3525BBIP_vs13" value="vs 13+%" onclick="generarTabla(244, 'dVs3BET3525BBIP', 'dVs3BET', '', 1008)"style="color: white; background-color: green">
+  <input type="button" id="bVs3BET3525BBIP_vs811" value="vs 8-11%" onclick="generarTabla(245, 'dVs3BET3525BBIP', 'dVs3BET', '', 1008)"style="color: white; background-color: green">
+  <input type="button" id="bVs3BET3525BBIP_vs46" value="vs 4-6%" onclick="generarTabla(246, 'dVs3BET3525BBIP', 'dVs3BET', '', 1008)"style="color: white; background-color: green">
+</div>
+
+
+<div id="dVs3BET3525BBOOP">
+  <input type="button" id="bVs3BET3525BBOOP_vs13" value="vs 13+%" onclick="generarTabla(247, 'dVs3BET3525BBOOP', 'dVs3BET', '', 1009)"style="color: white; background-color: green">
+  <input type="button" id="bVs3BET3525BBOOP_vs811" value="vs 8-11%" onclick="generarTabla(248, 'dVs3BET3525BBOOP', 'dVs3BET', '', 1009)"style="color: white; background-color: green">
+  <input type="button" id="bVs3BET3525BBOOP_vs46" value="vs 4-6%" onclick="generarTabla(250, 'dVs3BET3525BBOOP', 'dVs3BET', '', 1009)"style="color: white; background-color: green">
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+</div>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@if (Model != null)
+{
+
+
+
+
+<table class="table table-bordered">
+<tbody>
+
+        @foreach(Celda celda in Model){
+           
+            if(y == 0)
+            {
+                @:<tr>
+            }
+              <td style="background-color: @celda.Background_color; color:@celda.Color" id="@celda.Cell_id"><button style="background-color: @celda.Background_color; color:@celda.Color; font-weight:500; border: none;">@celda.Cell_id</button></td>
+            if (y == 13)
+            {
+                @:</tr>
+                y = 0;
+            }
+           y++;
+            
+
+
+    }
+
+
+
+</tbody>
+
+
+</table>
+
+}
