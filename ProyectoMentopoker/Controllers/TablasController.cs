@@ -28,5 +28,13 @@ namespace ProyectoMentopoker.Controllers
             List<Celda> tabla = this.repo.GetTabla(id);
             return View(tabla);
         }
+
+
+        public IActionResult JugarPartidaSinTabla()
+        {
+
+            return View();
+        }
+        
     }
 }
