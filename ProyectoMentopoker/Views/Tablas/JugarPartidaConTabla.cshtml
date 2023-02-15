@@ -48,11 +48,42 @@
     Action
   </button>
   <ul class="dropdown-menu">
+    
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="BBvsLimp"  class="dropdown-item" href="#">BB vs Limp</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a  id="DefendBB"  class="dropdown-item" href="#">Defend BB</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="Flat+3B"  class="dropdown-item" href="#">Flat + 3B</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="SQZ+CCMW"  class="dropdown-item" href="#">SQZ + CCMW</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="OS"  class="dropdown-item" href="#">OS</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="OR"  class="dropdown-item" href="#">OR</a></li>
+     <li><hr class="dropdown-divider"></li>
+    <li><a id="Reshove"  class="dropdown-item" href="#">Reshove</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="vsOS"  class="dropdown-item" href="#">vs OS</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="SBLimpia"  class="dropdown-item" href="#">SB Limpia</a></li>
+        <li><hr class="dropdown-divider"></li>
+    <li><a id="vs3Bet"  class="dropdown-item" href="#">vs 3Bet</a></li>
+
+  </ul>
+</div>
+
+
+<div class="btn-group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Action
+  </button>
+  <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="#">Action</a></li>
     <li><a class="dropdown-item" href="#">Another action</a></li>
     <li><a class="dropdown-item" href="#">Something else here</a></li>
     <li><hr class="dropdown-divider"></li>
-    <li><a id="12" name="hola" class="dropdown-item" href="#">Separated link</a></li>
+    <li><a id="13" name="hola" class="dropdown-item" href="#">Separated link</a></li>
   </ul>
 </div>
 
@@ -129,9 +160,15 @@
 <script>
 $('ul.dropdown-menu a').click(function() {
     var id = $(this).attr('id');
-    if (id == 12) {
+    var nombre = $(this).attr('name');
+    if (nombre === 'Flat+3B') {
         
        document.getElementById('div2').style.display = 'inline-block';
+     
+    }
+    if (id == 13) {
+        
+       alert("me lo pilla");
      
     }
     
