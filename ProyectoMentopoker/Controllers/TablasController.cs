@@ -35,6 +35,20 @@ namespace ProyectoMentopoker.Controllers
 
             return View();
         }
-        
+
+
+        public IActionResult JugarPartidaConTabla()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult JugarPartidaConTabla(int id)
+        {
+            this.repo = new RepositoryTablas();
+            List<Celda> tabla = this.repo.GetTabla(id);
+            return View(tabla);
+        }
     }
 }
