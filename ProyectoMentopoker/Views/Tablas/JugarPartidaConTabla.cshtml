@@ -1,0 +1,179 @@
+﻿@model List<Celda>
+
+@{
+    var i = 1;
+    var y = 1;
+}
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <!-- Bootstrap core CSS -->
+         <link href="~/css/bootstrap.min.css" rel="stylesheet">
+         <link href="~/css/NavBar.css" rel="stylesheet">
+
+
+
+
+
+    
+    <!-- Custom styles for this template -->
+    <link href="~/css/navbar-top-fixed.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <form method="post">
+        <label>SELECCIONE UNA TABLA</label>
+        <select name="id" class="form-control">
+        @for ( i = 1; i <= 249; i++)
+        {
+            <option value="@i">@i</option>
+        }
+            
+        </select>
+    <button class="btn btn-outline-dark">
+        Mostrar Tabla
+    </button>
+
+    </form>
+
+
+
+
+<div class="btn-group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Action
+  </button>
+  <ul class="dropdown-menu">
+    
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="BBvsLimp"  class="dropdown-item" href="#">BB vs Limp</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a  id="DefendBB"  class="dropdown-item" href="#">Defend BB</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="Flat+3B"  class="dropdown-item" href="#">Flat + 3B</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="SQZ+CCMW"  class="dropdown-item" href="#">SQZ + CCMW</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="OS"  class="dropdown-item" href="#">OS</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="OR"  class="dropdown-item" href="#">OR</a></li>
+     <li><hr class="dropdown-divider"></li>
+    <li><a id="Reshove"  class="dropdown-item" href="#">Reshove</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="vsOS"  class="dropdown-item" href="#">vs OS</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="SBLimpia"  class="dropdown-item" href="#">SB Limpia</a></li>
+        <li><hr class="dropdown-divider"></li>
+    <li><a id="vs3Bet"  class="dropdown-item" href="#">vs 3Bet</a></li>
+
+  </ul>
+</div>
+
+
+<div class="btn-group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Action
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="13" name="hola" class="dropdown-item" href="#">Separated link</a></li>
+  </ul>
+</div>
+
+
+
+
+<div class="btn-group" name="div2" id="div2" style="display:none">
+  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Action
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="12" name="hola" class="dropdown-item" href="#">Separated link</a></li>
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@if (Model != null)
+{
+
+
+
+
+<table class="table table-bordered">
+<tbody>
+
+        @foreach(Celda celda in Model){
+           
+            if(y == 0)
+            {
+                @:<tr>
+            }
+              <td style="background-color: @celda.Background_color; color:@celda.Color" id="@celda.Cell_id"><button style="background-color: @celda.Background_color; color:@celda.Color; font-weight:500; border: none;">@celda.Cell_id</button></td>
+            if (y == 13)
+            {
+                @:</tr>
+                y = 0;
+            }
+           y++;
+            
+
+
+    }
+
+
+
+</tbody>
+
+
+</table>
+
+}
+
+</body>
+
+@section scripts { 
+<script>
+$('ul.dropdown-menu a').click(function() {
+    var id = $(this).attr('id');
+    var nombre = $(this).attr('name');
+    if (nombre === 'Flat+3B') {
+        
+       document.getElementById('div2').style.display = 'inline-block';
+     
+    }
+    if (id == 13) {
+        
+       alert("me lo pilla");
+     
+    }
+    
+});
+</script>
+}
+
+        </html>
