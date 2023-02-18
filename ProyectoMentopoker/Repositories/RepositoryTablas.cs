@@ -26,8 +26,10 @@ namespace ProyectoMentopoker.Repositories
         public RepositoryTablas()
         {
 
+            
+                string connectionString = @"Data Source = DESKTOP - E38C8U3\SQLEXPRESS; Initial Catalog = MENTOPOKER; Integrated Security = True";
 
-            string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+            //string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
             // this.cn = new SqlConnection(HelperConfiguartion.GetConnectionString());
             this.cn = new SqlConnection(connectionString);
             this.com = new SqlCommand();
