@@ -68,6 +68,16 @@
 
 
 
+<div class="btn-group" id="dloquesea">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Seleccione una condición
+  </button>
+  <ul class="dropdown-menu">
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="hola_que_tal"  class="dropdown-item" href="#">BB vs Limp</a></li>
+  </ul>
+</div>
+
 
 <div class="btn-group" id="dInicial">
   <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -123,11 +133,11 @@
     Defend BB
   </button>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="bDefendBB_100BB" href="#">100BB</a></li>
-    <li><a class="dropdown-item" id="bDefendBB_50BB"  href="#">50BB</a></li>
-    <li><a class="dropdown-item" id="bDefendBB_30BB"   href="#">30BB</a></li>
-     <li><a class="dropdown-item" id="bDefendBB_20BB"   href="#">20BB</a></li>
-    <li><a class="dropdown-item" id="bDefendBB_15BB"   href="#">15BB</a></li>
+    <li><a class="dropdown-item" id="DefendBB_100BB" href="#">100BB</a></li>
+    <li><a class="dropdown-item" id="DefendBB_50BB"  href="#">50BB</a></li>
+    <li><a class="dropdown-item" id="DefendBB_30BB"   href="#">30BB</a></li>
+     <li><a class="dropdown-item" id="DefendBB_20BB"   href="#">20BB</a></li>
+    <li><a class="dropdown-item" id="DefendBB_15BB"   href="#">15BB</a></li>
   </ul>
 </div>
 
@@ -135,7 +145,7 @@
 
 
 
-<div class="btn-group" id="dbDefendBB_100BB" style="display:none">
+<div class="btn-group" id="dDefendBB_100BB" style="display:none">
   <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     100BB
   </button>
@@ -149,7 +159,7 @@
   </ul>
 </div>
 
-<div class="btn-group" id="dbDefendBB_50BB" style="display:none">
+<div class="btn-group" id="dDefendBB_50BB" style="display:none">
   <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     50BB
   </button>
@@ -164,7 +174,7 @@
 </div>
 
 
-<div class="btn-group" id="dbDefendBB_30BB" style="display:none">
+<div class="btn-group" id="dDefendBB_30BB" style="display:none">
   <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     30BB
   </button>
@@ -178,7 +188,7 @@
   </ul>
 </div>
 
- <div class="btn-group" id="dbDefendBB_20BB" style="display:none">
+ <div class="btn-group" id="dDefendBB_20BB" style="display:none">
   <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     20BB
   </button>
@@ -192,7 +202,7 @@
   </ul>
 </div>
  
- <div class="btn-group" id="dbDefendBB_15BB" style="display:none">
+ <div class="btn-group" id="dDefendBB_15BB" style="display:none">
   <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     15BB
   </button>
@@ -1116,24 +1126,48 @@ $('ul.dropdown-menu a').click(function() {
        alert("mostraría la tabla de " +id);
      
     }else{
+        alert("hola");
+       
+        var divsAOcultar = document.getElementsByClassName("btn-group");
 
-        if(id==='BBvsLimp'||id==='DefendBB'||id==='Flat3B'||id==='SQZ'||id==='OS'||id==='OR'||id==='Reshove'||id==='vsOS'||id==='SBLimpia'||id==='vs3Bet'){
-          
-            var divsAOcultar = document.getElementsByClassName("btn-group");
-
-            for (var i = 0; i < divsAOcultar.length; i++){
-                divsAOcultar[i].style.display = "none";
-            }
+        for (var i = 0; i < divsAOcultar.length; i++){
+            divsAOcultar[i].style.display = "none";
+        }
 
 
              
-              document.getElementById('dInicial').style.display = "inline-block";
-             
-      }
-        var idSeleccionado = id;
+         document.getElementById('dInicial').style.display = "inline-block";
+         
+         document.getElementById('dloquesea').style.display = "inline-block";
+
+
+        var divsPadre = [];
+        divsPadre = id.split(/_/);
+        var divsPadreDef=[];
         
-        idNuevo = "d"+idSeleccionado;
-        //alert(idNuevo);
+       divsPadre.forEach(item => 
+           divsPadreDef.push("d"+item)                    
+       );
+
+         //divsPadreDef.forEach(item => 
+         //    alert(item)
+         //    //if(document.getElementById(item)){
+         //   //document.getElementById(item).style.display = "inline-block"   
+         //);
+
+        for(var i=0;i<divsPadreDef.length;i++){
+        
+         //  alert("divpadre" +divsPadreDef[i]);
+         if(document.getElementById(divsPadreDef[i])){
+           document.getElementById(divsPadreDef[i]).style.display = "inline-block" ; }
+            //alert(1);
+        }
+
+             
+     
+      //  alert(id);
+        idNuevo = "d"+id;
+        alert(idNuevo);
         document.getElementById(idNuevo).style.display = "inline-block";
 
 
