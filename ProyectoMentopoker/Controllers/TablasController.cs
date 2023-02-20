@@ -44,11 +44,11 @@ namespace ProyectoMentopoker.Controllers
         }
 
         [HttpPost]
-        public IActionResult JugarPartidaConTabla(int id)
+        public List<Celda> JugarPartidaConTabla(int id)
         {
             this.repo = new RepositoryTablas();
             List<Celda> tabla = this.repo.GetTabla(id);
-            return View(tabla);
+            return tabla;
         }
 
         public IActionResult Prueba()

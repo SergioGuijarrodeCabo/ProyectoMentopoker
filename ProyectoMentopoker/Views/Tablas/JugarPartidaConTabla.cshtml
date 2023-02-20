@@ -3,6 +3,8 @@
 @{
     var i = 1;
     var y = 1;
+
+    var id = 0;
 }
 
 
@@ -25,7 +27,9 @@
   </head>
   <body>
 
-    <form method="post">
+@* <form method="post" id="form1" >
+     
+        
         <label>SELECCIONE UNA TABLA</label>
         <select name="id" class="form-control">
         @for ( i = 1; i <= 249; i++)
@@ -34,37 +38,13 @@
         }
             
         </select>
-    <button class="btn btn-outline-dark">
-        Mostrar Tabla
-    </button>
-
-    </form>
 
 
 
+<button class="btn btn-danger">ENVIAR</button>
 
-    @*<div class="btn-group" id="d100BB" style="display:none">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    BBvsLimp
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" name="b100BB_BBvsEP" 
-        
-        data-BBvsLimp = "6" 
-        data-bb-hj = "16" 
-        data-bb-btn = "20"
-        
-        name = "b100BB_BBvsEP" <!-- cuanco clickes inyectas el name -->
-        
-        
-        id="6" href="#">BB vs EP</a></li>
-    <li><a class="dropdown-item" name="b100BB_BBvsMP"  id="7" href="#">BB vs MP</a></li>
-    <li><a class="dropdown-item" name="b100BB_BBvsHJ"  id="8" href="#">BB vs HJ</a></li>
-     <li><a class="dropdown-item" name="b100BB_BBvsCO"  id="9" href="#">BB vs CO</a></li>
-    <li><a class="dropdown-item" name="b100BB_BBvsBTN"  id="10" href="#">BB vs BTN</a></li>
-      <li><a class="dropdown-item" name="b100BB_BBvsSB"  id="11" href="#">BB vs SB</a></li>
-  </ul>
-</div>*@
+
+</form>*@
 
 
 
@@ -111,11 +91,11 @@
     BBvsLimp
   </button>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="1" href="#">100BB</a></li>
-    <li><a class="dropdown-item"   id="2" href="#">50BB</a></li>
-    <li><a class="dropdown-item"  id="3" href="#">30BB</a></li>
-     <li><a class="dropdown-item"   id="4" href="#">20BB</a></li>
-    <li><a class="dropdown-item"   id="5" href="#">15BB</a></li>
+    <li><a class="dropdown-item" name="id"  id="1" href="#">100BB</a></li>
+    <li><a class="dropdown-item" name="id"   id="2" href="#">50BB</a></li>
+    <li><a class="dropdown-item" name="id"  id="3" href="#">30BB</a></li>
+     <li><a class="dropdown-item" name="id"   id="4" href="#">20BB</a></li>
+    <li><a class="dropdown-item"  name="id"  id="5" href="#">15BB</a></li>
   </ul>
 </div>
 
@@ -1057,10 +1037,14 @@ VS 3BET 35-25BBOP
 </div>
 
 
+<form method="post">
+ 
 
+<input id="demo" name="id"   class="form-control" style="display:none">
 
+<button class="btn btn-danger">GENERAR TABLA</button>
 
-
+</form>
 
 
 
@@ -1108,16 +1092,77 @@ VS 3BET 35-25BBOP
 
 @section scripts { 
 <script>
+
+//$(document).ready(function() {
+
+//  let table = $('#data-table-order').DataTable({
+//    "responsive": {
+//      "details": {
+//        "renderer": function(api, rowIdx, columns) {
+//          // Show hidden columns in row details
+//          var data = $.map(columns, function(col, i) {
+//            return col.hidden ?
+//              '<tr><td>' + col.title + ':</td> ' +
+//              '<td>' + col.data + '</td></tr>' :
+//              '';
+//          }).join('');
+//          var externalData = getExternalData(api.row(rowIdx).data(), 'mobile');
+//          data += '<tr><td>Extra Title:</td> ' +
+//            '<td>' + externalData.title + '</td></tr>';
+//          return $('<table width="100%"/>').append(data).prop('outerHTML');;
+//        }
+//      }
+//    }
+//  });
+
+//});
+
+
+
+
+
+
+
 $('ul.dropdown-menu a').click(function() {
-    var id = $(this).attr('id');
+    id=$(this).attr('id');
          var divsAMostrar=[];
     //var nombre = $(this).attr('name');
 
 
     if ($.isNumeric(id)  ) {
         
-       alert("mostraría la tabla de " +id);
-     
+        let $container = document.getElementById("demo");
+         $container.setAttribute("type", "text");
+          $container.setAttribute("value", id);
+
+        //const formData = new FormData(document.getElementById('form1'));
+
+        //formData.append("mappingPorts", JSON.stringify(id));
+
+        //// send the form data to the server using AJAX
+        //const xhr = new XMLHttpRequest();
+        //xhr.open('post', '/Tablas/JugarPartidaConTabla');
+        //xhr.send(formData);
+
+
+           //var datos = {
+           //     id: @id
+           // };
+
+         
+          $.ajax({
+              url: '/Tablas/JugarPartidaConTabla?id='+id,
+              type: 'POST',
+              async: false,
+              //data: datos,
+              success: function(data) {
+                  alert(data)
+               
+
+
+              
+            })
+          
     }else{
        // alert("hola");
        
@@ -1129,12 +1174,7 @@ $('ul.dropdown-menu a').click(function() {
 
         for (var i = 0; i < divsAOcultar.length; i++){
             divsAOcultar[i].style.display = "none";
-        }
-
-
-
-
-             
+        }      
          document.getElementById('dInicial').style.display = "inline-block";
          
         // document.getElementById('dloquesea').style.display = "inline-block";
@@ -1177,11 +1217,27 @@ $('ul.dropdown-menu a').click(function() {
 
        // document.getElementById('dBBvsLimp').style.display = "inline-block";
         
-    }
-     
-    
-     
+    }     
 });
+
+
+
+let $container = document.getElementById("demo");
+
+
+function select() {
+  
+   
+    $container.setAttribute("type", "text");
+    $container.setAttribute("value", id);
+   
+
+}
+
+
+
+
+
 </script>
 }
 
