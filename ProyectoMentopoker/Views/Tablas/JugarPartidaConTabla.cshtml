@@ -1178,9 +1178,10 @@ $('ul.dropdown-menu a').click(function() {
                         html += "<tr>";
                     }
                     //html += "<td style='background-color:"+celda.background_color+"; color:"+celda.text_color+";'  id='"+celda.cell_id+"' value='"+celda.table_id+"'>"+celda.cell_id + "</td>";
-                   
-                    
-                    html += "<td style='background-color:"+celda.background_color+"; color:"+celda.text_color+";'  id='"+celda.cell_id+"' value='"+celda.table_id+"'>"+"<button id='boton' style='background-color:"+celda.background_color+"; color:"+celda.text_color+"; font-weight:500; border: none;'>"+celda.cell_id+"</button>"+"</td>";
+                  
+                    html += "<td style='background-color:"+celda.background_color+"; color:"+celda.text_color+";' id='"+celda.id_celda+"' value='"+celda.id_celda+"'>"+"<button id='boton' style='background-color:"+celda.background_color+"; color:"+celda.text_color+"; font-weight:500; border: none;' onclick='botonSeleccionado("+celda.table_id+ ",\""+celda.id_celda+"\")'>"+celda.id_celda+"</button>"+"</td>";
+
+                   // html += "<td style='background-color:"+celda.background_color+"; color:"+celda.text_color+";'  id='"+celda.id_celda+"' value='"+celda.id_celda+"'>"+"<button id='boton' style='background-color:"+celda.background_color+"; color:"+celda.text_color+"; font-weight:500; border: none;' onclick='botonSeleccionado("+celda.table_id+ ","+celda.id_celda+")'>"+celda.id_celda+"</button>"+"</td>";
                     
                     
                     
@@ -1283,12 +1284,15 @@ function select() {
 
 }
 
-$(document).on('click','#boton', function()
-{
-    alert("Dynamic button action");
-});
+//$(document).on('click','#boton', function()
+//{
+//    alert("Dynamic button action");
+//});
 
-
+function botonSeleccionado(table_id, cell_id){
+    alert(cell_id);
+    alert(table_id);
+}
 
 
 </script>

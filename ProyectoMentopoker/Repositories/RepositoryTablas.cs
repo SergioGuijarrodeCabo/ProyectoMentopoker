@@ -26,10 +26,10 @@ namespace ProyectoMentopoker.Repositories
         public RepositoryTablas()
         {
 
-            
-               // string connectionString = @"Data Source = DESKTOP - E38C8U3\SQLEXPRESS; Initial Catalog = MENTOPOKER; Integrated Security = True";
 
-            string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+            // string connectionString = @"Data Source = DESKTOP - E38C8U3\SQLEXPRESS; Initial Catalog = MENTOPOKER; Integrated Security = True";
+            string connectionString = @"Data Source = LOCALHOST\DESARROLLO; Initial Catalog = PROYECTOMENTOPOKER; User ID = sa; Password = MCSD2022";
+            // string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
             // this.cn = new SqlConnection(HelperConfiguartion.GetConnectionString());
             this.cn = new SqlConnection(connectionString);
             this.com = new SqlCommand();
@@ -60,11 +60,11 @@ namespace ProyectoMentopoker.Repositories
 
                 int identificador = int.Parse(this.reader["Identificador"].ToString());
                 int table_id = int.Parse(this.reader["table_id"].ToString());
-                string cell_id = this.reader["cell_id"].ToString();
+                string id_celda = this.reader["Id_celda"].ToString();
                 string background_color = this.reader["background_color"].ToString();
                 string text_color = this.reader["text_color"].ToString();
-
-                Celda celda = new Celda(identificador, table_id, cell_id, background_color, text_color);
+                
+                Celda celda = new Celda(identificador, table_id, id_celda, background_color, text_color);
                 tabla.Add(celda);
             }
 
