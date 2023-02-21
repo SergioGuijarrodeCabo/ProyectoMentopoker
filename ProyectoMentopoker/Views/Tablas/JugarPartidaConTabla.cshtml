@@ -1042,7 +1042,7 @@ VS 3BET 35-25BBOP
 
 <input id="demo" name="id"   class="form-control" style="display:none">
 
-<button class="btn btn-danger">GENERAR TABLA</button>
+
 
 </form>
 
@@ -1052,12 +1052,8 @@ VS 3BET 35-25BBOP
 
 
 
-@if (Model != null)
+@*@if (Model != null)
 {
-
-
-
-
 <table class="table table-bordered">
 <tbody>
 
@@ -1074,19 +1070,23 @@ VS 3BET 35-25BBOP
                 y = 0;
             }
            y++;
-            
-
-
+           
     }
+</tbody></table>}*@
 
 
 
-</tbody>
 
-
+<table id="tabla" class="table table-bordered">
+    <thead></thead>
+    <tbody></tbody>
 </table>
 
-}
+
+
+
+
+
 
 </body>
 
@@ -1122,7 +1122,6 @@ VS 3BET 35-25BBOP
 
 
 
-
 $('ul.dropdown-menu a').click(function() {
     id=$(this).attr('id');
          var divsAMostrar=[];
@@ -1131,7 +1130,9 @@ $('ul.dropdown-menu a').click(function() {
 
     if ($.isNumeric(id)  ) {
         
-        let $container = document.getElementById("demo");
+
+
+       let $container = document.getElementById("demo");
          $container.setAttribute("type", "text");
           $container.setAttribute("value", id);
 
@@ -1146,7 +1147,7 @@ $('ul.dropdown-menu a').click(function() {
 
 
            //var datos = {
-           //     id: @id
+           //     id: id
            // };
 
          
@@ -1156,12 +1157,42 @@ $('ul.dropdown-menu a').click(function() {
               async: false,
               //data: datos,
               success: function(data) {
-                  alert(data)
-               
+                alert(data);
+                var tabla = document.getElementById("tabla");
+                //RECORREMOS LOS DATOS
+                var z = 0;
+                var html = "";
+                $("#tabla tbody").empty();
+                $.each(data, function(index, celda ) {
+
+                    //var nodopadre = $(this).parent();
+                    //var background_color = $(nodopadre).attr("Background_color");
+                    //var table_id = $(nodopadre).find("Table_id").text();
+                    //var cell_id = $(nodopadre).find("Cell_id").text();
+                    //var text_color = $(nodopadre).find("Text_color").text();
+
+                    if (z == 0) {
+                        html += "<tr>";
+                    }
+                    html += "<td style='background-color:"+celda.background_color+"; color:"+celda.text_color+";'  id='"+celda.cell_id+"' value='"+celda.table_id+"'>"+celda.cell_id + "</td>";
+                    if (z == 13) {
+                        html += "</tr>";
+                        z = 0;
+                    }
+                    z++;
+
+
+                        //<button style="background-color: celda.Background_color; color:celda.Color; font-weight:500; border: none;">celda.Cell_id</button>  
+
+           
+
+        });
+
+        $("#tabla tbody").html(html);
 
 
               
-            })
+            }});
           
     }else{
        // alert("hola");
