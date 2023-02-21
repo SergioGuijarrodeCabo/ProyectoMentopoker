@@ -1157,12 +1157,13 @@ $('ul.dropdown-menu a').click(function() {
               async: false,
               //data: datos,
               success: function(data) {
-                alert(data);
-                var tabla = document.getElementById("tabla");
-                //RECORREMOS LOS DATOS
+               // alert(data);
+                var tabla = document.getElementById("tabla");           
                 var z = 0;
                 var html = "";
+                  var primeraFila = false;
                 $("#tabla tbody").empty();
+                 //RECORREMOS LOS DATOS
                 $.each(data, function(index, celda ) {
 
                     //var nodopadre = $(this).parent();
@@ -1175,10 +1176,19 @@ $('ul.dropdown-menu a').click(function() {
                         html += "<tr>";
                     }
                     html += "<td style='background-color:"+celda.background_color+"; color:"+celda.text_color+";'  id='"+celda.cell_id+"' value='"+celda.table_id+"'>"+celda.cell_id + "</td>";
+                    
+                    if(z==12 && primeraFila==false){
+                         html += "</tr>";
+                        primeraFila = true;
+                         z = 0;
+                    }
+                    
                     if (z == 13) {
                         html += "</tr>";
                         z = 0;
                     }
+                    
+
                     z++;
 
 
