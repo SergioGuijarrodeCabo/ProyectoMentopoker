@@ -39,7 +39,7 @@ namespace ProyectoMentopoker.Controllers
 
         public IActionResult JugarPartidaConTabla()
         {
-
+            
             return View();
         }
 
