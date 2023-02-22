@@ -33,14 +33,14 @@
 
 
 
-<div id="dropdowns" style="display:none">
+<div id="dropdowns" >
 
     <br />
     <br />
     <br />
 
 
-<div class="btn-group" id="dInicial">
+<div class="btn-group" id="dInicial" >
   <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     Seleccione una condición
   </button>
@@ -1121,40 +1121,97 @@ VS 3BET 35-25BBOP
 
 @section scripts { 
 <script>
+var jugadaSeleccionada = false;
 
 $(document).ready(function() {
+
+    
+
   var idRondaActual = 0; // initialize the current ID to 0
   $("#botonRonda").click(function() {
+
+
     // increment the current ID for each new card
     idRondaActual++;
     
     // create the HTML for the card with the dynamic ID
     var cardHtml = '<div class="col">' +
-      '<div class="card shadow-sm" id="ronda' + idRondaActual + '">' +
-      '<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: صورة مصغرة" preserveAspectRatio="xMidYMid slice" focusable="false">' +
+      '<div class="card shadow-sm" id="dRonda' + idRondaActual + '">' +
+      '<svg class="bd-placeholder-img card-img-top" width="100%" height="225"  role="img" aria-label="Placeholder: Jugadas" preserveAspectRatio="xMidYMid slice" focusable="false">' +
       '<title>Placeholder</title>' +
       '<rect width="100%" height="100%" fill="#55595c"/>' +
-      '<text x="50%" y="50%" fill="#eceeef" dy=".3em">صورة مصغرة</text>' +
+      '<text x="50%" y="50%" fill="#eceeef" dy=".3em">Aquí irían las jugadas</text>' +
       '</svg>' +
-      '<div class="card-body">' +
+      '<div class="card-body" id="dJugadas'+idRondaActual+'">' +'</div>' +
       '<p class="card-text">Ronda'+ idRondaActual+'</p>' +
       '<div class="d-flex justify-content-between align-items-center">' +
       '<div class="btn-group">' +
-      '<button type="button" class="btn btn-sm btn-outline-secondary">عرض</button>' +
-      '<button type="button" class="btn btn-sm btn-outline-secondary">تعديل</button>' +
+     '<button type="button" class="btn btn-sm btn-outline-secondary iniciarJugada" id="b'+idRondaActual+'">Iniciar jugada</button>' +
       '</div>' +
-      '<small class="text-muted">9 دقائق</small>' +
+      '<small class="text-muted">Hola</small>' +
       '</div>' +
-      '</div>' +
+      
       '</div>' +
       '</div>';
     
     // append the card HTML to the "divRondas" div
     $("#divRondas").append(cardHtml);
+
+     
+
+   
+    $("#dropdowns").attr("readonly", false); 
+     
+
+    //$("#no_of_staff").attr("readonly", true); 
+     
+
+
+
   });
+
+
+  $(document).on("click", ".iniciarJugada", iniciarJugada);
 });
 
 
+
+
+function iniciarJugada() {
+  document.getElementById('dropdowns').style.display = "inline-block";
+  // get the current ID for the round
+  var idRondaActual = $(this).attr('id').substring(1);
+  
+  // create the HTML for the new div
+  var divHtml = '<div class="jugada" id="divJugada' + idRondaActual + '">' +
+       '<p class="card-text">Seleccione una condición de partida y una mano a jugar de las tablas</p>'+
+      '<select class="form-select" name="seleccion2">' +
+      '<option value="">Seguimiento a la tabla</option>' +
+      '<option value="1"></option>' +
+      '<option value="2">Opción 2</option>' +
+      '<option value="3">Opción 3</option>' +
+      '</select>' +
+      '<input type="number" class="form-control" name="numero" placeholder="Ingrese una cantidad a apostar">' +
+      '</div>';
+  
+  // append the new div to the "dJugadas" div for the current round
+  $("#dJugadas" + idRondaActual).append(divHtml);
+}
+
+
+
+//      <div class="form-check">
+//  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+//  <label class="form-check-label" for="flexRadioDefault1">
+//    Default radio
+//  </label>
+//</div>
+//<div class="form-check">
+//  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+//  <label class="form-check-label" for="flexRadioDefault2">
+//    Default checked radio
+//  </label>
+//</div>
 
 
 $('ul.dropdown-menu a').click(function() {
@@ -1313,11 +1370,12 @@ function botonSeleccionado(table_id, cell_id){
 
 function iniciarPartida(){
 
-    document.getElementById('dropdowns').style.display = "inline-block";
+
      document.getElementById('divPartida').style.display = "inline-block";
 };
 
 function iniciarRonda(){
+    
 
     document.getElementById('divJugadas').style.display = "inline-block";
     
