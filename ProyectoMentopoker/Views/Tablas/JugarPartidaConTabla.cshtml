@@ -30,7 +30,65 @@
 
 <button onclick="iniciarPartida()" class="btn btn-danger" id="botonInicio">Iniciar partida</button>
 
+<div id="divPartida" style="display:none" class="container"   >
 
+
+ <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">PARTIDA</h1>
+        @*<p class="lead text-muted">وصف قصير حول الألبوم أدناه (محتوياته ، ومنشؤه ، وما إلى ذلك). اجعله قصير ولطيف، ولكن ليست قصير جدًا حتى لا يتخطى الناس هذا الألبوم تمامًا.</p>
+        <p>
+          <a href="#" class="btn btn-primary my-2" onclick="iniciarRonda()" id="botonRonda">Iniciar ronda</a>
+          <a href="#" class="btn btn-secondary my-2">عمل ثانوي</a>*@
+        </p>
+      </div>
+    </div>
+  </section>
+
+ 
+
+  <div class="album py-5 bg-light" style="display:none" id="divJugadas">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="divRondas">
+
+
+        <div class="col" style="display:none">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: صورة مصغرة" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">صورة مصغرة</text></svg>
+
+            <div class="card-body">
+              <p class="card-text">Ronda </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">عرض</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">تعديل</button>
+                </div>
+                <small class="text-muted">9 دقائق</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+     
+
+  
+   
+
+        
+
+      
+        
+       
+      </div>
+    </div>
+  </div>
+
+</main>
+
+
+</div>
 
 
 <div id="dropdowns" >
@@ -1031,70 +1089,26 @@ VS 3BET 35-25BBOP
 <br />
 <table id="tabla" class="table table-bordered">
     <thead></thead>
-    <tbody></tbody>
+    <tbody>
+        <tr><th>AA</th> <th>AKs</th> <th>AQs</th> <th>AJs</th> <th>ATs</th> <th>A9s</th> <th>A8s</th> <th>A7s</th> <th>A6s</th> <th>A5s</th> <th>A4s</th> <th>A3s</th> <th>A2s</th></tr>
+        <tr><th>AKo</th> <th>KK</th> <th>KQs</th> <th>KJs</th> <th>KTs</th> <th>K9s</th> <th>K8s</th> <th>K7s</th> <th>K6s</th> <th>K5s</th> <th>K4s</th> <th>K3s</th> <th>K2s</th></tr>
+        <tr><th>AQo</th> <th>KQo</th> <th>QQ</th> <th>QJs</th> <th>QTs</th> <th>Q9s</th> <th>Q8s</th> <th>Q7s</th> <th>Q6s</th> <th>Q5s</th> <th>Q4s</th> <th>Q3s</th> <th>Q2s</th></tr>
+        <tr><th>AJo</th> <th>KJo</th> <th>QJo</th> <th>JJ</th> <th>JTs</th> <th>J9s</th> <th>J8s</th> <th>J7s</th> <th>J6s</th> <th>J5s</th> <th>J4s</th> <th>J3s</th> <th>J2s</th></tr>
+        <tr><th>ATo</th> <th>KTo</th> <th>QTo</th> <th>JTo</th> <th>TT</th> <th>T9s</th> <th>T8s</th> <th>T7s</th> <th>T6s</th> <th>T5s</th> <th>T4s</th> <th>T3s</th> <th>T2s</th></tr>
+        <tr><th>A9o</th> <th>K9o</th> <th>Q9o</th> <th>J9o</th> <th>T9o</th> <th>99</th> <th>98s</th> <th>97s</th> <th>96s</th> <th>95s</th> <th>94s</th> <th>93s</th> <th>92s</th></tr>
+        <tr><th>A8o</th> <th>K8o</th> <th>Q8o</th> <th>J8o</th> <th>T8o</th> <th>98o</th> <th>88</th> <th>87s</th> <th>86s</th> <th>85s</th> <th>84s</th> <th>83s</th> <th>82s</th></tr>
+        <tr><th>A7o</th> <th>K7o</th> <th>Q7o</th> <th>J7o</th> <th>T7o</th> <th>97o</th> <th>87o</th> <th>77</th> <th>76s</th> <th>75s</th> <th>74s</th> <th>73s</th> <th>72s</th></tr>
+        <tr><th>A6o</th> <th>K6o</th> <th>Q6o</th> <th>J6o</th> <th>T6o</th> <th>96o</th> <th>86o</th> <th>76o</th> <th>66</th> <th>65s</th> <th>64s</th> <th>63s</th> <th>62s</th></tr>
+        <tr><th>A5o</th> <th>K5o</th> <th>Q5o</th> <th>J5o</th> <th>T5o</th> <th>95o</th> <th>85o</th> <th>75o</th> <th>65o</th> <th>55</th> <th>54s</th> <th>53s</th> <th>52s</th></tr>
+        <tr><th>A4o</th> <th>K4o</th> <th>Q4o</th> <th>J4o</th> <th>T4o</th> <th>94o</th> <th>84o</th> <th>74o</th> <th>64o</th> <th>54o</th> <th>44</th> <th>43s</th> <th>42s</th></tr>
+        <tr><th>A3o</th> <th>K3o</th> <th>Q3o</th> <th>J3o</th> <th>T3o</th> <th>93o</th> <th>83o</th> <th>73o</th> <th>63o</th> <th>53o</th> <th>43o</th> <th>33</th> <th>32s</th></tr>
+        <tr><th>A2o</th> <th>K2o</th> <th>Q2o</th> <th>J2o</th> <th>T2o</th> <th>92o</th> <th>82o</th> <th>72o</th> <th>62o</th> <th>52o</th> <th>42o</th> <th>32o</th> <th>22</th></tr>
+    </tbody>
 </table>
 
 
 
-<div id="divPartida" style="display:none" class="container">
 
-
- <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">PARTIDA</h1>
-        @*<p class="lead text-muted">وصف قصير حول الألبوم أدناه (محتوياته ، ومنشؤه ، وما إلى ذلك). اجعله قصير ولطيف، ولكن ليست قصير جدًا حتى لا يتخطى الناس هذا الألبوم تمامًا.</p>
-        <p>*@
-          <a href="#" class="btn btn-primary my-2" onclick="iniciarRonda()" id="botonRonda">Iniciar ronda</a>
-          @*<a href="#" class="btn btn-secondary my-2">عمل ثانوي</a>*@
-        </p>
-      </div>
-    </div>
-  </section>
-
- 
-
-  <div class="album py-5 bg-light" style="display:none" id="divJugadas">
-    <div class="container">
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="divRondas">
-
-
-        <div class="col" style="display:none">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: صورة مصغرة" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">صورة مصغرة</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">Ronda </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">عرض</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">تعديل</button>
-                </div>
-                <small class="text-muted">9 دقائق</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-     
-
-  
-   
-
-        
-
-      
-        
-       
-      </div>
-    </div>
-  </div>
-
-</main>
-
-
-</div>
 
 
 
@@ -1122,13 +1136,14 @@ VS 3BET 35-25BBOP
 @section scripts { 
 <script>
 var jugadaSeleccionada = false;
-
+ var idRondaActual = 0; 
+ var idJugadaActual = 0;
 $(document).ready(function() {
 
     
 
-  var idRondaActual = 0; // initialize the current ID to 0
-  $("#botonRonda").click(function() {
+ // initialize the current ID to 0
+  $("#botonInicio").click(function() {
 
 
     // increment the current ID for each new card
@@ -1137,18 +1152,21 @@ $(document).ready(function() {
     // create the HTML for the card with the dynamic ID
     var cardHtml = '<div class="col">' +
       '<div class="card shadow-sm" id="dRonda' + idRondaActual + '">' +
-      '<svg class="bd-placeholder-img card-img-top" width="100%" height="225"  role="img" aria-label="Placeholder: Jugadas" preserveAspectRatio="xMidYMid slice" focusable="false">' +
+    
+      '<svg class="bd-placeholder-img card-img-top" width="800" height="225"  role="img" aria-label="Placeholder: Jugadas" preserveAspectRatio="xMidYMid slice" focusable="false">' +
       '<title>Placeholder</title>' +
       '<rect width="100%" height="100%" fill="#55595c"/>' +
-      '<text x="50%" y="50%" fill="#eceeef" dy=".3em">Aquí irían las jugadas</text>' +
+      '<text x="50%" y="50%" fill="#eceeef" dy=".3em" id="dJugadasPintadas'+idRondaActual+'"></text>' +
       '</svg>' +
+     
       '<div class="card-body" id="dJugadas'+idRondaActual+'">' +'</div>' +
       '<p class="card-text">Ronda'+ idRondaActual+'</p>' +
       '<div class="d-flex justify-content-between align-items-center">' +
       '<div class="btn-group">' +
-     '<button type="button" class="btn btn-sm btn-outline-secondary iniciarJugada" id="b'+idRondaActual+'">Iniciar jugada</button>' +
+     '<button type="button" class="btn btn-sm btn-outline-secondary iniciarJugada" width="50%" id="bRonda'+idRondaActual+'">Nueva jugada</button>' +
+     '<button type="button" class="btn btn-sm btn-outline-secondary" width="50%" id="bFinal'+idRondaActual+' onclick="iniciarRonda()"">Finalizar ronda</button>'+
       '</div>' +
-      '<small class="text-muted">Hola</small>' +
+
       '</div>' +
       
       '</div>' +
@@ -1180,18 +1198,25 @@ $(document).ready(function() {
 function iniciarJugada() {
   document.getElementById('dropdowns').style.display = "inline-block";
   // get the current ID for the round
-  var idRondaActual = $(this).attr('id').substring(1);
+  //var idRondaActual = $(this).attr('id').substring(1);
+    idJugadaActual++;
   
   // create the HTML for the new div
-  var divHtml = '<div class="jugada" id="divJugada' + idRondaActual + '">' +
+  var divHtml = '<div class="jugada" id="dJugada' + idJugadaActual + '">' +
+   '<p class="card-text">Jugada'+ idJugadaActual+'</p>' +
        '<p class="card-text">Seleccione una condición de partida y una mano a jugar de las tablas</p>'+
-      '<select class="form-select" name="seleccion2">' +
-      '<option value="">Seguimiento a la tabla</option>' +
-      '<option value="1"></option>' +
-      '<option value="2">Opción 2</option>' +
-      '<option value="3">Opción 3</option>' +
+      '<div class="form-check">'+
+      '<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">'+
+      '<label class="form-check-label" for="flexRadioDefault1">Sí</label>'+
+      '</div>'+
+      '<div class="form-check">'+
+      '<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>'+
+      '<label class="form-check-label" for="flexRadioDefault2">No</label>'+
+
       '</select>' +
+
       '<input type="number" class="form-control" name="numero" placeholder="Ingrese una cantidad a apostar">' +
+      '<button type="button" class="btn btn-warning" id="bJugada'+idJugadaActual+'">JUGAR</button>' +
       '</div>';
   
   // append the new div to the "dJugadas" div for the current round
@@ -1363,8 +1388,15 @@ $('ul.dropdown-menu a').click(function() {
 
 
 function botonSeleccionado(table_id, cell_id){
-    alert(cell_id);
-    alert(table_id);
+    //alert(cell_id);
+    //alert(table_id);
+
+        // Select the dynamically generated div using its ID
+    var $dJugadasPintadas = $('#dJugadasPintadas'+idRondaActual);
+
+    // Append the two values using the append() method
+    $dJugadasPintadas.append("R"+idRondaActual+" J"+idJugadaActual+ " "+ cell_id + " " + table_id +"\n");
+
 
 };
 
@@ -1372,14 +1404,20 @@ function iniciarPartida(){
 
 
      document.getElementById('divPartida').style.display = "inline-block";
+    this.iniciarRonda();
 };
 
 function iniciarRonda(){
     
 
     document.getElementById('divJugadas').style.display = "inline-block";
-    
+      $("#botonInicio").trigger("click");
 };
+
+$(document).on("click", "#bJugada" + idJugadaActual, function() {
+    alert("hola");
+});
+
 
 </script>
 }
