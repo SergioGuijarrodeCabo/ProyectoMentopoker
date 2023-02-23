@@ -1148,6 +1148,7 @@ var jugadaSeleccionada = false;
  var ultimaMano="";
 var ultimaCondicion = 0;
 var manoJugada = 0;
+var jugadaFinalizada;
 
 $(document).ready(function() {
 
@@ -1157,7 +1158,7 @@ $(document).ready(function() {
   $("#botonInicio").click(function() {
      
       
-      
+      jugadaFinalizada=1;
 
     // increment the current ID for each new card
     idRondaActual++;
@@ -1170,6 +1171,7 @@ $(document).ready(function() {
       '<title>Placeholder</title>' +
       '<rect width="100%" height="100%" fill="#55595c"/>' +
       '<text x="50%" y="50%" fill="#eceeef" dy=".3em" id="dJugadasPintadas'+idRondaActual+'" style="white-space: pre-wrap;"></text>' +
+
       '</svg>' +
      
       '<div class="card-body" id="dJugadas'+idRondaActual+'">' +'</div>' +
@@ -1216,35 +1218,37 @@ $(document).on("click", ".btn-outline-secondary", function() {
 
 
 function iniciarJugada() {
-  document.getElementById('dropdowns').style.display = "inline-block";
-  // get the current ID for the round
-  //var idRondaActual = $(this).attr('id').substring(1);
-    idJugadaActual++;
-  
-  // create the HTML for the new div
-  var divHtml =  '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + '">' +
-   '<p class="card-text">Jugada'+ idJugadaActual+'</p>' +
-       '<p class="card-text"></p>'+
-    
-      '<div class="form-check">'+
-      '<input class="form-check-input" type="radio"   name="partida" id="flexRadioDefaultSi">'+
-      '<label class="form-check-label" for="flexRadioDefault1">Sí</label>'+
-      '</div>'+
-      '<div class="form-check">'+
-      '<input class="form-check-input" type="radio"  name="partida" id="flexRadioDefaultNo" checked>'+
-      '<label class="form-check-label" for="flexRadioDefault2">No</label>'+
+
+    if (jugadaFinalizada == 1) {
+
+        document.getElementById('dropdowns').style.display = "inline-block";
+        // get the current ID for the round
+        //var idRondaActual = $(this).attr('id').substring(1);
+        idJugadaActual++;
+
+        // create the HTML for the new div
+        var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + '">' +
+            '<p class="card-text">Jugada' + idJugadaActual + '</p>' +
+            '<p class="card-text"></p>' +
+
+            '<div class="form-check">' +
+            '<input class="form-check-input" type="radio"   name="partida" id="flexRadioDefaultSi">' +
+            '<label class="form-check-label" for="flexRadioDefault1">Sí</label>' +
+            '</div>' +
+            '<div class="form-check">' +
+            '<input class="form-check-input" type="radio"  name="partida" id="flexRadioDefaultNo" checked>' +
+            '<label class="form-check-label" for="flexRadioDefault2">No</label>' +
 
 
-      '<input type="number" class="form-control"  id="inputCantidad" placeholder="Ingrese una cantidad a apostar">' +
-      '<button type="button" class="btn btn-warning" id="bJugada'+idJugadaActual+'" onclick="jugarMano()">JUGAR</button>' +
+            '<input type="number" class="form-control"  id="inputCantidad" placeholder="Ingrese una cantidad a apostar">' +
+            '<button type="button" class="btn btn-warning" id="bJugada' + idJugadaActual + '" onclick="jugarMano()">JUGAR</button>' +
 
-      '</div>';
-  
-  // append the new div to the "dJugadas" div for the current round
-  $("#dJugadas" + idRondaActual).append(divHtml);
+            '</div>';
 
-
- 
+        // append the new div to the "dJugadas" div for the current round
+        $("#dJugadas" + idRondaActual).append(divHtml);
+        jugadaFinalizada = 0;
+    } else { alert("Debe finalizar una jugada antes de empezar otra"); }
 }
 
 
@@ -1427,14 +1431,14 @@ function botonSeleccionado(table_id, cell_id){
    
     // Append the two values using the append() method
     $dJugadasPintadas.append("R"+idRondaActual+" J"+idJugadaActual+ " "+ cell_id + " " + table_id +"\n");
-    this.manoJugada = 1;
+   manoJugada = 1;
 
 };
 
 
  function jugarMano() {
 
-       if (this.manoJugada == 1) { 
+       if (manoJugada == 1) { 
   // retrieve the values from the checked boxes
   var partidaSi = $("#flexRadioDefaultSi").prop("checked");
   var partidaNo = $("#flexRadioDefaultNo").prop("checked");
@@ -1444,7 +1448,8 @@ function botonSeleccionado(table_id, cell_id){
 
  
   var hasPartida = partidaSi === true;
-   this.manoJugada = 0;
+  manoJugada = 0;
+    jugadaFinalizada = 1;
     $('.nueva-jugada').remove();
   // save the values to a data structure or perform any other actions
   var $dJugadasPintadas = $('#dJugadasPintadas'+idRondaActual);
@@ -1453,6 +1458,7 @@ function botonSeleccionado(table_id, cell_id){
    //$dJugadasPintadas.html($dJugadasPintadas.html() + "<br style='display: block'/>");
 
   //alert(cantidad+" "+ hasPartida); 
+       
   }else{
            alert("Debe seleccionar primero la condición de partida y la mano a jugar");
   }
@@ -1499,12 +1505,7 @@ $(document).on("click", "#bJugada" + idJugadaActual, function() {
 </script>
 }
 
-<style>
 
-[id^="dJugadasPintadas"] {
-  white-space: pre-line;
-}
-</style>
 
         </html>
 
