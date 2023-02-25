@@ -1250,23 +1250,33 @@ function iniciarJugada() {
         var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + '">' +
             '<p class="card-text">Jugada' + idJugadaActual + '</p>' +
             '<p class="card-text"></p>' +
-
+            '<p class="card-text">Seguimiento</p>' +
             '<div class="form-check">' +
             '<input class="form-check-input" type="radio"   name="partida" id="flexRadioDefaultSi">' +
             '<label class="form-check-label" for="flexRadioDefault1">Sí</label>' +
             '</div>' +
             '<div class="form-check">' +
-            '<input class="form-check-input" type="radio"  name="partida" id="flexRadioDefaultNo" checked>' +
+            '<input class="form-check-input" type="radio"  name="partida" id="flexRadioDefaultNo" >' +
             '<label class="form-check-label" for="flexRadioDefault2">No</label>' +
 
 
-            '<input type="number" class="form-control"  id="inputCantidad" placeholder="Ingrese una cantidad a apostar">' +
-            '<button type="button" class="btn btn-warning" id="bJugada' + idJugadaActual + '" onclick="jugarMano()">JUGAR</button>' +
+            '<input type="number" class="form-control"  id="inputCantidad" placeholder="Ingrese una cantidad a apostar" style="display: none;">' +
+            '<button type="button" class="btn btn-warning" id="bJugada' + idJugadaActual + '" onclick="jugarMano()" style="display: none;">JUGAR</button>' +
 
             '</div>';
 
         // append the new div to the "dJugadas" div for the current round
         $("#dJugadas" + idRondaActual).append(divHtml);
+
+        // When any radio button is checked, show the input and button
+        $("input[name='partida']").change(function() {
+            if ($(this).prop('checked')) {
+                $("#inputCantidad, #bJugada" + idJugadaActual).show();
+            }
+        });
+
+
+
         jugadaFinalizada = 0;
     } else { alert("Debe finalizar una jugada antes de empezar otra"); }
 }
@@ -1516,6 +1526,10 @@ function finalizarRonda(){
 
     cantidadTotalUltimaRonda = prompt("Introduzca sus ganancias o pérdidas(en negativo) de la última ronda");
       $("#dJugadasPintadas" + idRondaActual).text(ultimaMano + " "+ ultimaCondicion+" A:" +cantidadTotalRonda+"$" +" G:"+cantidadTotalUltimaRonda+"$");
+      ultimaCondicion="";
+      cantidadTotalRonda=0;
+      cantidadTotalUltimaRonda=0;
+      ultimaMano="";
 }
 
 
