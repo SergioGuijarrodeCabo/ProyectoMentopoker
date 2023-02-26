@@ -1150,12 +1150,16 @@ var jugadaSeleccionada = false;
 var ultimaCondicion = 0;
 var manoJugada = 0;
 var jugadaFinalizada;
+var rondaJugada=0;
 
 var ultimaCantidad = 0;
 var cantidadTotalRonda=0;
 var primeraJugadaHecha = 0;
 var cantidadTotalUltimaRonda = 0;
 
+var dineroActual=0;
+var balance=0;
+var dineroInicial=0;
 
 //ESTOS DATOS SE ENVIARÁN AL BACK
 var ids_Jugadas = [];
@@ -1168,7 +1172,7 @@ var seguimiento_Jugadas = [];
 
 
 $(document).ready(function() {
-
+    var inicio=0;
     
 
  // initialize the current ID to 0
@@ -1217,6 +1221,18 @@ $(document).ready(function() {
     //$("#no_of_staff").attr("readonly", true); 
      
 
+    if(inicio==0){
+       dineroInicial =  prompt("Introduzca la cantidad inicial con la que va a jugar");
+   dineroActual = dineroInicial;
+  
+  
+  $('#botonInicio').after('<div class="d-flex align-items-center mt-3">' +
+                        '<p class="text-primary fw-bold h5 mb-0 me-3" id="dineroInicial">Dinero inicial: ' + dineroInicial + '$</p>' +
+    '<p class="text-danger fw-bold h5 mb-0 me-3" id="dineroActual">Dinero actual: ' + dineroActual + '$</p>' +
+    '<p class="text-success fw-bold h5 mb-0" id="balance">Balance: ' + balance + '$</p>' +
+  '</div>');
+  inicio=1;
+  }
 
 
   });
@@ -1225,10 +1241,14 @@ $(document).ready(function() {
   $(document).on("click", ".iniciarJugada", iniciarJugada);
 });
 
+
+
 $(document).on("click", ".btn-outline-secondary", function() {
+
+    if(manoJugada==1){
   if ($(this).attr("id").startsWith("bFinal")) {
     iniciarRonda();
-    
+  }
     
 
   }
@@ -1247,8 +1267,8 @@ function iniciarJugada() {
         idJugadaActual++;
 
         // create the HTML for the new div
-        var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + '">' +
-            '<p class="card-text">Jugada' + idJugadaActual + '</p>' +
+        var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idRondaActual + "j" + idJugadaActual + '">' +
+            '<p class="card-text">Jugada' +idRondaActual+'</p>' +
             '<p class="card-text"></p>' +
             '<p class="card-text">Seguimiento</p>' +
             '<div class="form-check">' +
@@ -1260,10 +1280,29 @@ function iniciarJugada() {
             '<label class="form-check-label" for="flexRadioDefault2">No</label>' +
 
 
-            '<input type="number" class="form-control"  id="inputCantidad" placeholder="Ingrese una cantidad a apostar" style="display: none;">' +
-            '<button type="button" class="btn btn-warning" id="bJugada' + idJugadaActual + '" onclick="jugarMano()" style="display: none;">JUGAR</button>' +
+            '<input type="number" class="form-control"  id="inputCantidad' + idRondaActual + "j" + idJugadaActual + '" placeholder="Ingrese una cantidad a apostar" style="display: none;">' +
+            '<button type="button" class="btn btn-warning" id="bJugada' +idRondaActual+"j"+ idJugadaActual + '" onclick="jugarMano()" style="display: none;">JUGAR</button>' +
 
             '</div>';
+
+        //// create the HTML for the new div
+        //var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + '">' +
+        //    '<p class="card-text">Jugada' + idJugadaActual + '</p>' +
+        //    '<p class="card-text"></p>' +
+        //    '<p class="card-text">Seguimiento</p>' +
+        //    '<div class="form-check">' +
+        //    '<input class="form-check-input" type="radio"   name="partida" id="flexRadioDefaultSi">' +
+        //    '<label class="form-check-label" for="flexRadioDefault1">Sí</label>' +
+        //    '</div>' +
+        //    '<div class="form-check">' +
+        //    '<input class="form-check-input" type="radio"  name="partida" id="flexRadioDefaultNo" >' +
+        //    '<label class="form-check-label" for="flexRadioDefault2">No</label>' +
+
+
+        //    '<input type="number" class="form-control"  id="inputCantidad" placeholder="Ingrese una cantidad a apostar" style="display: none;">' +
+        //    '<button type="button" class="btn btn-warning" id="bJugada' + idJugadaActual + '" onclick="jugarMano()" style="display: none;">JUGAR</button>' +
+
+        //    '</div>';
 
         // append the new div to the "dJugadas" div for the current round
         $("#dJugadas" + idRondaActual).append(divHtml);
@@ -1271,13 +1310,15 @@ function iniciarJugada() {
         // When any radio button is checked, show the input and button
         $("input[name='partida']").change(function() {
             if ($(this).prop('checked')) {
-                $("#inputCantidad, #bJugada" + idJugadaActual).show();
+                $("#bJugada" +idRondaActual+"j"+ idJugadaActual).show();
+                 $("#inputCantidad" +idRondaActual+"j"+ idJugadaActual).show();
             }
         });
 
 
 
         jugadaFinalizada = 0;
+        rondaJugada=0;
     } else { alert("Debe finalizar una jugada antes de empezar otra"); }
 }
 
@@ -1295,6 +1336,9 @@ function iniciarJugada() {
 //    Default checked radio
 //  </label>
 //</div>
+
+
+
 
 
 $('ul.dropdown-menu a').click(function() {
@@ -1475,19 +1519,20 @@ function botonSeleccionado(table_id, cell_id){
   var partidaNo = $("#flexRadioDefaultNo").prop("checked");
   
  
-   // get the current ID for the jugada
-    var idJugadaActual = $(this).attr('id').substring(1);
+   // get the current ID for the jugada. ESTA LINEA NO SIRVE NI PARA TOMAR POR CULO
+   // var idJugadaActual = $(this).attr('id').substring(1);
+
     // get the value of the input field
-    var cantidadApostada = parseInt($("#inputCantidad").val());
+    var cantidadApostada = parseInt($("#inputCantidad"+idRondaActual+"j"+idJugadaActual).val());
     // check if the input field is empty or not a number
-   
+  
      $('.nueva-jugada').remove();
     cantidadTotalRonda += cantidadApostada;
     // update the content of the dJugadasPintadas element for the current round
     $("#dJugadasPintadas" + idRondaActual).text(ultimaMano + " "+ ultimaCondicion+" " +cantidadTotalRonda+"$");
     jugadaFinalizada = 1;
-
-
+    manoJugada=0;
+     rondaJugada=1;
 
 
   
@@ -1522,15 +1567,55 @@ function botonSeleccionado(table_id, cell_id){
 }
 
 
-function finalizarRonda(){
 
-    cantidadTotalUltimaRonda = prompt("Introduzca sus ganancias o pérdidas(en negativo) de la última ronda");
-      $("#dJugadasPintadas" + idRondaActual).text(ultimaMano + " "+ ultimaCondicion+" A:" +cantidadTotalRonda+"$" +" G:"+cantidadTotalUltimaRonda+"$");
-      ultimaCondicion="";
-      cantidadTotalRonda=0;
-      cantidadTotalUltimaRonda=0;
-      ultimaMano="";
+ function finalizarRonda(){
+
+     if(rondaJugada==1){
+ cantidadTotalUltimaRonda = prompt("Introduzca sus ganancias o pérdidas (en negativo) de la última ronda");
+
+
+
+  ////// Calculate the new dineroActual and balance values
+  ////var nuevoDineroActual = parseInt(dineroActual) + parseInt(cantidadTotalUltimaRonda);
+  ////var nuevoBalance = parseInt(nuevoDineroActual) - parseInt(dineroInicial) ;
+
+  // Calculate the new dineroActual and balance values
+  dineroActual = parseInt(dineroActual) + parseInt(cantidadTotalUltimaRonda);
+  balance = parseInt(dineroActual) - parseInt(dineroInicial) ;
+
+
+  
+   $("#dineroActual").text("Dinero actual: "+dineroActual + "$");
+  
+  $("#balance").text("Balance: "+balance + "$");
+
+  // Update the dJugadasPintadas <p> element
+  $("#dJugadasPintadas" + idRondaActual).text(ultimaMano + " " + ultimaCondicion + " A: " + cantidadTotalRonda + "$" + " G: " + cantidadTotalUltimaRonda + "$");
+
+  // Reset variables
+  ultimaCondicion = "";
+  cantidadTotalRonda = 0;
+  cantidadTotalUltimaRonda=0;
+  ultimaMano = "";
+  
+  rondaJugada=1;
+}else{
+      alert("Debe al menos terminar una jugada antes de iniciar una nueva ronda");
+  }
+
 }
+
+
+
+//function finalizarRonda(){
+
+//    cantidadTotalUltimaRonda = prompt("Introduzca sus ganancias o pérdidas(en negativo) de la última ronda");
+//      $("#dJugadasPintadas" + idRondaActual).text(ultimaMano + " "+ ultimaCondicion+" A:" +cantidadTotalRonda+"$" +" G:"+cantidadTotalUltimaRonda+"$");
+//      ultimaCondicion="";
+//      cantidadTotalRonda=0;
+//      //cantidadTotalUltimaRonda=0;
+//      ultimaMano="";
+//}
 
 
 function iniciarPartida(){
@@ -1540,6 +1625,17 @@ function iniciarPartida(){
      
     let i = 1;
    this.iniciarRonda(i);
+
+    // create the HTML for the new div
+        var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + "j"+idRondaActual+'">' +
+            
+            '</div>';
+
+        // append the new div to the "dJugadas" div for the current round
+        $("#dJugadas" + idRondaActual).append(divHtml);
+
+
+
 };
 
 function iniciarRonda(i){
@@ -1560,7 +1656,7 @@ function iniciarRonda(i){
     }
 };
 
-$(document).on("click", "#bJugada" + idJugadaActual, function() {
+$(document).on("click", "#bJugada" +idRondaActual+"j"+idJugadaActual, function() {
     alert("hola");
 
 });
