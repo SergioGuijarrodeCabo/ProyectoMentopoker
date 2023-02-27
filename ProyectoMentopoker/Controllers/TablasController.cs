@@ -63,7 +63,7 @@ namespace ProyectoMentopoker.Controllers
         }
 
         [HttpPost]
-        public IActionResult insertarPartida(int[] ids_Jugadas, int[] ids_Rondas, double[] ganancias_Rondas,
+        public IActionResult insertarPartida(int[] ids_Jugadas, int[] ids_Rondas, double[] ganancias_Rondas, double[] cantidades_Rondas,
             string[] cell_ids_Jugadas, int[] table_ids_Jugadas, double[] cantidades_Jugadas,
             Boolean[] seguimiento_jugadas, double dineroInicial, double dineroActual)
         {
@@ -75,7 +75,7 @@ namespace ProyectoMentopoker.Controllers
                 message = "Partida insertada correctamente"
             };
 
-            this.repo.insertPartida(dineroInicial, dineroActual);
+            this.repo.insertPartida( ids_Jugadas, ids_Rondas, ganancias_Rondas, cantidades_Rondas, cell_ids_Jugadas, table_ids_Jugadas, cantidades_Jugadas, seguimiento_jugadas, dineroInicial, dineroActual);
 
             return Json(result);
         }

@@ -1135,6 +1135,7 @@
         var ids_Jugadas = [];
         var ids_Rondas = [];
         var ganancias_Rondas = [];
+        var cantidades_Rondas = [];
         var cell_ids_Jugadas = [];
         var table_ids_Jugadas = [];
         var cantidades_Jugadas = [];
@@ -1166,7 +1167,7 @@
                     '</svg>' +
 
                     '<div class="card-body" id="dJugadas' + idRondaActual + '">' + '</div>' +
-                    '<p class="card-text">Ronda' + idRondaActual + '</p>' +
+                    '<p class="card-text">Ronda ' + idRondaActual + '</p>' +
                     '<div class="d-flex justify-content-between align-items-center">' +
                     '<div >' +
                     '<button type="button" class="btn btn-sm btn-outline-secondary iniciarJugada" width="50%" id="bRonda' + idRondaActual + '">Nueva jugada</button>' +
@@ -1277,7 +1278,7 @@
 
                 // create the HTML for the new div
                 var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idRondaActual + "j" + idJugadaActual + '">' +
-                    '<p class="card-text">Jugada' + idRondaActual + '</p>' +
+                    '<p class="card-text">Jugada ' + idJugadaActual + '</p>' +
                     '<p class="card-text"></p>' +
                     '<p class="card-text">Seguimiento</p>' +
                     '<div class="form-check">' +
@@ -1371,11 +1372,7 @@
                     seguimiento_Jugadas.push(false);
                 }
 
-                ids_Jugadas.push(idJugadaActual);
-                cantidades_Jugadas.push(cantidadApostada);
-                cell_ids_Jugadas.push(ultimaMano);
-                table_ids_Jugadas.push(ultimaCondicion);
-
+               
 
                 // get the current ID for the jugada. ESTA LINEA NO SIRVE NI PARA TOMAR POR CULO
                 // var idJugadaActual = $(this).attr('id').substring(1);
@@ -1389,6 +1386,14 @@
                 cantidadTotalRonda += cantidadApostada;
                 // update the content of the dJugadasPintadas element for the current round
                 $("#dJugadasPintadas" + idRondaActual).text(ultimaMano + " " + textoCondicion + " " + cantidadTotalRonda + "$");
+
+                 ids_Jugadas.push(idJugadaActual);
+                //cantidades_Jugadas.push(cantidadApostada);
+                cell_ids_Jugadas.push(ultimaMano);
+                table_ids_Jugadas.push(ultimaCondicion);
+                cantidades_Jugadas.push(cantidadApostada);
+
+
                 jugadaFinalizada = 1;
                 manoJugada = 0;
                 rondaJugada = 1;
@@ -1442,7 +1447,7 @@
 
                 ids_Rondas.push(idRondaActual);
                 ganancias_Rondas.push(cantidadTotalUltimaRonda);
-
+                cantidades_Rondas.push(cantidadTotalRonda);
 
 
                 $("#dineroActual").text("Dinero actual: " + dineroActual + "$");
@@ -1477,6 +1482,7 @@
                     ids_Jugadas: ids_Jugadas,
                     ids_Rondas: ids_Rondas,
                     ganancias_Rondas: ganancias_Rondas,
+                    cantidades_Rondas: cantidades_Rondas,
                     cell_ids_Jugadas: cell_ids_Jugadas,
                     table_ids_Jugadas: table_ids_Jugadas,
                     cantidades_Jugadas: cantidades_Jugadas,

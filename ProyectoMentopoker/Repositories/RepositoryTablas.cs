@@ -10,29 +10,25 @@ using static System.Net.Mime.MediaTypeNames;
 //GO
 
 
-
-
-
 //CREATE OR ALTER PROCEDURE SP_INSERT_PARTIDA
 //(
 //@CASH_INICIAL FLOAT,
 //@CASH_FINAL FLOAT
 //)
 //AS
-//INSERT INTO Partidas  (Partida_id, Cash_inicial, Cash_final) VALUES((SELECT max(CAST(Partida_id AS INT)) from Partidas) + 1, @CASH_INICIAL, @CASH_FINAL)
+//INSERT INTO Partidas  (Partida_id, Cash_inicial, Cash_final, Fecha) VALUES((SELECT max(CAST(Partida_id AS INT)) from Partidas) + 1, @CASH_INICIAL, @CASH_FINAL, GETDATE())
 //GO
-
 
 //CREATE OR ALTER PROCEDURE SP_INSERT_RONDA
 //(
-//@RONDA_ID NVARCHAR(50),
-//@CANTIDAD_JUGADA FLOAT,
-//@GANANCIAS FLOAT
+
+//@CANTIDAD_RONDA FLOAT,
+//@GANANCIAS FLOAT,
+//@PARTIDA_ID NVARCHAR(50)
 //)
 //AS
-//INSERT INTO Rondas (Ronda_id, Cantidad_jugada, Ganancias, Partida_id) VALUES((SELECT max(CAST(Ronda_id AS INT)) from Rondas) + 1, @RONDA_ID, @CANTIDAD_JUGADA, @GANANCIAS)
+//INSERT INTO Rondas (Ronda_id, Cantidad_jugada, Ganancias, Partida_id) VALUES((SELECT max(CAST(Ronda_id AS INT)) from Rondas) + 1, @CANTIDAD_RONDA, @GANANCIAS, @PARTIDA_ID)
 //GO
-
 
 //CREATE OR ALTER PROCEDURE SP_INSERT_JUGADA
 //(
@@ -128,8 +124,28 @@ namespace ProyectoMentopoker.Repositories
 
         //}
 
+        public void insertRonda(double cantidades_Rondas, double ganancias_Ronda, string partida_id)
+        {
 
-        public Boolean insertPartida(double dinero_inicial, double dinero_actual)
+            SqlParameter pamcantidad = new SqlParameter("@CANTIDAD_RONDA", cantidades_Rondas);
+            this.com.Parameters.Add(pamcantidad);
+            SqlParameter pamganancias = new SqlParameter("@GANANCIAS", ganancias_Ronda);
+            this.com.Parameters.Add(pamganancias);
+            SqlParameter pampartidaid = new SqlParameter("@PARTIDA_ID", partida_id);
+            this.com.Parameters.Add(pampartidaid);
+            this.com.CommandType = System.Data.CommandType.StoredProcedure;
+            this.com.CommandText = "SP_INSERT_RONDA";
+
+            this.cn.Open();
+            this.com.ExecuteNonQuery();
+            this.com.Parameters.Clear();
+            this.cn.Close();
+        }
+
+
+        public Boolean insertPartida(int[] ids_Jugadas, int[] ids_Rondas, double[] ganancias_Rondas, double[] cantidades_Rondas,
+            string[] cell_ids_Jugadas, int[] table_ids_Jugadas, double[] cantidades_Jugadas,
+            Boolean[] seguimiento_jugadas, double dinero_inicial, double dinero_actual)
         {
             int exito = 0;
             Boolean exitob = false;
@@ -151,6 +167,22 @@ namespace ProyectoMentopoker.Repositories
             {
                 exitob = true;
             }
+
+
+            this.com.CommandText = "SELECT MAX(CAST(Partida_id AS INT)) from Partidas";
+            this.com.CommandType = System.Data.CommandType.Text;
+            this.cn.Open();
+            string partidaId = this.com.ExecuteScalar().ToString();
+           
+  
+            this.cn.Close();
+
+            for (int i=0; i < cantidades_Rondas.Length; i++)
+                  {
+                this.insertRonda(cantidades_Rondas[i], ganancias_Rondas[i], partidaId);
+                  }
+
+
 
             return exitob;
         }
