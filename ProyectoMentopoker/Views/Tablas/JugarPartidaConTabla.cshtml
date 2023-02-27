@@ -1,6 +1,4 @@
-﻿
-
-@{
+﻿@{
     var i = 1;
     var y = 1;
 
@@ -11,1106 +9,1078 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
-   
+<head>
+
     <!-- Bootstrap core CSS -->
-         <link href="~/css/bootstrap.min.css" rel="stylesheet">
-         <link href="~/css/NavBar.css" rel="stylesheet">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/NavBar.css" rel="stylesheet">
 
 
 
 
 
-    
+
     <!-- Custom styles for this template -->
     <link href="~/css/navbar-top-fixed.css" rel="stylesheet">
-  </head>
-  <body>
-
-<div id="dropdowns" >
-
-    <br />
-    <br />
-    <br />
-
-
-<div class="btn-group" id="dInicial" >
-  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Seleccione una condición
-  </button>
-  <ul class="dropdown-menu">
-    
-    <li><hr class="dropdown-divider"></li>
-    <li><a id="BBvsLimp"  class="dropdown-item" >BB vs Limp</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a  id="DefendBB"  class="dropdown-item" >Defend BB</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a id="Flat3B"  class="dropdown-item" >Flat + 3B</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a id="SQZ"  class="dropdown-item" >SQZ + CCMW</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a id="OS"  class="dropdown-item" >OS</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a id="OR"  class="dropdown-item" >OR</a></li>
-     <li><hr class="dropdown-divider"></li>
-    <li><a id="Reshove"  class="dropdown-item" >Reshove</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a id="vsOS"  class="dropdown-item" >vs OS</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a id="SBLimpia"  class="dropdown-item" >SB Limpia</a></li>
-     <li><hr class="dropdown-divider"></li>
-    <li><a id="Vs3BET"  class="dropdown-item" >vs 3Bet</a></li> 
-  </ul>
-</div>
-
-
-
- 
-
-
-
-<div class="btn-group" id="dBBvsLimp" style="display:none">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    BBvsLimp
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" name="id"  id="1" >100BB</a></li>
-    <li><a class="dropdown-item" name="id"   id="2" >50BB</a></li>
-    <li><a class="dropdown-item" name="id"  id="3" >30BB</a></li>
-     <li><a class="dropdown-item" name="id"   id="4" >20BB</a></li>
-    <li><a class="dropdown-item"  name="id"  id="5" >15BB</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dDefendBB" style="display:none">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Defend BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="DefendBB_100BB" >100BB</a></li>
-    <li><a class="dropdown-item" id="DefendBB_50BB"  >50BB</a></li>
-    <li><a class="dropdown-item" id="DefendBB_30BB"   >30BB</a></li>
-     <li><a class="dropdown-item" id="DefendBB_20BB"   >20BB</a></li>
-    <li><a class="dropdown-item" id="DefendBB_15BB"   >15BB</a></li>
-  </ul>
-</div>
-
-
-
-
-
-<div class="btn-group" id="dDefendBB_100BB" style="display:none">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    100BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="6" >BB vs EP</a></li>
-    <li><a class="dropdown-item"  id="7" >BB vs MP</a></li>
-    <li><a class="dropdown-item"   id="8" >BB vs HJ</a></li>
-     <li><a class="dropdown-item"  id="9" >BB vs CO</a></li>
-    <li><a class="dropdown-item"   id="10" >BB vs BTN</a></li>
-      <li><a class="dropdown-item"  id="11" >BB vs SB</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dDefendBB_50BB" style="display:none">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    50BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="12" >BB vs EP</a></li>
-    <li><a class="dropdown-item"  id="13" >BB vs MP</a></li>
-    <li><a class="dropdown-item"   id="14" >BB vs HJ</a></li>
-     <li><a class="dropdown-item"   id="15" >BB vs CO</a></li>
-    <li><a class="dropdown-item"   id="16" >BB vs BTN</a></li>
-      <li><a class="dropdown-item"   id="17" >BB vs SB</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dDefendBB_30BB" style="display:none">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    30BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="18" >BB vs EP</a></li>
-    <li><a class="dropdown-item"  id="19" >BB vs MP</a></li>
-    <li><a class="dropdown-item"  id="20" >BB vs HJ</a></li>
-     <li><a class="dropdown-item"  id="21" >BB vs CO</a></li>
-    <li><a class="dropdown-item"  id="22" >BB vs BTN</a></li>
-      <li><a class="dropdown-item"  id="23" >BB vs SB</a></li>
-  </ul>
-</div>
-
- <div class="btn-group" id="dDefendBB_20BB" style="display:none">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    20BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="24" >BB vs EP</a></li>
-    <li><a class="dropdown-item"  id="25" >BB vs MP</a></li>
-    <li><a class="dropdown-item"   id="26" >BB vs HJ</a></li>
-     <li><a class="dropdown-item"  id="27" >BB vs CO</a></li>
-    <li><a class="dropdown-item"  id="28" >BB vs BTN</a></li>
-      <li><a class="dropdown-item"   id="29" >BB vs SB</a></li>
-  </ul>
-</div>
- 
- <div class="btn-group" id="dDefendBB_15BB" style="display:none">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    15BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="30" >BB vs EP</a></li>
-    <li><a class="dropdown-item"  id="31" >BB vs MP</a></li>
-    <li><a class="dropdown-item"   id="32" >BB vs HJ</a></li>
-     <li><a class="dropdown-item"   id="33" >BB vs CO</a></li>
-    <li><a class="dropdown-item"   id="34" >BB vs BTN</a></li>
-      <li><a class="dropdown-item"   id="35" >BB vs SB</a></li>
-  </ul>
-</div>
- 
-
-
-<div class="btn-group" id="dFlat3B" style="display:none">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat+3B
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="Flat3B_100BB" >100BB</a></li>
-    <li><a class="dropdown-item" id="Flat3B_50BB"  >50BB</a></li>
-    <li><a class="dropdown-item" id="Flat3B_30BB"   >30BB</a></li>
-     <li><a class="dropdown-item" id="Flat3B_20BB"   >20BB</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dFlat3B_100BB" style="display:none">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 100BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="Flat3B_100BBSB"  >SB</a></li>
-    <li><a class="dropdown-item" id="Flat3B_100BBBTN"   >BTN</a></li>
-    <li><a class="dropdown-item" id="Flat3B_100BBCO"  >CO</a></li>
-     <li><a class="dropdown-item" id="Flat3B_100BBHJ"   >HJ</a></li>
-    <li><a class="dropdown-item"  id="36" >MP</a></li>
-      <li><a class="dropdown-item"   id="37" >EP</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dFlat3B_100BBSB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 100BB SB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="38" >BB vs EP</a></li>
-    <li><a class="dropdown-item"   id="39" >BB vs MP</a></li>
-    <li><a class="dropdown-item"   id="40" >BB vs HJ</a></li>
-     <li><a class="dropdown-item"  id="41"  >BB vs CO</a></li>
-
-  </ul>
-</div>
-
-<div class="btn-group" id="dFlat3B_100BBBTN" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 100BB BTN
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="42" >BTN vs EP</a></li>
-    <li><a class="dropdown-item"   id="43" >BTN vs HJ</a></li>
-    <li><a class="dropdown-item"   id="4400" >BTN vs CO</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dFlat3B_100BBCO" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 100BB CO
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="45" >CO vs EP</a></li>
-    <li><a class="dropdown-item"   id="46" >CO vs HJ</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dFlat3B_100BBHJ" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-     Flat 100BB HJ
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="47" >HJ vs EP</a></li>
-    <li><a class="dropdown-item"   id="48" >HJ-MP</a></li>
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="btn-group" id="dFlat3B_50BB" style="display:none">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 50BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="Flat3B_50BBSB"  >SB</a></li>
-    <li><a class="dropdown-item" id="Flat3B_50BBBTN"   >BTN</a></li>
-    <li><a class="dropdown-item" id="Flat3B_50BBCO"  >CO</a></li>
-     <li><a class="dropdown-item" id="Flat3B_50BBHJ"   >HJ</a></li>
-    <li><a class="dropdown-item"  id="49" >MP</a></li>
-      <li><a class="dropdown-item"   id="50" >EP</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dFlat3B_50BBSB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 50BB SB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="51" >SB vs EP</a></li>
-    <li><a class="dropdown-item"   id="52" >SB vs HJ</a></li>
-    <li><a class="dropdown-item"   id="53" >SB vs CO</a></li>
-      <li><a class="dropdown-item"   id="54" >SB vs BTN</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dFlat3B_50BBBTN" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 50BB BTN
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="5500" >BTN vs EP</a></li>
-    <li><a class="dropdown-item"   id="56" >BTN vs HJ</a></li>
-    <li><a class="dropdown-item"   id="57" >BTN vs CO</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dFlat3B_50BBCO" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 50BB CO
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="58" >CO vs EP</a></li>
-    <li><a class="dropdown-item"   id="59" >CO vs HJ</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dFlat3B_50BBHJ" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 50BB HJ
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="60" >HJ vs EP</a></li>
-    <li><a class="dropdown-item"   id="61" >HJ-MP</a></li>
-  </ul>
-</div>
-
-
-
-
-<div class="btn-group" id="dFlat3B_30BB" style="display:none">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 30BB 
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="Flat3B_30BBSB" >SB</a></li>
-    <li><a class="dropdown-item"   id="Flat3B_30BBBTN" >BTN</a></li>
-    <li><a class="dropdown-item"  id="Flat3B_30BBCO" >CO</a></li>
-    <li><a class="dropdown-item"   id="Flat3B_30BBHJ" >HJ</a></li>
-    <li><a class="dropdown-item"   id="62" >MP</a></li>
-    <li><a class="dropdown-item"   id="63" >EP</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dFlat3B_30BBSB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 30BB SB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="64" >SB vs EP</a></li>
-    <li><a class="dropdown-item"   id="65" >SB vs HJ</a></li>
-    <li><a class="dropdown-item"  id="6600" >SB vs CO</a></li>
-    <li><a class="dropdown-item"   id="67" >SB vs BTN</a></li>
-
-  </ul>
-</div>
-
-<div class="btn-group" id="dFlat3B_30BBBTN" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 30BB BTN
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="68" >BTN vs EP</a></li>
-    <li><a class="dropdown-item"   id="69" >BTN vs HJ</a></li>
-    <li><a class="dropdown-item"  id="70" >BTN vs CO</a></li>
-
-  </ul>
-</div>
-
-<div class="btn-group" id="dFlat3B_30BBCO" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 30BB CO
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="71" >CO vs EP</a></li>
-    <li><a class="dropdown-item"   id="72" >CO vs HJ</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dFlat3B_30BBHJ" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 30BB HJ
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="73" >HJ vs EP</a></li>
-    <li><a class="dropdown-item"   id="74" >HJ-MP</a></li>
-  </ul>
-</div>
-
-
-
-
-<div class="btn-group" id="dFlat3B_20BB" style="display:none">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 20BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="Flat3B_20BBSB"  >SB</a></li>
-    <li><a class="dropdown-item" id="Flat3B_20BBBTN"   >BTN</a></li>
-    <li><a class="dropdown-item" id="Flat3B_20BBCO"  >CO</a></li>
-     <li><a class="dropdown-item" id="Flat3B_20BBHJ"   >HJ</a></li>
-    <li><a class="dropdown-item"  id="75" >MP</a></li>
-      <li><a class="dropdown-item"   id="76" >EP</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dFlat3B_20BBSB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 20BB SB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="7700" >SB vs EP</a></li>
-    <li><a class="dropdown-item"   id="78" >SB vs MP</a></li>
-    <li><a class="dropdown-item"  id="79" >SB vs HJ</a></li>
-    <li><a class="dropdown-item"   id="80" >SB vs CO</a></li>
-    <li><a class="dropdown-item"   id="81" >SB vs BTN</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dFlat3B_20BBBTN" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 20BB BTN
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="82" >BTN vs EP</a></li>
-    <li><a class="dropdown-item"   id="83" >BTN vs MP</a></li>
-    <li><a class="dropdown-item"  id="84" >BTN vs HJ</a></li>
-    <li><a class="dropdown-item"   id="85" >BTN vs CO</a></li>
-
-  </ul>
-</div>
-
-<div class="btn-group" id="dFlat3B_20BBCO" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 20BB CO
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="86" >CO vs EP</a></li>
-    <li><a class="dropdown-item"   id="87" >CO vs HJ</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dFlat3B_20BBHJ" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Flat 20BB HJ
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="8800" >HJ vs EP</a></li>
-    <li><a class="dropdown-item"   id="89" >HJ-MP</a></li>
-  </ul>
-</div>
-
-
-
-
-
-<div class="btn-group" id="dSQZ" style="display:none">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="SQZ_100BB" >100BB</a></li>
-    <li><a class="dropdown-item"   id="SQZ_50BB" >50BB</a></li>
-    <li><a class="dropdown-item"  id="SQZ_30BB" >30BB</a></li>
-    <li><a class="dropdown-item"   id="SQZ_20BB" >20BB</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_100BB" style="display:none">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 100BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="SQZ_100BBBB" >BB</a></li>
-    <li><a class="dropdown-item"   id="SQZ_100BBSB" >SB</a></li>
-    <li><a class="dropdown-item"  id="SQZ_100BBBTN" >BTN</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_100BBBB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 100BB BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="90" >BB vs BTN&SB</a></li>
-    <li><a class="dropdown-item"   id="91" >BB vs HJ+BTN-CO</a></li>
-    <li><a class="dropdown-item"  id="92" >BB vs EP+LP</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_100BBSB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 100BB SB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"   id="93" >SB vs HJ+BTN-CO</a></li>
-    <li><a class="dropdown-item"  id="94" >SB vs EP+MP</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_100BBBTN" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 100BB BTN
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"   id="95" >BTN vs EP+MP</a></li>
-    <li><a class="dropdown-item"  id="96" >BTN vs LP+LP</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_50BB" style="display:none">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 50BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="SQZ_50BBBB" >BB</a></li>
-    <li><a class="dropdown-item"   id="SQZ_50BBSB" >SB</a></li>
-    <li><a class="dropdown-item"  id="SQZ_50BBBTN" >BTN</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_50BBBB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 50BB BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="97" >BB vs BTN&SB</a></li>
-    <li><a class="dropdown-item"   id="98">BB vs HJ+BTN-CO</a></li>
-    <li><a class="dropdown-item"  id="9900">BB vs EP+LP</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_50BBSB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 50BB SB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"   id="100">SB vs HJ+BTN-CO</a></li>
-    <li><a class="dropdown-item"  id="10100">SB vs EP+MP</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_50BBBTN" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 50BB BTN
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"   id="102">BTN vs EP+MP</a></li>
-    <li><a class="dropdown-item"  id="103">BTN vs LP+LP</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_30BB" style="display:none">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 30BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="SQZ_30BBBB">BB</a></li>
-    <li><a class="dropdown-item"   id="SQZ_30BBSB">SB</a></li>
-    <li><a class="dropdown-item"  id="SQZ_30BBBTN">BTN</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_30BBBB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 30BB BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="104">BB vs BTN&SB</a></li>
-    <li><a class="dropdown-item"   id="105">BB vs HJ+BTN-CO</a></li>
-    <li><a class="dropdown-item"  id="106">BB vs EP+LP</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_30BBSB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 30BB SB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"   id="107">SB vs HJ+BTN-CO</a></li>
-    <li><a class="dropdown-item"  id="108">SB vs EP+MP</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_30BBBTN" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 30BB BTN
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"   id="109">BTN vs EP+MP</a></li>
-    <li><a class="dropdown-item"  id="110">BTN vs LP+LP</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_20BB" style="display:none">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 20BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="SQZ_20BBBB">BB</a></li>
-    <li><a class="dropdown-item"   id="SQZ_20BBSB">SB</a></li>
-    <li><a class="dropdown-item"  id="SQZ_20BBBTN">BTN</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_20BBBB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 20BB BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="11100">BB vs BTN&SB</a></li>
-    <li><a class="dropdown-item"   id="112">BB vs HJ+BTN-CO</a></li>
-    <li><a class="dropdown-item"  id="113">BB vs EP+LP</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_20BBSB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 20BB SB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"   id="114">SB vs HJ+BTN-CO</a></li>
-    <li><a class="dropdown-item"  id="115">SB vs EP+MP</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dSQZ_20BBBTN" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    SQZ 20BB BTN
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"   id="116">BTN vs EP+MP</a></li>
-    <li><a class="dropdown-item"  id="117">BTN vs LP+LP</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dOS" style="display:none">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OS
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="OS_15BB" >15 BB</a></li>
-    <li><a class="dropdown-item" id="OS_14BB"  >14 BB</a></li>
-    <li><a class="dropdown-item" id="OS_13BB" >13 BB</a></li>
-     <li><a class="dropdown-item" id="OS_12BB"  >12 BB</a></li>
-     <li><a class="dropdown-item" id="OS_11BB" >11 BB</a></li>
-    <li><a class="dropdown-item" id="OS_10BB"  >10 BB</a></li>
-    <li><a class="dropdown-item" id="OS_9BB" >9 BB</a></li>
-     <li><a class="dropdown-item" id="OS_8BB"  >8 BB</a></li>
-     <li><a class="dropdown-item" id="OS_7BB" >7 BB</a></li>
-     <li><a class="dropdown-item" id="OS_6BB"  >6 BB</a></li>
-     <li><a class="dropdown-item" id="OS_5BB"  >5 BB</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dOS_15BB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OS 15BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="118">UTG</a></li>
-    <li><a class="dropdown-item"   id="119">UTG1</a></li>
-    <li><a class="dropdown-item"  id="120">MP</a></li>
-    <li><a class="dropdown-item"   id="12100">LJ</a></li>
-    <li><a class="dropdown-item"   id="122">HJ</a></li>
-    <li><a class="dropdown-item"  id="123">CO</a></li>
-    <li><a class="dropdown-item"   id="124">BTN</a></li>
-    <li><a class="dropdown-item"   id="125">SB</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dOS_14BB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OS 14BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="126">UTG</a></li>
-    <li><a class="dropdown-item"   id="127">UTG1</a></li>
-    <li><a class="dropdown-item"  id="128">MP</a></li>
-    <li><a class="dropdown-item"   id="129">LJ</a></li>
-    <li><a class="dropdown-item"   id="130">HJ</a></li>
-    <li><a class="dropdown-item"  id="13100">CO</a></li>
-    <li><a class="dropdown-item"   id="132">BTN</a></li>
-    <li><a class="dropdown-item"   id="133">SB</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dOS_13BB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OS 13BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="134">UTG</a></li>
-    <li><a class="dropdown-item"   id="135">UTG1</a></li>
-    <li><a class="dropdown-item"  id="136">MP</a></li>
-    <li><a class="dropdown-item"   id="137">LJ</a></li>
-    <li><a class="dropdown-item"   id="138">HJ</a></li>
-    <li><a class="dropdown-item"  id="139">CO</a></li>
-    <li><a class="dropdown-item"   id="140">BTN</a></li>
-    <li><a class="dropdown-item"   id="14100">SB</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dOS_12BB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OS 12BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="142">UTG</a></li>
-    <li><a class="dropdown-item"   id="143">UTG1</a></li>
-    <li><a class="dropdown-item"  id="144">MP</a></li>
-    <li><a class="dropdown-item"   id="145">LJ</a></li>
-    <li><a class="dropdown-item"   id="146">HJ</a></li>
-    <li><a class="dropdown-item"  id="147">CO</a></li>
-    <li><a class="dropdown-item"   id="148">BTN</a></li>
-    <li><a class="dropdown-item"   id="149">SB</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dOS_11BB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OS 11BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="150">UTG</a></li>
-    <li><a class="dropdown-item"   id="15100">UTG1</a></li>
-    <li><a class="dropdown-item"  id="152">MP</a></li>
-    <li><a class="dropdown-item"   id="153">LJ</a></li>
-    <li><a class="dropdown-item"   id="154">HJ</a></li>
-    <li><a class="dropdown-item"  id="155">CO</a></li>
-    <li><a class="dropdown-item"   id="156">BTN</a></li>
-    <li><a class="dropdown-item"   id="157">SB</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dOS_10BB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OS 10BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="158">UTG</a></li>
-    <li><a class="dropdown-item"   id="159">UTG1</a></li>
-    <li><a class="dropdown-item"  id="160">MP</a></li>
-    <li><a class="dropdown-item"   id="16100">LJ</a></li>
-    <li><a class="dropdown-item"   id="162">HJ</a></li>
-    <li><a class="dropdown-item"  id="163">CO</a></li>
-    <li><a class="dropdown-item"   id="164">BTN</a></li>
-    <li><a class="dropdown-item"   id="165">SB</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dOS_9BB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OS 9BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="166">UTG</a></li>
-    <li><a class="dropdown-item"   id="167">UTG1</a></li>
-    <li><a class="dropdown-item"  id="168">MP</a></li>
-    <li><a class="dropdown-item"   id="169">LJ</a></li>
-    <li><a class="dropdown-item"   id="170">HJ</a></li>
-    <li><a class="dropdown-item"  id="17100">CO</a></li>
-    <li><a class="dropdown-item"   id="172">BTN</a></li>
-    <li><a class="dropdown-item"   id="173">SB</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dOS_8BB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OS 8BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="174">UTG</a></li>
-    <li><a class="dropdown-item"   id="175">UTG1</a></li>
-    <li><a class="dropdown-item"  id="176">MP</a></li>
-    <li><a class="dropdown-item"   id="177">LJ</a></li>
-    <li><a class="dropdown-item"   id="178">HJ</a></li>
-    <li><a class="dropdown-item"  id="179">CO</a></li>
-    <li><a class="dropdown-item"   id="180">BTN</a></li>
-    <li><a class="dropdown-item"   id="18100">SB</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dOS_7BB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OS 7BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="182">UTG</a></li>
-    <li><a class="dropdown-item"   id="183">UTG1</a></li>
-    <li><a class="dropdown-item"  id="184">MP</a></li>
-    <li><a class="dropdown-item"   id="185">LJ</a></li>
-    <li><a class="dropdown-item"   id="186">HJ</a></li>
-    <li><a class="dropdown-item"  id="187">CO</a></li>
-    <li><a class="dropdown-item"   id="188">BTN</a></li>
-    <li><a class="dropdown-item"   id="189">SB</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dOS_6BB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OS 6BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="190">UTG</a></li>
-    <li><a class="dropdown-item"   id="19100">UTG1</a></li>
-    <li><a class="dropdown-item"  id="192">MP</a></li>
-    <li><a class="dropdown-item"   id="193">LJ</a></li>
-    <li><a class="dropdown-item"   id="194">HJ</a></li>
-    <li><a class="dropdown-item"  id="195">CO</a></li>
-    <li><a class="dropdown-item"   id="196">BTN</a></li>
-    <li><a class="dropdown-item"   id="197">SB</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dOS_5BB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OS 5BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="198">UTG</a></li>
-    <li><a class="dropdown-item"   id="199">UTG1</a></li>
-    <li><a class="dropdown-item"  id="200">MP</a></li>
-    <li><a class="dropdown-item"   id="201">LJ</a></li>
-    <li><a class="dropdown-item"   id="20200">HJ</a></li>
-    <li><a class="dropdown-item"  id="203">CO</a></li>
-    <li><a class="dropdown-item"   id="204">BTN</a></li>
-    <li><a class="dropdown-item"   id="205">SB</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dOR" style="display:none">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OR
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="OR_10025BB" >100-25BB</a></li>
-    <li><a class="dropdown-item" id="OR_15BB"  >15 BB</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dOR_10025BB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OR 100-25BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="206">100BB</a></li>
-    <li><a class="dropdown-item"   id="207">50BB</a></li>
-    <li><a class="dropdown-item"  id="208">25BB</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dOR_15BB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    OR 15BB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="209">UTG</a></li>
-    <li><a class="dropdown-item"  id="210">MP</a></li>
-    <li><a class="dropdown-item"   id="2110">LJ</a></li>
-    <li><a class="dropdown-item"   id="21200">HJ</a></li>
-    <li><a class="dropdown-item"  id="213">CO</a></li>
-    <li><a class="dropdown-item"   id="214">BU</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dReshove" style="display:none">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Reshove
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="Reshove_SB" >SB</a></li>
-    <li><a class="dropdown-item" id="Reshove_BTN"  >BTN</a></li>
-    <li><a class="dropdown-item" id="Reshove_HJ-CO" >HJ-CO</a></li>
-     <li><a class="dropdown-item" id="Reshove_MP"  >MP</a></li>
-     <li><a class="dropdown-item" id="Reshove_EP" >EP</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dReshove_SB" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
- Reshove SB
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="217">SB vs EP</a></li>
-    <li><a class="dropdown-item"  id="218">SB vs MP</a></li>
-    <li><a class="dropdown-item"   id="219">SB vs CO</a></li>
-    <li><a class="dropdown-item"   id="220">SB vs BTN</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dReshove_BTN" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
- Reshove BTN
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="221">BTN vs EP</a></li>
-    <li><a class="dropdown-item"  id="22200">BTN vs MP</a></li>
-    <li><a class="dropdown-item"   id="223">BTN vs CO</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dReshove_HJ-CO" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
- Reshove HJ-CO
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="224">HJ vs EP</a></li>
-    <li><a class="dropdown-item"  id="225">HJ vs MP</a></li>
-    <li><a class="dropdown-item"   id="226">HJ vs CO</a></li>
-  </ul>
-</div>
-
-
-@*Esto son tablas de imagen*@
-<div class="btn-group" id="dvsOS" style="display:none">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    VS OS
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="vsOS20BB" >20BB</a></li>
-    <li><a class="dropdown-item" id="vsOS18BB"  >18BB</a></li>
-    <li><a class="dropdown-item" id="vsOS16BB" >16BB</a></li>
-     <li><a class="dropdown-item" id="vsOS14BB"  >14BB</a></li>
-     <li><a class="dropdown-item" id="vsOS12BB" >12BB</a></li>
-    <li><a class="dropdown-item" id="vsOS10BB"  >10BB</a></li>
-    <li><a class="dropdown-item" id="vsOS8BB" >8BB</a></li>
-     <li><a class="dropdown-item" id="vsOS6BB"  >6BB</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dSBLimpia" style="display:none">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-SB Limpia
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="227">HJ vs EP</a></li>
-    <li><a class="dropdown-item"  id="228">HJ vs MP</a></li>
-    <li><a class="dropdown-item"   id="229">HJ vs CO</a></li>
-    <li><a class="dropdown-item"  id="230">HJ vs MP</a></li>
-    <li><a class="dropdown-item"   id="231">HJ vs CO</a></li>
-  </ul>
-</div>
-
-
-
-<div class="btn-group" id="dVs3BET" style="display:none">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    VS 3BET
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" id="Vs3BET_100BBIP"  >15BB</a></li>
-    <li><a class="dropdown-item" id="Vs3BET_100BBOOP"   >14BB</a></li>
-    <li><a class="dropdown-item" id="Vs3BET_50BBIP"  >13BB</a></li>
-     <li><a class="dropdown-item" id="Vs3BET_50BBOOP"   >12BB</a></li>
-     <li><a class="dropdown-item" id="Vs3BET_3525BBIP" >11BB</a></li>
-    <li><a class="dropdown-item" id="Vs3BET_3525BBOOP"  >10BB</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dVs3BET_100BBIP" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-VS 3BET 100BBI
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="23200" >vs 13+%</a></li>
-    <li><a class="dropdown-item"  id="233">vs 8-11%</a></li>
-    <li><a class="dropdown-item"   id="234">vs 4-6%</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dVs3BET_100BBOOP" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-VS 3BET 100BBOP
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="235">vs 13+%</a></li>
-    <li><a class="dropdown-item"  id="236">vs 8-11%</a></li>
-    <li><a class="dropdown-item"   id="237">vs 4-6%</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dVs3BET_50BBIP" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-VS 3BET 50BBIP
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="238">vs 13+%</a></li>
-    <li><a class="dropdown-item"  id="239">vs 8-11%</a></li>
-    <li><a class="dropdown-item"   id="240">vs 4-6%</a></li>
-  </ul>
-</div>
-
-<div class="btn-group" id="dVs3BET_50BBOOP" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-VS 3BET 50BBOP
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="241">vs 13+%</a></li>
-    <li><a class="dropdown-item"  id="24200">vs 8-11%</a></li>
-    <li><a class="dropdown-item"   id="243">vs 4-6%</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dVs3BET_3525BBIP" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-VS 3BET 35-25BBIP
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="244">vs 13+%</a></li>
-    <li><a class="dropdown-item"  id="245">vs 8-11%</a></li>
-    <li><a class="dropdown-item"   id="246">vs 4-6%</a></li>
-  </ul>
-</div>
-
-
-<div class="btn-group" id="dVs3BET_3525BBOOP" style="display:none">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-VS 3BET 35-25BBOP
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item"  id="247">vs 13+%</a></li>
-    <li><a class="dropdown-item"  id="248">vs 8-11%</a></li>
-    <li><a class="dropdown-item"   id="249">vs 4-6%</a></li>
-  </ul>
-</div>
-
-
-</div>
-
-  <table id="tabla" class="table table-bordered">
-    <thead></thead>
-    <tbody>
-        <tr><th>AA</th> <th>AKs</th> <th>AQs</th> <th>AJs</th> <th>ATs</th> <th>A9s</th> <th>A8s</th> <th>A7s</th> <th>A6s</th> <th>A5s</th> <th>A4s</th> <th>A3s</th> <th>A2s</th></tr>
-        <tr><th>AKo</th> <th>KK</th> <th>KQs</th> <th>KJs</th> <th>KTs</th> <th>K9s</th> <th>K8s</th> <th>K7s</th> <th>K6s</th> <th>K5s</th> <th>K4s</th> <th>K3s</th> <th>K2s</th></tr>
-        <tr><th>AQo</th> <th>KQo</th> <th>QQ</th> <th>QJs</th> <th>QTs</th> <th>Q9s</th> <th>Q8s</th> <th>Q7s</th> <th>Q6s</th> <th>Q5s</th> <th>Q4s</th> <th>Q3s</th> <th>Q2s</th></tr>
-        <tr><th>AJo</th> <th>KJo</th> <th>QJo</th> <th>JJ</th> <th>JTs</th> <th>J9s</th> <th>J8s</th> <th>J7s</th> <th>J6s</th> <th>J5s</th> <th>J4s</th> <th>J3s</th> <th>J2s</th></tr>
-        <tr><th>ATo</th> <th>KTo</th> <th>QTo</th> <th>JTo</th> <th>TT</th> <th>T9s</th> <th>T8s</th> <th>T7s</th> <th>T6s</th> <th>T5s</th> <th>T4s</th> <th>T3s</th> <th>T2s</th></tr>
-        <tr><th>A9o</th> <th>K9o</th> <th>Q9o</th> <th>J9o</th> <th>T9o</th> <th>99</th> <th>98s</th> <th>97s</th> <th>96s</th> <th>95s</th> <th>94s</th> <th>93s</th> <th>92s</th></tr>
-        <tr><th>A8o</th> <th>K8o</th> <th>Q8o</th> <th>J8o</th> <th>T8o</th> <th>98o</th> <th>88</th> <th>87s</th> <th>86s</th> <th>85s</th> <th>84s</th> <th>83s</th> <th>82s</th></tr>
-        <tr><th>A7o</th> <th>K7o</th> <th>Q7o</th> <th>J7o</th> <th>T7o</th> <th>97o</th> <th>87o</th> <th>77</th> <th>76s</th> <th>75s</th> <th>74s</th> <th>73s</th> <th>72s</th></tr>
-        <tr><th>A6o</th> <th>K6o</th> <th>Q6o</th> <th>J6o</th> <th>T6o</th> <th>96o</th> <th>86o</th> <th>76o</th> <th>66</th> <th>65s</th> <th>64s</th> <th>63s</th> <th>62s</th></tr>
-        <tr><th>A5o</th> <th>K5o</th> <th>Q5o</th> <th>J5o</th> <th>T5o</th> <th>95o</th> <th>85o</th> <th>75o</th> <th>65o</th> <th>55</th> <th>54s</th> <th>53s</th> <th>52s</th></tr>
-        <tr><th>A4o</th> <th>K4o</th> <th>Q4o</th> <th>J4o</th> <th>T4o</th> <th>94o</th> <th>84o</th> <th>74o</th> <th>64o</th> <th>54o</th> <th>44</th> <th>43s</th> <th>42s</th></tr>
-        <tr><th>A3o</th> <th>K3o</th> <th>Q3o</th> <th>J3o</th> <th>T3o</th> <th>93o</th> <th>83o</th> <th>73o</th> <th>63o</th> <th>53o</th> <th>43o</th> <th>33</th> <th>32s</th></tr>
-        <tr><th>A2o</th> <th>K2o</th> <th>Q2o</th> <th>J2o</th> <th>T2o</th> <th>92o</th> <th>82o</th> <th>72o</th> <th>62o</th> <th>52o</th> <th>42o</th> <th>32o</th> <th>22</th></tr>
-    </tbody>
-</table>
-
-
-@*<button onclick="iniciarPartida()" class="btn btn-danger" id="botonInicio">Iniciar partida</button>*@
-
-<div id="divPartida" class="container"   >
-
-
- <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">PARTIDA</h1>
-       
-          <a href="#" class="btn btn-primary my-2" onclick="iniciarPartida()" id="botonInicio">Iniciar partida</a>
-         <p class="card-text" >1.Dentro de la ronda seleccione nueva jugada</p> 
-         <p class="card-text" >2.Seleccione una condición de partida y una mano a jugar de las tablas</p> 
-          <p class="card-text" >3.Seleccione si va a seguir la tabla, la cantidad  a jugar, y pulse en jugar</p> 
-          <p class="card-text" >4.Seleccione nueva ronda o nueva jugada dependiendo de la partida</p> 
-             
-        
-      </div>
-    </div>
-  </section>
-
- 
-
-  <div class="album py-5 bg-light" style="display:none" id="divJugadas">
-    <div class="container">
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="divRondas">
-
-@*
-        <div class="col" style="display:none">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: صورة مصغرة" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">صورة مصغرة</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">Ronda </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">عرض</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">تعديل</button>
-                </div>
-                <small class="text-muted">9 دقائق</small>
-              </div>
-            </div>
-          </div>
+</head>
+<body>
+
+    <div id="dropdowns">
+
+        <br />
+        <br />
+        <br />
+
+
+        <div class="btn-group" id="dInicial">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Seleccione una condición
+            </button>
+            <ul class="dropdown-menu">
+
+                <li><hr class="dropdown-divider"></li>
+                <li><a id="BBvsLimp" class="dropdown-item">BB vs Limp</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a id="DefendBB" class="dropdown-item">Defend BB</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a id="Flat3B" class="dropdown-item">Flat + 3B</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a id="SQZ" class="dropdown-item">SQZ + CCMW</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a id="OS" class="dropdown-item">OS</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a id="OR" class="dropdown-item">OR</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a id="Reshove" class="dropdown-item">Reshove</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a id="vsOS" class="dropdown-item">vs OS</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a id="SBLimpia" class="dropdown-item">SB Limpia</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a id="Vs3BET" class="dropdown-item">vs 3Bet</a></li>
+            </ul>
         </div>
-      
-     *@
 
-  
-   
 
-        
 
-      
-        
-       
-      </div>
+
+
+
+
+        <div class="btn-group" id="dBBvsLimp" style="display:none">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                BBvsLimp
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" name="id" id="1">100BB</a></li>
+                <li><a class="dropdown-item" name="id" id="2">50BB</a></li>
+                <li><a class="dropdown-item" name="id" id="3">30BB</a></li>
+                <li><a class="dropdown-item" name="id" id="4">20BB</a></li>
+                <li><a class="dropdown-item" name="id" id="5">15BB</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dDefendBB" style="display:none">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Defend BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="DefendBB_100BB">100BB</a></li>
+                <li><a class="dropdown-item" id="DefendBB_50BB">50BB</a></li>
+                <li><a class="dropdown-item" id="DefendBB_30BB">30BB</a></li>
+                <li><a class="dropdown-item" id="DefendBB_20BB">20BB</a></li>
+                <li><a class="dropdown-item" id="DefendBB_15BB">15BB</a></li>
+            </ul>
+        </div>
+
+
+
+
+
+        <div class="btn-group" id="dDefendBB_100BB" style="display:none">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                100BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="6">BB vs EP</a></li>
+                <li><a class="dropdown-item" id="7">BB vs MP</a></li>
+                <li><a class="dropdown-item" id="8">BB vs HJ</a></li>
+                <li><a class="dropdown-item" id="9">BB vs CO</a></li>
+                <li><a class="dropdown-item" id="10">BB vs BTN</a></li>
+                <li><a class="dropdown-item" id="11">BB vs SB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dDefendBB_50BB" style="display:none">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                50BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="12">BB vs EP</a></li>
+                <li><a class="dropdown-item" id="13">BB vs MP</a></li>
+                <li><a class="dropdown-item" id="14">BB vs HJ</a></li>
+                <li><a class="dropdown-item" id="15">BB vs CO</a></li>
+                <li><a class="dropdown-item" id="16">BB vs BTN</a></li>
+                <li><a class="dropdown-item" id="17">BB vs SB</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dDefendBB_30BB" style="display:none">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                30BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="18">BB vs EP</a></li>
+                <li><a class="dropdown-item" id="19">BB vs MP</a></li>
+                <li><a class="dropdown-item" id="20">BB vs HJ</a></li>
+                <li><a class="dropdown-item" id="21">BB vs CO</a></li>
+                <li><a class="dropdown-item" id="22">BB vs BTN</a></li>
+                <li><a class="dropdown-item" id="23">BB vs SB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dDefendBB_20BB" style="display:none">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                20BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="24">BB vs EP</a></li>
+                <li><a class="dropdown-item" id="25">BB vs MP</a></li>
+                <li><a class="dropdown-item" id="26">BB vs HJ</a></li>
+                <li><a class="dropdown-item" id="27">BB vs CO</a></li>
+                <li><a class="dropdown-item" id="28">BB vs BTN</a></li>
+                <li><a class="dropdown-item" id="29">BB vs SB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dDefendBB_15BB" style="display:none">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                15BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="30">BB vs EP</a></li>
+                <li><a class="dropdown-item" id="31">BB vs MP</a></li>
+                <li><a class="dropdown-item" id="32">BB vs HJ</a></li>
+                <li><a class="dropdown-item" id="33">BB vs CO</a></li>
+                <li><a class="dropdown-item" id="34">BB vs BTN</a></li>
+                <li><a class="dropdown-item" id="35">BB vs SB</a></li>
+            </ul>
+        </div>
+
+
+
+        <div class="btn-group" id="dFlat3B" style="display:none">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat+3B
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="Flat3B_100BB">100BB</a></li>
+                <li><a class="dropdown-item" id="Flat3B_50BB">50BB</a></li>
+                <li><a class="dropdown-item" id="Flat3B_30BB">30BB</a></li>
+                <li><a class="dropdown-item" id="Flat3B_20BB">20BB</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dFlat3B_100BB" style="display:none">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 100BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="Flat3B_100BBSB">SB</a></li>
+                <li><a class="dropdown-item" id="Flat3B_100BBBTN">BTN</a></li>
+                <li><a class="dropdown-item" id="Flat3B_100BBCO">CO</a></li>
+                <li><a class="dropdown-item" id="Flat3B_100BBHJ">HJ</a></li>
+                <li><a class="dropdown-item" id="36">MP</a></li>
+                <li><a class="dropdown-item" id="37">EP</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dFlat3B_100BBSB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 100BB SB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="38">BB vs EP</a></li>
+                <li><a class="dropdown-item" id="39">BB vs MP</a></li>
+                <li><a class="dropdown-item" id="40">BB vs HJ</a></li>
+                <li><a class="dropdown-item" id="41">BB vs CO</a></li>
+
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dFlat3B_100BBBTN" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 100BB BTN
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="42">BTN vs EP</a></li>
+                <li><a class="dropdown-item" id="43">BTN vs HJ</a></li>
+                <li><a class="dropdown-item" id="4400">BTN vs CO</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dFlat3B_100BBCO" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 100BB CO
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="45">CO vs EP</a></li>
+                <li><a class="dropdown-item" id="46">CO vs HJ</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dFlat3B_100BBHJ" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 100BB HJ
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="47">HJ vs EP</a></li>
+                <li><a class="dropdown-item" id="48">HJ-MP</a></li>
+            </ul>
+        </div>
+
+
+
+
+
+
+        <div class="btn-group" id="dFlat3B_50BB" style="display:none">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 50BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="Flat3B_50BBSB">SB</a></li>
+                <li><a class="dropdown-item" id="Flat3B_50BBBTN">BTN</a></li>
+                <li><a class="dropdown-item" id="Flat3B_50BBCO">CO</a></li>
+                <li><a class="dropdown-item" id="Flat3B_50BBHJ">HJ</a></li>
+                <li><a class="dropdown-item" id="49">MP</a></li>
+                <li><a class="dropdown-item" id="50">EP</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dFlat3B_50BBSB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 50BB SB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="51">SB vs EP</a></li>
+                <li><a class="dropdown-item" id="52">SB vs HJ</a></li>
+                <li><a class="dropdown-item" id="53">SB vs CO</a></li>
+                <li><a class="dropdown-item" id="54">SB vs BTN</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dFlat3B_50BBBTN" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 50BB BTN
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="5500">BTN vs EP</a></li>
+                <li><a class="dropdown-item" id="56">BTN vs HJ</a></li>
+                <li><a class="dropdown-item" id="57">BTN vs CO</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dFlat3B_50BBCO" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 50BB CO
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="58">CO vs EP</a></li>
+                <li><a class="dropdown-item" id="59">CO vs HJ</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dFlat3B_50BBHJ" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 50BB HJ
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="60">HJ vs EP</a></li>
+                <li><a class="dropdown-item" id="61">HJ-MP</a></li>
+            </ul>
+        </div>
+
+
+
+
+        <div class="btn-group" id="dFlat3B_30BB" style="display:none">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 30BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="Flat3B_30BBSB">SB</a></li>
+                <li><a class="dropdown-item" id="Flat3B_30BBBTN">BTN</a></li>
+                <li><a class="dropdown-item" id="Flat3B_30BBCO">CO</a></li>
+                <li><a class="dropdown-item" id="Flat3B_30BBHJ">HJ</a></li>
+                <li><a class="dropdown-item" id="62">MP</a></li>
+                <li><a class="dropdown-item" id="63">EP</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dFlat3B_30BBSB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 30BB SB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="64">SB vs EP</a></li>
+                <li><a class="dropdown-item" id="65">SB vs HJ</a></li>
+                <li><a class="dropdown-item" id="6600">SB vs CO</a></li>
+                <li><a class="dropdown-item" id="67">SB vs BTN</a></li>
+
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dFlat3B_30BBBTN" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 30BB BTN
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="68">BTN vs EP</a></li>
+                <li><a class="dropdown-item" id="69">BTN vs HJ</a></li>
+                <li><a class="dropdown-item" id="70">BTN vs CO</a></li>
+
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dFlat3B_30BBCO" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 30BB CO
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="71">CO vs EP</a></li>
+                <li><a class="dropdown-item" id="72">CO vs HJ</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dFlat3B_30BBHJ" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 30BB HJ
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="73">HJ vs EP</a></li>
+                <li><a class="dropdown-item" id="74">HJ-MP</a></li>
+            </ul>
+        </div>
+
+
+
+
+        <div class="btn-group" id="dFlat3B_20BB" style="display:none">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 20BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="Flat3B_20BBSB">SB</a></li>
+                <li><a class="dropdown-item" id="Flat3B_20BBBTN">BTN</a></li>
+                <li><a class="dropdown-item" id="Flat3B_20BBCO">CO</a></li>
+                <li><a class="dropdown-item" id="Flat3B_20BBHJ">HJ</a></li>
+                <li><a class="dropdown-item" id="75">MP</a></li>
+                <li><a class="dropdown-item" id="76">EP</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dFlat3B_20BBSB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 20BB SB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="7700">SB vs EP</a></li>
+                <li><a class="dropdown-item" id="78">SB vs MP</a></li>
+                <li><a class="dropdown-item" id="79">SB vs HJ</a></li>
+                <li><a class="dropdown-item" id="80">SB vs CO</a></li>
+                <li><a class="dropdown-item" id="81">SB vs BTN</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dFlat3B_20BBBTN" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 20BB BTN
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="82">BTN vs EP</a></li>
+                <li><a class="dropdown-item" id="83">BTN vs MP</a></li>
+                <li><a class="dropdown-item" id="84">BTN vs HJ</a></li>
+                <li><a class="dropdown-item" id="85">BTN vs CO</a></li>
+
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dFlat3B_20BBCO" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 20BB CO
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="86">CO vs EP</a></li>
+                <li><a class="dropdown-item" id="87">CO vs HJ</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dFlat3B_20BBHJ" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Flat 20BB HJ
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="8800">HJ vs EP</a></li>
+                <li><a class="dropdown-item" id="89">HJ-MP</a></li>
+            </ul>
+        </div>
+
+
+
+
+
+        <div class="btn-group" id="dSQZ" style="display:none">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="SQZ_100BB">100BB</a></li>
+                <li><a class="dropdown-item" id="SQZ_50BB">50BB</a></li>
+                <li><a class="dropdown-item" id="SQZ_30BB">30BB</a></li>
+                <li><a class="dropdown-item" id="SQZ_20BB">20BB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_100BB" style="display:none">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 100BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="SQZ_100BBBB">BB</a></li>
+                <li><a class="dropdown-item" id="SQZ_100BBSB">SB</a></li>
+                <li><a class="dropdown-item" id="SQZ_100BBBTN">BTN</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_100BBBB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 100BB BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="90">BB vs BTN&SB</a></li>
+                <li><a class="dropdown-item" id="91">BB vs HJ+BTN-CO</a></li>
+                <li><a class="dropdown-item" id="92">BB vs EP+LP</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_100BBSB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 100BB SB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="93">SB vs HJ+BTN-CO</a></li>
+                <li><a class="dropdown-item" id="94">SB vs EP+MP</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_100BBBTN" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 100BB BTN
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="95">BTN vs EP+MP</a></li>
+                <li><a class="dropdown-item" id="96">BTN vs LP+LP</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_50BB" style="display:none">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 50BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="SQZ_50BBBB">BB</a></li>
+                <li><a class="dropdown-item" id="SQZ_50BBSB">SB</a></li>
+                <li><a class="dropdown-item" id="SQZ_50BBBTN">BTN</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_50BBBB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 50BB BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="97">BB vs BTN&SB</a></li>
+                <li><a class="dropdown-item" id="98">BB vs HJ+BTN-CO</a></li>
+                <li><a class="dropdown-item" id="9900">BB vs EP+LP</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_50BBSB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 50BB SB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="100">SB vs HJ+BTN-CO</a></li>
+                <li><a class="dropdown-item" id="10100">SB vs EP+MP</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_50BBBTN" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 50BB BTN
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="102">BTN vs EP+MP</a></li>
+                <li><a class="dropdown-item" id="103">BTN vs LP+LP</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_30BB" style="display:none">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 30BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="SQZ_30BBBB">BB</a></li>
+                <li><a class="dropdown-item" id="SQZ_30BBSB">SB</a></li>
+                <li><a class="dropdown-item" id="SQZ_30BBBTN">BTN</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_30BBBB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 30BB BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="104">BB vs BTN&SB</a></li>
+                <li><a class="dropdown-item" id="105">BB vs HJ+BTN-CO</a></li>
+                <li><a class="dropdown-item" id="106">BB vs EP+LP</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_30BBSB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 30BB SB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="107">SB vs HJ+BTN-CO</a></li>
+                <li><a class="dropdown-item" id="108">SB vs EP+MP</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_30BBBTN" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 30BB BTN
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="109">BTN vs EP+MP</a></li>
+                <li><a class="dropdown-item" id="110">BTN vs LP+LP</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_20BB" style="display:none">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 20BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="SQZ_20BBBB">BB</a></li>
+                <li><a class="dropdown-item" id="SQZ_20BBSB">SB</a></li>
+                <li><a class="dropdown-item" id="SQZ_20BBBTN">BTN</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_20BBBB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 20BB BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="11100">BB vs BTN&SB</a></li>
+                <li><a class="dropdown-item" id="112">BB vs HJ+BTN-CO</a></li>
+                <li><a class="dropdown-item" id="113">BB vs EP+LP</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_20BBSB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 20BB SB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="114">SB vs HJ+BTN-CO</a></li>
+                <li><a class="dropdown-item" id="115">SB vs EP+MP</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dSQZ_20BBBTN" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SQZ 20BB BTN
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="116">BTN vs EP+MP</a></li>
+                <li><a class="dropdown-item" id="117">BTN vs LP+LP</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dOS" style="display:none">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OS
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="OS_15BB">15 BB</a></li>
+                <li><a class="dropdown-item" id="OS_14BB">14 BB</a></li>
+                <li><a class="dropdown-item" id="OS_13BB">13 BB</a></li>
+                <li><a class="dropdown-item" id="OS_12BB">12 BB</a></li>
+                <li><a class="dropdown-item" id="OS_11BB">11 BB</a></li>
+                <li><a class="dropdown-item" id="OS_10BB">10 BB</a></li>
+                <li><a class="dropdown-item" id="OS_9BB">9 BB</a></li>
+                <li><a class="dropdown-item" id="OS_8BB">8 BB</a></li>
+                <li><a class="dropdown-item" id="OS_7BB">7 BB</a></li>
+                <li><a class="dropdown-item" id="OS_6BB">6 BB</a></li>
+                <li><a class="dropdown-item" id="OS_5BB">5 BB</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dOS_15BB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OS 15BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="118">UTG</a></li>
+                <li><a class="dropdown-item" id="119">UTG1</a></li>
+                <li><a class="dropdown-item" id="120">MP</a></li>
+                <li><a class="dropdown-item" id="12100">LJ</a></li>
+                <li><a class="dropdown-item" id="122">HJ</a></li>
+                <li><a class="dropdown-item" id="123">CO</a></li>
+                <li><a class="dropdown-item" id="124">BTN</a></li>
+                <li><a class="dropdown-item" id="125">SB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dOS_14BB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OS 14BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="126">UTG</a></li>
+                <li><a class="dropdown-item" id="127">UTG1</a></li>
+                <li><a class="dropdown-item" id="128">MP</a></li>
+                <li><a class="dropdown-item" id="129">LJ</a></li>
+                <li><a class="dropdown-item" id="130">HJ</a></li>
+                <li><a class="dropdown-item" id="13100">CO</a></li>
+                <li><a class="dropdown-item" id="132">BTN</a></li>
+                <li><a class="dropdown-item" id="133">SB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dOS_13BB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OS 13BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="134">UTG</a></li>
+                <li><a class="dropdown-item" id="135">UTG1</a></li>
+                <li><a class="dropdown-item" id="136">MP</a></li>
+                <li><a class="dropdown-item" id="137">LJ</a></li>
+                <li><a class="dropdown-item" id="138">HJ</a></li>
+                <li><a class="dropdown-item" id="139">CO</a></li>
+                <li><a class="dropdown-item" id="140">BTN</a></li>
+                <li><a class="dropdown-item" id="14100">SB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dOS_12BB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OS 12BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="142">UTG</a></li>
+                <li><a class="dropdown-item" id="143">UTG1</a></li>
+                <li><a class="dropdown-item" id="144">MP</a></li>
+                <li><a class="dropdown-item" id="145">LJ</a></li>
+                <li><a class="dropdown-item" id="146">HJ</a></li>
+                <li><a class="dropdown-item" id="147">CO</a></li>
+                <li><a class="dropdown-item" id="148">BTN</a></li>
+                <li><a class="dropdown-item" id="149">SB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dOS_11BB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OS 11BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="150">UTG</a></li>
+                <li><a class="dropdown-item" id="15100">UTG1</a></li>
+                <li><a class="dropdown-item" id="152">MP</a></li>
+                <li><a class="dropdown-item" id="153">LJ</a></li>
+                <li><a class="dropdown-item" id="154">HJ</a></li>
+                <li><a class="dropdown-item" id="155">CO</a></li>
+                <li><a class="dropdown-item" id="156">BTN</a></li>
+                <li><a class="dropdown-item" id="157">SB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dOS_10BB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OS 10BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="158">UTG</a></li>
+                <li><a class="dropdown-item" id="159">UTG1</a></li>
+                <li><a class="dropdown-item" id="160">MP</a></li>
+                <li><a class="dropdown-item" id="16100">LJ</a></li>
+                <li><a class="dropdown-item" id="162">HJ</a></li>
+                <li><a class="dropdown-item" id="163">CO</a></li>
+                <li><a class="dropdown-item" id="164">BTN</a></li>
+                <li><a class="dropdown-item" id="165">SB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dOS_9BB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OS 9BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="166">UTG</a></li>
+                <li><a class="dropdown-item" id="167">UTG1</a></li>
+                <li><a class="dropdown-item" id="168">MP</a></li>
+                <li><a class="dropdown-item" id="169">LJ</a></li>
+                <li><a class="dropdown-item" id="170">HJ</a></li>
+                <li><a class="dropdown-item" id="17100">CO</a></li>
+                <li><a class="dropdown-item" id="172">BTN</a></li>
+                <li><a class="dropdown-item" id="173">SB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dOS_8BB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OS 8BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="174">UTG</a></li>
+                <li><a class="dropdown-item" id="175">UTG1</a></li>
+                <li><a class="dropdown-item" id="176">MP</a></li>
+                <li><a class="dropdown-item" id="177">LJ</a></li>
+                <li><a class="dropdown-item" id="178">HJ</a></li>
+                <li><a class="dropdown-item" id="179">CO</a></li>
+                <li><a class="dropdown-item" id="180">BTN</a></li>
+                <li><a class="dropdown-item" id="18100">SB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dOS_7BB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OS 7BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="182">UTG</a></li>
+                <li><a class="dropdown-item" id="183">UTG1</a></li>
+                <li><a class="dropdown-item" id="184">MP</a></li>
+                <li><a class="dropdown-item" id="185">LJ</a></li>
+                <li><a class="dropdown-item" id="186">HJ</a></li>
+                <li><a class="dropdown-item" id="187">CO</a></li>
+                <li><a class="dropdown-item" id="188">BTN</a></li>
+                <li><a class="dropdown-item" id="189">SB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dOS_6BB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OS 6BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="190">UTG</a></li>
+                <li><a class="dropdown-item" id="19100">UTG1</a></li>
+                <li><a class="dropdown-item" id="192">MP</a></li>
+                <li><a class="dropdown-item" id="193">LJ</a></li>
+                <li><a class="dropdown-item" id="194">HJ</a></li>
+                <li><a class="dropdown-item" id="195">CO</a></li>
+                <li><a class="dropdown-item" id="196">BTN</a></li>
+                <li><a class="dropdown-item" id="197">SB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dOS_5BB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OS 5BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="198">UTG</a></li>
+                <li><a class="dropdown-item" id="199">UTG1</a></li>
+                <li><a class="dropdown-item" id="200">MP</a></li>
+                <li><a class="dropdown-item" id="201">LJ</a></li>
+                <li><a class="dropdown-item" id="20200">HJ</a></li>
+                <li><a class="dropdown-item" id="203">CO</a></li>
+                <li><a class="dropdown-item" id="204">BTN</a></li>
+                <li><a class="dropdown-item" id="205">SB</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dOR" style="display:none">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OR
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="OR_10025BB">100-25BB</a></li>
+                <li><a class="dropdown-item" id="OR_15BB">15 BB</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dOR_10025BB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OR 100-25BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="206">100BB</a></li>
+                <li><a class="dropdown-item" id="207">50BB</a></li>
+                <li><a class="dropdown-item" id="208">25BB</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dOR_15BB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                OR 15BB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="209">UTG</a></li>
+                <li><a class="dropdown-item" id="210">MP</a></li>
+                <li><a class="dropdown-item" id="2110">LJ</a></li>
+                <li><a class="dropdown-item" id="21200">HJ</a></li>
+                <li><a class="dropdown-item" id="213">CO</a></li>
+                <li><a class="dropdown-item" id="214">BU</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dReshove" style="display:none">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Reshove
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="Reshove_SB">SB</a></li>
+                <li><a class="dropdown-item" id="Reshove_BTN">BTN</a></li>
+                <li><a class="dropdown-item" id="Reshove_HJ-CO">HJ-CO</a></li>
+                <li><a class="dropdown-item" id="Reshove_MP">MP</a></li>
+                <li><a class="dropdown-item" id="Reshove_EP">EP</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dReshove_SB" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Reshove SB
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="217">SB vs EP</a></li>
+                <li><a class="dropdown-item" id="218">SB vs MP</a></li>
+                <li><a class="dropdown-item" id="219">SB vs CO</a></li>
+                <li><a class="dropdown-item" id="220">SB vs BTN</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dReshove_BTN" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Reshove BTN
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="221">BTN vs EP</a></li>
+                <li><a class="dropdown-item" id="22200">BTN vs MP</a></li>
+                <li><a class="dropdown-item" id="223">BTN vs CO</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dReshove_HJ-CO" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Reshove HJ-CO
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="224">HJ vs EP</a></li>
+                <li><a class="dropdown-item" id="225">HJ vs MP</a></li>
+                <li><a class="dropdown-item" id="226">HJ vs CO</a></li>
+            </ul>
+        </div>
+
+
+        @*Esto son tablas de imagen*@
+        <div class="btn-group" id="dvsOS" style="display:none">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                VS OS
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="vsOS20BB">20BB</a></li>
+                <li><a class="dropdown-item" id="vsOS18BB">18BB</a></li>
+                <li><a class="dropdown-item" id="vsOS16BB">16BB</a></li>
+                <li><a class="dropdown-item" id="vsOS14BB">14BB</a></li>
+                <li><a class="dropdown-item" id="vsOS12BB">12BB</a></li>
+                <li><a class="dropdown-item" id="vsOS10BB">10BB</a></li>
+                <li><a class="dropdown-item" id="vsOS8BB">8BB</a></li>
+                <li><a class="dropdown-item" id="vsOS6BB">6BB</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dSBLimpia" style="display:none">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SB Limpia
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="227">HJ vs EP</a></li>
+                <li><a class="dropdown-item" id="228">HJ vs MP</a></li>
+                <li><a class="dropdown-item" id="229">HJ vs CO</a></li>
+                <li><a class="dropdown-item" id="230">HJ vs MP</a></li>
+                <li><a class="dropdown-item" id="231">HJ vs CO</a></li>
+            </ul>
+        </div>
+
+
+
+        <div class="btn-group" id="dVs3BET" style="display:none">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                VS 3BET
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="Vs3BET_100BBIP">15BB</a></li>
+                <li><a class="dropdown-item" id="Vs3BET_100BBOOP">14BB</a></li>
+                <li><a class="dropdown-item" id="Vs3BET_50BBIP">13BB</a></li>
+                <li><a class="dropdown-item" id="Vs3BET_50BBOOP">12BB</a></li>
+                <li><a class="dropdown-item" id="Vs3BET_3525BBIP">11BB</a></li>
+                <li><a class="dropdown-item" id="Vs3BET_3525BBOOP">10BB</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dVs3BET_100BBIP" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                VS 3BET 100BBI
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="23200">vs 13+%</a></li>
+                <li><a class="dropdown-item" id="233">vs 8-11%</a></li>
+                <li><a class="dropdown-item" id="234">vs 4-6%</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dVs3BET_100BBOOP" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                VS 3BET 100BBOP
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="235">vs 13+%</a></li>
+                <li><a class="dropdown-item" id="236">vs 8-11%</a></li>
+                <li><a class="dropdown-item" id="237">vs 4-6%</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dVs3BET_50BBIP" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                VS 3BET 50BBIP
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="238">vs 13+%</a></li>
+                <li><a class="dropdown-item" id="239">vs 8-11%</a></li>
+                <li><a class="dropdown-item" id="240">vs 4-6%</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group" id="dVs3BET_50BBOOP" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                VS 3BET 50BBOP
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="241">vs 13+%</a></li>
+                <li><a class="dropdown-item" id="24200">vs 8-11%</a></li>
+                <li><a class="dropdown-item" id="243">vs 4-6%</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dVs3BET_3525BBIP" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                VS 3BET 35-25BBIP
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="244">vs 13+%</a></li>
+                <li><a class="dropdown-item" id="245">vs 8-11%</a></li>
+                <li><a class="dropdown-item" id="246">vs 4-6%</a></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-group" id="dVs3BET_3525BBOOP" style="display:none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                VS 3BET 35-25BBOP
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" id="247">vs 13+%</a></li>
+                <li><a class="dropdown-item" id="248">vs 8-11%</a></li>
+                <li><a class="dropdown-item" id="249">vs 4-6%</a></li>
+            </ul>
+        </div>
+
+
     </div>
-  </div>
 
-</main>
+    <table id="tabla" class="table table-bordered">
+        <thead></thead>
+        <tbody>
+            <tr><th>AA</th> <th>AKs</th> <th>AQs</th> <th>AJs</th> <th>ATs</th> <th>A9s</th> <th>A8s</th> <th>A7s</th> <th>A6s</th> <th>A5s</th> <th>A4s</th> <th>A3s</th> <th>A2s</th></tr>
+            <tr><th>AKo</th> <th>KK</th> <th>KQs</th> <th>KJs</th> <th>KTs</th> <th>K9s</th> <th>K8s</th> <th>K7s</th> <th>K6s</th> <th>K5s</th> <th>K4s</th> <th>K3s</th> <th>K2s</th></tr>
+            <tr><th>AQo</th> <th>KQo</th> <th>QQ</th> <th>QJs</th> <th>QTs</th> <th>Q9s</th> <th>Q8s</th> <th>Q7s</th> <th>Q6s</th> <th>Q5s</th> <th>Q4s</th> <th>Q3s</th> <th>Q2s</th></tr>
+            <tr><th>AJo</th> <th>KJo</th> <th>QJo</th> <th>JJ</th> <th>JTs</th> <th>J9s</th> <th>J8s</th> <th>J7s</th> <th>J6s</th> <th>J5s</th> <th>J4s</th> <th>J3s</th> <th>J2s</th></tr>
+            <tr><th>ATo</th> <th>KTo</th> <th>QTo</th> <th>JTo</th> <th>TT</th> <th>T9s</th> <th>T8s</th> <th>T7s</th> <th>T6s</th> <th>T5s</th> <th>T4s</th> <th>T3s</th> <th>T2s</th></tr>
+            <tr><th>A9o</th> <th>K9o</th> <th>Q9o</th> <th>J9o</th> <th>T9o</th> <th>99</th> <th>98s</th> <th>97s</th> <th>96s</th> <th>95s</th> <th>94s</th> <th>93s</th> <th>92s</th></tr>
+            <tr><th>A8o</th> <th>K8o</th> <th>Q8o</th> <th>J8o</th> <th>T8o</th> <th>98o</th> <th>88</th> <th>87s</th> <th>86s</th> <th>85s</th> <th>84s</th> <th>83s</th> <th>82s</th></tr>
+            <tr><th>A7o</th> <th>K7o</th> <th>Q7o</th> <th>J7o</th> <th>T7o</th> <th>97o</th> <th>87o</th> <th>77</th> <th>76s</th> <th>75s</th> <th>74s</th> <th>73s</th> <th>72s</th></tr>
+            <tr><th>A6o</th> <th>K6o</th> <th>Q6o</th> <th>J6o</th> <th>T6o</th> <th>96o</th> <th>86o</th> <th>76o</th> <th>66</th> <th>65s</th> <th>64s</th> <th>63s</th> <th>62s</th></tr>
+            <tr><th>A5o</th> <th>K5o</th> <th>Q5o</th> <th>J5o</th> <th>T5o</th> <th>95o</th> <th>85o</th> <th>75o</th> <th>65o</th> <th>55</th> <th>54s</th> <th>53s</th> <th>52s</th></tr>
+            <tr><th>A4o</th> <th>K4o</th> <th>Q4o</th> <th>J4o</th> <th>T4o</th> <th>94o</th> <th>84o</th> <th>74o</th> <th>64o</th> <th>54o</th> <th>44</th> <th>43s</th> <th>42s</th></tr>
+            <tr><th>A3o</th> <th>K3o</th> <th>Q3o</th> <th>J3o</th> <th>T3o</th> <th>93o</th> <th>83o</th> <th>73o</th> <th>63o</th> <th>53o</th> <th>43o</th> <th>33</th> <th>32s</th></tr>
+            <tr><th>A2o</th> <th>K2o</th> <th>Q2o</th> <th>J2o</th> <th>T2o</th> <th>92o</th> <th>82o</th> <th>72o</th> <th>62o</th> <th>52o</th> <th>42o</th> <th>32o</th> <th>22</th></tr>
+        </tbody>
+    </table>
 
 
-</div>
+    @*<button onclick="iniciarPartida()" class="btn btn-danger" id="botonInicio">Iniciar partida</button>*@
+
+    <div id="divPartida" class="container">
+
+
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">PARTIDA</h1>
+
+                    <a class="btn btn-primary my-2" onclick="iniciarPartida()" id="botonInicio">Iniciar partida</a>
+                    <a class="btn btn-primary my-2" onclick="finalizarPartida()" id="botonFinal">Finalizar partida</a>
+                    <p class="card-text">1.Dentro de la ronda seleccione nueva jugada</p>
+                    <p class="card-text">2.Seleccione una condición de partida y una mano a jugar de las tablas</p>
+                    <p class="card-text">3.Seleccione si va a seguir la tabla, la cantidad  a jugar, y pulse en jugar</p>
+                    <p class="card-text">4.Seleccione nueva ronda o nueva jugada dependiendo de la partida</p>
+
+
+                </div>
+            </div>
+        </section>
+
+
+
+        <div class="album py-5 bg-light" style="display:none" id="divJugadas">
+            <div class="container">
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="divRondas">
+                </div>
+            </div>
+        </div>
 
 
 
 
-<br />
+    </div>
+
+
+
+
+    <br />
 
 
 
@@ -1120,11 +1090,11 @@ VS 3BET 35-25BBOP
 
 
 
-<form method="post">
- 
-<input id="demo" name="id"   class="form-control" style="display:none">
+    <form method="post">
 
-</form>
+        <input id="demo" name="id" class="form-control" style="display:none">
+
+    </form>
 
 
 
@@ -1141,539 +1111,563 @@ VS 3BET 35-25BBOP
 </body>
 
 @section scripts { 
-<script>
-var jugadaSeleccionada = false;
- var idRondaActual = 0; 
- var idJugadaActual = 0;
- var ultimaMano="";
+    <script>
+        var jugadaSeleccionada = false;
+        var idRondaActual = 0;
+        var idJugadaActual = 0;
+        var ultimaMano = "";
 
-var ultimaCondicion = 0;
-var manoJugada = 0;
-var jugadaFinalizada;
-var rondaJugada=0;
+        var ultimaCondicion = 0;
+        var manoJugada = 0;
+        var jugadaFinalizada;
+        var rondaJugada = 0;
 
-var ultimaCantidad = 0;
-var cantidadTotalRonda=0;
-var primeraJugadaHecha = 0;
-var cantidadTotalUltimaRonda = 0;
+        var ultimaCantidad = 0;
+        var cantidadTotalRonda = 0;
+        var primeraJugadaHecha = 0;
+        var cantidadTotalUltimaRonda = 0;
 
-var dineroActual=0;
-var balance=0;
-var dineroInicial=0;
+        var dineroActual = 0;
+        var balance = 0;
+        var dineroInicial = 0;
 
-//ESTOS DATOS SE ENVIARÁN AL BACK
-var ids_Jugadas = [];
-var cell_ids_Jugadas =[];
-var table_ids_Jugadas =[];
-var cantidades_Jugadas = [];
-var seguimiento_Jugadas = [];
+        //ESTOS DATOS SE ENVIARÁN AL BACK
+        var ids_Jugadas = [];
+        var ids_Rondas = [];
+        var ganancias_Rondas = [];
+        var cell_ids_Jugadas = [];
+        var table_ids_Jugadas = [];
+        var cantidades_Jugadas = [];
+        var seguimiento_Jugadas = [];
+
+
+        $(document).ready(function () {
+            var inicio = 0;
+
+            // initialize the current ID to 0
+            $("#botonInicio").click(function () {
+
+                //  document.getElementById('botonInicio').style.display = "none";
+                idJugadaActual = 0;
+                jugadaFinalizada = 1;
+
+                // increment the current ID for each new card
+                idRondaActual++;
+
+                // create the HTML for the card with the dynamic ID
+                var cardHtml = '<div class="col">' +
+                    '<div class="card shadow-sm" id="dRonda' + idRondaActual + '">' +
+
+                    '<svg class="bd-placeholder-img card-img-top" width="800" height="175"  role="img" aria-label="Placeholder: Jugadas" preserveAspectRatio="xMidYMid slice" focusable="false">' +
+                    '<title>Placeholder</title>' +
+                    '<rect width="100%" height="100%" fill="#55595c"/>' +
+                    '<text x="50%" y="50%" fill="#eceeef" dy=".3em" id="dJugadasPintadas' + idRondaActual + '" ></text>' +
+
+                    '</svg>' +
+
+                    '<div class="card-body" id="dJugadas' + idRondaActual + '">' + '</div>' +
+                    '<p class="card-text">Ronda' + idRondaActual + '</p>' +
+                    '<div class="d-flex justify-content-between align-items-center">' +
+                    '<div >' +
+                    '<button type="button" class="btn btn-sm btn-outline-secondary iniciarJugada" width="50%" id="bRonda' + idRondaActual + '">Nueva jugada</button>' +
+                    '<button type="button" class="btn btn-sm btn-outline-secondary" width="50%" id="bFinal' + idRondaActual + '"  onclick="finalizarRonda()">Finalizar ronda</button>' +
+
+                    '</div>' +
+
+                    '</div>' +
+
+                    '</div>' +
+                    '</div>';
+
+                // append the card HTML to the "divRondas" div
+                $("#divRondas").append(cardHtml);
 
 
 
 
-$(document).ready(function() {
-    var inicio=0;
-    
+                $("#dropdowns").attr("readonly", false);
 
- // initialize the current ID to 0
-  $("#botonInicio").click(function() {
-     
-      //  document.getElementById('botonInicio').style.display = "none";
 
-      jugadaFinalizada=1;
+                //$("#no_of_staff").attr("readonly", true);
 
-    // increment the current ID for each new card
-    idRondaActual++;
-    
-    // create the HTML for the card with the dynamic ID
-    var cardHtml = '<div class="col">' +
-      '<div class="card shadow-sm" id="dRonda' + idRondaActual + '">' +
-    
-      '<svg class="bd-placeholder-img card-img-top" width="800" height="175"  role="img" aria-label="Placeholder: Jugadas" preserveAspectRatio="xMidYMid slice" focusable="false">' +
-      '<title>Placeholder</title>' +
-      '<rect width="100%" height="100%" fill="#55595c"/>' +
-      '<text x="50%" y="50%" fill="#eceeef" dy=".3em" id="dJugadasPintadas'+idRondaActual+'" ></text>' +
 
-      '</svg>' +
-     
-      '<div class="card-body" id="dJugadas'+idRondaActual+'">' +'</div>' +
-      '<p class="card-text">Ronda'+ idRondaActual+'</p>' +
-      '<div class="d-flex justify-content-between align-items-center">' +
-      '<div >' +
-     '<button type="button" class="btn btn-sm btn-outline-secondary iniciarJugada" width="50%" id="bRonda'+idRondaActual+'">Nueva jugada</button>' +
-     '<button type="button" class="btn btn-sm btn-outline-secondary" width="50%" id="bFinal'+idRondaActual+'"  onclick="finalizarRonda()">Finalizar ronda</button>'+
+                if (inicio == 0) {
+                    dineroInicial = prompt("Introduzca la cantidad inicial con la que va a jugar");
+                    dineroActual = dineroInicial;
 
-      '</div>' +
 
-      '</div>' +
-      
-      '</div>' +
-      '</div>';
-    
-    // append the card HTML to the "divRondas" div
-    $("#divRondas").append(cardHtml);
-
-     
-
-   
-    $("#dropdowns").attr("readonly", false); 
-     
-
-    //$("#no_of_staff").attr("readonly", true); 
-     
-
-    if(inicio==0){
-       dineroInicial =  prompt("Introduzca la cantidad inicial con la que va a jugar");
-   dineroActual = dineroInicial;
-  
-  
-  $('#botonInicio').after('<div class="d-flex align-items-center mt-3">' +
+                    $('#botonInicio').after('<div class="d-flex align-items-center mt-3">' +
                         '<p class="text-primary fw-bold h5 mb-0 me-3" id="dineroInicial">Dinero inicial: ' + dineroInicial + '$</p>' +
-    '<p class="text-danger fw-bold h5 mb-0 me-3" id="dineroActual">Dinero actual: ' + dineroActual + '$</p>' +
-    '<p class="text-success fw-bold h5 mb-0" id="balance">Balance: ' + balance + '$</p>' +
-  '</div>');
-  inicio=1;
-  }
+                        '<p class="text-danger fw-bold h5 mb-0 me-3" id="dineroActual">Dinero actual: ' + dineroActual + '$</p>' +
+                        '<p class="text-success fw-bold h5 mb-0" id="balance">Balance: ' + balance + '$</p>' +
+                        '</div>');
+                    inicio = 1;
+                }
 
 
-  });
+            });
 
 
-  $(document).on("click", ".iniciarJugada", iniciarJugada);
-});
-
-
-
-$(document).on("click", ".btn-outline-secondary", function() {
-
-    if(rondaJugada==1){
-  if ($(this).attr("id").startsWith("bFinal")) {
-    iniciarRonda();
-    
-  }
-    
-
-  }
-});
+            $(document).on("click", ".iniciarJugada", iniciarJugada);
+        });
 
 
 
+        $(document).on("click", ".btn-outline-secondary", function () {
 
-function iniciarJugada() {
+            if (rondaJugada == 1) {
+                if ($(this).attr("id").startsWith("bFinal")) {
+                    iniciarRonda();
 
-    if (jugadaFinalizada == 1) {
-
-        document.getElementById('dropdowns').style.display = "inline-block";
-        // get the current ID for the round
-        //var idRondaActual = $(this).attr('id').substring(1);
-        idJugadaActual++;
-
-        // create the HTML for the new div
-        var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idRondaActual + "j" + idJugadaActual + '">' +
-            '<p class="card-text">Jugada' +idRondaActual+'</p>' +
-            '<p class="card-text"></p>' +
-            '<p class="card-text">Seguimiento</p>' +
-            '<div class="form-check">' +
-            '<input class="form-check-input" type="radio"   name="partida" id="flexRadioDefaultSi">' +
-            '<label class="form-check-label" for="flexRadioDefault1">Sí</label>' +
-            '</div>' +
-            '<div class="form-check">' +
-            '<input class="form-check-input" type="radio"  name="partida" id="flexRadioDefaultNo" >' +
-            '<label class="form-check-label" for="flexRadioDefault2">No</label>' +
+                }
 
 
-            '<input type="number" class="form-control"  id="inputCantidad' + idRondaActual + "j" + idJugadaActual + '" placeholder="Ingrese una cantidad a apostar" style="display: none;">' +
-            '<button type="button" class="btn btn-warning" id="bJugada' +idRondaActual+"j"+ idJugadaActual + '" onclick="jugarMano()" style="display: none;">JUGAR</button>' +
-
-            '</div>';
-
-        //// create the HTML for the new div
-        //var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + '">' +
-        //    '<p class="card-text">Jugada' + idJugadaActual + '</p>' +
-        //    '<p class="card-text"></p>' +
-        //    '<p class="card-text">Seguimiento</p>' +
-        //    '<div class="form-check">' +
-        //    '<input class="form-check-input" type="radio"   name="partida" id="flexRadioDefaultSi">' +
-        //    '<label class="form-check-label" for="flexRadioDefault1">Sí</label>' +
-        //    '</div>' +
-        //    '<div class="form-check">' +
-        //    '<input class="form-check-input" type="radio"  name="partida" id="flexRadioDefaultNo" >' +
-        //    '<label class="form-check-label" for="flexRadioDefault2">No</label>' +
-
-
-        //    '<input type="number" class="form-control"  id="inputCantidad" placeholder="Ingrese una cantidad a apostar" style="display: none;">' +
-        //    '<button type="button" class="btn btn-warning" id="bJugada' + idJugadaActual + '" onclick="jugarMano()" style="display: none;">JUGAR</button>' +
-
-        //    '</div>';
-
-        // append the new div to the "dJugadas" div for the current round
-        $("#dJugadas" + idRondaActual).append(divHtml);
-
-        // When any radio button is checked, show the input and button
-        $("input[name='partida']").change(function() {
-            if ($(this).prop('checked')) {
-                $("#bJugada" +idRondaActual+"j"+ idJugadaActual).show();
-                 $("#inputCantidad" +idRondaActual+"j"+ idJugadaActual).show();
             }
         });
 
 
 
-        jugadaFinalizada = 0;
-        rondaJugada=0;
-    } else { alert("Debe finalizar una jugada antes de empezar otra"); }
-}
+        function iniciarPartida() {
+
+            document.getElementById('botonInicio').style.display = "hidden";
+            // document.getElementById('divPartida').style.display = "inline-block";
+
+            let i = 1;
+            this.iniciarRonda(i);
+
+            // create the HTML for the new div
+            var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + "j" + idRondaActual + '">' +
+
+                '</div>';
+
+            // append the new div to the "dJugadas" div for the current round
+            $("#dJugadas" + idRondaActual).append(divHtml);
 
 
 
-//      <div class="form-check">
-//  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-//  <label class="form-check-label" for="flexRadioDefault1">
-//    Default radio
-//  </label>
-//</div>
-//<div class="form-check">
-//  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-//  <label class="form-check-label" for="flexRadioDefault2">
-//    Default checked radio
-//  </label>
-//</div>
+        };
+
+        function iniciarRonda(i) {
+            if (i == 1) {
+                document.getElementById('divJugadas').style.display = "inline-block";
+            } else {
+                $('.nueva-jugada').remove();
+                // $('.nueva-jugada').hide();
+
+                rondaJugada = 0;
+                $("#botonInicio").trigger("click");
+                if (idRondaActual > 0) {
+                    var prevCardId = "#dRonda" + (idRondaActual - 1);
+                    $(prevCardId + " .iniciarJugada, " + prevCardId + " .btn-outline-secondary").prop("disabled", true);
+                }
+
+
+            }
+        };
+
+
+        function iniciarJugada() {
+
+            if (jugadaFinalizada == 1) {
+
+                document.getElementById('dropdowns').style.display = "inline-block";
+                // get the current ID for the round
+                //var idRondaActual = $(this).attr('id').substring(1);
+                idJugadaActual++;
+
+                // create the HTML for the new div
+                var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idRondaActual + "j" + idJugadaActual + '">' +
+                    '<p class="card-text">Jugada' + idRondaActual + '</p>' +
+                    '<p class="card-text"></p>' +
+                    '<p class="card-text">Seguimiento</p>' +
+                    '<div class="form-check">' +
+                    '<input class="form-check-input" type="radio"   name="partida" id="flexRadioDefaultSi">' +
+                    '<label class="form-check-label" for="flexRadioDefault1">Sí</label>' +
+                    '</div>' +
+                    '<div class="form-check">' +
+                    '<input class="form-check-input" type="radio"  name="partida" id="flexRadioDefaultNo" >' +
+                    '<label class="form-check-label" for="flexRadioDefault2">No</label>' +
+
+
+                    '<input type="number" class="form-control"  id="inputCantidad' + idRondaActual + "j" + idJugadaActual + '" placeholder="Ingrese una cantidad a apostar" style="display: none;">' +
+                    '<button type="button" class="btn btn-warning" id="bJugada' + idRondaActual + "j" + idJugadaActual + '" onclick="jugarMano()" style="display: none;">JUGAR</button>' +
+
+                    '</div>';
+
+                //// create the HTML for the new div
+                //var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + '">' +
+                //    '<p class="card-text">Jugada' + idJugadaActual + '</p>' +
+                //    '<p class="card-text"></p>' +
+                //    '<p class="card-text">Seguimiento</p>' +
+                //    '<div class="form-check">' +
+                //    '<input class="form-check-input" type="radio"   name="partida" id="flexRadioDefaultSi">' +
+                //    '<label class="form-check-label" for="flexRadioDefault1">Sí</label>' +
+                //    '</div>' +
+                //    '<div class="form-check">' +
+                //    '<input class="form-check-input" type="radio"  name="partida" id="flexRadioDefaultNo" >' +
+                //    '<label class="form-check-label" for="flexRadioDefault2">No</label>' +
+
+
+                //    '<input type="number" class="form-control"  id="inputCantidad" placeholder="Ingrese una cantidad a apostar" style="display: none;">' +
+                //    '<button type="button" class="btn btn-warning" id="bJugada' + idJugadaActual + '" onclick="jugarMano()" style="display: none;">JUGAR</button>' +
+
+                //    '</div>';
+
+                // append the new div to the "dJugadas" div for the current round
+                $("#dJugadas" + idRondaActual).append(divHtml);
+
+                // When any radio button is checked, show the input and button
+                $("input[name='partida']").change(function () {
+                    if ($(this).prop('checked')) {
+                        $("#bJugada" + idRondaActual + "j" + idJugadaActual).show();
+                        $("#inputCantidad" + idRondaActual + "j" + idJugadaActual).show();
+                    }
+                });
 
 
 
-
-
-
-
-function botonSeleccionado(table_id, cell_id){
-    //alert(cell_id);
-    //alert(table_id);
-
-    
-  
-     // Select the dynamically generated div using its ID
-    var $dJugadasPintadas = $('#dJugadasPintadas'+idRondaActual);
-
- 
-   ultimaCondicion = table_id;
-   ultimaMano = cell_id;
-   
-    // Append the two values using the append() method
-    //$dJugadasPintadas.append("R"+idRondaActual+" J"+idJugadaActual+ " "+ cell_id + " " + table_id +"\n");
-   $("#dJugadasPintadas" + idRondaActual).text(cell_id + " " + table_id);
-   manoJugada = 1;
-
-};
-
-
- function jugarMano() {
-
-       if (manoJugada == 1) { 
-  // retrieve the values from the checked boxes
-  var partidaSi = $("#flexRadioDefaultSi").prop("checked");
-  var partidaNo = $("#flexRadioDefaultNo").prop("checked");
-  
- 
-   // get the current ID for the jugada. ESTA LINEA NO SIRVE NI PARA TOMAR POR CULO
-   // var idJugadaActual = $(this).attr('id').substring(1);
-
-    // get the value of the input field
-    var cantidadApostada = parseInt($("#inputCantidad"+idRondaActual+"j"+idJugadaActual).val());
-    // check if the input field is empty or not a number
-  
-    var textoCondicion =$("#"+ultimaCondicion).text();
-     $('.nueva-jugada').remove();
-    cantidadTotalRonda += cantidadApostada;
-    // update the content of the dJugadasPintadas element for the current round
-                $("#dJugadasPintadas" + idRondaActual).text(ultimaMano + " " + textoCondicion + " " + cantidadTotalRonda + "$");
-    jugadaFinalizada = 1;
-    manoJugada=0;
-     rondaJugada=1;
-
-
-  
-  
-  //// retrieve the value from the input field
-  //var cantidad = $("#inputCantidad").val();
-
-  //cantidadTotalRonda = cantidadTotalRonda + cantidad;
- 
-  //var hasPartida = partidaSi === true;
-  //manoJugada = 0;
-  //  jugadaFinalizada = 1;
-  //  $('.nueva-jugada').remove();
-
-
-  //// save the values to a data structure or perform any other actions
-  //var $dJugadasPintadas = $('#dJugadasPintadas'+idRondaActual);
-  //$dJugadasPintadas.append(" " + cantidadTotalRonda+"$ "+hasPartida);
-  // $dJugadasPintadas.append("<br/>");
-  // //$dJugadasPintadas.html($dJugadasPintadas.html() + "<br style='display: block'/>");
-
-  ////alert(cantidad+" "+ hasPartida); 
-       
-
-
-
-
-  }else{
-           alert("Debe seleccionar primero la condición de partida y la mano a jugar");
-  }
-
-}
-
-
-
- function finalizarRonda(){
-
-     if(rondaJugada==1){
- cantidadTotalUltimaRonda = prompt("Introduzca sus ganancias o pérdidas (en negativo) de la última ronda");
-
-
-
-  ////// Calculate the new dineroActual and balance values
-  ////var nuevoDineroActual = parseInt(dineroActual) + parseInt(cantidadTotalUltimaRonda);
-  ////var nuevoBalance = parseInt(nuevoDineroActual) - parseInt(dineroInicial) ;
-
-  // Calculate the new dineroActual and balance values
-  dineroActual = parseInt(dineroActual) + parseInt(cantidadTotalUltimaRonda);
-  balance = parseInt(dineroActual) - parseInt(dineroInicial) ;
-
-
-  
-   $("#dineroActual").text("Dinero actual: "+dineroActual + "$");
-  
-  $("#balance").text("Balance: "+balance + "$");
-
-  // Update the dJugadasPintadas <p> element
-  $("#dJugadasPintadas" + idRondaActual).text(ultimaMano + " " + ultimaCondicion + " A: " + cantidadTotalRonda + "$" + " G: " + cantidadTotalUltimaRonda + "$");
-
-  // Reset variables
-  ultimaCondicion = "";
-  cantidadTotalRonda = 0;
-  cantidadTotalUltimaRonda=0;
-  ultimaMano = "";
-  
-  
-}else{
-      alert("Debe al menos terminar una jugada antes de iniciar una nueva ronda");
-  }
-
-}
-
-
-
-//function finalizarRonda(){
-
-//    cantidadTotalUltimaRonda = prompt("Introduzca sus ganancias o pérdidas(en negativo) de la última ronda");
-//      $("#dJugadasPintadas" + idRondaActual).text(ultimaMano + " "+ ultimaCondicion+" A:" +cantidadTotalRonda+"$" +" G:"+cantidadTotalUltimaRonda+"$");
-//      ultimaCondicion="";
-//      cantidadTotalRonda=0;
-//      //cantidadTotalUltimaRonda=0;
-//      ultimaMano="";
-//}
-
-
-function iniciarPartida(){
-
-   document.getElementById('botonInicio').style.display ="hidden";
-    // document.getElementById('divPartida').style.display = "inline-block";
-     
-    let i = 1;
-   this.iniciarRonda(i);
-
-    // create the HTML for the new div
-        var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + "j"+idRondaActual+'">' +
-            
-            '</div>';
-
-        // append the new div to the "dJugadas" div for the current round
-        $("#dJugadas" + idRondaActual).append(divHtml);
-
-
-
-};
-
-function iniciarRonda(i){
-    if (i == 1) {
-        document.getElementById('divJugadas').style.display = "inline-block";
-    } else {
-        $('.nueva-jugada').remove();
-       // $('.nueva-jugada').hide();
-       idJugadaActual = 0;
-       rondaJugada=0;
-        $("#botonInicio").trigger("click");
-        if (idRondaActual > 0) {
-        var prevCardId = "#dRonda" + (idRondaActual - 1);
-        $(prevCardId + " .iniciarJugada, " + prevCardId + " .btn-outline-secondary").prop("disabled", true);
+                jugadaFinalizada = 0;
+                rondaJugada = 0;
+            } else { alert("Debe finalizar una jugada antes de empezar otra"); }
         }
-  
- 
-    }
-};
-
-$(document).on("click", "#bJugada" +idRondaActual+"j"+idJugadaActual, function() {
-    alert("hola");
-
-});
 
 
 
-$('ul.dropdown-menu a').click(function() {
-    id=$(this).attr('id');
-         var divsAMostrar=[];
-    //var nombre = $(this).attr('name');
+
+        function botonSeleccionado(table_id, cell_id) {
+            //alert(cell_id);
+            //alert(table_id);
 
 
-    if ($.isNumeric(id)  ) {
-        
+
+            // Select the dynamically generated div using its ID
+            var $dJugadasPintadas = $('#dJugadasPintadas' + idRondaActual);
 
 
-       let $container = document.getElementById("demo");
-         $container.setAttribute("type", "text");
-          $container.setAttribute("value", id);
+            ultimaCondicion = table_id;
+            ultimaMano = cell_id;
 
-        //const formData = new FormData(document.getElementById('form1'));
+            // Append the two values using the append() method
+            //$dJugadasPintadas.append("R"+idRondaActual+" J"+idJugadaActual+ " "+ cell_id + " " + table_id +"\n");
+            $("#dJugadasPintadas" + idRondaActual).text(cell_id + " " + table_id);
+            manoJugada = 1;
 
-        //formData.append("mappingPorts", JSON.stringify(id));
-
-        //// send the form data to the server using AJAX
-        //const xhr = new XMLHttpRequest();
-        //xhr.open('post', '/Tablas/JugarPartidaConTabla');
-        //xhr.send(formData);
+        };
 
 
-           //var datos = {
-           //     id: id
-           // };
+        function jugarMano() {
 
-         
-          $.ajax({
-              url: '/Tablas/JugarPartidaConTabla?id='+id,
-              type: 'POST',
-              async: false,
-              //data: datos,
-              success: function(data) {
-               // alert(data);
-                var tabla = document.getElementById("tabla");           
-                var z = 0;
-                var html = "";
-                  var primeraFila = false;
-                $("#tabla tbody").empty();
-                 //RECORREMOS LOS DATOS
-                $.each(data, function(index, celda ) {
 
-                    //var nodopadre = $(this).parent();
-                    //var background_color = $(nodopadre).attr("Background_color");
-                    //var table_id = $(nodopadre).find("Table_id").text();
-                    //var cell_id = $(nodopadre).find("Cell_id").text();
-                    //var text_color = $(nodopadre).find("Text_color").text();
+            if (manoJugada == 1) {
+                // retrieve the values from the checked boxes
+                var partidaSi = $("#flexRadioDefaultSi").prop("checked");
+                var partidaNo = $("#flexRadioDefaultNo").prop("checked");
 
-                    if (z == 0) {
-                        html += "<tr>";
+
+                //Se envian los datos a los arrays que harán los insert en la bd
+                if (partidaSi == true) {
+                    seguimiento_Jugadas.push(true)
+                } else {
+                    seguimiento_Jugadas.push(false);
+                }
+
+                ids_Jugadas.push(idJugadaActual);
+                cantidades_Jugadas.push(cantidadApostada);
+                cell_ids_Jugadas.push(ultimaMano);
+                table_ids_Jugadas.push(ultimaCondicion);
+
+
+                // get the current ID for the jugada. ESTA LINEA NO SIRVE NI PARA TOMAR POR CULO
+                // var idJugadaActual = $(this).attr('id').substring(1);
+
+                // get the value of the input field
+                var cantidadApostada = parseInt($("#inputCantidad" + idRondaActual + "j" + idJugadaActual).val());
+                // check if the input field is empty or not a number
+
+                var textoCondicion = $("#" + ultimaCondicion).text();
+                $('.nueva-jugada').remove();
+                cantidadTotalRonda += cantidadApostada;
+                // update the content of the dJugadasPintadas element for the current round
+                $("#dJugadasPintadas" + idRondaActual).text(ultimaMano + " " + textoCondicion + " " + cantidadTotalRonda + "$");
+                jugadaFinalizada = 1;
+                manoJugada = 0;
+                rondaJugada = 1;
+
+
+
+
+                //// retrieve the value from the input field
+                //var cantidad = $("#inputCantidad").val();
+
+                //cantidadTotalRonda = cantidadTotalRonda + cantidad;
+
+                //var hasPartida = partidaSi === true;
+                //manoJugada = 0;
+                //  jugadaFinalizada = 1;
+                //  $('.nueva-jugada').remove();
+
+
+                //// save the values to a data structure or perform any other actions
+                //var $dJugadasPintadas = $('#dJugadasPintadas'+idRondaActual);
+                //$dJugadasPintadas.append(" " + cantidadTotalRonda+"$ "+hasPartida);
+                // $dJugadasPintadas.append("<br/>");
+                // //$dJugadasPintadas.html($dJugadasPintadas.html() + "<br style='display: block'/>");
+
+                ////alert(cantidad+" "+ hasPartida);
+
+
+            } else {
+                alert("Debe seleccionar primero la condición de partida y la mano a jugar");
+            }
+
+        }
+
+
+
+        function finalizarRonda() {
+
+            if (rondaJugada == 1) {
+                cantidadTotalUltimaRonda = prompt("Introduzca sus ganancias o pérdidas (en negativo) de la última ronda");
+
+
+
+                ////// Calculate the new dineroActual and balance values
+                ////var nuevoDineroActual = parseInt(dineroActual) + parseInt(cantidadTotalUltimaRonda);
+                ////var nuevoBalance = parseInt(nuevoDineroActual) - parseInt(dineroInicial) ;
+
+                // Calculate the new dineroActual and balance values
+                dineroActual = parseInt(dineroActual) + parseInt(cantidadTotalUltimaRonda);
+                balance = parseInt(dineroActual) - parseInt(dineroInicial);
+
+
+                ids_Rondas.push(idRondaActual);
+                ganancias_Rondas.push(cantidadTotalUltimaRonda);
+
+
+
+                $("#dineroActual").text("Dinero actual: " + dineroActual + "$");
+
+                $("#balance").text("Balance: " + balance + "$");
+
+                // Update the dJugadasPintadas <p> element
+                $("#dJugadasPintadas" + idRondaActual).text(ultimaMano + " " + ultimaCondicion + " A: " + cantidadTotalRonda + "$" + " G: " + cantidadTotalUltimaRonda + "$");
+
+                // Reset variables
+                ultimaCondicion = "";
+                cantidadTotalRonda = 0;
+                cantidadTotalUltimaRonda = 0;
+                ultimaMano = "";
+
+
+            } else {
+                alert("Debe al menos terminar una jugada antes de iniciar una nueva ronda");
+            }
+
+        }
+
+
+        function finalizarPartida() {
+
+
+            $.ajax({
+                url: '@Url.Action("insertarPartida", "Tablas")',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    ids_Jugadas: ids_Jugadas,
+                    ids_Rondas: ids_Rondas,
+                    ganancias_Rondas: ganancias_Rondas,
+                    cell_ids_Jugadas: cell_ids_Jugadas,
+                    table_ids_Jugadas: table_ids_Jugadas,
+                    cantidades_Jugadas: cantidades_Jugadas,
+                    seguimiento_Jugadas: seguimiento_Jugadas,
+                    dineroActual: dineroActual,
+                    dineroInicial: dineroInicial
+                },
+                success: function (data) {
+                    if (data.success) {
+                        // The request was successful
+                        alert(data.message);
+                    } else {
+                        // The request was not successful
+                        alert("Hubo un error al insertar la partida");
                     }
-                    //html += "<td style='background-color:"+celda.background_color+"; color:"+celda.text_color+";'  id='"+celda.cell_id+"' value='"+celda.table_id+"'>"+celda.cell_id + "</td>";
-                  
-                    html += "<td style='background-color:"+celda.background_color+"; color:"+celda.text_color+";' id='"+celda.id_celda+"' value='"+celda.id_celda+"'>"+"<button id='boton' style='background-color:"+celda.background_color+"; color:"+celda.text_color+"; font-weight:500; border: none;' onclick='botonSeleccionado("+celda.table_id+ ",\""+celda.id_celda+"\")'>"+celda.id_celda+"</button>"+"</td>";
 
-                   // html += "<td style='background-color:"+celda.background_color+"; color:"+celda.text_color+";'  id='"+celda.id_celda+"' value='"+celda.id_celda+"'>"+"<button id='boton' style='background-color:"+celda.background_color+"; color:"+celda.text_color+"; font-weight:500; border: none;' onclick='botonSeleccionado("+celda.table_id+ ","+celda.id_celda+")'>"+celda.id_celda+"</button>"+"</td>";
-                    
-                    
-                    
-                    
-                    if(z==12 && primeraFila==false){
-                         html += "</tr>";
-                        primeraFila = true;
-                         z = 0;
+
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr + status + error);
+                }
+            });
+
+
+
+        }
+
+
+        //$(document).on("click", "#bJugada" +idRondaActual+"j"+idJugadaActual, function() {
+        //    alert("hola");
+
+        //});
+
+
+        //Aquí se manejan los dropdowns y el visor
+        $('ul.dropdown-menu a').click(function () {
+            id = $(this).attr('id');
+            var divsAMostrar = [];
+            //var nombre = $(this).attr('name');
+
+
+            if ($.isNumeric(id)) {
+
+
+
+                let $container = document.getElementById("demo");
+                $container.setAttribute("type", "text");
+                $container.setAttribute("value", id);
+
+                //const formData = new FormData(document.getElementById('form1'));
+
+                //formData.append("mappingPorts", JSON.stringify(id));
+
+                //// send the form data to the server using AJAX
+                //const xhr = new XMLHttpRequest();
+                //xhr.open('post', '/Tablas/JugarPartidaConTabla');
+                //xhr.send(formData);
+
+
+                //var datos = {
+                //     id: id
+                // };
+
+
+                $.ajax({
+                    url: '/Tablas/JugarPartidaConTabla?id=' + id,
+                    type: 'POST',
+                    async: false,
+                    //data: datos,
+                    success: function (data) {
+                        // alert(data);
+                        var tabla = document.getElementById("tabla");
+                        var z = 0;
+                        var html = "";
+                        var primeraFila = false;
+                        $("#tabla tbody").empty();
+                        //RECORREMOS LOS DATOS
+                        $.each(data, function (index, celda) {
+
+                            //var nodopadre = $(this).parent();
+                            //var background_color = $(nodopadre).attr("Background_color");
+                            //var table_id = $(nodopadre).find("Table_id").text();
+                            //var cell_id = $(nodopadre).find("Cell_id").text();
+                            //var text_color = $(nodopadre).find("Text_color").text();
+
+                            if (z == 0) {
+                                html += "<tr>";
+                            }
+                            //html += "<td style='background-color:"+celda.background_color+"; color:"+celda.text_color+";'  id='"+celda.cell_id+"' value='"+celda.table_id+"'>"+celda.cell_id + "</td>";
+
+                            html += "<td style='background-color:" + celda.background_color + "; color:" + celda.text_color + ";' id='" + celda.id_celda + "' value='" + celda.id_celda + "'>" + "<button id='boton' style='background-color:" + celda.background_color + "; color:" + celda.text_color + "; font-weight:500; border: none;' onclick='botonSeleccionado(" + celda.table_id + ",\"" + celda.id_celda + "\")'>" + celda.id_celda + "</button>" + "</td>";
+
+                            // html += "<td style='background-color:"+celda.background_color+"; color:"+celda.text_color+";'  id='"+celda.id_celda+"' value='"+celda.id_celda+"'>"+"<button id='boton' style='background-color:"+celda.background_color+"; color:"+celda.text_color+"; font-weight:500; border: none;' onclick='botonSeleccionado("+celda.table_id+ ","+celda.id_celda+")'>"+celda.id_celda+"</button>"+"</td>";
+
+
+
+
+                            if (z == 12 && primeraFila == false) {
+                                html += "</tr>";
+                                primeraFila = true;
+                                z = 0;
+                            }
+
+                            if (z == 13) {
+                                html += "</tr>";
+                                z = 0;
+                            }
+
+
+                            z++;
+
+
+                            //<button style="background-color: celda.Background_color; color:celda.Color; font-weight:500; border: none;">celda.Cell_id</button>
+
+
+
+                        });
+
+                        $("#tabla tbody").html(html);
+
+
+
                     }
-                    
-                    if (z == 13) {
-                        html += "</tr>";
-                        z = 0;
+                });
+
+            } else {
+                // alert("hola");
+
+                if (id === 'BBvsLimp' || id === 'DefendBB' || id === 'Flat3B' || id === 'SQZ' || id === 'OS' || id === 'OR' || id === 'Reshove' || id === 'vsOS' || id === 'SBLimpia' || id === 'vs3Bet') {
+                    divsAMostrar = [];
+                }
+
+                var divsAOcultar = document.getElementsByClassName("btn-group");
+
+                for (var i = 0; i < divsAOcultar.length; i++) {
+                    divsAOcultar[i].style.display = "none";
+
+                }
+                document.getElementById('dInicial').style.display = "inline-block";
+
+                // document.getElementById('dloquesea').style.display = "inline-block";
+
+
+                var divsPadre = [];
+                divsPadre = id.split(/_/);
+
+                var divsPadreDef = [];
+
+                divsPadre.forEach(item =>
+                    divsPadreDef.push("d" + item)
+                );
+
+                //divsPadreDef.forEach(item =>
+                //    alert(item)
+                //    //if(document.getElementById(item)){
+                //   //document.getElementById(item).style.display = "inline-block"
+                //);
+
+                divsAMostrar = divsPadreDef;
+
+                for (var i = 0; i < divsAMostrar.length; i++) {
+
+
+                    if (document.getElementById(divsAMostrar[i])) {
+                        document.getElementById(divsAMostrar[i]).style.display = "inline-block";
                     }
-                    
+                    //alert(1);
+                }
 
-                    z++;
 
 
-                        //<button style="background-color: celda.Background_color; color:celda.Color; font-weight:500; border: none;">celda.Cell_id</button>  
+                //  alert(id);
+                idNuevo = "d" + id;
+                //alert(idNuevo);
+                document.getElementById(idNuevo).style.display = "inline-block";
 
-           
 
+
+
+                // document.getElementById('dBBvsLimp').style.display = "inline-block";
+
+            }
         });
 
-        $("#tabla tbody").html(html);
 
-
-              
-            }});
-          
-    }else{
-       // alert("hola");
-       
-        if(id==='BBvsLimp'||id==='DefendBB'||id==='Flat3B'||id==='SQZ'||id==='OS'||id==='OR'||id==='Reshove'||id==='vsOS'||id==='SBLimpia'||id==='vs3Bet'){
-            divsAMostrar=[];
-        }
-       
-        var divsAOcultar = document.getElementsByClassName("btn-group");
-
-        for (var i = 0; i < divsAOcultar.length; i++){
-            divsAOcultar[i].style.display = "none";
-            
-        }      
-         document.getElementById('dInicial').style.display = "inline-block";
-         
-        // document.getElementById('dloquesea').style.display = "inline-block";
-
-
-        var divsPadre = [];
-        divsPadre = id.split(/_/);
-
-        var divsPadreDef=[];
-        
-       divsPadre.forEach(item => 
-           divsPadreDef.push("d"+item)                    
-       );
-
-         //divsPadreDef.forEach(item => 
-         //    alert(item)
-         //    //if(document.getElementById(item)){
-         //   //document.getElementById(item).style.display = "inline-block"   
-         //);
-
-         divsAMostrar= divsPadreDef;
-
-        for(var i=0;i<divsAMostrar.length;i++){
-        
-   
-             if(document.getElementById(divsAMostrar[i])){
-           document.getElementById(divsAMostrar[i]).style.display = "inline-block" ; }
-            //alert(1);
-        }
-
-             
-     
-      //  alert(id);
-        idNuevo = "d"+id;
-        //alert(idNuevo);
-        document.getElementById(idNuevo).style.display = "inline-block";
-
-
-
-
-       // document.getElementById('dBBvsLimp').style.display = "inline-block";
-        
-    }     
-});
-
-
-</script>
+    </script>
 }
 
 
 
-        </html>
-
+</html>
 
 
 
