@@ -168,11 +168,20 @@ namespace ProyectoMentopoker.Repositories
             this.cn.Close();
 
 
+            List<int> posicionJugadas = new List<int>();
+            for (int x = 0; x < ids_Jugadas.Length; x++)
+            {
+                posicionJugadas.Add(x);
+            }
+
+
 
             //var rondaIds = new List<string>();
             int numRonda = 1;
-            List<int> jugadasInsertadas = new List<int>();
-            Boolean insercion = true;
+
+            //List<int> jugadasInsertadas = new List<int>();
+            //Boolean insercion = true;
+
             for (int i=0; i < ids_Rondas.Length; i++)
             {
                 this.insertRonda(cantidades_Rondas[i], ganancias_Rondas[i], partidaId);
@@ -183,16 +192,14 @@ namespace ProyectoMentopoker.Repositories
                 {
                     if (numRonda == ids_Jugadas[y])
                     {
-                        insercion = true;
-                        for(int x = 0; x < jugadasInsertadas.Count; x++)
-                        {
-                            if (ids_Jugadas[y] == jugadasInsertadas[x])
-                            {
-                                insercion = false;
-                            }
-                        }
+                        //insercion = true;
+                        //for(int x = 0; x < jugadasInsertadas.Count; x++)
+                        //{
+                        //    if (ids_Jugadas[y] == jugadasInsertadas[x])
+                        //{ insercion = false; }}
+                        //if (insercion == true) { }
 
-                        if (insercion == true) { 
+
 
                         SqlParameter pamcellid = new SqlParameter("@CELL_ID", cell_ids_Jugadas[y]);
                         this.com.Parameters.Add(pamcellid);
@@ -217,9 +224,9 @@ namespace ProyectoMentopoker.Repositories
                         this.insertJugada(cantidades_Jugadas[y], seguimiento_jugadas[y], identificador, rondaId);
                        
 
-                        jugadasInsertadas.Add(ids_Jugadas[y]);
+                        //jugadasInsertadas.Add(ids_Jugadas[y]);
 
-                        }
+                        
                         
                     }
                 }
