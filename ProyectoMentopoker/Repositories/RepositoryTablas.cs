@@ -32,7 +32,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 //CREATE OR ALTER PROCEDURE SP_INSERT_JUGADA
 //(
-//@JUGADA_ID NVARCHAR(50),
+
 //@CANTIDAD_JUGADA FLOAT,
 //@SEGUIMIENTO_TABLA BIT,
 //@IDENTIFICADOR INT,
@@ -40,6 +40,16 @@ using static System.Net.Mime.MediaTypeNames;
 //)
 //AS
 //INSERT INTO Jugadas (Jugada_id, Cantidad_jugada, Seguimiento_Tabla, Identificador, Ronda_id) VALUES((SELECT max(CAST(Jugada_id AS INT)) from Jugadas) + 1, @CANTIDAD_JUGADA, @SEGUIMIENTO_TABLA, @IDENTIFICADOR, @RONDA_ID)
+//GO
+
+
+//CREATE OR ALTER PROCEDURE SP_FIND_IDENTIFICADOR
+//(
+//@CELL_ID NVARCHAR(4),
+//@TABLE_ID INT
+//)
+//AS
+//SELECT Identificador FROM Celdas WHERE  Table_id =@TABLE_ID AND Cell_id =@CELL_ID
 //GO
 
 
@@ -124,24 +134,6 @@ namespace ProyectoMentopoker.Repositories
 
         //}
 
-        public void insertRonda(double cantidades_Rondas, double ganancias_Ronda, string partida_id)
-        {
-
-            SqlParameter pamcantidad = new SqlParameter("@CANTIDAD_RONDA", cantidades_Rondas);
-            this.com.Parameters.Add(pamcantidad);
-            SqlParameter pamganancias = new SqlParameter("@GANANCIAS", ganancias_Ronda);
-            this.com.Parameters.Add(pamganancias);
-            SqlParameter pampartidaid = new SqlParameter("@PARTIDA_ID", partida_id);
-            this.com.Parameters.Add(pampartidaid);
-            this.com.CommandType = System.Data.CommandType.StoredProcedure;
-            this.com.CommandText = "SP_INSERT_RONDA";
-
-            this.cn.Open();
-            this.com.ExecuteNonQuery();
-            this.com.Parameters.Clear();
-            this.cn.Close();
-        }
-
 
         public Boolean insertPartida(int[] ids_Jugadas, int[] ids_Rondas, double[] ganancias_Rondas, double[] cantidades_Rondas,
             string[] cell_ids_Jugadas, int[] table_ids_Jugadas, double[] cantidades_Jugadas,
@@ -173,21 +165,135 @@ namespace ProyectoMentopoker.Repositories
             this.com.CommandType = System.Data.CommandType.Text;
             this.cn.Open();
             string partidaId = this.com.ExecuteScalar().ToString();
-           
-  
             this.cn.Close();
 
-            for (int i=0; i < cantidades_Rondas.Length; i++)
-                  {
-                this.insertRonda(cantidades_Rondas[i], ganancias_Rondas[i], partidaId);
-                  }
 
+
+            //var rondaIds = new List<string>();
+            int numRonda = 1;
+            List<int> jugadasInsertadas = new List<int>();
+            Boolean insercion = true;
+            for (int i=0; i < ids_Rondas.Length; i++)
+            {
+                this.insertRonda(cantidades_Rondas[i], ganancias_Rondas[i], partidaId);
+
+                
+
+                for (int y=0; y< ids_Jugadas.Length; y++)
+                {
+                    if (numRonda == ids_Jugadas[y])
+                    {
+                        insercion = true;
+                        for(int x = 0; x < jugadasInsertadas.Count; x++)
+                        {
+                            if (ids_Jugadas[y] == jugadasInsertadas[x])
+                            {
+                                insercion = false;
+                            }
+                        }
+
+                        if (insercion == true) { 
+
+                        SqlParameter pamcellid = new SqlParameter("@CELL_ID", cell_ids_Jugadas[y]);
+                        this.com.Parameters.Add(pamcellid);
+                        SqlParameter pamtableid = new SqlParameter("@TABLE_ID", table_ids_Jugadas[y]);
+                        this.com.Parameters.Add(pamtableid);
+                        this.com.CommandType = System.Data.CommandType.StoredProcedure;
+                        this.com.CommandText = "SP_FIND_IDENTIFICADOR";
+                        this.cn.Open();
+                        int identificador = int.Parse(this.com.ExecuteScalar().ToString());
+                        this.com.Parameters.Clear();
+                        this.cn.Close();
+
+                        string rondaId;
+                        this.com.CommandText = "SELECT MAX(CAST(Ronda_id AS INT)) from Rondas";
+                        this.com.CommandType = System.Data.CommandType.Text;
+                        this.cn.Open();
+                        rondaId = this.com.ExecuteScalar().ToString();
+                        this.cn.Close();
+
+
+
+                        this.insertJugada(cantidades_Jugadas[y], seguimiento_jugadas[y], identificador, rondaId);
+                       
+
+                        jugadasInsertadas.Add(ids_Jugadas[y]);
+
+                        }
+                        
+                    }
+                }
+
+                numRonda++;
+            }
+            numRonda = 1;
+
+
+            for(int i = 0;i< ids_Jugadas.Length; i++)
+            {
+
+
+                SqlParameter pamcellid = new SqlParameter("@CELL_ID", cell_ids_Jugadas[i]);
+                this.com.Parameters.Add(pamcellid);
+                SqlParameter pamtableid = new SqlParameter("@TABLE_ID", table_ids_Jugadas[i]);
+                this.com.Parameters.Add(pamtableid);
+                this.com.CommandType = System.Data.CommandType.StoredProcedure;
+                this.com.CommandText = "SP_FIND_IDENTIFICADOR";
+                this.cn.Open();
+                string identificador = this.com.ExecuteScalar().ToString();
+                this.com.Parameters.Clear();
+                this.cn.Close();
+
+
+            }
+
+           
 
 
             return exitob;
         }
 
 
+        public void insertRonda(double cantidad_Ronda, double ganancias_Ronda, string partida_id)
+        {
+
+            SqlParameter pamcantidad = new SqlParameter("@CANTIDAD_RONDA", cantidad_Ronda);
+            this.com.Parameters.Add(pamcantidad);
+            SqlParameter pamganancias = new SqlParameter("@GANANCIAS", ganancias_Ronda);
+            this.com.Parameters.Add(pamganancias);
+            SqlParameter pampartidaid = new SqlParameter("@PARTIDA_ID", partida_id);
+            this.com.Parameters.Add(pampartidaid);
+            this.com.CommandType = System.Data.CommandType.StoredProcedure;
+            this.com.CommandText = "SP_INSERT_RONDA";
+
+            this.cn.Open();
+            this.com.ExecuteNonQuery();
+            this.com.Parameters.Clear();
+            this.cn.Close();
+        }
+
+
+        public void insertJugada(double cantidad_Jugada, Boolean seguimiento_jugada, 
+            int identificador, string ronda_id)
+        {
+            SqlParameter pamcantidad = new SqlParameter("@CANTIDAD_JUGADA", cantidad_Jugada);
+            this.com.Parameters.Add(pamcantidad);
+            SqlParameter pamseguimiento = new SqlParameter("@SEGUIMIENTO_TABLA", seguimiento_jugada);
+            this.com.Parameters.Add(pamseguimiento);
+            SqlParameter pamidentificador = new SqlParameter("@IDENTIFICADOR", identificador);
+            this.com.Parameters.Add(pamidentificador);
+            SqlParameter pamrondaid = new SqlParameter("@RONDA_ID", ronda_id);
+            this.com.Parameters.Add(pamrondaid);
+            this.com.CommandType = System.Data.CommandType.StoredProcedure;
+            this.com.CommandText = "SP_INSERT_JUGADA";
+
+            this.cn.Open();
+            this.com.ExecuteNonQuery();
+            this.com.Parameters.Clear();
+            this.cn.Close();
+
+
+        }
 
     }
 
