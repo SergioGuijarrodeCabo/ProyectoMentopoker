@@ -1057,14 +1057,14 @@
     <div class="col d-inline mr-2">
     <div id="divPartida" class="container">
 
-
-        <section class="py-5 text-center container">
+         
+        <section class="py-5 text-center container" style="margin-top: 0;">
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <h1 class="fw-light">PARTIDA</h1>
 
-                    <a class="btn btn-primary my-2" onclick="iniciarPartida()" id="botonInicio">Iniciar partida</a>
-                    <a class="btn btn-primary my-2" onclick="finalizarPartida()" id="botonFinal">Finalizar partida</a>
+                    <a class="btn btn-primary my-2" onclick="this.style.display='none';" id="botonInicio">Iniciar partida</a>
+                    <a class="btn btn-primary my-2" onclick="finalizarPartida()" id="botonFinal" style="display:none;">Finalizar partida</a>
                    
                 </div>
             </div>
@@ -1147,7 +1147,7 @@
 
             // initialize the current ID to 0
             $("#botonInicio").click(function () {
-
+               
                 //  document.getElementById('botonInicio').style.display = "none";
                 idJugadaActual = 0;
                 jugadaFinalizada = 1;
@@ -1162,7 +1162,7 @@
                     '<svg class="bd-placeholder-img card-img-top"   role="img" aria-label="Placeholder: Jugadas" preserveAspectRatio="xMidYMid slice" focusable="false">' +
                     '<title>Placeholder</title>' +
                     '<rect width="100%" height="100%" fill="#55595c"/>' +
-                    '<text x="50%" y="50%" fill="#eceeef" dy=".3em" id="dJugadasPintadas' + idRondaActual + '" ></text>' +
+                    '<text x="40%" y="40%" fill="#eceeef" dy=".3em" id="dJugadasPintadas' + idRondaActual + '" ></text>' +
 
                     '</svg>' +
 
@@ -1197,13 +1197,27 @@
                     dineroActual = dineroInicial;
 
 
-                    $('#encabezado').after('<div class="d-flex align-items-center mt-3">' +
+                   $('#encabezado').after('<div class="d-flex justify-content-center align-items-center mt-3">' +
                         '<p class="text-primary fw-bold h5 mb-0 me-3" id="dineroInicial">Dinero inicial: ' + dineroInicial + '$</p>' +
                         '<p class="text-primary fw-bold h5 mb-0 me-3" id="dineroActual">Dinero actual: ' + dineroActual + '$</p>' +
                         '<p class="text-success fw-bold h5 mb-0" id="balance">Balance: ' + balance + '$</p>' +
                         '</div>');
                     inicio = 1;
+
+
+
+
                 }
+            
+                iniciarRonda(1);
+
+                // create the HTML for the new div
+                var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + "j" + idRondaActual + '">' +
+
+                    '</div>';
+
+                // append the new div to the "dJugadas" div for the current round
+                $("#dJugadas" + idRondaActual).append(divHtml);
 
 
             });
@@ -1235,25 +1249,23 @@
           }
 
 
-        function iniciarPartida() {
+        //function iniciarPartida() {
 
-            document.getElementById('botonInicio').style.display = "hidden";
-            // document.getElementById('divPartida').style.display = "inline-block";
+        //    //document.getElementById('botonInicio').style.display = "hidden";
+        //    // document.getElementById('divPartida').style.display = "inline-block";
 
-            let i = 1;
-            this.iniciarRonda(i);
+        //    let i = 1;
+        //    this.iniciarRonda(i);
 
-            // create the HTML for the new div
-            var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + "j" + idRondaActual + '">' +
+        //    // create the HTML for the new div
+        //    var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + "j" + idRondaActual + '">' +
 
-                '</div>';
+        //        '</div>';
 
-            // append the new div to the "dJugadas" div for the current round
-            $("#dJugadas" + idRondaActual).append(divHtml);
+        //    // append the new div to the "dJugadas" div for the current round
+        //    $("#dJugadas" + idRondaActual).append(divHtml);
 
-
-
-        };
+        //};
 
         function iniciarRonda(i) {
             if (i == 1) {
@@ -1459,7 +1471,6 @@
                 ganancias_Rondas.push(cantidadTotalUltimaRonda);
                 cantidades_Rondas.push(cantidadTotalRonda);
 
-
                 $("#dineroActual").text("Dinero actual: " + dineroActual + "$");
 
                
@@ -1475,8 +1486,10 @@
                $("#balance").text("Balance: " + balance + "$");
 
                 // Update the dJugadasPintadas <p> element
-                $("#dJugadasPintadas" + idRondaActual).text(ultimaMano + + " A: " + cantidadTotalRonda + "$" + " G: " + cantidadTotalUltimaRonda + "$");
+                $("#dJugadasPintadas" + idRondaActual).text(ultimaMano +  " A: " + cantidadTotalRonda + "$" + " G: " + cantidadTotalUltimaRonda + "$");
 
+               // $("#botonFinal").style.display = "inline";
+                document.getElementById("botonFinal").style.display = "inline-block";
                 // Reset variables
                 ultimaCondicion = "";
                 cantidadTotalRonda = 0;
