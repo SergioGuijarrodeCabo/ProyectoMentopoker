@@ -3,6 +3,12 @@ using ProyectoMentopoker.Models;
 using static System.Net.Mime.MediaTypeNames;
 
 #region
+
+//INSERT INTO Partidas (Partida_id, Cash_inicial, Cash_final, Fecha) VALUES(1, 20, 25, GETDATE())
+//INSERT INTO Rondas (Ronda_id, Cantidad_jugada, Ganancias, Partida_id) VALUES(1, 20, 250, 1)
+//INSERT INTO Jugadas (Jugada_id, Cantidad_jugada, Seguimiento_Tabla, Identificador, Ronda_id) VALUES(1, 20, 0, 234, 1)
+
+
 //CREATE OR ALTER PROCEDURE SP_GET_TABLA
 //(@ID INT)
 //AS
@@ -71,11 +77,12 @@ namespace ProyectoMentopoker.Repositories
         public RepositoryTablas()
         {
 
-
-            string connectionString = @"Data Source=DESKTOP-E38C8U3;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+            //Conexión de casa
+            //string connectionString = @"Data Source=DESKTOP-E38C8U3;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+            
             // string connectionString = @"Data Source = DESKTOP - E38C8U3\SQLEXPRESS; Initial Catalog = MENTOPOKER; Integrated Security = True";
             //string connectionString = @"Data Source = LOCALHOST\DESARROLLO; Initial Catalog = PROYECTOMENTOPOKER; User ID = sa; Password = MCSD2022";
-            // string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+             string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
             // this.cn = new SqlConnection(HelperConfiguartion.GetConnectionString());
             this.cn = new SqlConnection(connectionString);
             this.com = new SqlCommand();
@@ -106,8 +113,8 @@ namespace ProyectoMentopoker.Repositories
 
                 int identificador = int.Parse(this.reader["Identificador"].ToString());
                 int table_id = int.Parse(this.reader["table_id"].ToString());
-                string id_celda = this.reader["cell_id"].ToString();
-                //  string id_celda = this.reader["Id_celda"].ToString();
+                //string id_celda = this.reader["cell_id"].ToString();
+                string id_celda = this.reader["Id_celda"].ToString();
                 string background_color = this.reader["background_color"].ToString();
                 string text_color = this.reader["text_color"].ToString();
 
