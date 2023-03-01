@@ -1,4 +1,23 @@
+using Microsoft.EntityFrameworkCore;
+using ProyectoMentopoker.Data;
+using ProyectoMentopoker.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
+string connectionString =
+    builder.Configuration.GetConnectionString("SqlMentopoker");
+
+
+builder.Services.AddTransient<RepositoryEstadisticas>();
+
+
+
+builder.Services.AddDbContext<MentopokerContext>
+    (options => options.UseSqlServer(connectionString));
+
+//builder.Services.AddDbContext<MentopokerContext>
+//    (options => options.UseSqlServer(@"Data Source=DESKTOP-E38C8U3;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";));
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

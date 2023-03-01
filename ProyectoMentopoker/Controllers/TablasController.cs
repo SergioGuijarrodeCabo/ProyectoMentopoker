@@ -5,11 +5,13 @@ namespace ProyectoMentopoker.Controllers
 {
     public class TablasController : Controller
     {
-        private RepositoryTablas repo;
+        private RepositoryTablas repoTablas;
+        private RepositoryEstadisticas repoStats;
 
-        public TablasController()
+        public TablasController(RepositoryEstadisticas repoStats)
         {
-            this.repo = new RepositoryTablas();
+            this.repoTablas = new RepositoryTablas();
+            this.repoStats = repoStats;
         }
 
         public IActionResult Index()
@@ -26,11 +28,19 @@ namespace ProyectoMentopoker.Controllers
             return View();
         }
 
+
+        public IActionResult PruebaEstadisticas()
+        {
+            List<Partida> partidas = this.repoStats.GetPartidas();
+
+            return View(partidas);
+        }
+
         [HttpPost]
         public IActionResult GetTabla(int id)
         {
 
-            List<Celda> tabla = this.repo.GetTabla(id);
+            List<Celda> tabla = this.repoTablas.GetTabla(id);
             return View(tabla);
         }
 
@@ -51,8 +61,8 @@ namespace ProyectoMentopoker.Controllers
         [HttpPost]
         public List<Celda> JugarPartidaConTabla(int id)
         {
-            this.repo = new RepositoryTablas();
-            List<Celda> tabla = this.repo.GetTabla(id);
+
+            List<Celda> tabla = this.repoTablas.GetTabla(id);
             return tabla;
         }
 
@@ -75,7 +85,7 @@ namespace ProyectoMentopoker.Controllers
                 message = "Partida insertada correctamente"
             };
 
-            this.repo.insertPartida( ids_Jugadas, ids_Rondas, ganancias_Rondas, cantidades_Rondas, cell_ids_Jugadas, table_ids_Jugadas, cantidades_Jugadas, seguimiento_jugadas, dineroInicial, dineroActual);
+            this.repoTablas.insertPartida( ids_Jugadas, ids_Rondas, ganancias_Rondas, cantidades_Rondas, cell_ids_Jugadas, table_ids_Jugadas, cantidades_Jugadas, seguimiento_jugadas, dineroInicial, dineroActual);
 
             return Json(result);
         }
