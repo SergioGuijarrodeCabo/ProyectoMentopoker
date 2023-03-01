@@ -19,11 +19,14 @@ using static System.Net.Mime.MediaTypeNames;
 //CREATE OR ALTER PROCEDURE SP_INSERT_PARTIDA
 //(
 //@CASH_INICIAL FLOAT,
-//@CASH_FINAL FLOAT
+//@CASH_FINAL FLOAT,
+//@COMENTARIOS NVARCHAR(200),
+//@USUARIO_ID NVARCHAR(50)
 //)
 //AS
-//INSERT INTO Partidas  (Partida_id, Cash_inicial, Cash_final, Fecha) VALUES((SELECT max(CAST(Partida_id AS INT)) from Partidas) + 1, @CASH_INICIAL, @CASH_FINAL, GETDATE())
+//INSERT INTO Partidas  (Partida_id, Cash_inicial, Cash_final, Fecha, Comentarios, Usuario_id) VALUES((SELECT max(CAST(Partida_id AS INT)) from Partidas) + 1, @CASH_INICIAL, @CASH_FINAL, GETDATE(), @COMENTARIOS, @USUARIO_ID)
 //GO
+
 
 //CREATE OR ALTER PROCEDURE SP_INSERT_RONDA
 //(
@@ -78,11 +81,15 @@ namespace ProyectoMentopoker.Repositories
         {
 
             //Conexión de casa
-            //string connectionString = @"Data Source=DESKTOP-E38C8U3;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
-            
+            string connectionString = @"Data Source=DESKTOP-E38C8U3;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+
+            //Conexión de clase
+            //string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+
+
             // string connectionString = @"Data Source = DESKTOP - E38C8U3\SQLEXPRESS; Initial Catalog = MENTOPOKER; Integrated Security = True";
             //string connectionString = @"Data Source = LOCALHOST\DESARROLLO; Initial Catalog = PROYECTOMENTOPOKER; User ID = sa; Password = MCSD2022";
-             string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+
             // this.cn = new SqlConnection(HelperConfiguartion.GetConnectionString());
             this.cn = new SqlConnection(connectionString);
             this.com = new SqlCommand();
@@ -113,8 +120,8 @@ namespace ProyectoMentopoker.Repositories
 
                 int identificador = int.Parse(this.reader["Identificador"].ToString());
                 int table_id = int.Parse(this.reader["table_id"].ToString());
-                //string id_celda = this.reader["cell_id"].ToString();
-                string id_celda = this.reader["Id_celda"].ToString();
+                string id_celda = this.reader["cell_id"].ToString();
+                //string id_celda = this.reader["Id_celda"].ToString();
                 string background_color = this.reader["background_color"].ToString();
                 string text_color = this.reader["text_color"].ToString();
 
@@ -144,7 +151,7 @@ namespace ProyectoMentopoker.Repositories
 
         public Boolean insertPartida(int[] ids_Jugadas, int[] ids_Rondas, double[] ganancias_Rondas, double[] cantidades_Rondas,
             string[] cell_ids_Jugadas, int[] table_ids_Jugadas, double[] cantidades_Jugadas,
-            Boolean[] seguimiento_jugadas, double dinero_inicial, double dinero_actual)
+            Boolean[] seguimiento_jugadas, double dinero_inicial, double dinero_actual, string comentario, string usuario_id)
         {
             int exito = 0;
             Boolean exitob = false;
@@ -154,6 +161,10 @@ namespace ProyectoMentopoker.Repositories
             this.com.Parameters.Add(pamcashinicial);
             SqlParameter pamcashfinal = new SqlParameter("@CASH_FINAL", dinero_actual);
             this.com.Parameters.Add(pamcashfinal);
+            SqlParameter pamcomentario = new SqlParameter("@COMENTARIOS", comentario);
+            this.com.Parameters.Add(pamcomentario);
+            SqlParameter pamusuarioid = new SqlParameter("@USUARIO_ID", usuario_id);
+            this.com.Parameters.Add(pamusuarioid);
             this.com.CommandType = System.Data.CommandType.StoredProcedure;
             this.com.CommandText = "SP_INSERT_PARTIDA";
 

@@ -1,59 +1,145 @@
-﻿@model IEnumerable<ProyectoMentopoker.Models.Partida>
+﻿@model ConjuntoPartidasUsuario
 
-@{
-    ViewData["Title"] = "PruebaEstadisticas";
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+</head>
+<body>
+
+
+
+
+<h1>Prueba estadísticas</h1>
+
+
+@if (Model != null)
+{
+
+    <h2>Partidas</h2>
+    <table class="table table-info">
+        <thead>
+            <tr>
+                <th>Partida_id</th>
+                <th>Cash_Inicial</th>
+                <th>Cash_Final</th>
+                <th>Fecha</th>
+                <th>Comentarios</th>
+                <th>Usuario_id</th>
+                <th>Rondas</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @for (var i=0; i <  Model.Partidas.Count; i+=1)  
+            {  
+                <tr>  
+                    <td>@Html.DisplayFor(model =>model.Partidas[i].Partida_id)</td>
+                    <td>@Html.DisplayFor(model => model.Partidas[i].Cash_Inicial)</td>
+                    <td>@Html.DisplayFor(model => model.Partidas[i].Cash_Final)</td>
+                    <td>@Html.DisplayFor(model =>model.Partidas[i].Fecha)</td>
+                    <td>@Html.DisplayFor(model => model.Partidas[i].Comentarios)</td>
+                    <td>@Html.DisplayFor(model => model.Partidas[i].Usuario_id)</td>
+                     <td><button class="btn btn-primary my-2" onclick="verRondas(model.Partidas[i].Partida_id)" id="botonRondas">Ver rondas</button></td>
+                </tr>  
+            }  
+
+        </tbody>
+
+    </table>
+
+    <h2>Rondas</h2>
+    <table class="table table-info" id="rondas-table">
+        <thead>
+            <tr>
+                <th>Ronda_id</th>
+              @*  <th>Cantidad_Jugada</th>*@
+                <th>Ganancias</th>
+                <th>Partida_id</th>
+                <th>Jugadas</th>
+                <th>Jugadas</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Rondas.Count; i += 1)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model =>model.Rondas[i].Ronda_id)</td>
+                    @*<td>@Html.DisplayFor(model => model.Rondas[i].Cantidad_Jugada)</td>*@
+                    <td>@Html.DisplayFor(model => model.Rondas[i].Ganancias)</td>
+                    <td>@Html.DisplayFor(model =>model.Rondas[i].Partida_id)</td>
+                    <td><button class="btn btn-primary my-2" onclick="verJugadas()" id="botonJugadas" >Ver jugadas</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2>Jugadas</h2>
+    <table class="table table-info" id="jugadas-table">
+        <thead>
+            <tr>
+                <th>Jugada_id</th>
+               @* <th>Cantidad_Jugada</th>*@
+                <th>Seguimiento_Tabla</th>
+                <th>Identificador</th>
+                <th>Ronda_id</th>
+         
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Jugadas.Count; i += 1)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model =>model.Jugadas[i].Jugada_id)</td>
+                  @*  <td>@Html.DisplayFor(model => model.Jugadas[i].Cantidad_Jugada)</td>*@
+                    <td>@Html.DisplayFor(model => model.Jugadas[i].Seguimiento_Tabla)</td>
+                    <td>@Html.DisplayFor(model =>model.Jugadas[i].Identificador)</td>
+                    <td>@Html.DisplayFor(model => model.Jugadas[i].Ronda_id)</td>
+                       
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
-<h1>View</h1>
+      </body>
+      
+      @section scripts { 
+    <script>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Cash_Inicial)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cash_Final)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Comentarios)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario_id)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cash_Inicial)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cash_Final)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comentarios)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario_id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Partida_id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Partida_id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Partida_id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        function verRondas(partidaid) {
+        alert(partidaid); 
+        alert("Hola");
+
+        //    // Get the partida ID associated with the button
+        //    var partidaId = $("#botonRondas").closest("tr").find("td:first-child").text();
+
+        //    // Filter the list of rondas to only include those with the corresponding partida ID
+        //    var rondas = @Html.Raw(Json.Serialize(Model.Rondas));
+        //    var filteredRondas = rondas.filter(function (ronda) {
+        //        return ronda.Partida_id == partidaId;
+        //    });
+
+        //    // Update the HTML of the rondas table to display the filtered list
+        //    var rows = "";
+        //    $("#rondas-table tbody").empty();
+        //    for (var i = 0; i < filteredRondas.length; i++) {
+        //        rows += "<tr>";
+        //        rows += "<td>" + filteredRondas[i].Ronda_id + "</td>";
+        //        rows += "<td>" + filteredRondas[i].Cantidad_Jugada + "</td>";
+        //        rows += "<td>" + filteredRondas[i].Ganancias + "</td>";
+        //        rows += "<td>" + filteredRondas[i].Partida_id + "</td>";
+        //        rows += "<td><button class=\"btn btn-primary my-2\" onclick=\"verJugadas(event)\">Ver jugadas</button></td>";
+        //        rows += "</tr>";
+        //    }
+        //    $("#rondas-table tbody").html(rows);
+        //}
+        }
+      
+    </script>}

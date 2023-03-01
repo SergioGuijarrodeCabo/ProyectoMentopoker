@@ -5,14 +5,14 @@ namespace ProyectoMentopoker.Models
 {
 
     [Table("Partidas")]
-    public class Partida
+    public class PartidaModel
     {
         [Key]
         [Column("Partida_id")]
         public string Partida_id { get; set; }
-        [Column("Cash_Inicial")]
+        [Column("Cash_inicial")]
         public double Cash_Inicial { get; set; }
-        [Column("Cash_Final")]
+        [Column("Cash_final")]
         public double Cash_Final { get; set; }
         [Column("Fecha")]
         public DateTime Fecha { get; set; }
@@ -21,6 +21,6 @@ namespace ProyectoMentopoker.Models
         [Column("Usuario_id")]
         public string Usuario_id { get; set; }
         
-        //public List<Ronda> Rondas { get; set; }
+       // public List<Ronda> Rondas { get; set; }
     }
 }

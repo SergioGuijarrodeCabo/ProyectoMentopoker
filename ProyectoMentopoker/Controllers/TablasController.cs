@@ -31,9 +31,9 @@ namespace ProyectoMentopoker.Controllers
 
         public IActionResult PruebaEstadisticas()
         {
-            List<Partida> partidas = this.repoStats.GetPartidas();
+            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(1);
 
-            return View(partidas);
+            return View(conjunto);
         }
 
         [HttpPost]
@@ -75,7 +75,7 @@ namespace ProyectoMentopoker.Controllers
         [HttpPost]
         public IActionResult insertarPartida(int[] ids_Jugadas, int[] ids_Rondas, double[] ganancias_Rondas, double[] cantidades_Rondas,
             string[] cell_ids_Jugadas, int[] table_ids_Jugadas, double[] cantidades_Jugadas,
-            Boolean[] seguimiento_jugadas, double dineroInicial, double dineroActual)
+            Boolean[] seguimiento_jugadas, double dineroInicial, double dineroActual, string comentario, string usuario_id)
         {
 
             // Create a JSON object to return as the response
@@ -85,7 +85,7 @@ namespace ProyectoMentopoker.Controllers
                 message = "Partida insertada correctamente"
             };
 
-            this.repoTablas.insertPartida( ids_Jugadas, ids_Rondas, ganancias_Rondas, cantidades_Rondas, cell_ids_Jugadas, table_ids_Jugadas, cantidades_Jugadas, seguimiento_jugadas, dineroInicial, dineroActual);
+            this.repoTablas.insertPartida( ids_Jugadas, ids_Rondas, ganancias_Rondas, cantidades_Rondas, cell_ids_Jugadas, table_ids_Jugadas, cantidades_Jugadas, seguimiento_jugadas, dineroInicial, dineroActual, comentario, usuario_id);
 
             return Json(result);
         }

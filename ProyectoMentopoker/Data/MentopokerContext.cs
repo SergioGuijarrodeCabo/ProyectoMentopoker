@@ -7,6 +7,9 @@ namespace ProyectoMentopoker.Data
     {
         public MentopokerContext(DbContextOptions<MentopokerContext> options) : base(options) {}
 
-        public DbSet<Partida> Partidas { get; set; }
+        public DbSet<PartidaModel> Partidas { get; set; }
+
+        public DbSet<RondaModel> Rondas { get; set; }
+        public DbSet<JugadaModel> Jugadas { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace ProyectoMentopoker.Models
 {
 
     [Table("RONDAS")]
-    public class Ronda
+    public class RondaModel
     {
         [Key]
         [Column("Ronda_id")]
