@@ -292,8 +292,19 @@ namespace ProyectoMentopoker.Repositories
         {
             SqlParameter pamcantidad = new SqlParameter("@CANTIDAD_JUGADA", cantidad_Jugada);
             this.com.Parameters.Add(pamcantidad);
-            SqlParameter pamseguimiento = new SqlParameter("@SEGUIMIENTO_TABLA", seguimiento_jugada);
-            this.com.Parameters.Add(pamseguimiento);
+
+            if(seguimiento_jugada == true)
+            {
+                SqlParameter pamseguimiento = new SqlParameter("@SEGUIMIENTO_TABLA", 1);
+                this.com.Parameters.Add(pamseguimiento);
+            }
+            else
+            {
+                SqlParameter pamseguimiento = new SqlParameter("@SEGUIMIENTO_TABLA", 0);
+                this.com.Parameters.Add(pamseguimiento);
+            }
+
+           
             SqlParameter pamidentificador = new SqlParameter("@IDENTIFICADOR", identificador);
             this.com.Parameters.Add(pamidentificador);
             SqlParameter pamrondaid = new SqlParameter("@RONDA_ID", ronda_id);
