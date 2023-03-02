@@ -81,10 +81,10 @@ namespace ProyectoMentopoker.Repositories
         {
 
             //Conexión de casa
-            string connectionString = @"Data Source=DESKTOP-E38C8U3;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+            //string connectionString = @"Data Source=DESKTOP-E38C8U3;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
 
             //Conexión de clase
-            //string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+            string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
 
 
             // string connectionString = @"Data Source = DESKTOP - E38C8U3\SQLEXPRESS; Initial Catalog = MENTOPOKER; Integrated Security = True";
@@ -120,8 +120,8 @@ namespace ProyectoMentopoker.Repositories
 
                 int identificador = int.Parse(this.reader["Identificador"].ToString());
                 int table_id = int.Parse(this.reader["table_id"].ToString());
-                string id_celda = this.reader["cell_id"].ToString();
-                //string id_celda = this.reader["Id_celda"].ToString();
+                //string id_celda = this.reader["cell_id"].ToString();
+                string id_celda = this.reader["Id_celda"].ToString();
                 string background_color = this.reader["background_color"].ToString();
                 string text_color = this.reader["text_color"].ToString();
 
@@ -303,19 +303,18 @@ namespace ProyectoMentopoker.Repositories
         {
             SqlParameter pamcantidad = new SqlParameter("@CANTIDAD_JUGADA", cantidad_Jugada);
             this.com.Parameters.Add(pamcantidad);
-
+            int seguimiento;
             if(seguimiento_jugada == true)
             {
-                SqlParameter pamseguimiento = new SqlParameter("@SEGUIMIENTO_TABLA", 1);
-                this.com.Parameters.Add(pamseguimiento);
+                seguimiento = 1;
             }
             else
             {
-                SqlParameter pamseguimiento = new SqlParameter("@SEGUIMIENTO_TABLA", 0);
-                this.com.Parameters.Add(pamseguimiento);
+                seguimiento = 0;
             }
+            SqlParameter pamseguimiento = new SqlParameter("@SEGUIMIENTO_TABLA", seguimiento);
+            this.com.Parameters.Add(pamseguimiento);
 
-           
             SqlParameter pamidentificador = new SqlParameter("@IDENTIFICADOR", identificador);
             this.com.Parameters.Add(pamidentificador);
             SqlParameter pamrondaid = new SqlParameter("@RONDA_ID", ronda_id);

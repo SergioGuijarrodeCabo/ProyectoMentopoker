@@ -4,7 +4,7 @@ using ProyectoMentopoker.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 string connectionString =
-    builder.Configuration.GetConnectionString("SqlMentopokerCasa");
+    builder.Configuration.GetConnectionString("SqlMentopokerClase");
 
 
 builder.Services.AddTransient<RepositoryEstadisticas>();
