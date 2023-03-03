@@ -16,20 +16,33 @@
     <!-- Bootstrap core CSS -->
          <link href="~/css/bootstrap.min.css" rel="stylesheet">
          <link href="~/css/NavBar.css" rel="stylesheet">
-
+        
 
 
 
 
     
     <!-- Custom styles for this template -->
-    <link href="~/css/navbar-top-fixed.css" rel="stylesheet">
+    @*<link href="~/css/navbar-top-fixed.css" rel="stylesheet">*@
+
   </head>
   <body>
-    
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Fixed navbar</a>
+
+
+    <style>
+        .body-background{
+        background-image: url('/images/wave.svg');
+                background-color:  #71C549;
+        padding: 100px 5% 600px 5%;
+
+        }
+       
+
+     </style>
+  
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark nav-background">
+  <div class="container-fluid div-background">
+    <a class="navbar-brand" ><img src="~/images/logo.png" style="height:15%; width:15%;"/></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -43,22 +56,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Tablas" asp-action="Index">Tablas</a>
                         </li>
+                             <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="PartidaConTabla" asp-action="JugaPartidaConTabla">Partida</a>
+                        </li>
 
            </ul>
 
 
 
-      <form class="d-flex">
+     @* <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </form>*@
     </div>
   </div>
 </nav>
 
 
-<main class="container">
-  <div class="bg-light p-5 rounded">
+<main class="body-background">
+  <div class="bg-light p-3">
       @RenderBody()
 
 
@@ -76,6 +92,7 @@
       
     @RenderSection("scripts", false)
   </body>
+
 </html>
 
 
