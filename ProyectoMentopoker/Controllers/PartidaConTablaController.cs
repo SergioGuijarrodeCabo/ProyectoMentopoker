@@ -9,22 +9,21 @@ namespace ProyectoMentopoker.Controllers
     {
 
         private RepositoryTablas repoTablas;
-        private RepositoryEstadisticas repoStats;
 
-        public PartidaConTablaController(RepositoryEstadisticas repoStats)
+        public PartidaConTablaController()
         {
             this.repoTablas = new RepositoryTablas();
-            this.repoStats = repoStats;
+
         }
 
-        public IActionResult JugarPartidaConTabla()
+        public IActionResult Jugar()
         {
 
             return View();
         }
 
         [HttpPost]
-        public List<Celda> JugarPartidaConTabla(int id)
+        public List<Celda> Jugar(int id)
         {
 
             List<Celda> tabla = this.repoTablas.GetTabla(id);

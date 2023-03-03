@@ -36,6 +36,10 @@
         padding: 100px 5% 600px 5%;
 
         }
+        body .body-background .bg-light.colorfondo {
+            background-color: transparent !important;
+        }
+ 
        
 
      </style>
@@ -57,7 +61,7 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Tablas" asp-action="Index">Tablas</a>
                         </li>
                              <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="PartidaConTabla" asp-action="JugaPartidaConTabla">Partida</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="PartidaConTabla" asp-action="Jugar">Partida</a>
                         </li>
 
            </ul>
@@ -74,14 +78,12 @@
 
 
 <main class="body-background">
-  <div class="bg-light p-3">
-      @RenderBody()
-
-
-
-   <p>Pie de página</p>
+  <div class="bg-light p-3 colorfondo">
+    @RenderBody()
+    <p>Pie de página</p>
   </div>
 </main>
+
 
     
 

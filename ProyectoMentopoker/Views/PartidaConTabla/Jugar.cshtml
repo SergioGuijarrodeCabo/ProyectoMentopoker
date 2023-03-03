@@ -28,13 +28,34 @@
     <!-- Custom styles for this template -->
     <link href="~/css/navbar-top-fixed.css" rel="stylesheet">
 </head>
-<body class="fondo-color">
+<body >
 
     
     <style>
-        container{  
-        background-color:  #71C549;
+        /*.body{  
+        background-color:  transparent;
         }
+        .container{
+
+            background-color: #212529;
+        }
+*/
+
+    /*.container > .row > .col {
+      background-color: #212529 !important;
+    }
+
+    .container {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+*/
+.container {
+  background-color: transparent !important;
+}
+
+.container > div {
+  background-color: #212529 !important;
+}
        
 
      </style>
@@ -1627,12 +1648,12 @@
 
 
                 $.ajax({
-                    url: '/Tablas/JugarPartidaConTabla?id=' + id,
+                    url: '/PartidaConTabla/Jugar?id=' + id,
                     type: 'POST',
                     async: false,
                     //data: datos,
                     success: function (data) {
-                        // alert(data);
+                       
                         var tabla = document.getElementById("tabla");
                         var z = 0;
                         var html = "";
@@ -1753,6 +1774,7 @@
 
 
 </html>
+
 
 
 
