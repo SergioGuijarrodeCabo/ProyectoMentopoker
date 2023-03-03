@@ -3,6 +3,8 @@
     var y = 1;
 
     var id = 0;
+    var usuario_id = Context.Session.GetString("ID");
+    var email = Context.Session.GetString("EMAIL");
 }
 
 
@@ -1078,7 +1080,9 @@
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <h1 class="fw-light">PARTIDA</h1>
-
+                    @if(usuario_id !=null && email !=null){
+                    <h2 id="userId">Id: @usuario_id</h2>
+                    <h2 id="email">Usuario: @email</h2>}
                     <a class="btn btn-primary my-2" onclick="this.style.display='none';" id="botonInicio">Iniciar partida</a>
                     <a class="btn btn-primary my-2" onclick="finalizarPartida()" id="botonFinal" style="display:none;">Finalizar partida</a>
                    
@@ -1157,6 +1161,7 @@
         var cantidades_Jugadas = [];
         var seguimiento_Jugadas = [];
         var comentario ="";
+         //var usuario_id = Context.Session.GetString("ID");
         var usuario_id=1;
 
      $(document).ready(function () {
@@ -1394,13 +1399,15 @@
 
         function jugarMano() {
             
-
             if (manoJugada == 1) {
+              
+               
                     // get the value of the input field
-                var cantidadApostada = parseDouble($("#inputCantidad" + idRondaActual + "j" + idJugadaActual).val());
+                var cantidadApostada = parseFloat($("#inputCantidad" + idRondaActual + "j" + idJugadaActual).val());
+                 
                 cantidadTotalRonda += cantidadApostada;
                 if (cantidadTotalRonda < dineroActual) {
-
+                    
                     // retrieve the values from the checked boxes
                     var partidaSi = $("#flexRadioDefaultSi").prop("checked");
                     var partidaNo = $("#flexRadioDefaultNo").prop("checked");
@@ -1487,8 +1494,8 @@
                 ////var nuevoBalance = parseInt(nuevoDineroActual) - parseInt(dineroInicial) ;
 
                 // Calculate the new dineroActual and balance values
-                dineroActual = parseDouble(dineroActual) + parseDouble(cantidadTotalUltimaRonda);
-                balance = parseDouble(dineroActual) - parseDouble(dineroInicial);
+                dineroActual = parseFloat(dineroActual) + parseFloat(cantidadTotalUltimaRonda);
+                balance = parseFloat(dineroActual) - parseFloat(dineroInicial);
 
 
                 ids_Rondas.push(idRondaActual);
@@ -1530,6 +1537,9 @@
 
         function finalizarPartida() {
             
+            usuario_id =  $('#userId').text().match(/\d+/)[0];
+            // alert(usuario_id);
+
             comentario = prompt("Introduzca algún comentario sobre la partida");
 
             $.ajax({

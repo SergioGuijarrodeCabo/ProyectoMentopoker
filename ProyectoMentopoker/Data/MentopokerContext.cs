@@ -11,5 +11,6 @@ namespace ProyectoMentopoker.Data
 
         public DbSet<RondaModel> Rondas { get; set; }
         public DbSet<JugadaModel> Jugadas { get; set; }
+        public DbSet<UsuarioModel> Usuarios { get; set; }
     }
 }

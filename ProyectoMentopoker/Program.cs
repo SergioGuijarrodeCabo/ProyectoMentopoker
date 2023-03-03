@@ -9,6 +9,10 @@ string connectionString =
 
 builder.Services.AddTransient<RepositoryEstadisticas>();
 
+builder.Services.AddTransient<RepositoryLogin>();
+
+
+
 
 
 builder.Services.AddDbContext<MentopokerContext>
@@ -17,7 +21,13 @@ builder.Services.AddDbContext<MentopokerContext>
 //builder.Services.AddDbContext<MentopokerContext>
 //    (options => options.UseSqlServer(@"Data Source=DESKTOP-E38C8U3;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";));
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
 
+builder.Services.AddAntiforgery();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -38,9 +48,10 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Index}/{id?}");
 
 app.Run();

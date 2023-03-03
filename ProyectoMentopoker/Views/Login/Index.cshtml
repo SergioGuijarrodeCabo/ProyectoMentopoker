@@ -1,0 +1,11 @@
+﻿<h1>Log in user</h1>
+
+<form method="post">
+     @Html.AntiForgeryToken()
+    <label>Usuario</label>
+    <input type="text" name="email" class="form-control"/>
+    <label>Pass</label>
+    <input type="text" name="password" class="form-control"/>
+    <button>Log in</button>
+</form>
+<h1 style="color:red">@ViewData["MENSAJE"]</h1>
