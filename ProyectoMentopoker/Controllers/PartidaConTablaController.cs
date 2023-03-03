@@ -30,6 +30,9 @@ namespace ProyectoMentopoker.Controllers
             return tabla;
         }
 
+      
+
+
 
         public IActionResult insertarPartida()
         {
@@ -38,7 +41,7 @@ namespace ProyectoMentopoker.Controllers
         }
 
         [HttpPost]
-        public IActionResult insertarPartida(int[] ids_Jugadas, int[] ids_Rondas, double[] ganancias_Rondas, double[] cantidades_Rondas,
+        public IActionResult insertar(int[] ids_Jugadas, int[] ids_Rondas, double[] ganancias_Rondas, double[] cantidades_Rondas,
             string[] cell_ids_Jugadas, int[] table_ids_Jugadas, double[] cantidades_Jugadas,
             Boolean[] seguimiento_jugadas, double dineroInicial, double dineroActual, string comentario, string usuario_id)
         {
