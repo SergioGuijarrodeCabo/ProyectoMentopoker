@@ -1331,7 +1331,7 @@
             } else {
                 $('.nueva-jugada').remove();
                 // $('.nueva-jugada').hide();
-
+                rondaAMedias = 0;
                 rondaJugada = 0;
                 $("#botonInicio").trigger("click");
                 if (idRondaActual > 0) {
@@ -1490,7 +1490,7 @@
                     jugadaFinalizada = 1;
                     manoJugada = 0;
                     rondaJugada = 1;
-                      rondaAMedias = 1;
+                      
 
 
 
@@ -1569,8 +1569,8 @@
                 cantidadTotalRonda = 0;
                 cantidadTotalUltimaRonda = 0;
                 ultimaMano = "";
-                rondaAMedias = 0;
-
+               
+                rondaAMedias = 1;
 
                   $("#tabla td").css("opacity", "1");
             } else {
@@ -1726,10 +1726,11 @@
                 });
 
                 
-                if (rondaAMedias == 1) {
+                if (rondaAMedias == 0 && ultimaMano!="") {
                     $("#tabla td").css("opacity", "0.2");
                     $("#" + ultimaMano).css("opacity", "1");
                 } 
+               
             } else {
                 // alert("hola");
 
