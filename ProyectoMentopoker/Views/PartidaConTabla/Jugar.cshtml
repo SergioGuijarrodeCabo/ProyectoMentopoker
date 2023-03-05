@@ -1417,6 +1417,9 @@
             //alert(table_id);
 
 
+            
+            if(ultimaMano!=cell_id && rondaAMedias==1){
+            alert("No puede seleccionar distinta mano en la misma ronda")}else{
 
             // Select the dynamically generated div using its ID
             //var $dJugadasPintadas = $('#dJugadasPintadas' + idRondaActual);
@@ -1433,7 +1436,7 @@
 
             if (rondaAMedias == 0) { 
               $("#tabla td").css("opacity", "0.2");
-              $("#" + ultimaMano).css("opacity", "1");}
+              $("#" + ultimaMano).css("opacity", "1");}}
         };
 
        
@@ -1441,15 +1444,21 @@
 
         function jugarMano() {
             
-            if (manoJugada == 1) {
+            if (manoJugada == 1 || rondaAMedias==1) {
                 
-              $("#tabla td").css("opacity", "0.2");
-               $("#" + ultimaMano).css("opacity", "1");
-                    // get the value of the input field
-                var cantidadApostada = parseFloat($("#inputCantidad" + idRondaActual + "j" + idJugadaActual).val());
+               var cantidadApostada = parseFloat($("#inputCantidad" + idRondaActual + "j" + idJugadaActual).val());
+                 var cantidadMaxima = cantidadTotalRonda + cantidadApostada;
+               
+
+                
+                if (cantidadMaxima <= dineroActual) {
+
+                    $("#tabla td").css("opacity", "0.2");
+                   $("#" + ultimaMano).css("opacity", "1");
+                        // get the value of the input field
+                    //var cantidadApostada = parseFloat($("#inputCantidad" + idRondaActual + "j" + idJugadaActual).val());
                  
-                cantidadTotalRonda += cantidadApostada;
-                if (cantidadTotalRonda < dineroActual) {
+                    cantidadTotalRonda += cantidadApostada;
                     
                     // retrieve the values from the checked boxes
                     var partidaSi = $("#flexRadioDefaultSi").prop("checked");
@@ -1490,7 +1499,7 @@
                     jugadaFinalizada = 1;
                     manoJugada = 0;
                     rondaJugada = 1;
-                      
+                    rondaAMedias = 1;
 
 
 
@@ -1513,7 +1522,8 @@
 
                     ////alert(cantidad+" "+ hasPartida);
                 } else {
-                    alert("Dinero insuficiente. La cantidad máxima para jugar es de " + dineroActual+"$");
+                    var dineroMaximo = dineroActual - cantidadTotalRonda;
+                    alert("Dinero insuficiente. La cantidad máxima para jugar es de " + dineroMaximo+"$");
 
                 }
 
@@ -1570,7 +1580,7 @@
                 cantidadTotalUltimaRonda = 0;
                 ultimaMano = "";
                
-                rondaAMedias = 1;
+
 
                   $("#tabla td").css("opacity", "1");
             } else {
@@ -1726,10 +1736,11 @@
                 });
 
                 
-                if (rondaAMedias == 0 && ultimaMano!="") {
+                if (rondaAMedias == 1 && ultimaMano!="") {
                     $("#tabla td").css("opacity", "0.2");
                     $("#" + ultimaMano).css("opacity", "1");
                 } 
+
                
             } else {
                 // alert("hola");
