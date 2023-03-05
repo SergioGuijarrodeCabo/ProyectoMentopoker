@@ -59,11 +59,11 @@
         <thead>
             <tr>
                 <th>Ronda_id</th>
-              @*  <th>Cantidad_Jugada</th>*@
+               <th>Cantidad_Jugada</th>
                 <th>Ganancias</th>
                 <th>Partida_id</th>
                 <th>Jugadas</th>
-                <th>Jugadas</th>
+             
             </tr>
         </thead>
         <tbody>
@@ -71,7 +71,7 @@
             {
                 <tr>
                     <td>@Html.DisplayFor(model =>model.Rondas[i].Ronda_id)</td>
-                    @*<td>@Html.DisplayFor(model => model.Rondas[i].Cantidad_Jugada)</td>*@
+                    <td>@Html.DisplayFor(model => model.Rondas[i].Cantidad_jugada)</td>
                     <td>@Html.DisplayFor(model => model.Rondas[i].Ganancias)</td>
                     <td>@Html.DisplayFor(model =>model.Rondas[i].Partida_id)</td>
                     <td><button class="btn btn-primary my-2" onclick="verJugadas()" id="botonJugadas" >Ver jugadas</button></td>
@@ -85,7 +85,7 @@
         <thead>
             <tr>
                 <th>Jugada_id</th>
-               @* <th>Cantidad_Jugada</th>*@
+               <th>Cantidad_Jugada</th>
                 <th>Seguimiento_Tabla</th>
                 <th>Identificador</th>
                 <th>Ronda_id</th>
@@ -97,7 +97,7 @@
             {
                 <tr>
                     <td>@Html.DisplayFor(model =>model.Jugadas[i].Jugada_id)</td>
-                  @*  <td>@Html.DisplayFor(model => model.Jugadas[i].Cantidad_Jugada)</td>*@
+                    <td>@Html.DisplayFor(model => model.Jugadas[i].Cantidad_jugada)</td>
                     <td>@Html.DisplayFor(model => model.Jugadas[i].Seguimiento_Tabla)</td>
                     <td>@Html.DisplayFor(model =>model.Jugadas[i].Identificador)</td>
                     <td>@Html.DisplayFor(model => model.Jugadas[i].Ronda_id)</td>
