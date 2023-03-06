@@ -127,7 +127,7 @@ namespace ProyectoMentopoker.Repositories
             EstadisticasPartidas stats = new EstadisticasPartidas();
 
 
-            List<double> rentabilidades = new List<double>();
+            double rentabilidades = 0;
 
             double medias = 0 ;
             for (int i = 0; i<partidas.Partidas.Count; i++)
@@ -136,17 +136,15 @@ namespace ProyectoMentopoker.Repositories
                 stats.CashInicialPartidas += partidas.Partidas[i].Cash_Inicial;
                 stats.CashFinalPartidas += partidas.Partidas[i].Cash_Final;
                 medias+=(partidas.Partidas[i].Cash_Final - partidas.Partidas[i].Cash_Inicial);
-                rentabilidades.Add(((partidas.Partidas[i].Cash_Final - partidas.Partidas[i].Cash_Inicial) / partidas.Partidas[i].Cash_Inicial)*100);
+                rentabilidades+=((partidas.Partidas[i].Cash_Final - partidas.Partidas[i].Cash_Inicial) / partidas.Partidas[i].Cash_Inicial *100);
                 
             }
 
             stats.MediaGananciasPartidas = medias / partidas.Partidas.Count;
             
-            for (int i = 0; i < rentabilidades.Count; i++)
-            {
-                stats.RentabilidadPartidas += rentabilidades[i];
-            }
-            stats.RentabilidadPartidas = stats.RentabilidadPartidas / partidas.Partidas.Count;
+            
+
+            stats.RentabilidadPartidas = rentabilidades / partidas.Partidas.Count;
 
 
 

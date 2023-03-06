@@ -37,21 +37,23 @@
     </style>
 
     <div class="container">
-        <form method="POST">
+        
+        
+
+        <form method="POST" style="display:none;">
 
             <input type="date" name="fecha">
-
-
-            <button>VER</button>
+            <button onclick="mostrarPartidas()">VER</button>
         </form>
+        <br />
 
         @if (Model != null)
         {
-            <h2 style="color:white;">Ganancias partidas acumuladas: @Math.Round(Model.Estadisticas.GananciasPartidasAcumuladas, 2)$</h2>
-            <h2 style="color:white;">Cash inicial partidas: @Math.Round(Model.Estadisticas.CashInicialPartidas, 2)$</h2>
-            <h2 style="color:white;">Cash final partidas: @Math.Round(Model.Estadisticas.CashFinalPartidas, 2)$</h2>
-            <h2 style="color:white;">Media ganancias partidas: @Math.Round(Model.Estadisticas.MediaGananciasPartidas,2)$</h2>
-            <h2 style="color:white;">Rentabilidad partidas: @Math.Round(Model.Estadisticas.RentabilidadPartidas,2) %</h2>
+            <h3 style="color:white;">Ganancias partidas acumuladas: @Math.Round(Model.Estadisticas.GananciasPartidasAcumuladas, 2)$</h3>
+            <h3 style="color:white;">Cash inicial partidas: @Math.Round(Model.Estadisticas.CashInicialPartidas, 2)$</h3>
+            <h3 style="color:white;">Cash final partidas: @Math.Round(Model.Estadisticas.CashFinalPartidas, 2)$</h3>
+            <h3 style="color:white;">Media ganancias partidas: @Math.Round(Model.Estadisticas.MediaGananciasPartidas,2)$</h3>
+            <h3 style="color:white;">Rentabilidad partidas: @Math.Round(Model.Estadisticas.RentabilidadPartidas,2) %</h3>
         }
 
 
@@ -64,7 +66,7 @@
             
             <h2>Partidas</h2>
             <div class="table-wrapper">
-            <table class="table table-info table-wrapper">
+            <table class="table table-info table-wrapper" >
                 <thead>
                     <tr>
                         <th>Partida_id</th>
@@ -97,7 +99,7 @@
             </div>
             <h2>Rondas</h2>
             <div class="table-wrapper">
-            <table class="table table-info table-wrapper" id="rondas-table">
+                <table class="table table-info table-wrapper" id="rondas-table" style="display:none;">
                 <thead>
                     <tr>
                         <th>Ronda_id</th>
@@ -128,7 +130,7 @@
             
             <h2>Jugadas</h2>
             <div class="table-wrapper">
-            <table class="table table-info " id="jugadas-table">
+                <table class="table table-info " id="jugadas-table" style="display:none;">
                 <thead>
                     <tr>
                         <th>Jugada_id</th>
@@ -174,8 +176,16 @@
 @section scripts { 
     <script>
 
+        function mostrarPartidas(){
+            document.getElementById('rondas-table').style.display = "none";
+            document.getElementById('jugadas-table').style.display = "none";
+        }
+
         function verRondas(partidaId) {
             // Hide all rows in the rondas table
+
+            document.getElementById('rondas-table').style.display = "inline";
+
             $('#rondas-table tbody tr').hide();
 
             // Show only the rows associated with the selected partida
@@ -184,6 +194,8 @@
 
         function verJugadas(rondaId) {
             // Hide all rows in the jugadas table
+            document.getElementById('jugadas-table').style.display = "inline";
+ 
             $('#jugadas-table tbody tr').hide();
 
             // Show only the rows associated with the selected ronda
