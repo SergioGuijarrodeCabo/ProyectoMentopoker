@@ -151,38 +151,8 @@ namespace ProyectoMentopoker.Repositories
             return stats;
         }
 
-        //public EstadisticasPartidas GetEstadisticas(int Usuario_id, DateTime fecha)
-        //{
-        //    EstadisticasPartidas stats = new EstadisticasPartidas();
+        }
 
-        //    ConjuntoPartidasUsuario partidas = this.GetPartidas(Usuario_id, fecha);
-
-        //    List<double> rentabilidades = new List<double>();
-
-        //    double medias = 0;
-        //    for (int i = 0; i < partidas.Partidas.Count; i++)
-        //    {
-        //        stats.GananciasPartidasAcumuladas += Math.Round((partidas.Partidas[i].Cash_Final - partidas.Partidas[i].Cash_Inicial), 2);
-        //        stats.CashInicialPartidas += Math.Round(partidas.Partidas[i].Cash_Inicial, 2);
-        //        stats.CashFinalPartidas += Math.Round(partidas.Partidas[i].Cash_Final, 2);
-        //        medias += (partidas.Partidas[i].Cash_Final - partidas.Partidas[i].Cash_Inicial);
-        //        rentabilidades.Add(((partidas.Partidas[i].Cash_Final - partidas.Partidas[i].Cash_Inicial) / partidas.Partidas[i].Cash_Inicial) * 100);
-
-        //    }
-
-        //    stats.MediaGananciasPartidas = Math.Round((medias / partidas.Partidas.Count), 2);
-
-        //    for (int i = 0; i < rentabilidades.Count; i++)
-        //    {
-        //        stats.RentabilidadPartidas += rentabilidades[i];
-        //    }
-        //    stats.RentabilidadPartidas = Math.Round((stats.MediaGananciasPartidas / rentabilidades.Count), 2);
-
-
-
-        //    return stats;
-        //}
-
-    }
+        
 }
 
