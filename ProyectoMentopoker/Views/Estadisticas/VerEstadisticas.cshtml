@@ -1,0 +1,69 @@
+﻿@model EstadisticasPartidas
+
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/NavBar.css" rel="stylesheet">
+
+
+
+
+      
+        <div class="container" id="encabezado" style="text-align:center">
+   
+     <
+
+    <!-- Custom styles for this template -->
+    <link href="~/css/navbar-top-fixed.css" rel="stylesheet">
+</head>
+<body>
+    <style>
+
+        .container {
+            background-color: transparent !important;
+        }
+
+            .container > div {
+                background-color: #212529 !important;
+            }
+    </style>
+
+    <div class="container">
+        <form method="POST">
+
+            <input type="date" name="fecha">
+
+
+            <button>VER</button>
+        </form>
+        <br />
+        @if (Model != null)
+        {
+            <h1 style="color:white;">Ganancias partidas acumuladas: @Math.Round(Model.GananciasPartidasAcumuladas, 2)$</h1>
+            <h1 style="color:white;">Cash inicial partidas: @Math.Round(Model.CashInicialPartidas, 2)$</h1>
+            <h1 style="color:white;">Cash final partidas: @Math.Round(Model.CashFinalPartidas, 2)$</h1>
+            <h1 style="color:white;">Media ganancias partidas: @Math.Round(Model.MediaGananciasPartidas,2)$</h1>
+            <h1 style="color:white;">Rentabilidad partidas: @Math.Round(Model.RentabilidadPartidas,2) %</h1>
+        }
+
+
+
+    </div>
+</body>
+
+
+
+
+
+@section scripts { 
+
+
+    <script>
+
+    </script>
+}
+
+            </html>

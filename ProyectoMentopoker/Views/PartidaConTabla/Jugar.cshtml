@@ -32,30 +32,18 @@
 
     
     <style>
-        /*.body{  
-        background-color:  transparent;
-        }
-        .container{
+      
 
-            background-color: #212529;
-        }
-*/
+   
 
-    /*.container > .row > .col {
-      background-color: #212529 !important;
-    }
 
     .container {
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-*/
-.container {
-  background-color: transparent !important;
-}
+        background-color: transparent !important;
+    }
 
-.container > div {
-  background-color: #212529 !important;
-}
+    .container > div {
+        background-color: #212529 !important;
+    }
        
 
      </style>
@@ -1108,22 +1096,22 @@
     <div id="divPartida" class="container">
 
          
-        <section class="py-5 text-center container" style="margin-top: 0;">
-            <div class="row py-lg-5">
+        <section class="text-center container" style="margin-top: 0; margin-bottom: 0;">
+            <div class="row">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1  style="color:white" >PARTIDA</h1>
+                    @*<h1 style="color:white">PARTIDA</h1>*@
                     @if(usuario_id !=null && email !=null){
-                    <h2 id="userId" style="color:white;">Id: @usuario_id</h2>
-                    <h2 id="email" style="color:white">Usuario: @email</h2>}else{
-                    <h2 id="userId" style="display:hidden;">Id: 1</h2>
-                    <h2 id="email" style="display:hidden;">Usuario: "admin"</h2>
+                    <h2 id="userId" style="color:white; display:none">Id: @usuario_id</h2>
+                    <h2 id="email" style="color:white; display:none;">Usuario: @email</h2>}else{
+                    <h2 id="userId" style="display:none;">Id: 1</h2>
+                    <h2 id="email" style="display:none;">Usuario: "admin"</h2>
                     }
                     <a class="btn btn-primary my-2" onclick="this.style.display='none';" id="botonInicio">Iniciar partida</a>
                     <a class="btn btn-primary my-2" onclick="finalizarPartida()" id="botonFinal" style="display:none;">Finalizar partida</a>
-                   
                 </div>
             </div>
         </section>
+
 
 
 
@@ -1251,7 +1239,16 @@
 
 
                 if (inicio == 0) {
-                    dineroInicial = prompt("Introduzca la cantidad inicial con la que va a jugar");
+
+
+                    dineroInicial = null;
+
+                    do {
+                      dineroInicial = prompt("Introduzca la cantidad inicial con la que va a jugar");
+                    } while (dineroInicial === "" || isNaN(dineroInicial));
+
+
+
                     dineroActual = dineroInicial;
 
 
@@ -1538,7 +1535,13 @@
         function finalizarRonda() {
 
             if (rondaJugada == 1) {
-                cantidadTotalUltimaRonda = prompt("Introduzca sus ganancias o pérdidas (en negativo) de la última ronda");
+                
+                cantidadTotalUltimaRonda = null;
+
+            do {
+              cantidadTotalUltimaRonda = prompt("Introduzca sus ganancias o pérdidas (en negativo) de la última ronda");
+            } while (cantidadTotalUltimaRonda === "" || isNaN(cantidadTotalUltimaRonda));
+
 
 
 

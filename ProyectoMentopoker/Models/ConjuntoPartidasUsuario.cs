@@ -6,5 +6,8 @@
         public List<RondaModel> Rondas { get;set;}
         public List<JugadaModel> Jugadas { get; set; }
 
+        public EstadisticasPartidas Estadisticas { get; set; }
+
+
     }
 }
