@@ -35,6 +35,19 @@
             overflow-y: auto;
         }
 
+
+
+        #chart-line {
+          transform: scale(0.75);
+        }
+        .card {
+          max-width: 50%;
+            background-color: transparent !important;
+        }
+
+        .card-body {
+            height: auto;
+        }
         
     </style>
 
@@ -52,9 +65,54 @@
 
          @if (Model != null)
         {
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+
+                        <div class="card">
+                            <div class="card-header">Pie chart</div>
+                            <div class="card-body">
+                                <canvas id="chart-lineSeguimiento" class="chartjs-render-monitor"></canvas>
+                            </div>
+                        </div>
+                   
+                    </div>
+                    <div class="col">
+
+                        <div class="card">
+                            <div class="card-header">Pie chart</div>
+                            <div class="card-body">
+                                <canvas id="chart-linePrueba" class="chartjs-render-monitor"></canvas>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-        <div class="page-content page-container" id="page-content">
+           @*Segunda versión de pie chart
+               <div class="page-content page-container" id="page-content1">
+                <div class="padding">
+                    <div class="row">
+                        <div class="container-fluid d-flex justify-content-center">
+                            <div class="col-sm-8 col-md-6">
+                                <div class="card" style="max-width: 50%;">
+                                    <div class="card-header">Pie chart</div>
+                                    <div class="card-body">
+                                        <canvas id="chart-lineSeguimiento" width="299" height="200" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px; transform: scale(1);"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+            
+
+
+        @*Primera versión de pie chart
+            <div class="page-content page-container" id="page-content">
             <div class="padding">
                 <div class="row">
                     <div class="container-fluid d-flex justify-content-center">
@@ -76,7 +134,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
        
 
 
@@ -140,11 +198,11 @@
 
     <script>
         $(document).ready(function () {
-            var ctx = $("#chart-line");
+            var ctx = $("#chart-lineSeguimiento");
             var myLineChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: ["Seguimiento_Tabla: true", "Seguimiento_Tabla: false"],
+                    labels: ["Seguimiento tabla: true", "Seguimiento tabla: false"],
                     datasets: [{
                         data: [
         @if (Model != null)
@@ -165,7 +223,7 @@
             @Html.Raw(seguimientoTrueCount + "," + seguimientoFalseCount)
         }
                                 ],
-                        backgroundColor: ["rgba(255, 0, 0, 0.2)", "rgba(0, 255, 0, 0.2)"]
+                        backgroundColor: ["rgba(0, 255, 0, 0.2)", "rgba(255, 0, 0, 0.2)"]
                     }]
                 },
                 options: {
