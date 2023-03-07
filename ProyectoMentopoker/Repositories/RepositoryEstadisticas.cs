@@ -25,6 +25,18 @@ using Microsoft.Data.SqlClient;
 
 
 
+//CREATE OR ALTER PROCEDURE GET_IDSTABLAS_JUGADAS
+//(@Identificador INT)
+//AS
+
+//SELECT C.Cell_id, C.Table_id, T.Condicion, J.Cantidad_jugada, J.Seguimiento_Tabla, J.Ronda_id, J.Jugada_Id
+//FROM Celdas C
+//INNER JOIN Tablas T ON C.Table_id = T.Table_id
+//INNER JOIN Jugadas J ON J.Identificador = C.Identificador
+//WHERE C.Identificador = @Identificador
+
+
+
 
 
 #endregion
@@ -43,7 +55,7 @@ namespace ProyectoMentopoker.Repositories
         }
 
 
-        public ConjuntoPartidasUsuario GetPartidas(int Usuario_id, DateTime? fecha = null)
+        public ConjuntoPartidasUsuario GetPartidas(int Usuario_id, string peticion, DateTime? fecha = null)
         {
             //string sql = "SP_GET_PARTIDAS";
             //var consulta = this.context.Partidas.FromSqlRaw(sql);
@@ -85,8 +97,18 @@ namespace ProyectoMentopoker.Repositories
 
             conjunto.Partidas = partidas;
             conjunto.Rondas = rondas;
-            conjunto.Jugadas = jugadas;          
-            conjunto.Estadisticas =  this.GetEstadisticas(conjunto);
+            conjunto.Jugadas = jugadas;
+
+            if (peticion == "partidas")
+            {
+                conjunto.EstadisticasPartidas = this.GetEstadisticasPartidas(conjunto);
+            }
+            if (peticion == "jugadas")
+            {
+                conjunto.EstadisticasJugadas = this.GetEstadisticasJugadas(conjunto);
+
+            }
+
 
 
 
@@ -122,7 +144,7 @@ namespace ProyectoMentopoker.Repositories
             return jugadas;
         }
 
-        public EstadisticasPartidas GetEstadisticas(ConjuntoPartidasUsuario partidas)
+        public EstadisticasPartidas GetEstadisticasPartidas(ConjuntoPartidasUsuario partidas)
         {
             EstadisticasPartidas stats = new EstadisticasPartidas();
 
@@ -151,8 +173,28 @@ namespace ProyectoMentopoker.Repositories
             return stats;
         }
 
-        }
 
+
+        public EstadisticasJugadas GetEstadisticasJugadas(ConjuntoPartidasUsuario partidas)
+        {
+            EstadisticasJugadas stats = new EstadisticasJugadas();
+            
+            List <JugadasCalculadasModel> jugadas = new List<JugadasCalculadasModel>();
+            for(int i = 0; i < partidas.Jugadas.Count; i++)
+            {
+                var parameter = new SqlParameter("@Identificador", partidas.Jugadas[i].Identificador);
+
+                string sql = "EXECUTE GET_IDSTABLAS_JUGADAS @Identificador";
+                 jugadas.Add(this.context.JugadasCalculadas.FromSqlRaw(sql, parameter).AsEnumerable().First());
+
+            }
+            stats.Jugadas = jugadas;
+
+            return stats;
+        }
+    }
+
+     
         
 }
 

@@ -40,7 +40,7 @@
         
         
 
-        <form method="POST" style="display:none;">
+        <form method="POST" >
 
             <input type="date" name="fecha">
             <button onclick="mostrarPartidas()">VER</button>
@@ -49,11 +49,11 @@
 
         @if (Model != null)
         {
-            <h3 style="color:white;">Ganancias partidas acumuladas: @Math.Round(Model.Estadisticas.GananciasPartidasAcumuladas, 2)$</h3>
-            <h3 style="color:white;">Cash inicial partidas: @Math.Round(Model.Estadisticas.CashInicialPartidas, 2)$</h3>
-            <h3 style="color:white;">Cash final partidas: @Math.Round(Model.Estadisticas.CashFinalPartidas, 2)$</h3>
-            <h3 style="color:white;">Media ganancias partidas: @Math.Round(Model.Estadisticas.MediaGananciasPartidas,2)$</h3>
-            <h3 style="color:white;">Rentabilidad partidas: @Math.Round(Model.Estadisticas.RentabilidadPartidas,2) %</h3>
+            <h3 style="color:white;">Ganancias partidas acumuladas: @Math.Round(Model.EstadisticasPartidas.GananciasPartidasAcumuladas, 2)$</h3>
+            <h3 style="color:white;">Cash inicial partidas: @Math.Round(Model.EstadisticasPartidas.CashInicialPartidas, 2)$</h3>
+            <h3 style="color:white;">Cash final partidas: @Math.Round(Model.EstadisticasPartidas.CashFinalPartidas, 2)$</h3>
+            <h3 style="color:white;">Media ganancias partidas: @Math.Round(Model.EstadisticasPartidas.MediaGananciasPartidas,2)$</h3>
+            <h3 style="color:white;">Rentabilidad partidas: @Math.Round(Model.EstadisticasPartidas.RentabilidadPartidas,2) %</h3>
         }
 
 

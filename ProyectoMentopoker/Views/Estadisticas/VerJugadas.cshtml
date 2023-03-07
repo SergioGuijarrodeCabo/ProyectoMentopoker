@@ -1,0 +1,203 @@
+﻿@model ConjuntoPartidasUsuario
+
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/NavBar.css" rel="stylesheet">
+
+
+
+
+
+    <div class="container" id="encabezado" style="text-align:center">
+
+        <
+
+        <!-- Custom styles for this template -->
+        <link href="~/css/navbar-top-fixed.css" rel="stylesheet">
+</head>
+<body>
+    <style>
+
+        .container {
+            background-color: transparent !important;
+        }
+
+            .container > div {
+                background-color: #212529 !important;
+            }
+
+        .table-wrapper {
+            max-height: 50vh;
+            overflow-y: auto;
+        }
+
+        
+    </style>
+
+    <div class="container">
+
+
+
+        <form method="POST">
+
+            <input type="date" name="fecha">
+            <button onclick="Actualizar()">VER</button>
+        </form>
+        <br />
+
+
+         @if (Model != null)
+        {
+
+
+        <div class="page-content page-container" id="page-content">
+            <div class="padding">
+                <div class="row">
+                    <div class="container-fluid d-flex justify-content-center">
+                        <div class="col-sm-8 col-md-6">
+                            <div class="card">
+                                <div class="card-header">Pie chart</div>
+                                <div class="card-body" style="height: 420px">
+                                    <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                        <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                        </div>
+                                    </div> <canvas id="chart-line" width="299" height="200" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+
+        <h1>Prueba estadísticas</h1>
+
+
+       
+           
+
+            <h2>Jugadas</h2>
+            <div class="table-wrapper">
+                <table class="table table-info " id="jugadas-table">
+                    <thead>
+                        <tr>
+                            <th>Jugada_id</th>
+                            <th>Cantidad_Jugada</th>
+                            <th>Seguimiento_Tabla</th>
+                            <th>Cell_id</th>
+                            <th>Table_id</th>
+                            <th>Condicion</th>
+                            <th>Ronda_id</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (var i = 0; i < Model.EstadisticasJugadas.Jugadas.Count; i += 1)
+                        {
+                            <tr data-ronda-id="@Model.EstadisticasJugadas.Jugadas[i].Ronda_id">
+                                <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Jugada_id)</td>
+                                <td>@Html.DisplayFor(model => model.EstadisticasJugadas.Jugadas[i].Cantidad_jugada)</td>
+                                <td>@Html.DisplayFor(model => model.EstadisticasJugadas.Jugadas[i].Seguimiento_Tabla)</td>
+                                <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Cell_id)</td>
+                                <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Table_id)</td>
+                                <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Condicion)</td>
+                                <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Ronda_id)</td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+
+
+
+
+
+    </div>
+</body>
+
+
+
+
+
+
+
+
+
+
+@section scripts { 
+    <script src='~/js/Chart.bundle.min.js'></script>
+
+    <script>
+        $(document).ready(function () {
+            var ctx = $("#chart-line");
+            var myLineChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ["Seguimiento_Tabla: true", "Seguimiento_Tabla: false"],
+                    datasets: [{
+                        data: [
+        @if (Model != null)
+        {
+            var seguimientoTrueCount = 0;
+            var seguimientoFalseCount = 0;
+            for (var i = 0; i < Model.EstadisticasJugadas.Jugadas.Count; i++)
+            {
+                if (Model.EstadisticasJugadas.Jugadas[i].Seguimiento_Tabla)
+                {
+                    seguimientoTrueCount++;
+                }
+                else
+                {
+                    seguimientoFalseCount++;
+                }
+            }
+            @Html.Raw(seguimientoTrueCount + "," + seguimientoFalseCount)
+        }
+                                ],
+                        backgroundColor: ["rgba(255, 0, 0, 0.2)", "rgba(0, 255, 0, 0.2)"]
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        });
+
+
+       
+    </script>
+
+
+  @*  <script>
+        $(document).ready(function () {
+            var ctx = $("#chart-line");
+            var myLineChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ["Spring", "Summer", "Fall", "Winter"],
+                    datasets: [{
+                        data: [1200, 1700, 800, 200],
+                        backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)"]
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Weather'
+                    }
+                }
+            });
+        });
+    </script>*@
+}

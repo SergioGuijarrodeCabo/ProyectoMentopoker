@@ -30,12 +30,6 @@ namespace ProyectoMentopoker.Controllers
         }
 
 
-        public IActionResult PruebaEstadisticas()
-        {
-            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(1);
-
-            return View(conjunto);
-        }
 
         [HttpPost]
         public IActionResult GetTabla(int id)

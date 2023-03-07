@@ -16,15 +16,15 @@ namespace ProyectoMentopoker.Controllers
 
         public IActionResult VerPartidas()
         {
-            var usuario_id = HttpContext.Session.GetString("ID");
+            //var usuario_id = HttpContext.Session.GetString("ID");
 
-            if (usuario_id == null)
-            {
-                usuario_id = "1";
-            }
-            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id));
+            //if (usuario_id == null)
+            //{
+            //    usuario_id = "1";
+            //}
+            //ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), "partidas");
 
-            return View(conjunto);
+            return View();
         }
 
 
@@ -38,7 +38,38 @@ namespace ProyectoMentopoker.Controllers
             {
                 usuario_id = "1";
             }
-            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), fecha);
+            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), "partidas", fecha);
+
+            return View(conjunto);
+
+        }
+
+
+        public IActionResult VerJugadas()
+        {
+            //var usuario_id = HttpContext.Session.GetString("ID");
+
+            //if (usuario_id == null)
+            //{
+            //    usuario_id = "1";
+            //}
+            //ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), "jugadas");
+
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult VerJugadas(DateTime fecha)
+        {
+
+            var usuario_id = HttpContext.Session.GetString("ID");
+
+            if (usuario_id == null)
+            {
+                usuario_id = "1";
+            }
+            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), "jugadas", fecha);
 
             return View(conjunto);
 
