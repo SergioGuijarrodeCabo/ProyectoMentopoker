@@ -218,8 +218,13 @@ namespace ProyectoMentopoker.Repositories
                 }
                 stats.SeguimientoRondas.Add(seguimiento);
                 stats.Rondas_ids.Add(partidas.Rondas[i].Ronda_id);
-               
+            }
 
+            for(int i = 0; i < stats.SeguimientoRondas.Count; i++)
+            {
+                stats.CantidadesJugadasRondas.Add(partidas.Rondas[i].Cantidad_jugada);
+                stats.GananciasRondas.Add(partidas.Rondas[i].Ganancias);
+                stats.RentabilidadRondas.Add((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
             }
 
             return stats;
