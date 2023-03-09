@@ -191,33 +191,44 @@ namespace ProyectoMentopoker.Repositories
             stats.Jugadas = jugadas;
 
 
-            string seguimiento = "mixto";
-            int contadorTrue = 0;
-            int contadorFalse = 0;
+           
             for (int i = 0; i < partidas.Rondas.Count; i++)
             {
+                string seguimiento = "mixto";
+                int contadorTrue = 0;
+                int contadorFalse = 0;
 
-                for(int x = 0; x < partidas.Jugadas.Count; x++)
-                {
-                   if( partidas.Rondas[i].Ronda_id == partidas.Jugadas[x].Ronda_id) { 
+               
+                    for (int x = 0; x < partidas.Jugadas.Count; x++) { 
+                   if( partidas.Rondas[i].Ronda_id == partidas.Jugadas[x].Ronda_id) {
+
+                        seguimiento = "mixto";
                         if(partidas.Jugadas[x].Seguimiento_Tabla == false && contadorTrue == 0)
                         {
                             seguimiento = "no";
-                            contadorTrue++;
+                            contadorFalse=1;
                         }   if (partidas.Jugadas[x].Seguimiento_Tabla == true && contadorFalse == 0)
                         {
-                            seguimiento = "sí";
-                            contadorFalse++;
+                            seguimiento = "si";
+                            contadorTrue=1;
                         }
-                        if ((partidas.Jugadas[x].Seguimiento_Tabla == true || partidas.Jugadas[x].Seguimiento_Tabla == false) && (contadorFalse ==1 && contadorTrue == 1))
+                        if (contadorFalse == 1 && contadorTrue == 1)
                         {
                             seguimiento = "mixto";
+                            break;
                         }
+
+                        //if ((partidas.Jugadas[x].Seguimiento_Tabla == true || partidas.Jugadas[x].Seguimiento_Tabla == false) && (contadorFalse ==1 && contadorTrue == 1))
+                        //{
+                        //    seguimiento = "mixto";
+                        //}
 
                     }
                 }
-                stats.SeguimientoRondas.Add(seguimiento);
+               
+                stats.SeguimientoRondas.Add(seguimiento.ToString());
                 stats.Rondas_ids.Add(partidas.Rondas[i].Ronda_id);
+                
             }
 
             for(int i = 0; i < stats.SeguimientoRondas.Count; i++)
