@@ -29,7 +29,7 @@ using Microsoft.Data.SqlClient;
 //(@Identificador INT)
 //AS
 
-//SELECT C.Cell_id, C.Table_id, T.Condicion, J.Cantidad_jugada, J.Seguimiento_Tabla, J.Ronda_id, J.Jugada_Id
+//SELECT C.Id_celda, C.Table_id, T.Condicion, J.Cantidad_jugada, J.Seguimiento_Tabla, J.Ronda_id, J.Jugada_Id
 //FROM Celdas C
 //INNER JOIN Tablas T ON C.Table_id = T.Table_id
 //INNER JOIN Jugadas J ON J.Identificador = C.Identificador
@@ -189,6 +189,38 @@ namespace ProyectoMentopoker.Repositories
 
             }
             stats.Jugadas = jugadas;
+
+
+            string seguimiento = "mixto";
+            int contadorTrue = 0;
+            int contadorFalse = 0;
+            for (int i = 0; i < partidas.Rondas.Count; i++)
+            {
+
+                for(int x = 0; x < partidas.Jugadas.Count; x++)
+                {
+                   if( partidas.Rondas[i].Ronda_id == partidas.Jugadas[x].Ronda_id) { 
+                        if(partidas.Jugadas[x].Seguimiento_Tabla == false && contadorTrue == 0)
+                        {
+                            seguimiento = "no";
+                            contadorTrue++;
+                        }   if (partidas.Jugadas[x].Seguimiento_Tabla == true && contadorFalse == 0)
+                        {
+                            seguimiento = "sí";
+                            contadorFalse++;
+                        }
+                        if ((partidas.Jugadas[x].Seguimiento_Tabla == true || partidas.Jugadas[x].Seguimiento_Tabla == false) && (contadorFalse ==1 && contadorTrue == 1))
+                        {
+                            seguimiento = "mixto";
+                        }
+
+                    }
+                }
+                stats.SeguimientoRondas.Add(seguimiento);
+                stats.Rondas_ids.Add(partidas.Rondas[i].Ronda_id);
+               
+
+            }
 
             return stats;
         }
