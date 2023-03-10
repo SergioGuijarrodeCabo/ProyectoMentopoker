@@ -65,7 +65,7 @@
 
          @if (Model != null)
         {
-            <div class="container">
+            <div class="container" id="divGraficos">
                 <div class="row">
                     <div class="col">
 
@@ -88,15 +88,34 @@
                         </div>
                     </div>
 
-                      <div class="col">
-                          <table class="table table-dark table-hover ">
+                      <div class="col" id="divStatsRondas">
+                          <div class="card">
+                         <table class="table table-dark table-hover " id="tablaSi" style="display:none">
                             <tbody>
-                                <tr><th>  <h3 style="color:white;">Cash inicial partidas: @Math.Round(Model.EstadisticasPartidas.CashInicialPartidas, 2)$</h3></th></tr>
-                                <tr><th> <h3 style="color:white;">Cash final partidas: @Math.Round(Model.EstadisticasPartidas.CashFinalPartidas, 2)$</h3></th></tr>
-                                <tr><th> <h3 style="color:white;">Media ganancias partidas: @Math.Round(Model.EstadisticasPartidas.MediaGananciasPartidas,2)$</h3></th></tr>
-                                <tr><th><h3 style="color:white;">Rentabilidad partidas: @Math.Round(Model.EstadisticasPartidas.RentabilidadPartidas,2) %</h3></th></tr>
+                                <tr><th>  <h3 style="color:white;">Cantidades jugadas rondas: @Math.Round(Model.EstadisticasJugadas.CantidadesJugadasTipoRondas[0], 2)$</h3></th></tr>
+                                <tr><th> <h3 style="color:white;">Ganancias Rondas: @Math.Round(Model.EstadisticasJugadas.GananciasTipoRondas[0], 2)$</h3></th></tr>
+                                <tr><th> <h3 style="color:white;">Rentabilidad Rondas: @Math.Round(Model.EstadisticasJugadas.RentabilidadTipoRondas[0],2)$</h3></th></tr>
+                               
                             </tbody>
-                          </table>
+                          </table>  </div>
+                          <div class="card">
+                            <table class="table table-dark table-hover " id="tablaNo" style="display:none">
+                            <tbody>
+                                <tr><th>  <h3 style="color:white;">Cantidades jugadas rondas: @Math.Round(Model.EstadisticasJugadas.CantidadesJugadasTipoRondas[1], 2)$</h3></th></tr>
+                                <tr><th> <h3 style="color:white;">Ganancias Rondas: @Math.Round(Model.EstadisticasJugadas.GananciasTipoRondas[1], 2)$</h3></th></tr>
+                                <tr><th> <h3 style="color:white;">Rentabilidad Rondas: @Math.Round(Model.EstadisticasJugadas.RentabilidadTipoRondas[1],2)$</h3></th></tr>
+                               
+                            </tbody>
+                          </table>  </div>
+                          <div class="card">
+                          <table class="table table-dark table-hover " id="tablaMixto" style="display:none">
+                            <tbody>
+                                <tr><th>  <h3 style="color:white;">Cantidades jugadas rondas: @Math.Round(Model.EstadisticasJugadas.CantidadesJugadasTipoRondas[2], 2)$</h3></th></tr>
+                                <tr><th> <h3 style="color:white;">Ganancias Rondas: @Math.Round(Model.EstadisticasJugadas.GananciasTipoRondas[2], 2)$</h3></th></tr>
+                                <tr><th> <h3 style="color:white;">Rentabilidad Rondas: @Math.Round(Model.EstadisticasJugadas.RentabilidadTipoRondas[2],2)$</h3></th></tr>
+                               
+                            </tbody>
+                          </table>  </div>
 
 
                           </div>
@@ -211,7 +230,8 @@
 
     <script>
 var myPieChart = null;
-var myLineChart = null
+var myLineChart = null;
+var condicion = "";
 
        $(document).ready(function () {
     var ctx = $("#chart-lineSeguimiento");
@@ -261,14 +281,14 @@ data: [
     var siCount = 0;
     var noCount = 0;
     var mixtoCount = 0;
-    for (var i = 0; i < Model.EstadisticasJugadas.SeguimientoRondas.Count; i++) {
+    for (var i = 0; i < Model.EstadisticasJugadas.SeguimientoTipoRondas.Count; i++) {
       //var seguimientoRondas = Model.EstadisticasJugadas.SeguimientoRondas[i];
       //for (var j = 0; j < seguimientoRondas.Length; j++) {
-        if (Model.EstadisticasJugadas.SeguimientoRondas[i].Equals("si")) {
+        if (Model.EstadisticasJugadas.SeguimientoTipoRondas[i].Equals("si")) {
           siCount++;
-        } else if (Model.EstadisticasJugadas.SeguimientoRondas[i].Equals("no")) {
+        } else if (Model.EstadisticasJugadas.SeguimientoTipoRondas[i].Equals("no")) {
           noCount++;
-        } else if (Model.EstadisticasJugadas.SeguimientoRondas[i].Equals("mixto")) {
+        } else if (Model.EstadisticasJugadas.SeguimientoTipoRondas[i].Equals("mixto")) {
           mixtoCount++;
         }
       //}
@@ -316,15 +336,53 @@ $("#chart-lineComparacionSeguimiento").click(
           var clickedElementindex = activePoints[0]["_index"];
 
       //get specific label by index 
-      var condicion = myPieChart.data.labels[clickedElementindex];
+        if (myPieChart.data.labels[clickedElementindex] === 'Sí') {
+            condicion = 0;
+        }if (myPieChart.data.labels[clickedElementindex] === 'No') {
+            condicion = 1;
+        }if (myPieChart.data.labels[clickedElementindex] === 'Mixto') {
+            condicion = 2;
+        }
 
       //get value by index      
       //var value = myPieChart.data.datasets[0].data[clickedElementindex];
-        alert(condicion);
-
-
+       // alert(condicion);
+        statsRondas();
     }
 );  
+
+function statsRondas(){
+  
+    
+    alert(condicion);
+
+       
+        
+    //var tableHTML = '<div class="col">' +
+    //        '<table class="table table-dark table-hover">' +
+    //      '<tbody>' +
+    //        '<tr><th><h3 style="color:white;">cash inicial partidas:  Math.round(model.estadisticasjugadas.cantidadesjugadastiporondas[1], 2)$</h3></th></tr>' +
+    //        '<tr><th><h3 style="color:white;">cash final partidas:  Math.round(model.estadisticasjugadas.gananciastiporondas[1], 2)$</h3></th></tr>' +
+    //        '<tr><th><h3 style="color:white;">media ganancias partidas:  Math.round(model.estadisticasjugadas.rentabilidadtiporondas[1], 2)$</h3></th></tr>' +
+    //      '</tbody>' +
+    //    '</table>'+
+    //    '</div>';
+    if (condicion == 0) {
+        document.getElementById('tablaSi').style.display = "inline-block";
+        document.getElementById('tablaNo').style.display = "none";
+         document.getElementById('tablaNo').style.display = "none";
+    }  if (condicion == 1) {
+       document.getElementById('tablaNo').style.display = "inline-block";
+        document.getElementById('tablaSi').style.display = "none";
+         document.getElementById('tablaMixto').style.display = "none";
+    }  if (condicion == 2) {
+        document.getElementById('tablaMixto').style.display = "inline-block";
+        document.getElementById('tablaNo').style.display = "none";
+         document.getElementById('tablaSi').style.display = "none";
+    }
+         
+         // $("#tablaSi").append(tableHTML);
+}
 
        
     </script>

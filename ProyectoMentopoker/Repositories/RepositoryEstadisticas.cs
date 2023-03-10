@@ -234,7 +234,9 @@ namespace ProyectoMentopoker.Repositories
             var rondasSi = 0;
             var rondasNo = 0;
             var rondasMixto = 0;
-            for(int i = 0; i < stats.SeguimientoTipoRondas.Count; i++)
+
+
+            for (int i = 0; i < partidas.Rondas.Count; i++)
             {
                 if (stats.SeguimientoTipoRondas[i].Equals("si")){
                     stats.CantidadesJugadasTipoRondas[0]+=(partidas.Rondas[i].Cantidad_jugada);
@@ -247,20 +249,23 @@ namespace ProyectoMentopoker.Repositories
                     stats.CantidadesJugadasTipoRondas[1] += (partidas.Rondas[i].Cantidad_jugada);
                     stats.GananciasTipoRondas[1] += (partidas.Rondas[i].Ganancias);
                     stats.RentabilidadTipoRondas[1] += ((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
+                    rondasNo++;
                 }
                 if (stats.SeguimientoTipoRondas[i].Equals("mixto"))
                 {
                     stats.CantidadesJugadasTipoRondas[2] += (partidas.Rondas[i].Cantidad_jugada);
                     stats.GananciasTipoRondas[2] += (partidas.Rondas[i].Ganancias);
                     stats.RentabilidadTipoRondas[2]+=((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
+                    rondasMixto++;
                 }
                // stats.CantidadesJugadasTipoRondas.Add(partidas.Rondas[i].Cantidad_jugada);
                 //stats.GananciasTipoRondas.Add(partidas.Rondas[i].Ganancias);
                 //stats.RentabilidadTipoRondas.Add((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
             }
 
-            stats.RentabilidadTipoRondas[0] = stats.RentabilidadTipoRondas[0] / partidas.Rondas.Count;
-
+            stats.RentabilidadTipoRondas[0] = stats.RentabilidadTipoRondas[0] / rondasSi;
+            stats.RentabilidadTipoRondas[1] = stats.RentabilidadTipoRondas[1] / rondasNo;
+            stats.RentabilidadTipoRondas[2] = stats.RentabilidadTipoRondas[2] / rondasMixto;
 
             return stats;
         }

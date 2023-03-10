@@ -16,9 +16,19 @@
         public EstadisticasJugadas()
         {
             this.Rondas_ids = new List<string>();
+           
             this.CantidadesJugadasTipoRondas = new List<double>();
+            this.CantidadesJugadasTipoRondas.Add(0);
+            this.CantidadesJugadasTipoRondas.Add(0);
+            this.CantidadesJugadasTipoRondas.Add(0);
             this.GananciasTipoRondas = new List<double>();
-            this.RentabilidadTipoRondas = new List<double>(); 
+            this.GananciasTipoRondas.Add(0);
+            this.GananciasTipoRondas.Add(0);
+            this.GananciasTipoRondas.Add(0);
+            this.RentabilidadTipoRondas = new List<double>();
+            this.RentabilidadTipoRondas.Add(0);
+            this.RentabilidadTipoRondas.Add(0);
+            this.RentabilidadTipoRondas.Add(0);
             this.SeguimientoTipoRondas = new List<string>();
  
         }
