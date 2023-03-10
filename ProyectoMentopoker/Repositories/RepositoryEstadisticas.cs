@@ -226,17 +226,41 @@ namespace ProyectoMentopoker.Repositories
                     }
                 }
                
-                stats.SeguimientoRondas.Add(seguimiento.ToString());
+                stats.SeguimientoTipoRondas.Add(seguimiento.ToString());
                 stats.Rondas_ids.Add(partidas.Rondas[i].Ronda_id);
                 
             }
 
-            for(int i = 0; i < stats.SeguimientoRondas.Count; i++)
+            var rondasSi = 0;
+            var rondasNo = 0;
+            var rondasMixto = 0;
+            for(int i = 0; i < stats.SeguimientoTipoRondas.Count; i++)
             {
-                stats.CantidadesJugadasRondas.Add(partidas.Rondas[i].Cantidad_jugada);
-                stats.GananciasRondas.Add(partidas.Rondas[i].Ganancias);
-                stats.RentabilidadRondas.Add((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
+                if (stats.SeguimientoTipoRondas[i].Equals("si")){
+                    stats.CantidadesJugadasTipoRondas[0]+=(partidas.Rondas[i].Cantidad_jugada);
+                    stats.GananciasTipoRondas[0]+=(partidas.Rondas[i].Ganancias);
+                    stats.RentabilidadTipoRondas[0] += ((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
+                    rondasSi++;
+                }
+                if (stats.SeguimientoTipoRondas[i].Equals("no"))
+                {
+                    stats.CantidadesJugadasTipoRondas[1] += (partidas.Rondas[i].Cantidad_jugada);
+                    stats.GananciasTipoRondas[1] += (partidas.Rondas[i].Ganancias);
+                    stats.RentabilidadTipoRondas[1] += ((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
+                }
+                if (stats.SeguimientoTipoRondas[i].Equals("mixto"))
+                {
+                    stats.CantidadesJugadasTipoRondas[2] += (partidas.Rondas[i].Cantidad_jugada);
+                    stats.GananciasTipoRondas[2] += (partidas.Rondas[i].Ganancias);
+                    stats.RentabilidadTipoRondas[2]+=((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
+                }
+               // stats.CantidadesJugadasTipoRondas.Add(partidas.Rondas[i].Cantidad_jugada);
+                //stats.GananciasTipoRondas.Add(partidas.Rondas[i].Ganancias);
+                //stats.RentabilidadTipoRondas.Add((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
             }
+
+            stats.RentabilidadTipoRondas[0] = stats.RentabilidadTipoRondas[0] / partidas.Rondas.Count;
+
 
             return stats;
         }

@@ -49,11 +49,20 @@
 
         @if (Model != null)
         {
-            <h3 style="color:white;">Ganancias partidas acumuladas: @Math.Round(Model.EstadisticasPartidas.GananciasPartidasAcumuladas, 2)$</h3>
-            <h3 style="color:white;">Cash inicial partidas: @Math.Round(Model.EstadisticasPartidas.CashInicialPartidas, 2)$</h3>
-            <h3 style="color:white;">Cash final partidas: @Math.Round(Model.EstadisticasPartidas.CashFinalPartidas, 2)$</h3>
-            <h3 style="color:white;">Media ganancias partidas: @Math.Round(Model.EstadisticasPartidas.MediaGananciasPartidas,2)$</h3>
-            <h3 style="color:white;">Rentabilidad partidas: @Math.Round(Model.EstadisticasPartidas.RentabilidadPartidas,2) %</h3>
+            <table class="table table-dark table-hover ">
+                <tbody>
+                    <tr><th>  <h3 style="color:white;">Cash inicial partidas: @Math.Round(Model.EstadisticasPartidas.CashInicialPartidas, 2)$</h3></th></tr>
+                    <tr><th> <h3 style="color:white;">Cash final partidas: @Math.Round(Model.EstadisticasPartidas.CashFinalPartidas, 2)$</h3></th></tr>
+                    <tr><th> <h3 style="color:white;">Media ganancias partidas: @Math.Round(Model.EstadisticasPartidas.MediaGananciasPartidas,2)$</h3></th></tr>
+                    <tr><th><h3 style="color:white;">Rentabilidad partidas: @Math.Round(Model.EstadisticasPartidas.RentabilidadPartidas,2) %</h3></th></tr>
+                </tbody>
+            </table>
+
+            
+          
+           
+           
+            
         }
 
 
