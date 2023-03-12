@@ -69,11 +69,14 @@ namespace ProyectoMentopoker.Controllers
             {
                 usuario_id = "1";
             }
-            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), "jugadas", fecha);
+            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), "jugadasFecha", fecha);
 
             return View(conjunto);
 
         }
+
+
+
 
     }
 }

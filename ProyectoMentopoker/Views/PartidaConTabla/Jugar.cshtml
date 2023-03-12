@@ -44,6 +44,10 @@
     .container > div {
         background-color: #212529 !important;
     }
+
+    th{
+        color:white;
+    }
        
 
      </style>
@@ -1051,7 +1055,7 @@
     </div>
 
 
-    <div class="overflow-scroll">
+    @*<div class="overflow-scroll">*@
     <table id="tabla" class="table table-bordered" >
         <thead></thead>
         <tbody>
@@ -1086,7 +1090,7 @@
         
               </tbody>
              </table>
-         </div>
+         @*</div>*@
     </div>
 
     @*<button onclick="iniciarPartida()" class="btn btn-danger" id="botonInicio">Iniciar partida</button>*@
@@ -1154,6 +1158,10 @@
 </body>
 
 @section scripts { 
+
+ 
+
+
     <script>
         var jugadaSeleccionada = false;
         var idRondaActual = 0;
@@ -1303,6 +1311,14 @@
                   "4.Seleccione nueva ronda o nueva jugada dependiendo de la partida");
           }
 
+          //Swal.fire(
+          //    'Tutorial',
+          //    "1.Dentro de la ronda seleccione nueva jugada\n" +
+          //        "2.Seleccione una condición de partida y una mano a jugar de las tablas\n" +
+          //        "3.Seleccione si va a seguir la tabla, la cantidad a jugar, y pulse en jugar\n" +
+          //        "4.Seleccione nueva ronda o nueva jugada dependiendo de la partida",
+          //    'question'
+          //  )
 
         //function iniciarPartida() {
 
@@ -1596,9 +1612,12 @@
         function finalizarPartida() {
             
             usuario_id =  $('#userId').text().match(/\d+/)[0];
-            // alert(usuario_id);
+            Swal.fire(usuario_id);
 
-            comentario = prompt("Introduzca algún comentario sobre la partida");
+            do {
+              comentario = prompt("Introduzca algún comentario sobre la partida");
+            } while (comentario === "");
+
 
             $.ajax({
                 url: '@Url.Action("insertar", "PartidaConTabla")',

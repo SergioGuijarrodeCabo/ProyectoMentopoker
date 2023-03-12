@@ -36,8 +36,39 @@ using Microsoft.Data.SqlClient;
 //WHERE C.Identificador = @Identificador
 
 
+//CREATE OR ALTER PROCEDURE GET_IDSTABLAS_JUGADAS
+//(@Identificador INT)
+//AS
+
+//SELECT C.Cell_id, C.Table_id, T.Condicion, J.Cantidad_jugada, J.Seguimiento_Tabla, J.Ronda_id, J.Jugada_Id
+//FROM Celdas C
+//INNER JOIN Tablas T ON C.Table_id = T.Table_id
+//INNER JOIN Jugadas J ON J.Identificador = C.Identificador
+//WHERE C.Identificador = @Identificador
 
 
+//ESTE
+
+//CREATE OR ALTER PROCEDURE GET_IDSTABLAS_JUGADAS
+//(
+//@Jugada_id NVARCHAR(50))
+//AS
+
+//SELECT C.Cell_id, C.Table_id, T.Condicion, J.Cantidad_jugada, J.Seguimiento_Tabla, J.Ronda_id, J.Jugada_Id
+//FROM Celdas C
+//INNER JOIN Tablas T ON C.Table_id = T.Table_id
+//INNER JOIN Jugadas J ON J.Identificador = C.Identificador
+//WHERE j.Jugada_id = @Jugada_id
+
+
+
+
+
+//create or alter procedure /*SP_GETCELLID*/
+//(@identificador int)
+//as
+//select cell_id from Celdas where celdas.Identificador = @identificador
+//go
 
 #endregion
 
@@ -71,15 +102,21 @@ namespace ProyectoMentopoker.Repositories
             //                where datos.Usuario_id == Usuario_id.ToString()
             //                select datos;
 
-            var consulta = from datos in this.context.Partidas
-                           where datos.Usuario_id == Usuario_id.ToString() &&
-                                 (!fecha.HasValue || datos.Fecha > fecha.Value)
-                           select datos;
 
+            List<PartidaModel> partidas = new List<PartidaModel>();
+            if (peticion == "partidas" || peticion == "jugadasFecha")
+            {
+                 var consulta = from datos in this.context.Partidas
+                               where datos.Usuario_id == Usuario_id.ToString() &&
+                                     (!fecha.HasValue || datos.Fecha > fecha.Value)
+                               select datos;
+               partidas = consulta.ToList();
+            }
+          
 
 
             ConjuntoPartidasUsuario conjunto = new ConjuntoPartidasUsuario();
-            List<PartidaModel> partidas = consulta.ToList();
+           
 
             List<RondaModel> rondas = new List<RondaModel>();
             List<JugadaModel> jugadas = new List<JugadaModel>();
@@ -103,11 +140,12 @@ namespace ProyectoMentopoker.Repositories
             {
                 conjunto.EstadisticasPartidas = this.GetEstadisticasPartidas(conjunto);
             }
-            if (peticion == "jugadas")
+            if (peticion == "jugadasFecha")
             {
                 conjunto.EstadisticasJugadas = this.GetEstadisticasJugadas(conjunto);
 
             }
+          
 
 
 
@@ -119,21 +157,15 @@ namespace ProyectoMentopoker.Repositories
 
         public List<RondaModel> GetRondas(string partida_id)
         {
-
             var consulta = from datos in this.context.Rondas
-                           where datos.Partida_id == partida_id.ToString()
+                           where datos.Partida_id == partida_id
                            select datos;
+
+            
             List<RondaModel> rondas = consulta.ToList();
-            //for (int i = 0; i < rondas.Count; i++)
-            //{
-            //    rondas[i].Jugadas = this.GetJugadas(rondas[i].Partida_id);
-
-            //}
             return rondas;
-
-
         }
-      
+
         public List<JugadaModel> GetJugadas(string ronda_id)
         {
             var consulta = from datos in this.context.Jugadas
@@ -180,15 +212,19 @@ namespace ProyectoMentopoker.Repositories
             EstadisticasJugadas stats = new EstadisticasJugadas();
             
             List <JugadasCalculadasModel> jugadas = new List<JugadasCalculadasModel>();
-            for(int i = 0; i < partidas.Jugadas.Count; i++)
-            {
-                var parameter = new SqlParameter("@Identificador", partidas.Jugadas[i].Identificador);
 
-                string sql = "EXECUTE GET_IDSTABLAS_JUGADAS @Identificador";
-                 jugadas.Add(this.context.JugadasCalculadas.FromSqlRaw(sql, parameter).AsEnumerable().First());
 
-            }
-            stats.Jugadas = jugadas;
+
+                for (int i = 0; i < partidas.Jugadas.Count; i++)
+                {
+                    var parameter = new SqlParameter("@Jugada_id", partidas.Jugadas[i].Jugada_id);
+
+                    string sql = "EXECUTE GET_IDSTABLAS_JUGADAS @Jugada_id";
+                    jugadas.Add(this.context.JugadasCalculadas.FromSqlRaw(sql, parameter).AsEnumerable().First());
+
+                }
+                stats.Jugadas = jugadas;
+            
 
 
            
@@ -241,21 +277,24 @@ namespace ProyectoMentopoker.Repositories
                 if (stats.SeguimientoTipoRondas[i].Equals("si")){
                     stats.CantidadesJugadasTipoRondas[0]+=(partidas.Rondas[i].Cantidad_jugada);
                     stats.GananciasTipoRondas[0]+=(partidas.Rondas[i].Ganancias);
-                    stats.RentabilidadTipoRondas[0] += ((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
+                    //stats.RentabilidadTipoRondas[0] += ((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
+                    stats.MediaGananciasTipoRondas[0] += (partidas.Rondas[i].Ganancias);
                     rondasSi++;
                 }
                 if (stats.SeguimientoTipoRondas[i].Equals("no"))
                 {
                     stats.CantidadesJugadasTipoRondas[1] += (partidas.Rondas[i].Cantidad_jugada);
                     stats.GananciasTipoRondas[1] += (partidas.Rondas[i].Ganancias);
-                    stats.RentabilidadTipoRondas[1] += ((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
+                    //stats.RentabilidadTipoRondas[1] += ((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
+                    stats.MediaGananciasTipoRondas[1] += (partidas.Rondas[i].Ganancias);
                     rondasNo++;
                 }
                 if (stats.SeguimientoTipoRondas[i].Equals("mixto"))
                 {
                     stats.CantidadesJugadasTipoRondas[2] += (partidas.Rondas[i].Cantidad_jugada);
                     stats.GananciasTipoRondas[2] += (partidas.Rondas[i].Ganancias);
-                    stats.RentabilidadTipoRondas[2]+=((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
+                    //stats.RentabilidadTipoRondas[2]+=((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
+                    stats.MediaGananciasTipoRondas[2] += (partidas.Rondas[i].Ganancias);
                     rondasMixto++;
                 }
                // stats.CantidadesJugadasTipoRondas.Add(partidas.Rondas[i].Cantidad_jugada);
@@ -263,9 +302,9 @@ namespace ProyectoMentopoker.Repositories
                 //stats.RentabilidadTipoRondas.Add((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
             }
 
-            stats.RentabilidadTipoRondas[0] = stats.RentabilidadTipoRondas[0] / rondasSi;
-            stats.RentabilidadTipoRondas[1] = stats.RentabilidadTipoRondas[1] / rondasNo;
-            stats.RentabilidadTipoRondas[2] = stats.RentabilidadTipoRondas[2] / rondasMixto;
+            stats.MediaGananciasTipoRondas[0] = stats.MediaGananciasTipoRondas[0] / rondasSi;
+            stats.MediaGananciasTipoRondas[1] = stats.MediaGananciasTipoRondas[1] / rondasNo;
+            stats.MediaGananciasTipoRondas[2] = stats.MediaGananciasTipoRondas[2] / rondasMixto;
 
             return stats;
         }

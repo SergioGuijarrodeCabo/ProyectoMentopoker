@@ -7,10 +7,10 @@
         public List<string> SeguimientoTipoRondas { get; set; }
         public List<double> CantidadesJugadasTipoRondas { get; set; }
         public List<double> GananciasTipoRondas { get; set; }
-        public List<double> RentabilidadTipoRondas { get; set; }
+
         public List<string> Rondas_ids { get; set; }
 
-
+        public List<double> MediaGananciasTipoRondas { get; set; }
 
 
         public EstadisticasJugadas()
@@ -25,10 +25,13 @@
             this.GananciasTipoRondas.Add(0);
             this.GananciasTipoRondas.Add(0);
             this.GananciasTipoRondas.Add(0);
-            this.RentabilidadTipoRondas = new List<double>();
-            this.RentabilidadTipoRondas.Add(0);
-            this.RentabilidadTipoRondas.Add(0);
-            this.RentabilidadTipoRondas.Add(0);
+
+
+            this.MediaGananciasTipoRondas = new List<double>();
+            this.MediaGananciasTipoRondas.Add(0);
+            this.MediaGananciasTipoRondas.Add(0);
+            this.MediaGananciasTipoRondas.Add(0);
+
             this.SeguimientoTipoRondas = new List<string>();
  
         }
