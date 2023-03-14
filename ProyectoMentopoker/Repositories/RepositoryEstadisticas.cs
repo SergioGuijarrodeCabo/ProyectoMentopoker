@@ -220,56 +220,60 @@ namespace ProyectoMentopoker.Repositories
                     var parameter = new SqlParameter("@Jugada_id", partidas.Jugadas[i].Jugada_id);
 
                     string sql = "EXECUTE GET_IDSTABLAS_JUGADAS @Jugada_id";
-                    jugadas.Add(this.context.JugadasCalculadas.FromSqlRaw(sql, parameter).AsEnumerable().First());
+                    jugadas.Add(this.context.JugadasCalculadas.FromSqlRaw(sql, parameter).AsEnumerable().FirstOrDefault());
 
                 }
                 stats.Jugadas = jugadas;
-            
 
 
            
             for (int i = 0; i < partidas.Rondas.Count; i++)
             {
-                string seguimiento = "mixto";
-                int contadorTrue = 0;
-                int contadorFalse = 0;
 
-               
-                    for (int x = 0; x < partidas.Jugadas.Count; x++) { 
-                   if( partidas.Rondas[i].Ronda_id == partidas.Jugadas[x].Ronda_id) {
 
-                        seguimiento = "mixto";
-                        if(partidas.Jugadas[x].Seguimiento_Tabla == false && contadorTrue == 0)
+                string seguimiento = "si";
+               var jugadaInsertada = false;
+                   for (int x = 0; x < partidas.Jugadas.Count; x++) {
+                    if (jugadaInsertada == false)
+                    {
+
+                        if (partidas.Rondas[i].Ronda_id == partidas.Jugadas[x].Ronda_id)
                         {
-                            seguimiento = "no";
-                            contadorFalse=1;
-                        }   if (partidas.Jugadas[x].Seguimiento_Tabla == true && contadorFalse == 0)
-                        {
-                            seguimiento = "si";
-                            contadorTrue=1;
+
+
+                            if (partidas.Jugadas[x].Seguimiento_Tabla == false)
+                            {
+                                seguimiento = "no";
+
+                                jugadaInsertada = true;
+                            }
+                            if (partidas.Jugadas[x].Seguimiento_Tabla == true)
+                            {
+                                seguimiento = "si";
+                                jugadaInsertada = true;
+
+                            }
+                            stats.SeguimientoTipoRondas.Add(seguimiento.ToString());
+                            stats.Rondas_ids.Add(partidas.Rondas[i].Ronda_id);
+
+                            //if ((partidas.Jugadas[x].Seguimiento_Tabla == true || partidas.Jugadas[x].Seguimiento_Tabla == false) && (contadorFalse ==1 && contadorTrue == 1))
+                            //{
+                            //    seguimiento = "mixto";
+                            //}
+
                         }
-                        if (contadorFalse == 1 && contadorTrue == 1)
-                        {
-                            seguimiento = "mixto";
-                            break;
-                        }
-
-                        //if ((partidas.Jugadas[x].Seguimiento_Tabla == true || partidas.Jugadas[x].Seguimiento_Tabla == false) && (contadorFalse ==1 && contadorTrue == 1))
-                        //{
-                        //    seguimiento = "mixto";
-                        //}
-
                     }
+                    else { break; }
+                    
                 }
                
-                stats.SeguimientoTipoRondas.Add(seguimiento.ToString());
-                stats.Rondas_ids.Add(partidas.Rondas[i].Ronda_id);
+               
                 
             }
 
             var rondasSi = 0;
             var rondasNo = 0;
-            var rondasMixto = 0;
+       
 
 
             for (int i = 0; i < partidas.Rondas.Count; i++)
@@ -289,14 +293,7 @@ namespace ProyectoMentopoker.Repositories
                     stats.MediaGananciasTipoRondas[1] += (partidas.Rondas[i].Ganancias);
                     rondasNo++;
                 }
-                if (stats.SeguimientoTipoRondas[i].Equals("mixto"))
-                {
-                    stats.CantidadesJugadasTipoRondas[2] += (partidas.Rondas[i].Cantidad_jugada);
-                    stats.GananciasTipoRondas[2] += (partidas.Rondas[i].Ganancias);
-                    //stats.RentabilidadTipoRondas[2]+=((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
-                    stats.MediaGananciasTipoRondas[2] += (partidas.Rondas[i].Ganancias);
-                    rondasMixto++;
-                }
+                
                // stats.CantidadesJugadasTipoRondas.Add(partidas.Rondas[i].Cantidad_jugada);
                 //stats.GananciasTipoRondas.Add(partidas.Rondas[i].Ganancias);
                 //stats.RentabilidadTipoRondas.Add((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
@@ -304,7 +301,7 @@ namespace ProyectoMentopoker.Repositories
 
             stats.MediaGananciasTipoRondas[0] = stats.MediaGananciasTipoRondas[0] / rondasSi;
             stats.MediaGananciasTipoRondas[1] = stats.MediaGananciasTipoRondas[1] / rondasNo;
-            stats.MediaGananciasTipoRondas[2] = stats.MediaGananciasTipoRondas[2] / rondasMixto;
+            
 
             return stats;
         }

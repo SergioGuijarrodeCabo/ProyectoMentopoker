@@ -10,5 +10,8 @@
         public Boolean Seguimiento_Tabla { get; set; }
         public string Ronda_id { get; set; }
         public string Jugada_id { get; set; }
+        
+        public double Ganancias { get; set; }
+
     }
 }

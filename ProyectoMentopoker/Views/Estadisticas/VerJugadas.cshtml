@@ -42,6 +42,10 @@
        
             color: white;
         }
+        .prueba{
+             background-color: transparent;
+             color:white;
+        }
     </style>
 
 
@@ -59,18 +63,66 @@
     <div class="container">
 
         <div class="container">
-            <div class="row">
+            <div class="row" >
                 <div class="col">
-                    <button class="btn btn-info" onclick="mostrarCalendario()">Filtrar por fecha</button>
+           <button class="btn btn-info" onclick="mostrarCalendario()">Filtrar por fecha</button>
 
-                    <form method="POST" id="selectorFecha" style="display:none;">
+          <form method="POST" id="selectorFecha" style="display:none;" >
 
             <input type="date" name="fecha">
             <button  onclick="Actualizar()">VER</button>
         </form>
        </div>
 
+      <div class="col" >
+           <button class="btn btn-info" onclick="mostrarTabla()">Filtrar por jugada</button>
+          
+           <div id="dJugada" style="display:none;"> 
+           <table id="tabla" class="table table-bordered" >
+        <thead></thead>
+
       
+        <tbody>
+           @* <tr scope="row"><th>AA</th> <th>AKs</th> <th>AQs</th> <th>AJs</th> <th>ATs</th> <th>A9s</th> <th>A8s</th> <th>A7s</th> <th>A6s</th> <th>A5s</th> <th>A4s</th> <th>A3s</th> <th>A2s</th></tr>
+            <tr scope="row"><th>AKo</th> <th>KK</th> <th>KQs</th> <th>KJs</th> <th>KTs</th> <th>K9s</th> <th>K8s</th> <th>K7s</th> <th>K6s</th> <th>K5s</th> <th>K4s</th> <th>K3s</th> <th>K2s</th></tr>
+            <tr scope="row"><th>AQo</th> <th>KQo</th> <th>QQ</th> <th>QJs</th> <th>QTs</th> <th>Q9s</th> <th>Q8s</th> <th>Q7s</th> <th>Q6s</th> <th>Q5s</th> <th>Q4s</th> <th>Q3s</th> <th>Q2s</th></tr>
+            <tr scope="row"><th>AJo</th> <th>KJo</th> <th>QJo</th> <th>JJ</th> <th>JTs</th> <th>J9s</th> <th>J8s</th> <th>J7s</th> <th>J6s</th> <th>J5s</th> <th>J4s</th> <th>J3s</th> <th>J2s</th></tr>
+            <tr scope="row"><th>ATo</th> <th>KTo</th> <th>QTo</th> <th>JTo</th> <th>TT</th> <th>T9s</th> <th>T8s</th> <th>T7s</th> <th>T6s</th> <th>T5s</th> <th>T4s</th> <th>T3s</th> <th>T2s</th></tr>
+            <tr scope="row"><th>A9o</th> <th>K9o</th> <th>Q9o</th> <th>J9o</th> <th>T9o</th> <th>99</th> <th>98s</th> <th>97s</th> <th>96s</th> <th>95s</th> <th>94s</th> <th>93s</th> <th>92s</th></tr>
+            <tr scope="row"><th>A8o</th> <th>K8o</th> <th>Q8o</th> <th>J8o</th> <th>T8o</th> <th>98o</th> <th>88</th> <th>87s</th> <th>86s</th> <th>85s</th> <th>84s</th> <th>83s</th> <th>82s</th></tr>
+            <tr scope="row"><th>A7o</th> <th>K7o</th> <th>Q7o</th> <th>J7o</th> <th>T7o</th> <th>97o</th> <th>87o</th> <th>77</th> <th>76s</th> <th>75s</th> <th>74s</th> <th>73s</th> <th>72s</th></tr>
+            <tr scope="row"><th>A6o</th> <th>K6o</th> <th>Q6o</th> <th>J6o</th> <th>T6o</th> <th>96o</th> <th>86o</th> <th>76o</th> <th>66</th> <th>65s</th> <th>64s</th> <th>63s</th> <th>62s</th></tr>
+            <tr scope="row"><th>A5o</th> <th>K5o</th> <th>Q5o</th> <th>J5o</th> <th>T5o</th> <th>95o</th> <th>85o</th> <th>75o</th> <th>65o</th> <th>55</th> <th>54s</th> <th>53s</th> <th>52s</th></tr>
+            <tr scope="row"><th>A4o</th> <th>K4o</th> <th>Q4o</th> <th>J4o</th> <th>T4o</th> <th>94o</th> <th>84o</th> <th>74o</th> <th>64o</th> <th>54o</th> <th>44</th> <th>43s</th> <th>42s</th></tr>
+            <tr scope="row"><th>A3o</th> <th>K3o</th> <th>Q3o</th> <th>J3o</th> <th>T3o</th> <th>93o</th> <th>83o</th> <th>73o</th> <th>63o</th> <th>53o</th> <th>43o</th> <th>33</th> <th>32s</th></tr>
+            <tr scope="row"><th>A2o</th> <th>K2o</th> <th>Q2o</th> <th>J2o</th> <th>T2o</th> <th>92o</th> <th>82o</th> <th>72o</th> <th>62o</th> <th>52o</th> <th>42o</th> <th>32o</th> <th>22</th></tr>*@
+        
+             <tr scope="row"><th><button class="prueba" style="font-weight:500; border: none;">AA</button></th> <th><button class="prueba"style="font-weight:500; border: none;">AKs</button></th> <th><button class="prueba"style="font-weight:500; border: none;">AQs</button></th> <th><button class="prueba"style="font-weight:500; border: none;">AJs</button></th> <th><button class="prueba"style="font-weight:500; border: none;">ATs</button></th> <th><button class="prueba"style="font-weight:500; border: none;">A9s</button></th> <th><button class="prueba"style="font-weight:500; border: none;">A8s</button></th> <th><button class="prueba"style="font-weight:500; border: none;">A7s</button></th> <th><button style="font-weight:500; border: none;">A6s</button></th> <th><button style="font-weight:500; border: none;">A5s</button></th> <th><button style="font-weight:500; border: none;">A4s</button></th> <th><button style="font-weight:500; border: none;">A3s</button></th> <th><button style="font-weight:500; border: none;">A2s</button></th></tr>
+            <tr scope="row"><th><button class="prueba" style="font-weight:500; border: none;">AKo</button></th> <th><button class="prueba"style="font-weight:500; border: none;">KK</button></th> <th><button class="prueba"style="font-weight:500; border: none;">KQs</button></th> <th><button class="prueba"style="font-weight:500; border: none;">KJs</button></th> <th><button class="prueba"style="font-weight:500; border: none;">KTs</button></th> <th><button class="prueba"style="font-weight:500; border: none;">K9s</button></th> <th><button class="prueba"style="font-weight:500; border: none;">K8s</button></th> <th><button class="prueba"style="font-weight:500; border: none;">K7s</button></th> <th><button style="font-weight:500; border: none;">K6s</button></th> <th><button style="font-weight:500; border: none;">K5s</button></th> <th><button style="font-weight:500; border: none;">K4s</button></th> <th><button style="font-weight:500; border: none;">K3s</button></th> <th><button style="font-weight:500; border: none;">K2s</button></th></tr>
+            <tr scope="row"><th><button  class="prueba"style="font-weight:500; border: none;">AQo</button></th> <th><button class="prueba"style="font-weight:500; border: none;">KQo</button></th> <th><button class="prueba"style="font-weight:500; border: none;">QQ</button></th> <th><button class="prueba"style="font-weight:500; border: none;">QJs</button></th> <th><button class="prueba"style="font-weight:500; border: none;">QTs</button></th> <th><button class="prueba"style="font-weight:500; border: none;">Q9s</button></th> <th><button class="prueba"style="font-weight:500; border: none;">Q8s</button></th> <th><button class="prueba"style="font-weight:500; border: none;">Q7s</button></th> <th><button style="font-weight:500; border: none;">Q6s</button></th> <th><button style="font-weight:500; border: none;">Q5s</button></th> <th><button style="font-weight:500; border: none;">Q4s</button></th> <th><button style="font-weight:500; border: none;">Q3s</button></th> <th><button style="font-weight:500; border: none;">Q2s</button></th></tr>
+            <tr scope="row"><th><button class="prueba" style="font-weight:500; border: none;">AJo</button></th> <th><button class="prueba"style="font-weight:500; border: none;">KJo</button></th> <th><button class="prueba"style="font-weight:500; border: none;">QJo</button></th> <th><button class="prueba"style="font-weight:500; border: none;">JJ</button></th> <th><button class="prueba"style="font-weight:500; border: none;">JTs</button></th> <th><button class="prueba"style="font-weight:500; border: none;">J9s</button></th> <th><button class="prueba"style="font-weight:500; border: none;">J8s</button></th> <th><button class="prueba"style="font-weight:500; border: none;">J7s</button></th> <th><button style="font-weight:500; border: none;">J6s</button></th> <th><button style="font-weight:500; border: none;">J5s</button></th> <th><button style="font-weight:500; border: none;">J4s</button></th> <th><button style="font-weight:500; border: none;">J3s</button></th> <th><button style="font-weight:500; border: none;">J2s</button></th></tr>
+            <tr scope="row"><th><button class="prueba" style="font-weight:500; border: none;">A9o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">K9o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">Q9o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">J9o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">T9o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">99</button></th> <th><button class="prueba"style="font-weight:500; border: none;">98s</button></th> <th><button class="prueba"style="font-weight:500; border: none;">97s</button></th> <th><button style="font-weight:500; border: none;">96s</button></th> <th><button style="font-weight:500; border: none;">95s</button></th> <th><button style="font-weight:500; border: none;">94s</button></th> <th><button style="font-weight:500; border: none;">93s</button></th> <th><button style="font-weight:500; border: none;">92s</button></th></tr>
+            <tr scope="row"><th><button class="prueba" style="font-weight:500; border: none;">A8o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">K8o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">Q8o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">J8o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">T8o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">98o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">88</button></th> <th><button class="prueba"style="font-weight:500; border: none;">87s</button></th> <th><button style="font-weight:500; border: none;">86s</button></th> <th><button style="font-weight:500; border: none;">85s</button></th> <th><button style="font-weight:500; border: none;">84s</button></th> <th><button style="font-weight:500; border: none;">83s</button></th> <th><button style="font-weight:500; border: none;">82s</button></th></tr>
+            <tr scope="row"><th><button class="prueba" style="font-weight:500; border: none;">A7o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">K7o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">Q7o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">J7o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">T7o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">97o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">87o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">77</button></th> <th><button style="font-weight:500; border: none;">76s</button></th> <th><button style="font-weight:500; border: none;">75s</button></th> <th><button style="font-weight:500; border: none;">74s</button></th> <th><button style="font-weight:500; border: none;">73s</button></th> <th><button style="font-weight:500; border: none;">72s</button></th></tr>
+            <tr scope="row"><th><button class="prueba" style="font-weight:500; border: none;">ATo</button></th> <th><button class="prueba"style="font-weight:500; border: none;">KTo</button></th> <th><button class="prueba"style="font-weight:500; border: none;">QTo</button></th> <th><button class="prueba"style="font-weight:500; border: none;">JTo</button></th> <th><button class="prueba"style="font-weight:500; border: none;">TT</button></th> <th><button class="prueba"style="font-weight:500; border: none;">T9s</button></th> <th><button class="prueba"style="font-weight:500; border: none;">T8s</button></th> <th><button class="prueba"style="font-weight:500; border: none;">T7s</button></th> <th><button style="font-weight:500; border: none;">T6s</button></th> <th><button style="font-weight:500; border: none;">T5s</button></th> <th><button style="font-weight:500; border: none;">T4s</button></th> <th><button style="font-weight:500; border: none;">T3s</button></th> <th><button style="font-weight:500; border: none;">T2s</button></th></tr>
+            <tr scope="row"><th><button class="prueba" style="font-weight:500; border: none;">A6o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">K6o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">Q6o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">J6o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">T6o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">96o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">86o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">76o</button></th> <th><button style="font-weight:500; border: none;">66</button></th> <th><button style="font-weight:500; border: none;">65s</button></th> <th><button style="font-weight:500; border: none;">64s</button></th> <th><button style="font-weight:500; border: none;">63s</button></th> <th><button style="font-weight:500; border: none;">62s</button></th></tr>
+            <tr scope="row"><th><button  class="prueba"style="font-weight:500; border: none;">A5o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">K5o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">Q5o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">J5o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">T5o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">95o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">85o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">75o</button></th> <th><button style="font-weight:500; border: none;">65o</button></th> <th><button style="font-weight:500; border: none;">55</button></th> <th><button style="font-weight:500; border: none;">54s</button></th> <th><button style="font-weight:500; border: none;">53s</button></th> <th><button style="font-weight:500; border: none;">52s</button></th></tr>
+            <tr scope="row"><th><button  class="prueba"style="font-weight:500; border: none;">A4o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">K4o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">Q4o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">J4o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">T4o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">94o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">84o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">74o</button></th> <th><button style="font-weight:500; border: none;">64o</button></th> <th><button style="font-weight:500; border: none;">54o</button></th> <th><button style="font-weight:500; border: none;">44</button></th> <th><button style="font-weight:500; border: none;">43s</button></th> <th><button style="font-weight:500; border: none;">42s</button></th></tr>
+            <tr scope="row"><th><button  class="prueba" style="font-weight:500; border: none;">A3o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">K3o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">Q3o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">J3o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">T3o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">93o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">83o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">73o</button></th> <th><button style="font-weight:500; border: none;">63o</button></th> <th><button style="font-weight:500; border: none;">53o</button></th> <th><button style="font-weight:500; border: none;">43o</button></th> <th><button style="font-weight:500; border: none;">33</button></th> <th><button style="font-weight:500; border: none;">32s</button></th></tr>
+            <tr scope="row"><th><button class="prueba" style="font-weight:500; border: none;">A2o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">K2o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">Q2o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">J2o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">T2o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">92o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">82o</button></th> <th><button class="prueba"style="font-weight:500; border: none;">72o</button></th> <th><button style="font-weight:500; border: none;">62o</button></th> <th><button style="font-weight:500; border: none;">52o</button></th> <th><button style="font-weight:500; border: none;">42o</button></th> <th><button style="font-weight:500; border: none;">32o</button></th> <th><button style="font-weight:500; border: none;">22</button></th></tr>
+            
+        
+              </tbody>
+             </table>
+
+             <form method="post" > 
+                 <input type="hidden" name="cell_id"/>
+                 <button>Buscar por jugada</button>
+             </form>
+             </div>
+    </div>
+
+      </div>
           
     
 
@@ -85,12 +137,7 @@
                 <div class="row">
                     <div class="col">
 
-                        <div class="card">
-                            <div class="card-header">Pie chart</div>
-                            <div class="card-body">
-                                <canvas id="chart-lineSeguimiento" class="chartjs-render-monitor"></canvas>
-                            </div>
-                        </div>
+                       
                    
                     </div>
                     <div class="col">
@@ -123,15 +170,7 @@
                                
                             </tbody>
                           </table>  </div>
-                          <div class="card">
-                          <table class="table table-dark table-hover " id="tablaMixto" style="display:none">
-                            <tbody>
-                                <tr><th>  <h3 style="color:white;">Cantidades jugadas rondas: @Math.Round(Model.EstadisticasJugadas.CantidadesJugadasTipoRondas[2], 2)$</h3></th></tr>
-                                <tr><th> <h3 style="color:white;">Ganancias Rondas: @Math.Round(Model.EstadisticasJugadas.GananciasTipoRondas[2], 2)$</h3></th></tr>
-                                    <tr><th> <h3 style="color:white;">Rentabilidad Rondas: @Math.Round(Model.EstadisticasJugadas.MediaGananciasTipoRondas[2],2)$</h3></th></tr>
-                               
-                            </tbody>
-                          </table>  </div>
+                        
 
 
                           </div>
@@ -205,6 +244,7 @@
                             <th>Table_id</th>
                             <th>Condicion</th>
                             <th>Ronda_id</th>
+                            <th>Ganancias</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -218,7 +258,7 @@
                                 <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Table_id)</td>
                                 <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Condicion)</td>
                                 <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Ronda_id)</td>
-
+                                <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Ganancias)</td>
                             </tr>
                         }
                     </tbody>
@@ -247,52 +287,21 @@
 
     <script>
 var myPieChart = null;
-var myLineChart = null;
+
 var condicion = "";
 
 
-       $(document).ready(function () {
-    var ctx = $("#chart-lineSeguimiento");
-     myLineChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ["Seguimiento tabla: true", "Seguimiento tabla: false"],
-            datasets: [{
-                data: [
-@if (Model != null)
-{
-    var seguimientoTrueCount = 0;
-    var seguimientoFalseCount = 0;
-    for (var i = 0; i < Model.EstadisticasJugadas.Jugadas.Count; i++)
-    {
-        if (Model.EstadisticasJugadas.Jugadas[i].Seguimiento_Tabla)
-        {
-            seguimientoTrueCount++;
-        }
-        else
-        {
-            seguimientoFalseCount++;
-        }
-    }
-    @Html.Raw(seguimientoTrueCount + "," + seguimientoFalseCount)
-}
-                        ],
-                backgroundColor: ["rgba(0, 255, 0, 0.2)", "rgba(255, 0, 0, 0.2)"]
-            }]
-        },
-        options: {
-            responsive: true
-        }
-    });
 
+  $(document).ready(function () {
 
+   
 
 
 var ctx = $("#chart-lineComparacionSeguimiento");
  myPieChart = new Chart(ctx, {
 type: 'pie',
 data: {
-labels: ["Sí", "No", "Mixto"],
+labels: ["Sí", "No"],
 datasets: [{
 data: [
   @if (Model != null) {
@@ -306,23 +315,19 @@ data: [
           siCount++;
         } else if (Model.EstadisticasJugadas.SeguimientoTipoRondas[i].Equals("no")) {
           noCount++;
-        } else if (Model.EstadisticasJugadas.SeguimientoTipoRondas[i].Equals("mixto")) {
-          mixtoCount++;
         }
       //}
     }
-    @Html.Raw(siCount + ", " + noCount + ", " + mixtoCount)
+    @Html.Raw(siCount + ", " + noCount)
   }
 ],
 backgroundColor: [
   'rgba(255, 99, 132, 0.5)',
-  'rgba(54, 162, 235, 0.5)',
-  'rgba(255, 206, 86, 0.5)'
+  'rgba(54, 162, 235, 0.5)'
 ],
 borderColor: [
   'rgba(255, 99, 132, 1)',
-  'rgba(54, 162, 235, 1)',
-  'rgba(255, 206, 86, 1)'
+  'rgba(54, 162, 235, 1)'
 ],
 borderWidth: 1
 }]
@@ -359,8 +364,6 @@ $("#chart-lineComparacionSeguimiento").click(
             condicion = 0;
         }if (myPieChart.data.labels[clickedElementindex] === 'No') {
             condicion = 1;
-        }if (myPieChart.data.labels[clickedElementindex] === 'Mixto') {
-            condicion = 2;
         }
 
       //get value by index      
@@ -389,16 +392,12 @@ function statsRondas(){
     if (condicion == 0) {
         document.getElementById('tablaSi').style.display = "inline-block";
         document.getElementById('tablaNo').style.display = "none";
-         document.getElementById('tablaNo').style.display = "none";
+       
     }  if (condicion == 1) {
        document.getElementById('tablaNo').style.display = "inline-block";
         document.getElementById('tablaSi').style.display = "none";
-         document.getElementById('tablaMixto').style.display = "none";
-    }  if (condicion == 2) {
-        document.getElementById('tablaMixto').style.display = "inline-block";
-        document.getElementById('tablaNo').style.display = "none";
-         document.getElementById('tablaSi').style.display = "none";
-    }
+       
+    } 
          
          // $("#tablaSi").append(tableHTML);
 }
@@ -407,9 +406,20 @@ function statsRondas(){
 function mostrarCalendario(){
 
             document.getElementById('selectorFecha').style.display = "inline-block";
-            
+    document.getElementById('dJugada').style.display = "none";
 }
 
+function mostrarTabla(){
+
+            document.getElementById('dJugada').style.display = "inline-block";
+            document.getElementById('selectorFecha').style.display = "none";
+}
+
+$('.prueba').click(function() {
+ var idValue =  $(this).text();
+    alert(idValue);
+
+});
       
        
     </script>

@@ -686,8 +686,8 @@
                 <li><a class="dropdown-item" id="124">BTN</a></li>
                 <li><a class="dropdown-item" id="125">SB</a></li>
             </ul>
-        </div>
 
+        </div>
         <div class="btn-group" id="dOS_14BB" style="display:none">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 OS 14BB
@@ -1351,7 +1351,10 @@
                     var prevCardId = "#dRonda" + (idRondaActual - 1);
                     $(prevCardId + " .iniciarJugada, " + prevCardId + " .btn-outline-secondary").prop("disabled", true);
                 }
-
+                ultimaCondicion = "";
+                cantidadTotalRonda = 0;
+                cantidadTotalUltimaRonda = 0;
+                ultimaMano = "";
 
             }
         };
@@ -1514,7 +1517,8 @@
                     rondaJugada = 1;
                     rondaAMedias = 1;
 
-
+                    finalizarRonda();
+                    iniciarRonda();
 
                     //// retrieve the value from the input field
                     //var cantidad = $("#inputCantidad").val();
@@ -1550,9 +1554,9 @@
 
         function finalizarRonda() {
 
-            if (rondaJugada == 1) {
+            //if (rondaJugada == 1) {
                 
-                cantidadTotalUltimaRonda = null;
+            //    cantidadTotalUltimaRonda = null;
 
             do {
               cantidadTotalUltimaRonda = prompt("Introduzca sus ganancias o pérdidas (en negativo) de la última ronda");
@@ -1594,31 +1598,29 @@
                // $("#botonFinal").style.display = "inline";
                 document.getElementById("botonFinal").style.display = "inline-block";
                 // Reset variables
-                ultimaCondicion = "";
-                cantidadTotalRonda = 0;
-                cantidadTotalUltimaRonda = 0;
-                ultimaMano = "";
+                
                
 
 
                   $("#tabla td").css("opacity", "1");
-            } else {
-                alert("Debe al menos terminar una jugada antes de iniciar una nueva ronda");
-            }
+            //} else {
+            //    alert("Debe al menos terminar una jugada antes de iniciar una nueva ronda");
+            //}
 
         }
 
 
         function finalizarPartida() {
+
             
             usuario_id =  $('#userId').text().match(/\d+/)[0];
-            Swal.fire(usuario_id);
+           
 
             do {
               comentario = prompt("Introduzca algún comentario sobre la partida");
             } while (comentario === "");
 
-
+            alert(usuario_id);
             $.ajax({
                 url: '@Url.Action("insertar", "PartidaConTabla")',
                 type: 'POST',
