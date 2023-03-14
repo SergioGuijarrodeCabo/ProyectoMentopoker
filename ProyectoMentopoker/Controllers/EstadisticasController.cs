@@ -60,7 +60,7 @@ namespace ProyectoMentopoker.Controllers
 
 
         [HttpPost]
-        public IActionResult VerJugadas(DateTime fecha)
+        public IActionResult VerJugadas(DateTime? fecha = null, string? cell_id = null)
         {
 
             var usuario_id = HttpContext.Session.GetString("ID");
@@ -69,12 +69,14 @@ namespace ProyectoMentopoker.Controllers
             {
                 usuario_id = "1";
             }
-            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), "jugadasFecha", fecha);
+            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), "jugadasFecha", fecha, null);
 
             return View(conjunto);
 
         }
 
+
+       
 
 
 

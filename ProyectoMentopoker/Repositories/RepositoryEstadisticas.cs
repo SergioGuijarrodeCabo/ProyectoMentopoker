@@ -86,7 +86,7 @@ namespace ProyectoMentopoker.Repositories
         }
 
 
-        public ConjuntoPartidasUsuario GetPartidas(int Usuario_id, string peticion, DateTime? fecha = null)
+        public ConjuntoPartidasUsuario GetPartidas(int Usuario_id, string peticion, DateTime? fecha = null, string? cell_id = null)
         {
             //string sql = "SP_GET_PARTIDAS";
             //var consulta = this.context.Partidas.FromSqlRaw(sql);
@@ -103,7 +103,14 @@ namespace ProyectoMentopoker.Repositories
             //                select datos;
 
 
+
+
+
             List<PartidaModel> partidas = new List<PartidaModel>();
+
+
+
+
             if (peticion == "partidas" || peticion == "jugadasFecha")
             {
                  var consulta = from datos in this.context.Partidas
@@ -113,6 +120,10 @@ namespace ProyectoMentopoker.Repositories
                partidas = consulta.ToList();
             }
           
+            if(peticion== "jugadasCellID")
+            {
+                int a = 0;
+            }
 
 
             ConjuntoPartidasUsuario conjunto = new ConjuntoPartidasUsuario();
