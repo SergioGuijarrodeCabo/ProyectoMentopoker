@@ -1557,6 +1557,9 @@
             //if (rondaJugada == 1) {
                 
             //    cantidadTotalUltimaRonda = null;
+              do {
+              cantidadTotalRonda = prompt("Introduzca su apuesta final");
+            } while (cantidadTotalRonda === "" || isNaN(cantidadTotalRonda));
 
             do {
               cantidadTotalUltimaRonda = prompt("Introduzca sus ganancias o pérdidas (en negativo) de la última ronda");
