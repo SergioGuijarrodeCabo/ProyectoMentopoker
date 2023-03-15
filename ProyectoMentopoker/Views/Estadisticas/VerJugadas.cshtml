@@ -151,25 +151,32 @@
                         </div>
                     </div>
 
-                      <div class="col" id="divStatsRondas">
+                     <div class="col" id="divStatsRondas">
                           <div class="card">
-                         <table class="table table-dark table-hover " id="tablaSi" style="display:none">
+                         <table class="table table-dark table-hover " id="tablaSi" style="display:none;text-align:left;vertical-align: middle;">
                             <tbody>
-                                <tr><th>  <h3 style="color:white;">Cantidades jugadas rondas: @Math.Round(Model.EstadisticasJugadas.CantidadesJugadasTipoRondas[0], 2)$</h3></th></tr>
-                                <tr><th> <h3 style="color:white;">Ganancias Rondas: @Math.Round(Model.EstadisticasJugadas.GananciasTipoRondas[0], 2)$</h3></th></tr>
-                                <tr><th> <h3 style="color:white;">Rentabilidad Rondas: @Math.Round(Model.EstadisticasJugadas.MediaGananciasTipoRondas[0],2)$</h3></th></tr>
+                                <tr><th>  <p style="color:white;">Cantidades jugadas: @Math.Round(Model.EstadisticasJugadas.CantidadesJugadas[0], 2)$</p></th></tr>
+                                 <tr><th>  <p style="color:white;">Media cantidades jugadas: @Math.Round(Model.EstadisticasJugadas.MediaCantidadesJugadas[0], 2)$</p></th></tr>
+                                 <tr><th>  <p style="color:white;">Cantidades rondas: @Math.Round(Model.EstadisticasJugadas.CantidadesRondas[0], 2)$</p></th></tr>
+                                <tr><th> <p style="color:white;">Ganancias Rondas: @Math.Round(Model.EstadisticasJugadas.GananciasTipoRondas[0], 2)$</p></th></tr>
+                                <tr><th> <p style="color:white;">Media ganancias Rondas: @Math.Round(Model.EstadisticasJugadas.MediaGananciasTipoRondas[0],2)</p></th></tr>
+                                 <tr><th> <p style="color:white;">Rentabilidad Rondas: @Math.Round(Model.EstadisticasJugadas.RentabilidadTipoRondas[0],2)$</p></th></tr>
                                
                             </tbody>
                           </table>  </div>
                           <div class="card">
-                            <table class="table table-dark table-hover " id="tablaNo" style="display:none">
+                            <table class="table table-dark table-hover " id="tablaNo" style="display:none;text-align:left">
                             <tbody>
-                                <tr><th>  <h3 style="color:white;">Cantidades jugadas rondas: @Math.Round(Model.EstadisticasJugadas.CantidadesJugadasTipoRondas[1], 2)$</h3></th></tr>
-                                <tr><th> <h3 style="color:white;">Ganancias Rondas: @Math.Round(Model.EstadisticasJugadas.GananciasTipoRondas[1], 2)$</h3></th></tr>
-                                <tr><th> <h3 style="color:white;">Rentabilidad Rondas: @Math.Round(Model.EstadisticasJugadas.MediaGananciasTipoRondas[1],2)$</h3></th></tr>
+                              <tr><th>  <p style="color:white;">Cantidades jugadas: @Math.Round(Model.EstadisticasJugadas.CantidadesJugadas[1], 2)$</p></th></tr>
+                                 <tr><th>  <p style="color:white;">Media cantidades jugadas: @Math.Round(Model.EstadisticasJugadas.MediaCantidadesJugadas[1], 2)$</p></th></tr>
+                                 <tr><th>  <p style="color:white;">Cantidades jugadas rondas: @Math.Round(Model.EstadisticasJugadas.CantidadesRondas[1], 2)$</p></th></tr>
+                                <tr><th> <p style="color:white;">Ganancias Rondas: @Math.Round(Model.EstadisticasJugadas.GananciasTipoRondas[1], 2)$</p></th></tr>
+                                <tr><th> <p style="color:white;">Media ganancias Rondas: @Math.Round(Model.EstadisticasJugadas.MediaGananciasTipoRondas[1],2)$</p></th></tr>
+                                 <tr><th> <p style="color:white;">Rentabilidad Rondas: @Math.Round(Model.EstadisticasJugadas.RentabilidadTipoRondas[1],2)$</p></th></tr>
                                
                             </tbody>
                           </table>  </div>
+                        
                         
 
 

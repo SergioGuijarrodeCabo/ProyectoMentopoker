@@ -260,7 +260,7 @@ namespace ProyectoMentopoker.Repositories
             var numRondas = 0;
             List<string> cellids = new List<string>();
             List<RondaModel> rondasACalcular = new List<RondaModel>();
-
+            List<JugadaModel> JugadasRondas = new List<JugadaModel>();
 
             if (cell_id != null)
             {
@@ -351,12 +351,13 @@ namespace ProyectoMentopoker.Repositories
                                         seguimiento = "no";
 
                                         jugadaInsertada = true;
+                                        JugadasRondas.Add(partidas.Jugadas[x]);
                                     }
                                     if (partidas.Jugadas[x].Seguimiento_Tabla == true)
                                     {
                                         seguimiento = "si";
                                         jugadaInsertada = true;
-
+                                        JugadasRondas.Add(partidas.Jugadas[x]);
                                     }
                                     stats.SeguimientoTipoRondas.Add(seguimiento.ToString());
                                     stats.Rondas_ids.Add(partidas.Rondas[i].Ronda_id);
@@ -372,11 +373,13 @@ namespace ProyectoMentopoker.Repositories
                                     seguimiento = "no";
 
                                     jugadaInsertada = true;
+                                    JugadasRondas.Add(partidas.Jugadas[x]);
                                 }
                                 if (partidas.Jugadas[x].Seguimiento_Tabla == true)
                                 {
                                     seguimiento = "si";
                                     jugadaInsertada = true;
+                                    JugadasRondas.Add(partidas.Jugadas[x]);
 
                                 }
                                 stats.SeguimientoTipoRondas.Add(seguimiento.ToString());
@@ -403,33 +406,45 @@ namespace ProyectoMentopoker.Repositories
 
 
             for (int i = 0; i < numRondas; i++)
-            //for (int i = 0; i < partidas.Rondas.Count; i++)
             {
-                if (stats.SeguimientoTipoRondas[i].Equals("si")){
-                    //stats.CantidadesJugadasTipoRondas[0]+=(partidas.Rondas[i].Cantidad_jugada);
-                    stats.CantidadesJugadasTipoRondas[0] += (rondasACalcular[i].Cantidad_jugada);
-                    stats.GananciasTipoRondas[0]+=(rondasACalcular[i].Ganancias);
-                    //stats.RentabilidadTipoRondas[0] += ((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
-                    stats.MediaGananciasTipoRondas[0] += (partidas.Rondas[i].Ganancias);
+                if (stats.SeguimientoTipoRondas[i].Equals("si"))
+                {
+
+                    stats.CantidadesJugadas[0] += (rondasACalcular[i].Cantidad_jugada);
+                    stats.GananciasTipoRondas[0] += (rondasACalcular[i].Ganancias);
+                    stats.CantidadesRondas[0] += (JugadasRondas[i].Cantidad_jugada_Preflop);
+                    stats.MediaCantidadesJugadas[0] += (JugadasRondas[i].Cantidad_jugada_Preflop);
+                    stats.RentabilidadTipoRondas[0] += ((rondasACalcular[i].Ganancias + rondasACalcular[i].Cantidad_jugada) / rondasACalcular[i].Cantidad_jugada);
+                    stats.MediaGananciasTipoRondas[0] += (rondasACalcular[i].Ganancias);
                     rondasSi++;
                 }
                 if (stats.SeguimientoTipoRondas[i].Equals("no"))
                 {
-                    stats.CantidadesJugadasTipoRondas[1] += (rondasACalcular[i].Cantidad_jugada);
+                    stats.CantidadesJugadas[1] += (rondasACalcular[i].Cantidad_jugada);
                     stats.GananciasTipoRondas[1] += (rondasACalcular[i].Ganancias);
-                    //stats.RentabilidadTipoRondas[1] += ((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
+                    stats.CantidadesRondas[1] += (JugadasRondas[i].Cantidad_jugada_Preflop);
+                    stats.MediaCantidadesJugadas[1] += (JugadasRondas[i].Cantidad_jugada_Preflop);
+                    stats.RentabilidadTipoRondas[1] += ((rondasACalcular[i].Ganancias + rondasACalcular[i].Cantidad_jugada) / rondasACalcular[i].Cantidad_jugada);
                     stats.MediaGananciasTipoRondas[1] += (rondasACalcular[i].Ganancias);
                     rondasNo++;
                 }
-                
-               // stats.CantidadesJugadasTipoRondas.Add(partidas.Rondas[i].Cantidad_jugada);
+
+                // stats.CantidadesJugadasTipoRondas.Add(partidas.Rondas[i].Cantidad_jugada);
                 //stats.GananciasTipoRondas.Add(partidas.Rondas[i].Ganancias);
                 //stats.RentabilidadTipoRondas.Add((partidas.Rondas[i].Ganancias + partidas.Rondas[i].Cantidad_jugada) / partidas.Rondas[i].Cantidad_jugada);
             }
 
+            stats.MediaCantidadesJugadas[0] = stats.MediaCantidadesJugadas[0] / rondasSi;
+            stats.MediaCantidadesJugadas[1] = stats.MediaCantidadesJugadas[1] / rondasNo;
+
+            stats.RentabilidadTipoRondas[0] = stats.RentabilidadTipoRondas[0] / rondasSi;
+            stats.RentabilidadTipoRondas[1] = stats.RentabilidadTipoRondas[1] / rondasSi;
+
+
             stats.MediaGananciasTipoRondas[0] = stats.MediaGananciasTipoRondas[0] / rondasSi;
             stats.MediaGananciasTipoRondas[1] = stats.MediaGananciasTipoRondas[1] / rondasNo;
-            
+
+
 
             return stats;
         }
