@@ -64,12 +64,22 @@ namespace ProyectoMentopoker.Controllers
         {
 
             var usuario_id = HttpContext.Session.GetString("ID");
-
+            string condicion = "";
             if (usuario_id == null)
             {
                 usuario_id = "1";
             }
-            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), "jugadasFecha", fecha, null);
+
+            if (fecha == null)
+            {
+                condicion = "jugadasCellid";
+            }
+            if(cell_id == null)
+            {
+                condicion = "jugadasFecha";
+            }
+
+            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), condicion, fecha, cell_id);
 
             return View(conjunto);
 

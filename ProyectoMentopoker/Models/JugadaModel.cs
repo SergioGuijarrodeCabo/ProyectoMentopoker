@@ -11,8 +11,8 @@ namespace ProyectoMentopoker.Models
         [Key]
         [Column("Jugada_id")]
         public string Jugada_id { get; set; }
-        [Column("Cantidad_jugada")]
-        public double Cantidad_jugada { get; set; }
+        [Column("Cantidad_jugada_Preflop")]
+        public double Cantidad_jugada_Preflop { get; set; }
         [Column("Seguimiento_Tabla")]
         public Boolean Seguimiento_Tabla { get; set; }
         [Column("Identificador")]

@@ -42,13 +42,13 @@ using static System.Net.Mime.MediaTypeNames;
 //CREATE OR ALTER PROCEDURE SP_INSERT_JUGADA
 //(
 
-//@CANTIDAD_JUGADA FLOAT,
+//@CANTIDAD_JUGADA_PREFLOP FLOAT,
 //@SEGUIMIENTO_TABLA BIT,
 //@IDENTIFICADOR INT,
 //@RONDA_ID NVARCHAR(50)
 //)
 //AS
-//INSERT INTO Jugadas (Jugada_id, Cantidad_jugada, Seguimiento_Tabla, Identificador, Ronda_id) VALUES((SELECT max(CAST(Jugada_id AS INT)) from Jugadas) + 1, @CANTIDAD_JUGADA, @SEGUIMIENTO_TABLA, @IDENTIFICADOR, @RONDA_ID)
+//INSERT INTO Jugadas (Jugada_id, Cantidad_jugada_Preflop, Seguimiento_Tabla, Identificador, Ronda_id) VALUES((SELECT max(CAST(Jugada_id AS INT)) from Jugadas) + 1, @CANTIDAD_JUGADA_PREFLOP, @SEGUIMIENTO_TABLA, @IDENTIFICADOR, @RONDA_ID)
 //GO
 
 
@@ -301,7 +301,7 @@ namespace ProyectoMentopoker.Repositories
         public void insertJugada(double cantidad_Jugada, Boolean seguimiento_jugada, 
             int identificador, string ronda_id)
         {
-            SqlParameter pamcantidad = new SqlParameter("@CANTIDAD_JUGADA", cantidad_Jugada);
+            SqlParameter pamcantidad = new SqlParameter("@CANTIDAD_JUGADA_PREFLOP", cantidad_Jugada);
             this.com.Parameters.Add(pamcantidad);
             int seguimiento;
             if(seguimiento_jugada == true)
