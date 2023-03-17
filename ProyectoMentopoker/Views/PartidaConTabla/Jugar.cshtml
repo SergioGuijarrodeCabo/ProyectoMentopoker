@@ -48,6 +48,11 @@
     th{
         color:white;
     }
+
+    .image-gallery{
+          background-color: #212529 !important;
+          padding: 20px;
+    }
        
 
      </style>
@@ -1210,21 +1215,29 @@
                 idRondaActual++;
 
                 // create the HTML for the card with the dynamic ID
-                var cardHtml = '<div class="col"  style="width:50%; height:175;">' +
+                var cardHtml = '<div class="col"  style="width:200px;">' +
                     '<div class="card shadow-sm" id="dRonda' + idRondaActual + '">' +
 
-                    '<svg class="bd-placeholder-img card-img-top"   role="img" aria-label="Placeholder: Jugadas" preserveAspectRatio="xMidYMid slice" focusable="false">' +
+                    
                     '<title>Placeholder</title>' +
                     '<rect width="100%" height="100%" fill="#55595c"/>' +
-                    '<text x="40%" y="40%" fill="#eceeef" dy=".3em" id="dJugadasPintadas' + idRondaActual + '" ></text>' +
+                    '<text x="40%" y="40%" fill="#eceeef" dy=".3em" style="text-align:center" id="dJugadasPintadas' + idRondaActual + '" >&nbsp&nbsp&nbsp&nbsp&nbsp</text>' +
 
-                    '</svg>' +
+                    
+
+                           
+                    '<div class="image-gallery d-flex align-items-center justify-content-around"  >' +
+                    '<img src="/images/cartas/2R.png" class="gallery-image shadow-1-strong rounded" style="height:60px;" id="carta1'+idRondaActual+'" />' +
+                    '<img src="/images/cartas/2N.png" class="gallery-image shadow-1-strong rounded"  style="height:60px;" id="carta2'+idRondaActual+'" "/>' +
+                    '</div>' +
+
+
 
                     '<div class="card-body" id="dJugadas' + idRondaActual + '">' + '</div>' +
                     '<p class="card-text">Ronda ' + idRondaActual + '</p>' +
                     '<div class="d-flex justify-content-between align-items-center">' +
-                    '<div >' +
-                    '<button type="button" class="btn btn-sm btn-outline-secondary iniciarJugada" width="50%" id="bRonda' + idRondaActual + '">Nueva jugada</button>' +
+                    '<div style="justify-content-center" >' +
+                    //'<button type="button" class="btn btn-sm btn-outline-secondary iniciarJugada" width="50%" id="bRonda' + idRondaActual + '">Iniciar jugada</button>' +
                     '<button type="button" class="btn btn-sm btn-outline-secondary" width="50%" id="bFinal' + idRondaActual + '"  onclick="finalizarRonda()">Finalizar ronda</button>' +
 
                     '</div>' +
@@ -1280,13 +1293,13 @@
                     '</div>';
 
                 // append the new div to the "dJugadas" div for the current round
-                $("#dJugadas" + idRondaActual).append(divHtml);
+                //$("#dJugadas" + idRondaActual).append(divHtml);
 
 
             });
 
 
-            $(document).on("click", ".iniciarJugada", iniciarJugada);
+            //$(document).on("click", ".iniciarJugada", iniciarJugada);
         });
 
 
@@ -1341,20 +1354,22 @@
         function iniciarRonda(i) {
             if (i == 1) {
                 document.getElementById('divJugadas').style.display = "inline-block";
+                iniciarJugada();
             } else {
                 $('.nueva-jugada').remove();
                 // $('.nueva-jugada').hide();
                 rondaAMedias = 0;
                 rondaJugada = 0;
                 $("#botonInicio").trigger("click");
-                if (idRondaActual > 0) {
-                    var prevCardId = "#dRonda" + (idRondaActual - 1);
-                    $(prevCardId + " .iniciarJugada, " + prevCardId + " .btn-outline-secondary").prop("disabled", true);
-                }
+                //if (idRondaActual > 0) {
+                    //var prevCardId = "#dRonda" + (idRondaActual - 1);
+                    //$(prevCardId + " .iniciarJugada, " + prevCardId + " .btn-outline-secondary").prop("disabled", true);}
+                iniciarJugada();
                 ultimaCondicion = "";
                 cantidadTotalRonda = 0;
                 cantidadTotalUltimaRonda = 0;
                 ultimaMano = "";
+               
 
             }
         };
@@ -1371,7 +1386,7 @@
 
                 // create the HTML for the new div
                 var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idRondaActual + "j" + idJugadaActual + '">' +
-                    '<p class="card-text">Jugada ' + idJugadaActual + '</p>' +
+                    //'<p class="card-text">Jugada ' + idJugadaActual + '</p>' +
                     '<p class="card-text"></p>' +
                     '<p class="card-text">Seguimiento</p>' +
                     '<div class="form-check">' +
@@ -1441,12 +1456,52 @@
             //var $dJugadasPintadas = $('#dJugadasPintadas' + idRondaActual);
             
 
+            var carta1 = $("#carta1"+idRondaActual);
+            var carta2 = $("#carta2"+idRondaActual);
+
+            // set the src attribute for each image
+           
+            
+            
+              var  strInicial = cell_id;
+                var subString1 = strInicial.substring(0,1);
+                var subString2 = strInicial.substring(1,2);
+                var subString3 = strInicial.substring(2,3);
+                var src1 = "/images/cartas/";
+                var src2 = "/images/cartas/";
+                if(subString1 == 'T'){
+                    subString1 = '10';
+                }
+                if(subString2 == 'T'){
+                    subString2 = '10';
+                }
+
+                if(subString3 == 's'){
+
+                
+                    src1 += subString1+"R.png";
+                    src2 += subString2+"R.png";
+                }else{
+                     src1 += subString1+"N.png";
+                    src2 += subString2+"R.png";
+                }
+
+               // alert(src1);
+                //alert(src2);
+                
+             carta1.attr("src", src1);
+            carta2.attr("src", src2);
+           
+
             ultimaCondicion = table_id;
             ultimaMano = cell_id;
 
             // Append the two values using the append() method
             //$dJugadasPintadas.append("R"+idRondaActual+" J"+idJugadaActual+ " "+ cell_id + " " + table_id +"\n");
             $("#dJugadasPintadas" + idRondaActual).text(cell_id);
+
+
+
             manoJugada = 1;
           
 
