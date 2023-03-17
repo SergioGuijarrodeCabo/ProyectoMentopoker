@@ -1221,7 +1221,7 @@
                     
                     '<title>Placeholder</title>' +
                     '<rect width="100%" height="100%" fill="#55595c"/>' +
-                    '<text x="40%" y="40%" fill="#eceeef" dy=".3em" style="text-align:center" id="dJugadasPintadas' + idRondaActual + '" >&nbsp&nbsp&nbsp&nbsp&nbsp</text>' +
+                    '<p x="40%" y="40%" fill="#eceeef" dy=".3em" style="text-align:center" id="dJugadasPintadas' + idRondaActual + '" >&nbsp&nbsp&nbsp&nbsp&nbsp</p>' +
 
                     
 
@@ -1377,7 +1377,7 @@
 
         function iniciarJugada() {
 
-            if (jugadaFinalizada == 1) {
+            //if (jugadaFinalizada == 1) {
                 
                 document.getElementById('dropdowns').style.display = "inline-block";
                 // get the current ID for the round
@@ -1437,7 +1437,7 @@
 
                 jugadaFinalizada = 0;
                 rondaJugada = 0;
-            } else { alert("Debe finalizar una jugada antes de empezar otra"); }
+            //} else { alert("Debe finalizar una jugada antes de empezar otra"); }
         }
 
 
