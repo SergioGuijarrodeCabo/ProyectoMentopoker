@@ -29,7 +29,7 @@ namespace ProyectoMentopoker.Controllers
 
 
         [HttpPost]
-        public IActionResult VerPartidas(DateTime fecha)
+        public IActionResult VerPartidas(DateTime? fechaInicio = null, DateTime? fechaFinal = null)
         {
 
             var usuario_id = HttpContext.Session.GetString("ID");
@@ -38,7 +38,7 @@ namespace ProyectoMentopoker.Controllers
             {
                 usuario_id = "1";
             }
-            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), "partidas", fecha);
+            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), "partidas", fechaInicio, fechaFinal);
 
             return View(conjunto);
 
@@ -60,7 +60,7 @@ namespace ProyectoMentopoker.Controllers
 
 
         [HttpPost]
-        public IActionResult VerJugadas(DateTime? fecha = null, string? cell_id = null)
+        public IActionResult VerJugadas(DateTime? fechaInicio = null, DateTime? fechaFinal = null, string? cell_id = null)
         {
 
             var usuario_id = HttpContext.Session.GetString("ID");
@@ -70,7 +70,7 @@ namespace ProyectoMentopoker.Controllers
                 usuario_id = "1";
             }
 
-            if (fecha == null)
+            if (fechaInicio == null || fechaFinal ==null)
             {
                 condicion = "jugadasCellid";
             }
@@ -79,7 +79,7 @@ namespace ProyectoMentopoker.Controllers
                 condicion = "jugadasFecha";
             }
 
-            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), condicion, fecha, cell_id);
+            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), condicion, fechaInicio, fechaFinal, cell_id);
 
             return View(conjunto);
 

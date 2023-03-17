@@ -45,6 +45,10 @@
         background-color: #212529 !important;
     }
 
+    .principal{
+       padding:20px;
+    }
+
     th{
         color:white;
     }
@@ -58,6 +62,7 @@
      </style>
 
     <div class="container">
+        <div class="principal">
         <div class="row">
           <div class="col d-inline mr-2">
 
@@ -1061,7 +1066,7 @@
 
 
     @*<div class="overflow-scroll">*@
-    <table id="tabla" class="table table-bordered" >
+    <table id="tabla" class="table table-bordered overflow-scroll" >
         <thead></thead>
         <tbody>
             <tr scope="row"><th>AA</th> <th>AKs</th> <th>AQs</th> <th>AJs</th> <th>ATs</th> <th>A9s</th> <th>A8s</th> <th>A7s</th> <th>A6s</th> <th>A5s</th> <th>A4s</th> <th>A3s</th> <th>A2s</th></tr>
@@ -1156,7 +1161,7 @@
 
     </div>
 
-
+    </div>
 
 
 
@@ -1220,15 +1225,15 @@
 
                     
                     '<title>Placeholder</title>' +
-                    '<rect width="100%" height="100%" fill="#55595c"/>' +
+                    '<rect width="100%" height="100%" fill="#55595c" style="padding:10px"/>' +
                     '<p x="40%" y="40%" fill="#eceeef" dy=".3em" style="text-align:center" id="dJugadasPintadas' + idRondaActual + '" >&nbsp&nbsp&nbsp&nbsp&nbsp</p>' +
 
                     
 
                            
                     '<div class="image-gallery d-flex align-items-center justify-content-around"  >' +
-                    '<img src="/images/cartas/2R.png" class="gallery-image shadow-1-strong rounded" style="height:60px;" id="carta1'+idRondaActual+'" />' +
-                    '<img src="/images/cartas/2N.png" class="gallery-image shadow-1-strong rounded"  style="height:60px;" id="carta2'+idRondaActual+'" "/>' +
+                    '<img src="" class="gallery-image shadow-1-strong rounded" style="height:60px;" id="carta1'+idRondaActual+'" />' +
+                    '<img src="" class="gallery-image shadow-1-strong rounded"  style="height:60px;" id="carta2'+idRondaActual+'" "/>' +
                     '</div>' +
 
 
@@ -1236,11 +1241,11 @@
                     '<div class="card-body" id="dJugadas' + idRondaActual + '">' + '</div>' +
                     '<p class="card-text">Ronda ' + idRondaActual + '</p>' +
                     '<div class="d-flex justify-content-between align-items-center">' +
-                    '<div style="justify-content-center" >' +
+                    //'<div style="justify-content-center" >' +
                     //'<button type="button" class="btn btn-sm btn-outline-secondary iniciarJugada" width="50%" id="bRonda' + idRondaActual + '">Iniciar jugada</button>' +
-                    '<button type="button" class="btn btn-sm btn-outline-secondary" width="50%" id="bFinal' + idRondaActual + '"  onclick="finalizarRonda()">Finalizar ronda</button>' +
+                    //'<button type="button" class="btn btn-primary my-2" width="50%" id="bFinal' + idRondaActual + '"  onclick="jugarMano()">Finalizar ronda</button>' +
 
-                    '</div>' +
+                    //'</div>' +
 
                     '</div>' +
 
@@ -1364,7 +1369,7 @@
                 //if (idRondaActual > 0) {
                     //var prevCardId = "#dRonda" + (idRondaActual - 1);
                     //$(prevCardId + " .iniciarJugada, " + prevCardId + " .btn-outline-secondary").prop("disabled", true);}
-                iniciarJugada();
+              
                 ultimaCondicion = "";
                 cantidadTotalRonda = 0;
                 cantidadTotalUltimaRonda = 0;
@@ -1399,7 +1404,7 @@
 
 
                     '<input type="number" class="form-control"  id="inputCantidad' + idRondaActual + "j" + idJugadaActual + '" placeholder="Ingrese una cantidad a apostar" style="display: none;">' +
-                    '<button type="button" class="btn btn-warning" id="bJugada' + idRondaActual + "j" + idJugadaActual + '" onclick="jugarMano()" style="display: none;">JUGAR</button>' +
+                    '<button type="button" class="btn btn-primary my-2" id="bJugada' + idRondaActual + "j" + idJugadaActual + '" onclick="jugarMano()" style="display: none;">JUGAR</button>' +
 
                     '</div>';
 
@@ -1593,6 +1598,7 @@
                     // //$dJugadasPintadas.html($dJugadasPintadas.html() + "<br style='display: block'/>");
 
                     ////alert(cantidad+" "+ hasPartida);
+
                 } else {
                     var dineroMaximo = dineroActual - cantidadTotalRonda;
                     alert("Dinero insuficiente. La cantidad máxima para jugar es de " + dineroMaximo+"$");
@@ -1620,7 +1626,8 @@
               cantidadTotalUltimaRonda = prompt("Introduzca sus ganancias o pérdidas (en negativo) de la última ronda");
             } while (cantidadTotalUltimaRonda === "" || isNaN(cantidadTotalUltimaRonda));
 
-
+            //$("#bFinal" + idRondaActual).style.display = "none";
+    
 
 
                 ////// Calculate the new dineroActual and balance values

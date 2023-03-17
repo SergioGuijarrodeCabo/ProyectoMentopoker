@@ -35,18 +35,33 @@
             overflow-y: auto;
              overflow-x: auto;
         }
+
+         .formCalendario {
+          background-color: #212529;
+          padding: 20px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+
     </style>
 
     <div class="container">
         
         
 
-        <form method="POST" >
-
-            <input type="date" name="fecha">
-            <button onclick="mostrarPartidas()">VER</button>
+           <form method="POST" id="selectorFecha"  class="formCalendario" >
+          <div class="form-group">
+            <label for="start_date">Start Date:</label>
+            <input type="date" class="form-control" name="fechaInicio">
+          </div>
+          <div class="form-group">
+            <label for="end_date">End Date:</label>
+            <input type="date" class="form-control" name="fechaFinal">
+          </div>
+          <input type="hidden" name="cell_id" id="cell_id">
+          <button class="btn btn-info" id="bJugada">MOSTRAR PARTIDAS</button>
         </form>
-        <br />
+
 
         @if (Model != null)
         {

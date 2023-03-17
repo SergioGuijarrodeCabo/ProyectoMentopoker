@@ -48,18 +48,48 @@
              color:white;
         }
 
-        .superpuesta{
+        /*.superpuesta{
             position:absolute;
             right:200px;
             z-index:1;
-        }
+            color:#212529 !important;
+        }*/
+
+        .formCalendario{
+               display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            background-color: #212529;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+          }
+
+
+            #dJugada {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            background-color: #212529;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+          }
+  
+          #tabla {
+            color: #fff;
+          }
     </style>
 
 
 
     <div class="container" id="encabezado" style="text-align:center">
 
-        <
+        
 
         <!-- Custom styles for this template -->
         <link href="~/css/navbar-top-fixed.css" rel="stylesheet">
@@ -72,20 +102,46 @@
 
         <div class="container">
             <div class="row" >
-                <div class="col">
-           <button class="btn btn-info" onclick="mostrarCalendario()">Filtrar por fecha</button>
+                <div class="col" >
 
+                    <div  style="padding:50px;">
+                <button class="btn btn-info" onclick="mostrarCalendario()">Filtrar por fecha</button>
+                 <button class="btn btn-info" onclick="mostrarTabla()">Filtrar por jugada</button>
+                    </div>  
+             </div>
+            </div>
+            <div class="row" >
+                <div class="col">
+           
+        
+           
+          <form method="POST" id="selectorFecha" style="display:none;" class="formCalendario" >
+          <div class="form-group">
+            <label for="fechaInicio"  style="color:whitesmoke">Fecha inicio:</label>
+            <input type="date" class="form-control" name="fechaInicio">
+          </div>
+          <div class="form-group">
+            <label for="fechaFinal" style="color:whitesmoke">Fecha final:</label>
+            <input type="date" class="form-control" name="fechaFinal">
+          </div>
+          <input type="hidden" name="cell_id" id="cell_id">
+          <button class="btn btn-info" id="bJugada">MOSTRAR PARTIDAS</button>
+        </form>
+
+        
+
+@*
           <form method="POST" id="selectorFecha" style="display:none;" >
 
             <input type="date" name="fecha">
              <input type="hidden" name="cell_id" id="cell_id"/>
             <button id="bJugada">VER</button>
         </form>
-
+*@
        </div>
 
       <div class="col">
-           <button class="btn btn-info" onclick="mostrarTabla()">Filtrar por jugada</button>
+          
           
            <div id="dJugada" style="display:none;" class="superpuesta"> 
            <table id="tabla" class="table table-bordered" >
@@ -142,15 +198,11 @@
         {
             <div class="container" id="divGraficos">
                 <div class="row">
-                    <div class="col">
-
-                       
-                   
-                    </div>
+                    
                     <div class="col">
 
                         <div class="card">
-                            <div class="card-header">Pie chart</div>
+                       
                             <div class="card-body">
                                 <canvas id="chart-lineComparacionSeguimiento" class="chartjs-render-monitor"></canvas>
                             </div>
@@ -170,8 +222,8 @@
                                  <tr><th> <p style="color:white;">Rentabilidad Rondas: @Math.Round(Model.EstadisticasJugadas.RentabilidadTipoRondas[0],2)%</p></th></tr>
                                
                             </tbody>
-                          </table>  </div>
-                          <div class="card">
+                          </table>  
+                         
                             <table class="table table-dark table-hover " id="tablaNo" style="display:none;text-align:left">
                             <tbody>
                               <tr><th>  <p style="color:white;">Cantidades jugadas: @Math.Round(Model.EstadisticasJugadas.CantidadesJugadas[1], 2)$</p></th></tr>
@@ -182,8 +234,8 @@
                                  <tr><th> <p style="color:white;">Rentabilidad Rondas: @Math.Round(Model.EstadisticasJugadas.RentabilidadTipoRondas[1],2)%</p></th></tr>
                                
                             </tbody>
-                          </table>  </div>
-                        
+                          </table> 
+                        </div>
                         
 
 
@@ -307,6 +359,9 @@ var myPieChart = null;
 
 var condicion = "";
 
+var botonCalendario = 0;
+var botonFecha = 0;
+
 
 
   $(document).ready(function () {
@@ -420,16 +475,36 @@ function statsRondas(){
 }
 
 
-function mostrarCalendario(){
+function mostrarCalendario() {
+
+    if (botonCalendario == 0) { 
 
             document.getElementById('selectorFecha').style.display = "inline-block";
     document.getElementById('dJugada').style.display = "none";
+        botonCalendario = 1;
+        botonFecha = 0;
+}
+    else{
+         document.getElementById('selectorFecha').style.display = "none";
+        botonCalendario = 0;
+             botonFecha = 0;
+
+    }
 }
 
 function mostrarTabla(){
-
+     if (botonFecha == 0) { 
             document.getElementById('dJugada').style.display = "inline-block";
             document.getElementById('selectorFecha').style.display = "none";
+         botonFecha = 1;
+         botonCalendario = 0;
+
+}
+            else{
+                 document.getElementById('dJugada').style.display = "none";
+         botonFecha = 0;
+          botonCalendario = 0;
+            }
 }
 
 $('.prueba').click(function() {
