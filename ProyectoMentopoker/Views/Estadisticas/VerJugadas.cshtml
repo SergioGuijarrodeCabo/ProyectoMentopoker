@@ -1,5 +1,54 @@
 ﻿@model EstadisticasJugadas
 
+
+@{
+
+    if(Model !=null){
+    if (Model.partidas.Jugadas != null) {
+        var cellIds = Model.partidas.Jugadas.Select(j => j.Cell_id).ToArray();
+        <script>
+
+        
+             $(document).ready(function () {
+
+            var cellIdsArray = @Html.Raw(Json.Serialize(cellIds));
+
+
+            
+            for (var i = 0; i < cellIdsArray.length; i++) {
+                    var cellId = cellIdsArray[i];
+                    var subString1 = cellId.substring(0,1);
+                    var subString2 = cellId.substring(1,2);
+                    var subString3 = cellId.substring(2,3);
+                    var src1 = "/images/cartas/";
+                    var src2 = "/images/cartas/";
+
+                    if(subString1 == 'T'){
+                        subString1 = '10';
+                    }
+                    if(subString2 == 'T'){
+                        subString2 = '10';
+                    }
+
+                    if(subString3 == 's'){
+                        src1 += subString1+"R.png";
+                        src2 += subString2+"R.png";
+                    } else {
+                        src1 += subString1+"N.png";
+                        src2 += subString2+"R.png";
+                    }
+
+               // alert(src1);
+                    $("#ig" + cellId ).find("#carta1_" + (i+1)).attr("src", src1);
+                    $("#ig" + cellId ).find("#carta2_" + (i+1)).attr("src", src2);
+                }
+
+            });
+        </script>
+    }}
+}
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -96,6 +145,12 @@
           #tabla {
             color: #fff;
           }
+
+          
+            .image-gallery{
+                  background-color: #212529 !important;
+                  padding: 20px;
+            }
     </style>
 
 
@@ -1209,6 +1264,7 @@
                           <div class="card">
                          <table class="table table-dark table-hover " id="tablaSi" style="display:none;text-align:left;vertical-align: middle;">
                             <tbody>
+                                  <tr><th>  <p style="color:white;">Rondas con seguimiento de tabla</p></th></tr>
                                 <tr><th>  <p style="color:white;">Cantidades jugadas: @Math.Round(Model.CantidadesJugadas[0], 2)$</p></th></tr>
                                  <tr><th>  <p style="color:white;">Media cantidades jugadas: @Math.Round(Model.MediaCantidadesJugadas[0], 2)$</p></th></tr>
                                  <tr><th>  <p style="color:white;">Cantidades rondas: @Math.Round(Model.CantidadesRondas[0], 2)$</p></th></tr>
@@ -1221,9 +1277,10 @@
                          
                             <table class="table table-dark table-hover " id="tablaNo" style="display:none;text-align:left">
                             <tbody>
+                                <tr><th>  <p style="color:white;">Rondas sin seguimiento de tabla</p></th></tr>
                               <tr><th>  <p style="color:white;">Cantidades jugadas: @Math.Round(Model.CantidadesJugadas[1], 2)$</p></th></tr>
                                  <tr><th>  <p style="color:white;">Media cantidades jugadas: @Math.Round(Model.MediaCantidadesJugadas[1], 2)$</p></th></tr>
-                                 <tr><th>  <p style="color:white;">Cantidades jugadas rondas: @Math.Round(Model.CantidadesRondas[1], 2)$</p></th></tr>
+                                 <tr><th>  <p style="color:white;">Cantidades rondas: @Math.Round(Model.CantidadesRondas[1], 2)$</p></th></tr>
                                 <tr><th> <p style="color:white;">Ganancias Rondas: @Math.Round(Model.GananciasTipoRondas[1], 2)$</p></th></tr>
                                 <tr><th> <p style="color:white;">Media ganancias Rondas: @Math.Round(Model.MediaGananciasTipoRondas[1],2)$</p></th></tr>
                                  <tr><th> <p style="color:white;">Rentabilidad Rondas: @Math.Round(Model.RentabilidadTipoRondas[1],2)%</p></th></tr>
@@ -1317,7 +1374,13 @@
                                 <td>@Html.DisplayFor(model => model.partidas.Jugadas[i].Cantidad_jugada_Preflop)</td>
                                   <td>@Html.DisplayFor(model => model.partidas.Jugadas[i].Cantidad_jugada)</td>
                                 <td>@Html.DisplayFor(model => model.partidas.Jugadas[i].Seguimiento_Tabla)</td>
-                                <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Cell_id)</td>
+                                <td>        
+                               <div class="image-gallery d-flex align-items-center justify-content-around" id="ig_@Model.partidas.Jugadas[i].Jugada_id" data-cell-id="@Model.partidas.Jugadas[i].Cell_id">
+                                  <img src="" class="gallery-image shadow-1-strong rounded" style="height:20px;" id="carta1_@Model.partidas.Jugadas[i].Jugada_id" />
+                                        <img src="" class="gallery-image shadow-1-strong rounded" style="height:20px;" id="carta2_@Model.partidas.Jugadas[i].Jugada_id" />
+                                </div>
+
+                                </td>
                                 <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Table_id)</td>
                                 <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Condicion)</td>
                                 <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Ronda_id)</td>
@@ -1361,6 +1424,45 @@ var botonDropdowns = 0;
 
 
   $(document).ready(function () {
+
+
+
+      
+            //var carta1 = $("#carta1");
+            //var carta2 = $("#carta2");
+
+            //// set the src attribute for each image
+           
+            
+            
+            //  var  strInicial = cell_id;
+            //    var subString1 = strInicial.substring(0,1);
+            //    var subString2 = strInicial.substring(1,2);
+            //    var subString3 = strInicial.substring(2,3);
+            //    var src1 = "/images/cartas/";
+            //    var src2 = "/images/cartas/";
+            //    if(subString1 == 'T'){
+            //        subString1 = '10';
+            //    }
+            //    if(subString2 == 'T'){
+            //        subString2 = '10';
+            //    }
+
+            //    if(subString3 == 's'){
+
+                
+            //        src1 += subString1+"R.png";
+            //        src2 += subString2+"R.png";
+            //    }else{
+            //         src1 += subString1+"N.png";
+            //        src2 += subString2+"R.png";
+            //    }
+
+            //   // alert(src1);
+            //    //alert(src2);
+                
+            // carta1.attr("src", src1);
+            //carta2.attr("src", src2);
 
    
 
