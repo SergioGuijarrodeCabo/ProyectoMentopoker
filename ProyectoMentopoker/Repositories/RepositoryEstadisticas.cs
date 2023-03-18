@@ -71,7 +71,7 @@ using System.Diagnostics.Metrics;
 
 
 
-//VFINAL
+//VAvanzando
 //ALTER PROCEDURE[dbo].[GET_IDSTABLAS_JUGADAS]
 //(@Ronda_id INT, @Cell_id NVARCHAR(4) = NULL)
 //AS
@@ -93,6 +93,24 @@ using System.Diagnostics.Metrics;
 //WHERE R.Ronda_id = @Ronda_id AND C.Cell_id = @Cell_id
 
 
+//VFINAL(de momento
+//ALTER PROCEDURE[dbo].[GET_IDSTABLAS_JUGADAS]
+//(
+//    @Ronda_id INT,
+//    @Cell_id NVARCHAR(4) = NULL,
+//    @Condicion NVARCHAR(50) = NULL
+//)
+//AS
+//BEGIN
+//    SELECT C.Cell_id, C.Table_id, T.Condicion, J.Cantidad_jugada_Preflop, J.Seguimiento_Tabla, J.Ronda_id, J.Jugada_Id, R.Cantidad_jugada, R.Ganancias
+//    FROM Celdas C
+//    INNER JOIN Tablas T ON C.Table_id = T.Table_id
+//    INNER JOIN Jugadas J ON J.Identificador = C.Identificador
+//    INNER JOIN Rondas R ON R.Ronda_id = J.Ronda_id
+//    WHERE R.Ronda_id = @Ronda_id 
+//    AND (@Cell_id IS NULL OR C.Cell_id = @Cell_id)
+//    AND(@Condicion IS NULL OR T.Condicion = @Condicion)
+//END
 
 
 
@@ -143,7 +161,7 @@ namespace ProyectoMentopoker.Repositories
         }
 
 
-        public ConjuntoPartidasUsuario GetPartidas(int Usuario_id, string peticion, DateTime? fechaInicio = null, DateTime? fechaFinal = null, string? cell_id = null)
+        public ConjuntoPartidasUsuario GetPartidas(int Usuario_id, string peticion, DateTime? fechaInicio = null, DateTime? fechaFinal = null, string? cell_id = null, string? condicion =null)
         {
             //string sql = "SP_GET_PARTIDAS";
             //var consulta = this.context.Partidas.FromSqlRaw(sql);
@@ -186,13 +204,14 @@ namespace ProyectoMentopoker.Repositories
 
             }
 
-            if (peticion == "jugadasCellid")
+            if (peticion == "jugadasCellid" || peticion =="jugadasCondicion")
             {
                 var consulta = from datos in this.context.Partidas
                                select datos;
                 partidas = consulta.ToList();
             }
           
+            
             
 
 
@@ -209,7 +228,7 @@ namespace ProyectoMentopoker.Repositories
             }
             for (int i = 0; i < rondas.Count; i++)
             {
-                jugadas.AddRange(this.GetJugadas(rondas[i].Ronda_id,cell_id));
+                jugadas.AddRange(this.GetJugadas(rondas[i].Ronda_id,cell_id, condicion));
 
             }
 
@@ -250,10 +269,10 @@ namespace ProyectoMentopoker.Repositories
             return rondas;
         }
 
-        public List<JugadasCalculadasModel> GetJugadas(string ronda_id, string? cell_id = null)
+        public List<JugadasCalculadasModel> GetJugadas(string ronda_id, string? cell_id = null, string? condicion = null)
         {
             List<JugadasCalculadasModel> jugadas = new List<JugadasCalculadasModel>();
-            if (cell_id == null)
+            if (cell_id == null && condicion ==null)
             {
 
 
@@ -262,11 +281,19 @@ namespace ProyectoMentopoker.Repositories
                 string sql = "EXECUTE GET_IDSTABLAS_JUGADAS @Ronda_id";
                  jugadas = this.context.JugadasCalculadas.FromSqlRaw(sql, parameter).ToList();
             }
-            else
+            if(cell_id !=null && condicion ==null)
             {
                 var parameterR = new SqlParameter("@Ronda_id", ronda_id);
                 var parameterC = new SqlParameter("@Cell_id", cell_id);
                 string sql = "EXECUTE GET_IDSTABLAS_JUGADAS @Ronda_id, @Cell_id";
+                jugadas = this.context.JugadasCalculadas.FromSqlRaw(sql, parameterR, parameterC).ToList();
+
+            }
+            if(cell_id == null && condicion !=null) {
+
+                var parameterR = new SqlParameter("@Ronda_id", ronda_id);
+                var parameterC = new SqlParameter("@Condicion", condicion);
+                string sql = "EXECUTE GET_IDSTABLAS_JUGADAS @Ronda_id, @Condicion";
                 jugadas = this.context.JugadasCalculadas.FromSqlRaw(sql, parameterR, parameterC).ToList();
 
 
@@ -311,17 +338,19 @@ namespace ProyectoMentopoker.Repositories
 
 
 
-        public EstadisticasJugadas GetEstadisticasJugadas(int Usuario_id, string peticion, DateTime? fechaInicio = null, DateTime? fechaFinal = null, string? cell_id = null)
+        public EstadisticasJugadas GetEstadisticasJugadas(int Usuario_id, string peticion, DateTime? fechaInicio = null, DateTime? fechaFinal = null, string? cell_id = null, string? condicion = null)
         {
             EstadisticasJugadas stats = new EstadisticasJugadas();
 
        
 
-            stats.partidas = this.GetPartidas(Usuario_id, peticion, fechaInicio, fechaFinal, cell_id);
+            stats.partidas = this.GetPartidas(Usuario_id, peticion, fechaInicio, fechaFinal, cell_id, condicion);
+      
+
 
             //List <JugadasCalculadasModel> jugadas = new List<JugadasCalculadasModel>();
 
-          
+
             var numRondas = 0;
 
 
