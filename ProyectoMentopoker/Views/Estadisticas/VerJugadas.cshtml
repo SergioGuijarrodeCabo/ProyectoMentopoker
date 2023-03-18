@@ -140,6 +140,7 @@
           </div>
           <input type="hidden" name="cell_id" id="cell_id">
           <input type="hidden" name="condicion" id="condicion" />
+
           <button class="btn btn-info" id="bJugada">MOSTRAR PARTIDAS</button>
         </form>
 
@@ -187,6 +188,7 @@
 
 
                 <label for="fechaInicio"  style="color:whitesmoke">Seleccione una condición para filtrar:</label>
+                <br/><br/>
                 <div class="btn-group" id="dInicial">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         Seleccione una condición
@@ -1541,13 +1543,13 @@ $('.prueba').click(function() {
 //$('.dropdown-item').click(function() {
 
 
-//     var idValue = $(this).text();
+//     var idValue = $(this).id();
     
 //    // Check if idValue is numeric
 //    if ($.isNumeric(idValue)) {
 
     
-//        //alert(idValue);
+//        alert(idValue);
 
 
 //     $('#condicion').val(idValue);
@@ -1569,18 +1571,16 @@ $('.prueba').click(function() {
 
             if ($.isNumeric(id)) {
 
-               var idValue = $(this).text();
+               // alert(id);
 
-                $('#condicion').val(idValue);
+                $('#condicion').val(id);
 
-                var lectura = $('#condicion').val();
+            var lectura = $('#condicion').val();
 
-                  $('#bJugada').click();
-                         
-
+              $('#bJugada').click();
 
 
-            } else {
+            }else{
                 // alert("hola");
 
                 if (id === 'BBvsLimp' || id === 'DefendBB' || id === 'Flat3B' || id === 'SQZ' || id === 'OS' || id === 'OR' || id === 'Reshove' || id === 'vsOS' || id === 'SBLimpia' || id === 'vs3Bet') {

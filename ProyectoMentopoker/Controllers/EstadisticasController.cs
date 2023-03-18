@@ -60,7 +60,7 @@ namespace ProyectoMentopoker.Controllers
 
 
         [HttpPost]
-        public IActionResult VerJugadas(DateTime? fechaInicio = null, DateTime? fechaFinal = null, string? cell_id = null, string? condicion = null)
+        public IActionResult VerJugadas(DateTime? fechaInicio = null, DateTime? fechaFinal = null, string? cell_id = null, int? condicion = null)
         {
 
             var usuario_id = HttpContext.Session.GetString("ID");
