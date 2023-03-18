@@ -1680,10 +1680,10 @@
             
             usuario_id =  $('#userId').text().match(/\d+/)[0];
            
-
+            var comentario = "";
             do {
-              comentario = prompt("Introduzca algún comentario sobre la partida");
-            } while (comentario === "");
+                comentario = prompt("Introduzca algún comentario sobre la partida");
+            } while (comentario.trim() === "");
 
             alert(usuario_id);
             $.ajax({
@@ -1707,7 +1707,12 @@
                 success: function (data) {
                     if (data.success) {
                         // The request was successful
-                        alert(data.message);
+                        //alert(data.message);
+                        if(data.message==1){
+                        alert("Partida insertada correctamente");
+                        }else{
+                               alert("Hubo un error al insertar la partida");
+                        }
                     } else {
                         // The request was not successful
                         alert("Hubo un error al insertar la partida");
