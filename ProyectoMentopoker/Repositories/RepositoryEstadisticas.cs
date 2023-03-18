@@ -274,9 +274,6 @@ namespace ProyectoMentopoker.Repositories
       
 
 
-
-
-   
             return jugadas;
         }
 
@@ -429,9 +426,13 @@ namespace ProyectoMentopoker.Repositories
             stats.MediaCantidadesJugadas[0] = stats.MediaCantidadesJugadas[0] / rondasSi;
             stats.MediaCantidadesJugadas[1] = stats.MediaCantidadesJugadas[1] / rondasNo;
 
-            stats.RentabilidadTipoRondas[0] = stats.RentabilidadTipoRondas[0] / rondasSi;
-            stats.RentabilidadTipoRondas[1] = stats.RentabilidadTipoRondas[1] / rondasSi;
 
+            double rent = stats.RentabilidadTipoRondas[1];
+
+            stats.RentabilidadTipoRondas[0] = stats.RentabilidadTipoRondas[0] / rondasSi;
+            stats.RentabilidadTipoRondas[1] = stats.RentabilidadTipoRondas[1] / rondasNo;
+
+            double rentFinal = stats.RentabilidadTipoRondas[1];
 
             stats.MediaGananciasTipoRondas[0] = stats.MediaGananciasTipoRondas[0] / rondasSi;
             stats.MediaGananciasTipoRondas[1] = stats.MediaGananciasTipoRondas[1] / rondasNo;
