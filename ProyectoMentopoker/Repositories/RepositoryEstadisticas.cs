@@ -327,7 +327,14 @@ namespace ProyectoMentopoker.Repositories
           
             var numRondas = 0;
 
-            List<RondaModel> rondasACalcular = stats.partidas.Rondas;
+
+            //if (cell_id == null)
+            //{
+            //List<RondaModel> rondasACalcular = stats.partidas.Rondas;
+
+
+            List<RondaModel> rondasACalcular = new List<RondaModel>();
+
             List<JugadasCalculadasModel> JugadasRondas = new List<JugadasCalculadasModel>();
 
             
@@ -357,14 +364,16 @@ namespace ProyectoMentopoker.Repositories
 
                                     jugadaInsertada = true;
                                     JugadasRondas.Add(stats.partidas.Jugadas[x]);
+                                   rondasACalcular.Add(stats.partidas.Rondas[i]);
                                 }
                                 if (stats.partidas.Jugadas[x].Seguimiento_Tabla == true)
                                 {
                                     seguimiento = "si";
                                     jugadaInsertada = true;
                                     JugadasRondas.Add(stats.partidas.Jugadas[x]);
+                                   rondasACalcular.Add(stats.partidas.Rondas[i]);
 
-                                }
+                            }
                                 stats.SeguimientoTipoRondas.Add(seguimiento.ToString());
                                 stats.Rondas_ids.Add(stats.partidas.Rondas[i].Ronda_id);
                                 numRondas++;
@@ -397,7 +406,7 @@ namespace ProyectoMentopoker.Repositories
                     stats.GananciasTipoRondas[0] += (rondasACalcular[i].Ganancias);
                     stats.CantidadesRondas[0] += (JugadasRondas[i].Cantidad_jugada_Preflop);
                     stats.MediaCantidadesJugadas[0] += (JugadasRondas[i].Cantidad_jugada_Preflop);
-                    stats.RentabilidadTipoRondas[0] += ((rondasACalcular[i].Ganancias + rondasACalcular[i].Cantidad_jugada) / rondasACalcular[i].Cantidad_jugada);
+                    stats.RentabilidadTipoRondas[0] += ((rondasACalcular[i].Ganancias /*+ rondasACalcular[i].Cantidad_jugada*/) / rondasACalcular[i].Cantidad_jugada)*100;
                     stats.MediaGananciasTipoRondas[0] += (rondasACalcular[i].Ganancias);
                     rondasSi++;
                 }
@@ -407,7 +416,7 @@ namespace ProyectoMentopoker.Repositories
                     stats.GananciasTipoRondas[1] += (rondasACalcular[i].Ganancias);
                     stats.CantidadesRondas[1] += (JugadasRondas[i].Cantidad_jugada_Preflop);
                     stats.MediaCantidadesJugadas[1] += (JugadasRondas[i].Cantidad_jugada_Preflop);
-                    stats.RentabilidadTipoRondas[1] += ((rondasACalcular[i].Ganancias + rondasACalcular[i].Cantidad_jugada) / rondasACalcular[i].Cantidad_jugada);
+                    stats.RentabilidadTipoRondas[1] += (rondasACalcular[i].Ganancias / rondasACalcular[i].Cantidad_jugada)*100;
                     stats.MediaGananciasTipoRondas[1] += (rondasACalcular[i].Ganancias);
                     rondasNo++;
                 }
