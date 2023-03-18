@@ -38,9 +38,9 @@ namespace ProyectoMentopoker.Controllers
             {
                 usuario_id = "1";
             }
-            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), "partidas", fechaInicio, fechaFinal);
+            EstadisticasPartidas stats = this.repoStats.GetEstadisticasPartidas(int.Parse(usuario_id), "partidas", fechaInicio, fechaFinal);
 
-            return View(conjunto);
+            return View(stats);
 
         }
 
@@ -79,9 +79,9 @@ namespace ProyectoMentopoker.Controllers
                 condicion = "jugadasFecha";
             }
 
-            ConjuntoPartidasUsuario conjunto = this.repoStats.GetPartidas(int.Parse(usuario_id), condicion, fechaInicio, fechaFinal, cell_id);
+            EstadisticasJugadas stats = this.repoStats.GetEstadisticasJugadas(int.Parse(usuario_id), condicion, fechaInicio, fechaFinal, cell_id);
 
-            return View(conjunto);
+            return View(stats);
 
         }
 

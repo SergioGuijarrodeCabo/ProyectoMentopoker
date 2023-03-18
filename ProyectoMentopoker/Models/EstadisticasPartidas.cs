@@ -2,7 +2,7 @@
 {
     public class EstadisticasPartidas
     {
-
+        public ConjuntoPartidasUsuario partidas { get; set; }
        
         public double CashInicialPartidas { get; set; }
         public double CashFinalPartidas { get; set; }

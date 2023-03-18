@@ -2,6 +2,7 @@
 using ProyectoMentopoker.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
+using System.Diagnostics.Metrics;
 
 #region
 
@@ -65,6 +66,40 @@ using Microsoft.Data.SqlClient;
 //INNER JOIN Tablas T ON C.Table_id = T.Table_id
 //INNER JOIN Jugadas J ON J.Identificador = C.Identificador
 //WHERE j.Jugada_id = @Jugada_id
+
+
+
+
+
+//VFINAL
+//ALTER PROCEDURE[dbo].[GET_IDSTABLAS_JUGADAS]
+//(@Ronda_id INT, @Cell_id NVARCHAR(4) = NULL)
+//AS
+
+//IF @Cell_id IS NULL  BEGIN
+//SELECT C.Cell_id, C.Table_id, T.Condicion, J.Cantidad_jugada_Preflop, J.Seguimiento_Tabla, J.Ronda_id, J.Jugada_Id, R.Cantidad_jugada, R.Ganancias
+//FROM Celdas C
+//INNER JOIN Tablas T ON C.Table_id = T.Table_id
+//INNER JOIN Jugadas J ON J.Identificador = C.Identificador
+//INNER JOIN Rondas R ON R.Ronda_id = J.Ronda_id
+//WHERE R.Ronda_id = @Ronda_id
+//END
+//ELSE
+//SELECT C.Cell_id, C.Table_id, T.Condicion, J.Cantidad_jugada_Preflop, J.Seguimiento_Tabla, J.Ronda_id, J.Jugada_Id, R.Cantidad_jugada, R.Ganancias
+//FROM Celdas C
+//INNER JOIN Tablas T ON C.Table_id = T.Table_id
+//INNER JOIN Jugadas J ON J.Identificador = C.Identificador
+//INNER JOIN Rondas R ON R.Ronda_id = J.Ronda_id
+//WHERE R.Ronda_id = @Ronda_id AND C.Cell_id = @Cell_id
+
+
+
+
+
+
+
+
+
 
 
 
@@ -165,7 +200,7 @@ namespace ProyectoMentopoker.Repositories
            
 
             List<RondaModel> rondas = new List<RondaModel>();
-            List<JugadaModel> jugadas = new List<JugadaModel>();
+            List<JugadasCalculadasModel> jugadas = new List<JugadasCalculadasModel>();
             
             for (int i=0;i<partidas.Count;i++)
             {
@@ -174,7 +209,7 @@ namespace ProyectoMentopoker.Repositories
             }
             for (int i = 0; i < rondas.Count; i++)
             {
-                jugadas.AddRange(this.GetJugadas(rondas[i].Ronda_id));
+                jugadas.AddRange(this.GetJugadas(rondas[i].Ronda_id,cell_id));
 
             }
 
@@ -182,18 +217,18 @@ namespace ProyectoMentopoker.Repositories
             conjunto.Rondas = rondas;
             conjunto.Jugadas = jugadas;
 
-            if (peticion == "partidas")
-            {
-                conjunto.EstadisticasPartidas = this.GetEstadisticasPartidas(conjunto);
-            }
-            if (peticion == "jugadasFecha") 
-            {
-                conjunto.EstadisticasJugadas = this.GetEstadisticasJugadas(conjunto);
+            //if (peticion == "partidas")
+            //{
+            //    conjunto.EstadisticasPartidas = this.GetEstadisticasPartidas(conjunto);
+            //}
+            //if (peticion == "jugadasFecha") 
+            //{
+            //    conjunto.EstadisticasJugadas = this.GetEstadisticasJugadas(conjunto);
 
-            }if(peticion == "jugadasCellid")
-            {
-                conjunto.EstadisticasJugadas = this.GetEstadisticasJugadas(conjunto, cell_id);
-            }
+            //}if(peticion == "jugadasCellid")
+            //{
+            //    conjunto.EstadisticasJugadas = this.GetEstadisticasJugadas(conjunto, cell_id);
+            //}
           
 
 
@@ -215,39 +250,62 @@ namespace ProyectoMentopoker.Repositories
             return rondas;
         }
 
-        public List<JugadaModel> GetJugadas(string ronda_id)
+        public List<JugadasCalculadasModel> GetJugadas(string ronda_id, string? cell_id = null)
         {
-            var consulta = from datos in this.context.Jugadas
-                           where datos.Ronda_id == ronda_id.ToString()
-                           select datos;
-            List<JugadaModel> jugadas = consulta.ToList();
+            List<JugadasCalculadasModel> jugadas = new List<JugadasCalculadasModel>();
+            if (cell_id == null)
+            {
+
+
+                var parameter = new SqlParameter("@Ronda_id", ronda_id);
+
+                string sql = "EXECUTE GET_IDSTABLAS_JUGADAS @Ronda_id";
+                 jugadas = this.context.JugadasCalculadas.FromSqlRaw(sql, parameter).ToList();
+            }
+            else
+            {
+                var parameterR = new SqlParameter("@Ronda_id", ronda_id);
+                var parameterC = new SqlParameter("@Cell_id", cell_id);
+                string sql = "EXECUTE GET_IDSTABLAS_JUGADAS @Ronda_id, @Cell_id";
+                jugadas = this.context.JugadasCalculadas.FromSqlRaw(sql, parameterR, parameterC).ToList();
+
+
+            }
+      
+
+
+
+
    
             return jugadas;
         }
 
-        public EstadisticasPartidas GetEstadisticasPartidas(ConjuntoPartidasUsuario partidas)
+        public EstadisticasPartidas GetEstadisticasPartidas(int Usuario_id, string peticion, DateTime? fechaInicio = null, DateTime? fechaFinal = null)
         {
             EstadisticasPartidas stats = new EstadisticasPartidas();
 
+   
+
+            stats.partidas = this.GetPartidas(Usuario_id, peticion, fechaInicio, fechaFinal);
 
             double rentabilidades = 0;
 
             double medias = 0 ;
-            for (int i = 0; i<partidas.Partidas.Count; i++)
+            for (int i = 0; i< stats.partidas.Partidas.Count; i++)
             {
-                stats.GananciasPartidasAcumuladas += (partidas.Partidas[i].Cash_Final - partidas.Partidas[i].Cash_Inicial);
-                stats.CashInicialPartidas += partidas.Partidas[i].Cash_Inicial;
-                stats.CashFinalPartidas += partidas.Partidas[i].Cash_Final;
-                medias+=(partidas.Partidas[i].Cash_Final - partidas.Partidas[i].Cash_Inicial);
-                rentabilidades+=((partidas.Partidas[i].Cash_Final - partidas.Partidas[i].Cash_Inicial) / partidas.Partidas[i].Cash_Inicial *100);
+                stats.GananciasPartidasAcumuladas += (stats.partidas.Partidas[i].Cash_Final - stats.partidas.Partidas[i].Cash_Inicial);
+                stats.CashInicialPartidas += stats.partidas.Partidas[i].Cash_Inicial;
+                stats.CashFinalPartidas += stats.partidas.Partidas[i].Cash_Final;
+                medias+=(stats.partidas.Partidas[i].Cash_Final - stats.partidas.Partidas[i].Cash_Inicial);
+                rentabilidades+=((stats.partidas.Partidas[i].Cash_Final - stats.partidas.Partidas[i].Cash_Inicial) / stats.partidas.Partidas[i].Cash_Inicial *100);
                 
             }
 
-            stats.MediaGananciasPartidas = medias / partidas.Partidas.Count;
+            stats.MediaGananciasPartidas = medias / stats.partidas.Partidas.Count;
             
             
 
-            stats.RentabilidadPartidas = rentabilidades / partidas.Partidas.Count;
+            stats.RentabilidadPartidas = rentabilidades / stats.partidas.Partidas.Count;
 
 
 
@@ -256,150 +314,66 @@ namespace ProyectoMentopoker.Repositories
 
 
 
-        public EstadisticasJugadas GetEstadisticasJugadas(ConjuntoPartidasUsuario partidas, string? cell_id = null)
+        public EstadisticasJugadas GetEstadisticasJugadas(int Usuario_id, string peticion, DateTime? fechaInicio = null, DateTime? fechaFinal = null, string? cell_id = null)
         {
             EstadisticasJugadas stats = new EstadisticasJugadas();
 
+       
 
-           
-            
-            List <JugadasCalculadasModel> jugadas = new List<JugadasCalculadasModel>();
+            stats.partidas = this.GetPartidas(Usuario_id, peticion, fechaInicio, fechaFinal, cell_id);
 
-            var filtroJugada = false;
+            //List <JugadasCalculadasModel> jugadas = new List<JugadasCalculadasModel>();
+
+          
             var numRondas = 0;
-            List<string> cellids = new List<string>();
-            List<RondaModel> rondasACalcular = new List<RondaModel>();
-            List<JugadaModel> JugadasRondas = new List<JugadaModel>();
 
-            if (cell_id != null)
-            {
-                filtroJugada = true;
+            List<RondaModel> rondasACalcular = stats.partidas.Rondas;
+            List<JugadasCalculadasModel> JugadasRondas = new List<JugadasCalculadasModel>();
 
-                //Conexión de casa
-                //string connectionString = @"Data Source=DESKTOP-E38C8U3;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
-
-                //Conexión de clase
-                string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
-
-
-                var cn = new SqlConnection(connectionString);
-                var com = new SqlCommand();
-                com.Connection = cn;
+            
 
 
 
-                for (int x = 0; x < partidas.Jugadas.Count; x++)
-                {
-                    SqlParameter pamidentificador = new SqlParameter("@Identificador", partidas.Jugadas[x].Identificador);
-                    com.Parameters.Add(pamidentificador);
-
-                    com.CommandType = System.Data.CommandType.StoredProcedure;
-                    com.CommandText = "SP_GET_CELLID";
-                    cn.Open();
-                    string cellid = com.ExecuteScalar().ToString();
-                    com.Parameters.Clear();
-                    cn.Close();
-                    cellids.Add(cellid);
-                    if(cellid == cell_id)
-                    {
-                        var parameter = new SqlParameter("@Jugada_id", partidas.Jugadas[x].Jugada_id);
-
-                        string sql = "EXECUTE GET_IDSTABLAS_JUGADAS @Jugada_id";
-                        JugadasCalculadasModel jugada = this.context.JugadasCalculadas.FromSqlRaw(sql, parameter).AsEnumerable().FirstOrDefault();
-                        jugadas.Add(jugada);
-
-                        var parameter2 = new SqlParameter("@Ronda_id", partidas.Jugadas[x].Ronda_id);
-                        string sql2 = "EXECUTE SP_GET_RONDA_IDJUGADA @Ronda_id";
-                        RondaModel ronda = this.context.Rondas.FromSqlRaw(sql2, parameter2).AsEnumerable().FirstOrDefault();
-                        rondasACalcular.Add(ronda);
-                       
-                    }
-
-                }
-                stats.Jugadas = jugadas;
-
-            }
-            else
-            {
 
 
-                for (int i = 0; i < partidas.Jugadas.Count; i++)
-                {
-                    var parameter = new SqlParameter("@Jugada_id", partidas.Jugadas[i].Jugada_id);
-
-                    string sql = "EXECUTE GET_IDSTABLAS_JUGADAS @Jugada_id";
-                    JugadasCalculadasModel jugada = this.context.JugadasCalculadas.FromSqlRaw(sql, parameter).AsEnumerable().FirstOrDefault();
-
-                    jugadas.Add(jugada);
-
-                }
-                stats.Jugadas = jugadas;
-                rondasACalcular = partidas.Rondas;
-            }
-
-
-            for (int i = 0; i < partidas.Rondas.Count; i++)
+            for (int i = 0; i < stats.partidas.Rondas.Count; i++)
             {
 
 
                 string seguimiento = "si";
                var jugadaInsertada = false;
-                   for (int x = 0; x < partidas.Jugadas.Count; x++) {
+                   for (int x = 0; x <stats.partidas.Jugadas.Count; x++) {
                     if (jugadaInsertada == false)
                     {
 
-                        if (partidas.Rondas[i].Ronda_id == partidas.Jugadas[x].Ronda_id)
+                        if (stats.partidas.Rondas[i].Ronda_id == stats.partidas.Jugadas[x].Ronda_id)
                         {
-                            if (filtroJugada == true)
-                            {
+                            
+                            
 
-                                if (cellids[x] == cell_id)
-                                {
-                                    if (partidas.Jugadas[x].Seguimiento_Tabla == false)
-                                    {
-                                        seguimiento = "no";
-
-                                        jugadaInsertada = true;
-                                        JugadasRondas.Add(partidas.Jugadas[x]);
-                                    }
-                                    if (partidas.Jugadas[x].Seguimiento_Tabla == true)
-                                    {
-                                        seguimiento = "si";
-                                        jugadaInsertada = true;
-                                        JugadasRondas.Add(partidas.Jugadas[x]);
-                                    }
-                                    stats.SeguimientoTipoRondas.Add(seguimiento.ToString());
-                                    stats.Rondas_ids.Add(partidas.Rondas[i].Ronda_id);
-                                    numRondas++;
-
-                                }
-                            }
-                            else
-                            {
-
-                                if (partidas.Jugadas[x].Seguimiento_Tabla == false)
+                                if (stats.partidas.Jugadas[x].Seguimiento_Tabla == false)
                                 {
                                     seguimiento = "no";
 
                                     jugadaInsertada = true;
-                                    JugadasRondas.Add(partidas.Jugadas[x]);
+                                    JugadasRondas.Add(stats.partidas.Jugadas[x]);
                                 }
-                                if (partidas.Jugadas[x].Seguimiento_Tabla == true)
+                                if (stats.partidas.Jugadas[x].Seguimiento_Tabla == true)
                                 {
                                     seguimiento = "si";
                                     jugadaInsertada = true;
-                                    JugadasRondas.Add(partidas.Jugadas[x]);
+                                    JugadasRondas.Add(stats.partidas.Jugadas[x]);
 
                                 }
                                 stats.SeguimientoTipoRondas.Add(seguimiento.ToString());
-                                stats.Rondas_ids.Add(partidas.Rondas[i].Ronda_id);
+                                stats.Rondas_ids.Add(stats.partidas.Rondas[i].Ronda_id);
                                 numRondas++;
                                 //if ((partidas.Jugadas[x].Seguimiento_Tabla == true || partidas.Jugadas[x].Seguimiento_Tabla == false) && (contadorFalse ==1 && contadorTrue == 1))
                                 //{
                                 //    seguimiento = "mixto";
                                 //}
 
-                            }
+                            
                         }
                     }
                     else { break; }

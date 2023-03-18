@@ -2,7 +2,9 @@
 {
     public class EstadisticasJugadas
     {
-        public List<JugadasCalculadasModel> Jugadas { get; set; }
+
+        public ConjuntoPartidasUsuario partidas { get; set; }
+        //public List<JugadasCalculadasModel> Jugadas { get; set; }
 
         public List<string> SeguimientoTipoRondas { get; set; }
         public List<double> CantidadesJugadas { get; set; }

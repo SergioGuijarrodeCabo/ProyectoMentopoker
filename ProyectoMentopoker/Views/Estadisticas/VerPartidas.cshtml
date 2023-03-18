@@ -1,4 +1,4 @@
-﻿@model ConjuntoPartidasUsuario
+﻿@model EstadisticasPartidas
 
 <!doctype html>
 <html lang="en">
@@ -67,10 +67,10 @@
         {
             <table class="table table-dark table-hover ">
                 <tbody>
-                    <tr><th>  <h3 style="color:white;">Cash inicial partidas: @Math.Round(Model.EstadisticasPartidas.CashInicialPartidas, 2)$</h3></th></tr>
-                    <tr><th> <h3 style="color:white;">Cash final partidas: @Math.Round(Model.EstadisticasPartidas.CashFinalPartidas, 2)$</h3></th></tr>
-                    <tr><th> <h3 style="color:white;">Media ganancias partidas: @Math.Round(Model.EstadisticasPartidas.MediaGananciasPartidas,2)$</h3></th></tr>
-                    <tr><th><h3 style="color:white;">Rentabilidad partidas: @Math.Round(Model.EstadisticasPartidas.RentabilidadPartidas,2) %</h3></th></tr>
+                    <tr><th>  <h3 style="color:white;">Cash inicial partidas: @Math.Round(Model.CashInicialPartidas, 2)$</h3></th></tr>
+                    <tr><th> <h3 style="color:white;">Cash final partidas: @Math.Round(Model.CashFinalPartidas, 2)$</h3></th></tr>
+                    <tr><th> <h3 style="color:white;">Media ganancias partidas: @Math.Round(Model.MediaGananciasPartidas,2)$</h3></th></tr>
+                    <tr><th><h3 style="color:white;">Rentabilidad partidas: @Math.Round(Model.RentabilidadPartidas,2) %</h3></th></tr>
                 </tbody>
             </table>
 
@@ -105,16 +105,16 @@
 
                 </thead>
                 <tbody>
-                    @for (var i = 0; i < Model.Partidas.Count; i += 1)
+                    @for (var i = 0; i < Model.partidas.Partidas.Count; i += 1)
                     {
                         <tr>
-                            <td>@Html.DisplayFor(model =>model.Partidas[i].Partida_id)</td>
-                            <td>@Html.DisplayFor(model => model.Partidas[i].Cash_Inicial)</td>
-                            <td>@Html.DisplayFor(model => model.Partidas[i].Cash_Final)</td>
-                            <td>@Html.DisplayFor(model =>model.Partidas[i].Fecha)</td>
-                            <td>@Html.DisplayFor(model => model.Partidas[i].Comentarios)</td>
-                            <td>@Html.DisplayFor(model => model.Partidas[i].Usuario_id)</td>
-                            <td><button class="btn btn-primary my-2" onclick="verRondas(@Model.Partidas[i].Partida_id)" id="botonRondas">Ver rondas</button></td>
+                                <td>@Html.DisplayFor(model =>model.partidas.Partidas[i].Partida_id)</td>
+                                <td>@Html.DisplayFor(model => model.partidas.Partidas[i].Cash_Inicial)</td>
+                            <td>@Html.DisplayFor(model => model.partidas.Partidas[i].Cash_Final)</td>
+                                <td>@Html.DisplayFor(model =>model.partidas.Partidas[i].Fecha)</td>
+                                <td>@Html.DisplayFor(model => model.partidas.Partidas[i].Comentarios)</td>
+                                <td>@Html.DisplayFor(model => model.partidas.Partidas[i].Usuario_id)</td>
+                            <td><button class="btn btn-primary my-2" onclick="verRondas(@Model.partidas.Partidas[i].Partida_id)" id="botonRondas">Ver rondas</button></td>
                         </tr>
                     }
 
@@ -136,15 +136,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (var i = 0; i < Model.Rondas.Count; i += 1)
+                        @for (var i = 0; i < Model.partidas.Rondas.Count; i += 1)
                     {
-                        <tr data-partida-id="@Model.Rondas[i].Partida_id">
-                            <td>@Html.DisplayFor(model =>model.Rondas[i].Ronda_id)</td>
-                            <td>@Html.DisplayFor(model => model.Rondas[i].Cantidad_jugada)</td>
-                            <td>@Html.DisplayFor(model => model.Rondas[i].Ganancias)</td>
-                            <td>@Html.DisplayFor(model =>model.Rondas[i].Partida_id)</td>
+                            <tr data-partida-id="@Model.partidas.Rondas[i].Partida_id">
+                                <td>@Html.DisplayFor(model =>model.partidas.Rondas[i].Ronda_id)</td>
+                                <td>@Html.DisplayFor(model => model.partidas.Rondas[i].Cantidad_jugada)</td>
+                                <td>@Html.DisplayFor(model => model.partidas.Rondas[i].Ganancias)</td>
+                                <td>@Html.DisplayFor(model =>model.partidas.Rondas[i].Partida_id)</td>
                             <td>
-                                <button class="btn btn-primary my-2" onclick="verJugadas(@Model.Rondas[i].Ronda_id)" id="botonJugadas">Ver jugadas</button>
+                                    <button class="btn btn-primary my-2" onclick="verJugadas(@Model.partidas.Rondas[i].Ronda_id)" id="botonJugadas">Ver jugadas</button>
                             </td>
                         </tr>
                     }
@@ -167,14 +167,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (var i = 0; i < Model.Jugadas.Count; i += 1)
+                        @for (var i = 0; i < Model.partidas.Jugadas.Count; i += 1)
                     {
-                        <tr data-ronda-id="@Model.Jugadas[i].Ronda_id">
-                            <td>@Html.DisplayFor(model =>model.Jugadas[i].Jugada_id)</td>
-                            <td>@Html.DisplayFor(model => model.Jugadas[i].Cantidad_jugada_Preflop)</td>
-                            <td>@Html.DisplayFor(model => model.Jugadas[i].Seguimiento_Tabla)</td>
-                            <td>@Html.DisplayFor(model =>model.Jugadas[i].Identificador)</td>
-                            <td>@Html.DisplayFor(model => model.Jugadas[i].Ronda_id)</td>
+                            <tr data-ronda-id="@Model.partidas.Jugadas[i].Ronda_id">     
+                                <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Jugada_id)</td>
+                                <td>@Html.DisplayFor(model => model.partidas.Jugadas[i].Cantidad_jugada_Preflop)</td>
+                                <td>@Html.DisplayFor(model => model.partidas.Jugadas[i].Cantidad_jugada)</td>
+                                <td>@Html.DisplayFor(model => model.partidas.Jugadas[i].Seguimiento_Tabla)</td>
+                                <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Cell_id)</td>
+                                <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Table_id)</td>
+                                <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Condicion)</td>
+                                <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Ronda_id)</td>
+                                <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Ganancias)</td>
                         </tr>
                     }
                 </tbody>

@@ -1,4 +1,4 @@
-﻿@model ConjuntoPartidasUsuario
+﻿@model EstadisticasJugadas
 
 <!doctype html>
 <html lang="en">
@@ -214,24 +214,24 @@
                           <div class="card">
                          <table class="table table-dark table-hover " id="tablaSi" style="display:none;text-align:left;vertical-align: middle;">
                             <tbody>
-                                <tr><th>  <p style="color:white;">Cantidades jugadas: @Math.Round(Model.EstadisticasJugadas.CantidadesJugadas[0], 2)$</p></th></tr>
-                                 <tr><th>  <p style="color:white;">Media cantidades jugadas: @Math.Round(Model.EstadisticasJugadas.MediaCantidadesJugadas[0], 2)$</p></th></tr>
-                                 <tr><th>  <p style="color:white;">Cantidades rondas: @Math.Round(Model.EstadisticasJugadas.CantidadesRondas[0], 2)$</p></th></tr>
-                                <tr><th> <p style="color:white;">Ganancias Rondas: @Math.Round(Model.EstadisticasJugadas.GananciasTipoRondas[0], 2)$</p></th></tr>
-                                <tr><th> <p style="color:white;">Media ganancias Rondas: @Math.Round(Model.EstadisticasJugadas.MediaGananciasTipoRondas[0],2)$</p></th></tr>
-                                 <tr><th> <p style="color:white;">Rentabilidad Rondas: @Math.Round(Model.EstadisticasJugadas.RentabilidadTipoRondas[0],2)%</p></th></tr>
+                                <tr><th>  <p style="color:white;">Cantidades jugadas: @Math.Round(Model.CantidadesJugadas[0], 2)$</p></th></tr>
+                                 <tr><th>  <p style="color:white;">Media cantidades jugadas: @Math.Round(Model.MediaCantidadesJugadas[0], 2)$</p></th></tr>
+                                 <tr><th>  <p style="color:white;">Cantidades rondas: @Math.Round(Model.CantidadesRondas[0], 2)$</p></th></tr>
+                                <tr><th> <p style="color:white;">Ganancias Rondas: @Math.Round(Model.GananciasTipoRondas[0], 2)$</p></th></tr>
+                                <tr><th> <p style="color:white;">Media ganancias Rondas: @Math.Round(Model.MediaGananciasTipoRondas[0],2)$</p></th></tr>
+                                 <tr><th> <p style="color:white;">Rentabilidad Rondas: @Math.Round(Model.RentabilidadTipoRondas[0],2)%</p></th></tr>
                                
                             </tbody>
                           </table>  
                          
                             <table class="table table-dark table-hover " id="tablaNo" style="display:none;text-align:left">
                             <tbody>
-                              <tr><th>  <p style="color:white;">Cantidades jugadas: @Math.Round(Model.EstadisticasJugadas.CantidadesJugadas[1], 2)$</p></th></tr>
-                                 <tr><th>  <p style="color:white;">Media cantidades jugadas: @Math.Round(Model.EstadisticasJugadas.MediaCantidadesJugadas[1], 2)$</p></th></tr>
-                                 <tr><th>  <p style="color:white;">Cantidades jugadas rondas: @Math.Round(Model.EstadisticasJugadas.CantidadesRondas[1], 2)$</p></th></tr>
-                                <tr><th> <p style="color:white;">Ganancias Rondas: @Math.Round(Model.EstadisticasJugadas.GananciasTipoRondas[1], 2)$</p></th></tr>
-                                <tr><th> <p style="color:white;">Media ganancias Rondas: @Math.Round(Model.EstadisticasJugadas.MediaGananciasTipoRondas[1],2)$</p></th></tr>
-                                 <tr><th> <p style="color:white;">Rentabilidad Rondas: @Math.Round(Model.EstadisticasJugadas.RentabilidadTipoRondas[1],2)%</p></th></tr>
+                              <tr><th>  <p style="color:white;">Cantidades jugadas: @Math.Round(Model.CantidadesJugadas[1], 2)$</p></th></tr>
+                                 <tr><th>  <p style="color:white;">Media cantidades jugadas: @Math.Round(Model.MediaCantidadesJugadas[1], 2)$</p></th></tr>
+                                 <tr><th>  <p style="color:white;">Cantidades jugadas rondas: @Math.Round(Model.CantidadesRondas[1], 2)$</p></th></tr>
+                                <tr><th> <p style="color:white;">Ganancias Rondas: @Math.Round(Model.GananciasTipoRondas[1], 2)$</p></th></tr>
+                                <tr><th> <p style="color:white;">Media ganancias Rondas: @Math.Round(Model.MediaGananciasTipoRondas[1],2)$</p></th></tr>
+                                 <tr><th> <p style="color:white;">Rentabilidad Rondas: @Math.Round(Model.RentabilidadTipoRondas[1],2)%</p></th></tr>
                                
                             </tbody>
                           </table> 
@@ -315,18 +315,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (var i = 0; i < Model.EstadisticasJugadas.Jugadas.Count; i ++)
+                        @for (var i = 0; i < Model.partidas.Jugadas.Count; i ++)
                         {
-                            <tr data-ronda-id="@Model.EstadisticasJugadas.Jugadas[i].Ronda_id">
-                                <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Jugada_id)</td>
-                                <td>@Html.DisplayFor(model => model.EstadisticasJugadas.Jugadas[i].Cantidad_jugada_Preflop)</td>
-                                  <td>@Html.DisplayFor(model => model.EstadisticasJugadas.Jugadas[i].Cantidad_jugada)</td>
-                                <td>@Html.DisplayFor(model => model.EstadisticasJugadas.Jugadas[i].Seguimiento_Tabla)</td>
-                                <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Cell_id)</td>
-                                <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Table_id)</td>
-                                <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Condicion)</td>
-                                <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Ronda_id)</td>
-                                <td>@Html.DisplayFor(model =>model.EstadisticasJugadas.Jugadas[i].Ganancias)</td>
+                            <tr data-ronda-id="@Model.partidas.Jugadas[i].Ronda_id">
+                                <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Jugada_id)</td>
+                                <td>@Html.DisplayFor(model => model.partidas.Jugadas[i].Cantidad_jugada_Preflop)</td>
+                                  <td>@Html.DisplayFor(model => model.partidas.Jugadas[i].Cantidad_jugada)</td>
+                                <td>@Html.DisplayFor(model => model.partidas.Jugadas[i].Seguimiento_Tabla)</td>
+                                <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Cell_id)</td>
+                                <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Table_id)</td>
+                                <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Condicion)</td>
+                                <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Ronda_id)</td>
+                                <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Ganancias)</td>
                             </tr>
                         }
                     </tbody>
@@ -380,12 +380,12 @@ data: [
     var siCount = 0;
     var noCount = 0;
     var mixtoCount = 0;
-    for (var i = 0; i < Model.EstadisticasJugadas.SeguimientoTipoRondas.Count; i++) {
+    for (var i = 0; i < Model.SeguimientoTipoRondas.Count; i++) {
       //var seguimientoRondas = Model.EstadisticasJugadas.SeguimientoRondas[i];
       //for (var j = 0; j < seguimientoRondas.Length; j++) {
-        if (Model.EstadisticasJugadas.SeguimientoTipoRondas[i].Equals("si")) {
+        if (Model.SeguimientoTipoRondas[i].Equals("si")) {
           siCount++;
-        } else if (Model.EstadisticasJugadas.SeguimientoTipoRondas[i].Equals("no")) {
+        } else if (Model.SeguimientoTipoRondas[i].Equals("no")) {
           noCount++;
         }
       //}

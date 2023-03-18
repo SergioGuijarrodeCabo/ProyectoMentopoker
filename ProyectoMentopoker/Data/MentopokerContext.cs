@@ -13,6 +13,7 @@ namespace ProyectoMentopoker.Data
         public DbSet<JugadaModel> Jugadas { get; set; }
         public DbSet<UsuarioModel> Usuarios { get; set; }
 
+        public DbSet<Celda> Celdas { get; set; }
         public DbSet<JugadasCalculadasModel> JugadasCalculadas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

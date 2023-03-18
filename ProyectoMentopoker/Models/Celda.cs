@@ -1,11 +1,23 @@
-﻿namespace ProyectoMentopoker.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ProyectoMentopoker.Models
 {
+
+    [Table("CELDAS")]
     public class Celda
     {
+
+        [Key]
+        [Column("Identificador")]
         public int Identificador { get; set; }
-        public int Table_id { get; set; }       
-        public string Id_celda { get; set; } 
-        public string Background_color { get; set; }    
+        [Column("Table_id")]
+        public int Table_id { get; set; }
+        [Column("Id_celda")]
+        public string Id_celda { get; set; }
+        [Column("Background_color")]
+        public string Background_color { get; set; }
+        [Column("Color")]
         public string Color { get; set; }   
 
         public Celda(int identificador, int table_id, string id_celda, string background_color, string color)
