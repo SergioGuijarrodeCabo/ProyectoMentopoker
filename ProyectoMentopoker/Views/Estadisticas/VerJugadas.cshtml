@@ -7,43 +7,8 @@
     if (Model.partidas.Jugadas != null) {
         var cellIds = Model.partidas.Jugadas.Select(j => j.Cell_id).ToArray();
         <script>
-
-        
-             $(document).ready(function () {
-
             var cellIdsArray = @Html.Raw(Json.Serialize(cellIds));
-
-
-            
-            for (var i = 0; i < cellIdsArray.length; i++) {
-                    var cellId = cellIdsArray[i];
-                    var subString1 = cellId.substring(0,1);
-                    var subString2 = cellId.substring(1,2);
-                    var subString3 = cellId.substring(2,3);
-                    var src1 = "/images/cartas/";
-                    var src2 = "/images/cartas/";
-
-                    if(subString1 == 'T'){
-                        subString1 = '10';
-                    }
-                    if(subString2 == 'T'){
-                        subString2 = '10';
-                    }
-
-                    if(subString3 == 's'){
-                        src1 += subString1+"R.png";
-                        src2 += subString2+"R.png";
-                    } else {
-                        src1 += subString1+"N.png";
-                        src2 += subString2+"R.png";
-                    }
-
-               // alert(src1);
-                    $("#ig" + cellId ).find("#carta1_" + (i+1)).attr("src", src1);
-                    $("#ig" + cellId ).find("#carta2_" + (i+1)).attr("src", src2);
-                }
-
-            });
+            // Your existing JavaScript code that uses cellIdsArray
         </script>
     }}
 }
@@ -1375,7 +1340,7 @@
                                   <td>@Html.DisplayFor(model => model.partidas.Jugadas[i].Cantidad_jugada)</td>
                                 <td>@Html.DisplayFor(model => model.partidas.Jugadas[i].Seguimiento_Tabla)</td>
                                 <td>        
-                               <div class="image-gallery d-flex align-items-center justify-content-around" id="ig_@Model.partidas.Jugadas[i].Jugada_id" data-cell-id="@Model.partidas.Jugadas[i].Cell_id">
+                               <div class="image-gallery d-flex align-items-center justify-content-around" data-cell-id="@Model.partidas.Jugadas[i].Cell_id">
                                   <img src="" class="gallery-image shadow-1-strong rounded" style="height:20px;" id="carta1_@Model.partidas.Jugadas[i].Jugada_id" />
                                         <img src="" class="gallery-image shadow-1-strong rounded" style="height:20px;" id="carta2_@Model.partidas.Jugadas[i].Jugada_id" />
                                 </div>
@@ -1426,6 +1391,33 @@ var botonDropdowns = 0;
   $(document).ready(function () {
 
 
+for (var i = 0; i < cellIdsArray.length; i++) {
+        var cellId = cellIdsArray[i];
+        var subString1 = cellId.substring(0,1);
+        var subString2 = cellId.substring(1,2);
+        var subString3 = cellId.substring(2,3);
+        var src1 = "/images/cartas/";
+        var src2 = "/images/cartas/";
+
+        if(subString1 == 'T'){
+            subString1 = '10';
+        }
+        if(subString2 == 'T'){
+            subString2 = '10';
+        }
+
+        if(subString3 == 's'){
+            src1 += subString1+"R.png";
+            src2 += subString2+"R.png";
+        } else {
+            src1 += subString1+"N.png";
+            src2 += subString2+"R.png";
+        }
+
+
+        $(".image-gallery[data-cell-id='" + cellId + "']").find("#carta1_" + (i+1)).attr("src", src1);
+        $(".image-gallery[data-cell-id='" + cellId + "']").find("#carta2_" + (i+1)).attr("src", src2);
+    }
 
       
             //var carta1 = $("#carta1");
