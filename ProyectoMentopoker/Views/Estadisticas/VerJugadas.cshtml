@@ -64,7 +64,7 @@
         }*/
 
         .formCalendario{
-               display: none;
+           
             position: fixed;
             top: 50%;
             left: 50%;
@@ -135,15 +135,39 @@
                 <button class="btn btn-info" onclick="mostrarCalendario()">Filtrar por fecha</button>
                  <button class="btn btn-info" onclick="mostrarTabla()">Filtrar por jugada</button>
                   <button class="btn btn-info" onclick="mostrarDropdowns()">Filtrar por condición</button>
-                   <button class="btn btn-info" onclick="setImages()">Filtrar por condición</button>
+                  
+                  
+            </div>
+                    </div> </div>  
+                    
+                    <div class="row">
+                    <div class="col" >
+
+                 <label class="form-check-label" id="labelFecha" style="color:white"> </label>
+                     <label class="form-check-label" id="labelCellid" style="color:white"> </label>
+                     <label class="form-check-label" id="labelCondicion" style="color:white"> </label>
+                  
+                  
+           
                     </div>  
              </div>
+             <div class="row">
+             <div class="col" > <div style="padding:10px;">
+              
+                        <label class="form-check-label" style="color:white">
+                            Multifiltro
+                        </label>
+                        <input class="form-check-input" type="checkbox" value="" id="multiFiltro">
+                <button class="btn btn-danger" onclick="multiFitro()" >FILTRAR</button>
+          </div>
             </div>
+            </div>
+
             <div class="row" >
                 <div class="col">
-           
-        
-           
+
+               
+                   
           <form method="POST" id="selectorFecha" style="display:none;" class="formCalendario" >
           <div class="form-group">
             <label for="fechaInicio"  style="color:whitesmoke">Fecha inicio:</label>
@@ -155,13 +179,15 @@
           </div>
           <input type="hidden" name="cell_id" id="cell_id">
           <input type="hidden" name="condicion" id="condicion" />
-
-          <button class="btn btn-info" id="bJugada">MOSTRAR PARTIDAS</button>
+          
+           
+          <button class="btn btn-info" id="bJugada" type="submit" >MOSTRAR PARTIDAS</button>
+       
         </form>
+                        
 
-        
-
-       </div>
+                        
+                    </div>
 
       <div class="col">
           
@@ -1381,11 +1407,17 @@ var condicion = "";
 var botonCalendario = 0;
 var botonFecha = 0;
 var botonDropdowns = 0;
-
-       
+        var clickedButton = null;
+        var cellID =null;
+       var condicion = null;
 
      
   $(document).ready(function () {
+      
+
+
+            // Add an event listener to the checkbox element
+            document.getElementById("multiFiltro").addEventListener("change", handleCheckboxChange);
 
 
                 // Loop through each gallery
@@ -1577,6 +1609,33 @@ $("#chart-lineComparacionSeguimiento").click(
 
 
 
+
+function handleCheckboxChange() {
+  // Get a reference to the checkbox element
+  const checkbox = document.getElementById("multiFiltro");
+
+  // Check if the checkbox is checked
+  if (checkbox.checked) {
+    // Checkbox is checked, do something
+    document.getElementById("bJugada").style.display = "none";
+  } else {
+    // Checkbox is not checked, do something else
+        document.getElementById("bJugada").style.display = "inline-block";
+  }
+}
+
+function multiFitro(){
+
+
+    if(condicion!=null){
+        $('#condicion').val(condicion);
+    }if(cellID!=null){
+        $('#cell_id').val(cellID);
+    }
+     
+        $('#bJugada').click();
+}
+
 function statsRondas(){
   
     
@@ -1614,7 +1673,8 @@ function mostrarCalendario() {
 
     if (botonCalendario == 0) { 
 
-            document.getElementById('selectorFecha').style.display = "inline-block";
+                document.getElementById('selectorFecha').style.display = "inline-block";
+              
     document.getElementById('dJugada').style.display = "none";
      document.getElementById('dropdowns').style.display = "none";
         botonCalendario = 1;
@@ -1633,14 +1693,18 @@ function mostrarCalendario() {
     }
 }
 
+
+
 function mostrarTabla(){
      if (botonFecha == 0) { 
             document.getElementById('dJugada').style.display = "inline-block";
             document.getElementById('selectorFecha').style.display = "none";
                 document.getElementById('dropdowns').style.display = "none";
+                   
          botonFecha = 1;
          botonCalendario = 0;
          botonDropdowns = 0;
+           
 
 }
             else{
@@ -1648,6 +1712,7 @@ function mostrarTabla(){
          botonFecha = 0;
           botonCalendario = 0;
           botonDropdowns = 0;
+                
             }
 }
 
@@ -1655,9 +1720,10 @@ function mostrarTabla(){
 function mostrarDropdowns(){
          if (botonDropdowns == 0) { 
             document.getElementById('dropdowns').style.display = "inline-block";
-            document.getElementById('selectorFecha').style.display = "none";
+                document.getElementById('selectorFecha').style.display = "none";
                 document.getElementById('dJugada').style.display = "none";
-         botonDropdowns = 1;
+ 
+                botonDropdowns = 1;
          botonCalendario = 0;
          botonFecha = 0;
 
@@ -1671,16 +1737,45 @@ function mostrarDropdowns(){
 
 }
 
+//if ($('#multiFiltro').is(':checked')) {
+//               document.getElementById('dInicial').style.display = "none";
+//} else {
+//        document.getElementById('bJugada').style.display = "inline-block";
+//}
+
+
+
 $('.prueba').click(function() {
- var idValue =  $(this).text();
-     $('#cell_id').val(idValue);
+
+            $(this).removeClass('btn-primary').addClass('btn-secondary');
+            clickedButton = $(this);
+            
+            cellID = $(this).text();
+
+    if ($('#multiFiltro').is(':checked')) {
+
+  
+         $('#labelCellid').text('Cell ID: ' + cellID);
+
+    alert("Seleccione más filtros y luego pulse en filtrar");
+          
+
+} else {
+     cellID =  $(this).text();
+     $('#cell_id').val(cellID);
 
     var lectura = $('#cell_id').val();
 
       $('#bJugada').click();
+}
+ 
 
 
 });
+
+
+
+
 
 
 //$('.dropdown-item').click(function() {
@@ -1710,18 +1805,32 @@ $('.prueba').click(function() {
             id = $(this).attr('id');
             var divsAMostrar = [];
             //var nombre = $(this).attr('name');
+         
+
+            if ($.isNumeric(condicion)) {
+                  if ($('#multiFiltro').is(':checked')) {
+                     condicion = $(this).attr('id');
+                      
+                        //condicion = $('#condicion').val();
+
+                        //var texto = $('#condicion').text();
+                        //alert(texto);
+                         
+                     $('#labelCondicion').text('Condicion: ' + condicion);
 
 
-            if ($.isNumeric(id)) {
+                    alert("Seleccione más filtros y luego pulse en filtrar");
+                   $('#condicion').val(id);
 
-               // alert(id);
+                    
 
-                $('#condicion').val(id);
+                } else {
+                    $('#condicion').val(id);
 
             var lectura = $('#condicion').val();
 
               $('#bJugada').click();
-
+                }
 
             }else{
                 // alert("hola");
@@ -1770,7 +1879,7 @@ $('.prueba').click(function() {
 
 
                 //  alert(id);
-                idNuevo = "d" + id;
+                idNuevo = "d" + condicion;
                 //alert(idNuevo);
                 document.getElementById(idNuevo).style.display = "inline-block";
 

@@ -190,7 +190,7 @@ namespace ProyectoMentopoker.Repositories
 
 
 
-            if (peticion == "partidas" || peticion == "jugadasFecha")
+            if (fechaInicio !=null || fechaFinal !=null)
             {
                 //  var consulta = from datos in this.context.Partidas
                 //                where datos.Usuario_id == Usuario_id.ToString() &&
@@ -207,9 +207,7 @@ namespace ProyectoMentopoker.Repositories
                 partidas = consulta.ToList();
 
             }
-
-            if (peticion == "jugadasCellid" || peticion =="jugadasCondicion")
-            {
+            else { 
                 var consulta = from datos in this.context.Partidas
                                select datos;
                 partidas = consulta.ToList();
@@ -318,10 +316,20 @@ namespace ProyectoMentopoker.Repositories
 
                 //string sql = "EXECUTE GET_IDSTABLAS_JUGADAS @Ronda_id, @Table_id";
                 //jugada = this.context.JugadasCalculadas.FromSqlRaw(sql, parameters.ToArray()).AsEnumerable().FirstOrDefault();
+            }
 
+            if(cell_id !=null && condicion != null)
+            {
+                var parameterR = new SqlParameter("@Ronda_id", ronda_id);
+                var parameterC = new SqlParameter("@Cell_id", cell_id);
+                var parameterC2 = new SqlParameter("@Table_id", condicion);
+                string sql = "EXECUTE GET_IDSTABLAS_JUGADAS @Ronda_id, @Cell_id, @Table_id";
+                jugada = this.context.JugadasCalculadas.FromSqlRaw(sql, parameterR, parameterC, parameterC2).AsEnumerable().FirstOrDefault();
 
 
             }
+
+
 
 
 
