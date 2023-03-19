@@ -107,7 +107,7 @@
 
           
             .image-gallery{
-                  background-color: #212529 !important;
+                  background-color: transparent !important;
                   padding: 20px;
             }
     </style>
@@ -1336,8 +1336,8 @@
                                 <td>@Html.DisplayFor(model => model.partidas.Jugadas[i].Seguimiento_Tabla)</td>
                                 <td>        
                                <div class="image-gallery d-flex align-items-center justify-content-around" id="gallery_@Model.partidas.Jugadas[i].Cell_id">
-                                  <img src="" class="gallery-image shadow-1-strong rounded" style="height:20px;" id="carta1_@Model.partidas.Jugadas[i].Cell_id" />
-                                        <img src="" class="gallery-image shadow-1-strong rounded" style="height:20px;" id="carta2_@Model.partidas.Jugadas[i].Cell_id" />
+                                  <img src="" class="gallery-image shadow-1-strong rounded" style="height:35px;" id="carta1_@Model.partidas.Jugadas[i].Cell_id" />
+                                        <img src="" class="gallery-image shadow-1-strong rounded" style="height:35px;" id="carta2_@Model.partidas.Jugadas[i].Cell_id" />
                                 </div>
                                 
                                 </td>
@@ -1345,6 +1345,7 @@
                                 <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Condicion)</td>
                                 <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Ronda_id)</td>
                                 <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Ganancias)</td>
+                  
                             </tr>
                         }
                     </tbody>
@@ -1387,10 +1388,43 @@ var botonDropdowns = 0;
   $(document).ready(function () {
 
 
- 
+                // Loop through each gallery
+                $('.image-gallery').each(function () {
+                    var cellId = $(this).attr('id').substring(8);
+                    // Get the cell ID from the gallery ID
+
+
+                    var strInicial = cellId;
+                    var subString1 = strInicial.substring(0, 1);
+                    var subString2 = strInicial.substring(1, 2);
+                    var subString3 = strInicial.substring(2, 3);
+                    var src1 = "/images/cartas/";
+                    var src2 = "/images/cartas/";
+                    if (subString1 == 'T') {
+                        subString1 = '10';
+                    }
+                    if (subString2 == 'T') {
+                        subString2 = '10';
+                    }
+
+                    if (subString3 == 's') {
+
+
+                        src1 += subString1 + "R.png";
+                        src2 += subString2 + "R.png";
+                    } else {
+                        src1 += subString1 + "N.png";
+                        src2 += subString2 + "R.png";
+                    }
 
 
 
+
+
+                    $(this).find('#carta1_' + cellId).attr('src', src1); // Set the src attribute for the first image
+                    $(this).find('#carta2_' + cellId).attr('src', src2); // Set the src attribute for the second image
+                });
+            
 
 
 
@@ -1538,7 +1572,7 @@ $("#chart-lineComparacionSeguimiento").click(
 
 
 
-        
+
 
 
 
@@ -1573,44 +1607,7 @@ function statsRondas(){
 }
 
 
-function setImages(model) {
-  // Loop through each gallery
-  $('.image-gallery').each(function() {
-    var cellId = $(this).attr('id').substring(8); 
-   // Get the cell ID from the gallery ID
 
-    
-              var  strInicial = cellId;
-                var subString1 = strInicial.substring(0,1);
-                var subString2 = strInicial.substring(1,2);
-                var subString3 = strInicial.substring(2,3);
-                var src1 = "/images/cartas/";
-                var src2 = "/images/cartas/";
-                if(subString1 == 'T'){
-                    subString1 = '10';
-                }
-                if(subString2 == 'T'){
-                    subString2 = '10';
-                }
-
-                if(subString3 == 's'){
-
-                
-                    src1 += subString1+"R.png";
-                    src2 += subString2+"R.png";
-                }else{
-                     src1 += subString1+"N.png";
-                    src2 += subString2+"R.png";
-                }
-
-
-
-
-
-    $(this).find('#carta1_' + cellId).attr('src', src1); // Set the src attribute for the first image
-                $(this).find('#carta2_' + cellId).attr('src', src2); // Set the src attribute for the second image
-  });
-}
 
 
 function mostrarCalendario() {
@@ -1681,6 +1678,7 @@ $('.prueba').click(function() {
     var lectura = $('#cell_id').val();
 
       $('#bJugada').click();
+
 
 });
 
