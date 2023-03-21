@@ -159,7 +159,7 @@
                             Multifiltro
                         </label>
                         <input class="form-check-input" type="checkbox" value="" id="multiFiltro">
-                <button class="btn btn-danger" onclick="multiFitro()" >FILTRAR</button>
+                <button class="btn btn-danger" id="bmultiFiltro" onclick="multiFitro()" style="display:none;" >FILTRAR</button>
           </div>
             </div>
             </div>
@@ -302,7 +302,7 @@
                         100BB
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" id="6">BB vs EP</a></li>
+                        <li><a class="dropdown-item"   id="aaaa">BB vs EP</a></li>
                         <li><a class="dropdown-item" id="7">BB vs MP</a></li>
                         <li><a class="dropdown-item" id="8">BB vs HJ</a></li>
                         <li><a class="dropdown-item" id="9">BB vs CO</a></li>
@@ -1424,6 +1424,10 @@ var botonDropdowns = 0;
 
 
                 if ($("#multiFiltro").is(":checked")) {
+
+                        
+                  
+
                     // save the value of the datepicker to the corresponding label
                     if ($(this).attr("id") === "fechaInicio") {
                         $("#labelFechaInicio").text('Fecha inicio: '+$(this).val());
@@ -1635,10 +1639,14 @@ function handleCheckboxChange() {
   // Get a reference to the checkbox element
   const checkbox = document.getElementById("multiFiltro");
 
+
+
+
   // Check if the checkbox is checked
   if (checkbox.checked) {
    // $("#selectorFecha").show();
-
+   
+   document.getElementById("bmultiFiltro").style.display = "inline-block";
   
 
     // Checkbox is checked, do something
@@ -1647,6 +1655,7 @@ function handleCheckboxChange() {
     // Checkbox is not checked, do something else
     document.getElementById("bJugada").style.display = "inline-block";
     $("#selectorFecha").hide();
+      document.getElementById("bmultiFiltro").style.display = "none";
   }
 }
 
@@ -1802,21 +1811,19 @@ $('.prueba').click(function() {
 
 
 
-
-
-
+ //Aquí se manejan los dropdowns y el visor
         $('ul.dropdown-menu a').click(function () {
             id = $(this).attr('id');
             var divsAMostrar = [];
             //var nombre = $(this).attr('name');
 
 
-           
-          
-
             if ($.isNumeric(id)) {
-                  if ($('#multiFiltro').is(':checked')) {
+
+              if ($('#multiFiltro').is(':checked')) {
                      
+
+     
                      condicion = $(this).attr('id');
                       
                         //condicion = $('#condicion').val();
@@ -1824,23 +1831,26 @@ $('.prueba').click(function() {
                         //var texto = $('#condicion').text();
                         //alert(texto);
                          
-                     $('#labelCondicion').text('Condicion: ' + condicion);
+                     $('#labelCondicion').text('condicion: ' + id);
 
 
-                   // alert("Seleccione más filtros y luego pulse en filtrar");
+                   // alert("seleccione más filtros y luego pulse en filtrar");
                    $('#condicion').val(id);
 
                     
 
                 } else {
+             
                     $('#condicion').val(id);
 
             var lectura = $('#condicion').val();
 
               $('#bJugada').click();
                 }
+                
 
-            }else{
+               
+            } else {
                 // alert("hola");
 
                 if (id === 'BBvsLimp' || id === 'DefendBB' || id === 'Flat3B' || id === 'SQZ' || id === 'OS' || id === 'OR' || id === 'Reshove' || id === 'vsOS' || id === 'SBLimpia' || id === 'vs3Bet') {
@@ -1887,7 +1897,7 @@ $('.prueba').click(function() {
 
 
                 //  alert(id);
-                idNuevo = "d" + condicion;
+                idNuevo = "d" + id;
                 //alert(idNuevo);
                 document.getElementById(idNuevo).style.display = "inline-block";
 
@@ -1898,6 +1908,9 @@ $('.prueba').click(function() {
 
             }
         });
+
+
+
 
       
        
