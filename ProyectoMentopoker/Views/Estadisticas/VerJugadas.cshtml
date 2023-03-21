@@ -143,7 +143,8 @@
                     <div class="row">
                     <div class="col" >
 
-                 <label class="form-check-label" id="labelFecha" style="color:white"> </label>
+                 <label class="form-check-label" id="labelFechaInicio" style="color:white"> </label>
+                  <label class="form-check-label" id="labelFechaFinal" style="color:white"> </label>
                      <label class="form-check-label" id="labelCellid" style="color:white"> </label>
                      <label class="form-check-label" id="labelCondicion" style="color:white"> </label>
                   
@@ -171,11 +172,11 @@
           <form method="POST" id="selectorFecha" style="display:none;" class="formCalendario" >
           <div class="form-group">
             <label for="fechaInicio"  style="color:whitesmoke">Fecha inicio:</label>
-            <input type="date" class="form-control" name="fechaInicio">
+            <input type="date" class="form-control" id="fechaInicio" name="fechaInicio">
           </div>
           <div class="form-group">
-            <label for="fechaFinal" style="color:whitesmoke">Fecha final:</label>
-            <input type="date" class="form-control" name="fechaFinal">
+            <label for="fechaFinal" style="color:whitesmoke" >Fecha final:</label>
+            <input type="date" class="form-control" id="fechaFinal" name="fechaFinal">
           </div>
           <input type="hidden" name="cell_id" id="cell_id">
           <input type="hidden" name="condicion" id="condicion" />
@@ -1410,11 +1411,31 @@ var botonDropdowns = 0;
         var clickedButton = null;
         var cellID =null;
        var condicion = null;
+       var fechaInicio = null;
+        var fechaFinal = null;
 
      
   $(document).ready(function () {
-      
 
+
+          $("#fechaInicio, #fechaFinal").on("change", function() {
+                // check if the checkbox is checked
+
+
+
+                if ($("#multiFiltro").is(":checked")) {
+                    // save the value of the datepicker to the corresponding label
+                    if ($(this).attr("id") === "fechaInicio") {
+                        $("#labelFechaInicio").text('Fecha inicio: '+$(this).val());
+                           
+                    } else if ($(this).attr("id") === "fechaFinal") {
+                        alert("jl");
+                        $("#labelFechaFinal").text('Fecha final: '+$(this).val());
+                    }
+                }
+            });
+    
+          
 
             // Add an event listener to the checkbox element
             document.getElementById("multiFiltro").addEventListener("change", handleCheckboxChange);
@@ -1616,13 +1637,19 @@ function handleCheckboxChange() {
 
   // Check if the checkbox is checked
   if (checkbox.checked) {
+   // $("#selectorFecha").show();
+
+  
+
     // Checkbox is checked, do something
     document.getElementById("bJugada").style.display = "none";
   } else {
     // Checkbox is not checked, do something else
-        document.getElementById("bJugada").style.display = "inline-block";
+    document.getElementById("bJugada").style.display = "inline-block";
+    $("#selectorFecha").hide();
   }
 }
+
 
 function multiFitro(){
 
@@ -1639,7 +1666,7 @@ function multiFitro(){
 function statsRondas(){
   
     
-    alert(condicion);
+    //alert(condicion);
 
        
         
@@ -1757,7 +1784,7 @@ $('.prueba').click(function() {
   
          $('#labelCellid').text('Cell ID: ' + cellID);
 
-    alert("Seleccione más filtros y luego pulse en filtrar");
+   // alert("Seleccione más filtros y luego pulse en filtrar");
           
 
 } else {
@@ -1778,37 +1805,18 @@ $('.prueba').click(function() {
 
 
 
-//$('.dropdown-item').click(function() {
-
-
-//     var idValue = $(this).id();
-    
-//    // Check if idValue is numeric
-//    if ($.isNumeric(idValue)) {
-
-    
-//        alert(idValue);
-
-
-//     $('#condicion').val(idValue);
-
-//    var lectura = $('#condicion').val();
-
-//      $('#bJugada').click();
-//    }
-//});
-
-
-
-
         $('ul.dropdown-menu a').click(function () {
             id = $(this).attr('id');
             var divsAMostrar = [];
             //var nombre = $(this).attr('name');
-         
 
-            if ($.isNumeric(condicion)) {
+
+           
+          
+
+            if ($.isNumeric(id)) {
                   if ($('#multiFiltro').is(':checked')) {
+                     
                      condicion = $(this).attr('id');
                       
                         //condicion = $('#condicion').val();
@@ -1819,7 +1827,7 @@ $('.prueba').click(function() {
                      $('#labelCondicion').text('Condicion: ' + condicion);
 
 
-                    alert("Seleccione más filtros y luego pulse en filtrar");
+                   // alert("Seleccione más filtros y luego pulse en filtrar");
                    $('#condicion').val(id);
 
                     
@@ -1895,26 +1903,4 @@ $('.prueba').click(function() {
        
     </script>
 
-
-  @*  <script>
-        $(document).ready(function () {
-            var ctx = $("#chart-line");
-            var myLineChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ["Spring", "Summer", "Fall", "Winter"],
-                    datasets: [{
-                        data: [1200, 1700, 800, 200],
-                        backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)"]
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Weather'
-                    }
-                }
-            });
-        });
-    </script>*@
 }

@@ -96,7 +96,7 @@ using System.ComponentModel.Design;
 
 
 //VFINAL(de momento
-//ALTER PROCEDURE[dbo].[GET_IDSTABLAS_JUGADAS]
+//ALTER PROCEDURE[dbo].[GET_IDSTABLAS_JUGADAS]  
 //(
 //    @Ronda_id INT,
 //    @Cell_id NVARCHAR(4) = NULL,
@@ -111,7 +111,7 @@ using System.ComponentModel.Design;
 //    INNER JOIN Rondas R ON R.Ronda_id = J.Ronda_id
 //    WHERE R.Ronda_id = @Ronda_id 
 //    AND (@Cell_id IS NULL OR C.Cell_id = @Cell_id)
-//    AND(@Condicion IS NULL OR C.Table_id = @Condicion)
+//    AND(@Table_id IS NULL OR C.Table_id = @Table_id)
 //END
 
 
