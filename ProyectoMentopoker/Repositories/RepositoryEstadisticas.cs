@@ -252,7 +252,7 @@ namespace ProyectoMentopoker.Repositories
             }
             for (int i = 0; i < rondas.Count; i++)
             {
-                JugadasCalculadasModel jugada = this.GetJugadas(rondas[i].Ronda_id, cell_id, condicion);
+                JugadasCalculadasModel jugada = this.GetJugadas(rondas[i].Ronda_id, cell_id, condicion, cantidadJugada);
                 if (jugada != null)
                 {
                     jugadas.Add(jugada);
@@ -348,7 +348,7 @@ namespace ProyectoMentopoker.Repositories
 
 
         public EstadisticasJugadas GetEstadisticasJugadas(int Usuario_id, string peticion, DateTime? fechaInicio = null, DateTime? fechaFinal = null, string? cell_id = null, int? condicion = null, double? cantidadJugada = null)
-        {
+            {
             
             
             
@@ -356,7 +356,7 @@ namespace ProyectoMentopoker.Repositories
 
        
 
-            stats.partidas = this.GetPartidas(Usuario_id, peticion, fechaInicio, fechaFinal, cell_id, condicion);
+            stats.partidas = this.GetPartidas(Usuario_id, peticion, fechaInicio, fechaFinal, cell_id, condicion, cantidadJugada);
       
 
 

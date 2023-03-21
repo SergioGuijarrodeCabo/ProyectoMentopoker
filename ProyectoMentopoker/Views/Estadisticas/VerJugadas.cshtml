@@ -135,7 +135,7 @@
                 <button class="btn btn-info" onclick="mostrarCalendario()">Filtrar por fecha</button>
                  <button class="btn btn-info" onclick="mostrarTabla()">Filtrar por jugada</button>
                   <button class="btn btn-info" onclick="mostrarDropdowns()">Filtrar por condición</button>
-                  
+                     <button class="btn btn-info" onclick="mostrarCantidad()">Filtrar por cantidad mínima</button>
                   
             </div>
                     </div> </div>  
@@ -147,7 +147,7 @@
                   <label class="form-check-label" id="labelFechaFinal" style="color:white"> </label>
                      <label class="form-check-label" id="labelCellid" style="color:white"> </label>
                      <label class="form-check-label" id="labelCondicion" style="color:white"> </label>
-                  
+                     <label class="form-check-label" id="labelCantidadJugada" style="color:white"> </label>
                   
            
                     </div>  
@@ -179,16 +179,30 @@
             <input type="date" class="form-control" id="fechaFinal" name="fechaFinal">
           </div>
           <input type="hidden" name="cell_id" id="cell_id">
-          <input type="hidden" name="condicion" id="condicion" />
-          
+          <input type="hidden" name="condicion" id="condicion"/>
+          <input type="hidden" name="cantidadJugada"  @*step="0.01" *@ id="cantidadJugada"/>
            
-          <button class="btn btn-info" id="bJugada" type="submit" >MOSTRAR PARTIDAS</button>
+          <button class="btn btn-info" id="bJugada" type="submit" >FILTRAR</button>
        
         </form>
                         
 
                         
                     </div>
+   
+                    
+                    
+    <div class="col">
+        <div id="dCantidadJugada" style="display:none;" class="formCalendario"> 
+          <div class="form-group">
+            <label for="icantidadJugada"  style="color:whitesmoke">Introduzca una cantidad jugada mínima por ronda:</label>
+            <input type="number" class="form-control" @*step="0.01" *@ id="icantidadJugada" name="icantidadJugada">
+             <button class="btn btn-info" id="bCantidad" onclick="filtrarCantidad()" >FILTRAR</button>
+          </div>
+         </div>
+    </div>
+
+
 
       <div class="col">
           
@@ -1408,14 +1422,33 @@ var condicion = "";
 var botonCalendario = 0;
 var botonFecha = 0;
 var botonDropdowns = 0;
+var botonCantidad = 0;
+
         var clickedButton = null;
         var cellID =null;
        var condicion = null;
        var fechaInicio = null;
         var fechaFinal = null;
-
+        var cantidadJugadaValor = null;
      
   $(document).ready(function () {
+
+        cellID =null;
+        condicion = null;
+        fechaInicio = null;
+         fechaFinal = null;
+         cantidadJugadaValor = null;
+
+      $("#icantidadJugada").on("change", function() {
+          if ($('#multiFiltro').is(':checked')) {
+
+
+              cantidadJugadaValor = $("#icantidadJugada").val();
+                $('#cantidadJugada').val(cantidadJugadaValor);
+
+              $("#labelFechaFinal").text('Cantidad mínima: ' + cantidadJugadaValor);
+          } 
+        });
 
 
           $("#fechaInicio, #fechaFinal").on("change", function() {
@@ -1484,69 +1517,6 @@ var botonDropdowns = 0;
             
 
 
-
-        //var subString1 = cellId.substring(0,1);
-        //var subString2 = cellId.substring(1,2);
-        //var subString3 = cellId.substring(2,3);
-        //var src1 = "/images/cartas/";
-        //var src2 = "/images/cartas/";
-
-        //if(subString1 == 'T'){
-        //    subString1 = '10';
-        //}
-        //if(subString2 == 'T'){
-        //    subString2 = '10';
-        //}
-
-        //if(subString3 == 's'){
-        //    src1 += subString1+"R.png";
-        //    src2 += subString2+"R.png";
-        //} else {
-        //    src1 += subString1+"N.png";
-        //    src2 += subString2+"R.png";
-        //}
-
-
-        //$(".image-gallery[data-cell-id='" + cellId + "']").find("#carta1_" + (i+1)).attr("src", src1);
-        //$(".image-gallery[data-cell-id='" + cellId + "']").find("#carta2_" + (i+1)).attr("src", src2);
-    
-
-      
-            //var carta1 = $("#carta1");
-            //var carta2 = $("#carta2");
-
-            //// set the src attribute for each image
-           
-            
-            
-            //  var  strInicial = cell_id;
-            //    var subString1 = strInicial.substring(0,1);
-            //    var subString2 = strInicial.substring(1,2);
-            //    var subString3 = strInicial.substring(2,3);
-            //    var src1 = "/images/cartas/";
-            //    var src2 = "/images/cartas/";
-            //    if(subString1 == 'T'){
-            //        subString1 = '10';
-            //    }
-            //    if(subString2 == 'T'){
-            //        subString2 = '10';
-            //    }
-
-            //    if(subString3 == 's'){
-
-                
-            //        src1 += subString1+"R.png";
-            //        src2 += subString2+"R.png";
-            //    }else{
-            //         src1 += subString1+"N.png";
-            //        src2 += subString2+"R.png";
-            //    }
-
-            //   // alert(src1);
-            //    //alert(src2);
-                
-            // carta1.attr("src", src1);
-            //carta2.attr("src", src2);
 
    
 
@@ -1631,10 +1601,6 @@ $("#chart-lineComparacionSeguimiento").click(
 
 
 
-
-
-
-
 function handleCheckboxChange() {
   // Get a reference to the checkbox element
   const checkbox = document.getElementById("multiFiltro");
@@ -1647,13 +1613,14 @@ function handleCheckboxChange() {
    // $("#selectorFecha").show();
    
    document.getElementById("bmultiFiltro").style.display = "inline-block";
-  
-
+   document.getElementById("bCantidad").style.display = "none";
+   
     // Checkbox is checked, do something
     document.getElementById("bJugada").style.display = "none";
   } else {
     // Checkbox is not checked, do something else
     document.getElementById("bJugada").style.display = "inline-block";
+      document.getElementById("bCantidad").style.display = "inline-block";
     $("#selectorFecha").hide();
       document.getElementById("bmultiFiltro").style.display = "none";
   }
@@ -1674,20 +1641,8 @@ function multiFitro(){
 
 function statsRondas(){
   
-    
-    //alert(condicion);
 
-       
-        
-    //var tableHTML = '<div class="col">' +
-    //        '<table class="table table-dark table-hover">' +
-    //      '<tbody>' +
-    //        '<tr><th><h3 style="color:white;">cash inicial partidas:  Math.round(model.estadisticasjugadas.cantidadesjugadastiporondas[1], 2)$</h3></th></tr>' +
-    //        '<tr><th><h3 style="color:white;">cash final partidas:  Math.round(model.estadisticasjugadas.gananciastiporondas[1], 2)$</h3></th></tr>' +
-    //        '<tr><th><h3 style="color:white;">media ganancias partidas:  Math.round(model.estadisticasjugadas.rentabilidadtiporondas[1], 2)$</h3></th></tr>' +
-    //      '</tbody>' +
-    //    '</table>'+
-    //    '</div>';
+ 
     if (condicion == 0) {
         document.getElementById('tablaSi').style.display = "inline-block";
         document.getElementById('tablaNo').style.display = "none";
@@ -1713,10 +1668,11 @@ function mostrarCalendario() {
               
     document.getElementById('dJugada').style.display = "none";
      document.getElementById('dropdowns').style.display = "none";
+       document.getElementById('dCantidadJugada').style.display = "none";
         botonCalendario = 1;
         botonFecha = 0;
         botonDropdowns = 0;
-
+        botonCantidad = 0;
                
 
 }
@@ -1725,7 +1681,7 @@ function mostrarCalendario() {
         botonCalendario = 0;
              botonFecha = 0;
              botonDropdowns = 0;
-
+               botonCantidad = 0;
     }
 }
 
@@ -1736,11 +1692,11 @@ function mostrarTabla(){
             document.getElementById('dJugada').style.display = "inline-block";
             document.getElementById('selectorFecha').style.display = "none";
                 document.getElementById('dropdowns').style.display = "none";
-                   
+                document.getElementById('dCantidadJugada').style.display = "none";
          botonFecha = 1;
          botonCalendario = 0;
          botonDropdowns = 0;
-           
+         botonCantidad = 0;
 
 }
             else{
@@ -1748,7 +1704,7 @@ function mostrarTabla(){
          botonFecha = 0;
           botonCalendario = 0;
           botonDropdowns = 0;
-                
+         botonCantidad = 0;
             }
 }
 
@@ -1758,10 +1714,11 @@ function mostrarDropdowns(){
             document.getElementById('dropdowns').style.display = "inline-block";
                 document.getElementById('selectorFecha').style.display = "none";
                 document.getElementById('dJugada').style.display = "none";
- 
+                document.getElementById('dCantidadJugada').style.display = "none";
                 botonDropdowns = 1;
          botonCalendario = 0;
          botonFecha = 0;
+           botonCantidad = 0;
 
 }
             else{
@@ -1769,9 +1726,66 @@ function mostrarDropdowns(){
          botonFecha = 0;
           botonCalendario = 0;
           botonDropdowns = 0;
+            botonCantidad = 0;
             }
 
 }
+
+
+
+function mostrarCantidad() {
+
+    if (botonCantidad == 0) { 
+
+                document.getElementById('dCantidadJugada').style.display = "inline-block";
+          document.getElementById('selectorFecha').style.display = "none";
+    document.getElementById('dJugada').style.display = "none";
+     document.getElementById('dropdowns').style.display = "none";
+        botonCantidad = 1;
+        botonCalendario = 0;
+        botonFecha = 0;
+        botonDropdowns = 0;
+
+               
+
+}
+    else{
+         document.getElementById('dCantidadJugada').style.display = "none";
+         botonCantidad = 0;
+        botonCalendario = 0;
+             botonFecha = 0;
+             botonDropdowns = 0;
+
+    }
+}
+
+
+
+function filtrarCantidad(){
+
+
+          if ($('#multiFiltro').is(':checked')) {
+         
+
+          }else{
+               cantidadJugadaValor =  $("#icantidadJugada").val();
+   
+             $('#cantidadJugada').val(cantidadJugadaValor);
+              //alert($("#cantidadJugada").val());
+            var lectura = $('#cantidadJugada').val();
+
+              $('#bJugada').click();
+
+
+
+          }
+
+         
+
+}
+
+
+
 
 //if ($('#multiFiltro').is(':checked')) {
 //               document.getElementById('dInicial').style.display = "none";

@@ -60,7 +60,7 @@ namespace ProyectoMentopoker.Controllers
 
 
         [HttpPost]
-        public IActionResult VerJugadas(DateTime? fechaInicio = null, DateTime? fechaFinal = null, string? cell_id = null, int? condicion = null)
+        public IActionResult VerJugadas(DateTime? fechaInicio = null, DateTime? fechaFinal = null, string? cell_id = null, int? condicion = null, double? cantidadJugada = null)
         {
 
             var usuario_id = HttpContext.Session.GetString("ID");
@@ -85,7 +85,7 @@ namespace ProyectoMentopoker.Controllers
                 peticion = "jugadasCondicion";
             }
 
-            EstadisticasJugadas stats = this.repoStats.GetEstadisticasJugadas(int.Parse(usuario_id), peticion, fechaInicio, fechaFinal, cell_id, condicion);
+            EstadisticasJugadas stats = this.repoStats.GetEstadisticasJugadas(int.Parse(usuario_id), peticion, fechaInicio, fechaFinal, cell_id, condicion, cantidadJugada);
 
             return View(stats);
 
