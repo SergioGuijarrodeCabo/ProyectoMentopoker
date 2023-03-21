@@ -47,6 +47,10 @@
             height: auto;
         }
 
+
+
+
+
         th {
        
             color: white;
@@ -89,22 +93,25 @@
 
 
 
-            #dJugada {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            background-color: #212529;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-          }
+           #dJugada {
+          display: none;
+          position: fixed;
+          top: calc(50% + 100px);
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 2;
+          background-color: #212529;
+          padding: 20px;
+          box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
   
           #tabla {
             color: #fff;
           }
 
+
+       
           
             .image-gallery{
                   background-color: transparent !important;
@@ -140,18 +147,19 @@
             </div>
                     </div> </div>  
                     
-                    <div class="row">
-                    <div class="col" >
+                  <div class="row ">
+                  <div class="col">
+                    <label class="form-check-label" id="labelFechaInicio" style="color:white"></label>
+                    <label class="form-check-label" id="labelFechaFinal" style="color:white"></label>
+                    <label class="form-check-label" id="labelCellid" style="color:white"></label>
+                    <label class="form-check-label" id="labelCondicion" style="color:white"></label>
+                    <label class="form-check-label" id="labelCantidadJugada" style="color:white"></label>
+                  </div>
+                </div>
 
-                 <label class="form-check-label" id="labelFechaInicio" style="color:white"> </label>
-                  <label class="form-check-label" id="labelFechaFinal" style="color:white"> </label>
-                     <label class="form-check-label" id="labelCellid" style="color:white"> </label>
-                     <label class="form-check-label" id="labelCondicion" style="color:white"> </label>
-                     <label class="form-check-label" id="labelCantidadJugada" style="color:white"> </label>
-                  
-           
-                    </div>  
-             </div>
+
+
+
              <div class="row">
              <div class="col" > <div style="padding:10px;">
               
@@ -207,7 +215,7 @@
       <div class="col">
           
           
-           <div id="dJugada" style="display:none;" class="superpuesta"> 
+           <div id="dJugada" style="display:none;" class="superpuesta tabla"> 
            <table id="tabla" class="table table-bordered" >
         <thead></thead>
 
@@ -1297,54 +1305,7 @@
             </div>
 
 
-           @*Segunda versión de pie chart
-               <div class="page-content page-container" id="page-content1">
-                <div class="padding">
-                    <div class="row">
-                        <div class="container-fluid d-flex justify-content-center">
-                            <div class="col-sm-8 col-md-6">
-                                <div class="card" style="max-width: 50%;">
-                                    <div class="card-header">Pie chart</div>
-                                    <div class="card-body">
-                                        <canvas id="chart-lineSeguimiento" width="299" height="200" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px; transform: scale(1);"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
-            
 
-
-        @*Primera versión de pie chart
-            <div class="page-content page-container" id="page-content">
-            <div class="padding">
-                <div class="row">
-                    <div class="container-fluid d-flex justify-content-center">
-                        <div class="col-sm-8 col-md-6">
-                            <div class="card">
-                                <div class="card-header">Pie chart</div>
-                                <div class="card-body" style="height: 420px">
-                                    <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                        <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-                                        </div>
-                                        <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-                                        </div>
-                                    </div> <canvas id="chart-line" width="299" height="200" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-       
-
-
-        <h1>Prueba estadísticas</h1>
 
 
        
@@ -1353,15 +1314,15 @@
 
             <h2>Jugadas</h2>
             <div class="table-wrapper">
-                <table class="table table-info " id="jugadas-table">
+                <table class="table table-dark table-hover " id="jugadas-table">
                     <thead>
                         <tr>
                             <th>Jugada_id</th>
                             <th>Jugada Preflop</th>
                             <th>Cantidad jugada</th>
-                            <th>Seguimiento_Tabla</th>
-                            <th>Cell_id</th>
-                            <th>Table_id</th>
+                            <th>Seguimiento Tabla</th>
+                            <th>Mano</th>
+           
                             <th>Condicion</th>
                             <th>Ronda_id</th>
                             <th>Ganancias</th>
@@ -1382,7 +1343,6 @@
                                 </div>
                                 
                                 </td>
-                                <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Table_id)</td>
                                 <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Condicion)</td>
                                 <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Ronda_id)</td>
                                 <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Ganancias)</td>

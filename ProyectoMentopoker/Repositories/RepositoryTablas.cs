@@ -149,7 +149,7 @@ namespace ProyectoMentopoker.Repositories
         //}
 
 
-        public Boolean insertPartida(int[] ids_Jugadas, int[] ids_Rondas, double[] ganancias_Rondas, double[] cantidades_Rondas,
+        public async Task<Boolean>  insertPartida(int[] ids_Jugadas, int[] ids_Rondas, double[] ganancias_Rondas, double[] cantidades_Rondas,
             string[] cell_ids_Jugadas, int[] table_ids_Jugadas, double[] cantidades_Jugadas,
             Boolean[] seguimiento_jugadas, double dinero_inicial, double dinero_actual, string comentario, string usuario_id)
         {
@@ -169,7 +169,7 @@ namespace ProyectoMentopoker.Repositories
             this.com.CommandText = "SP_INSERT_PARTIDA";
 
             this.cn.Open();
-            exito = this.com.ExecuteNonQuery();
+            exito = await this.com.ExecuteNonQueryAsync();
             this.com.Parameters.Clear();
             this.cn.Close();
 
@@ -279,7 +279,7 @@ namespace ProyectoMentopoker.Repositories
         }
 
 
-        public void insertRonda(double cantidad_Ronda, double ganancias_Ronda, string partida_id)
+        public async void insertRonda(double cantidad_Ronda, double ganancias_Ronda, string partida_id)
         {
 
             SqlParameter pamcantidad = new SqlParameter("@CANTIDAD_RONDA", cantidad_Ronda);
@@ -292,13 +292,13 @@ namespace ProyectoMentopoker.Repositories
             this.com.CommandText = "SP_INSERT_RONDA";
 
             this.cn.Open();
-            this.com.ExecuteNonQuery();
+            await this.com.ExecuteNonQueryAsync();
             this.com.Parameters.Clear();
             this.cn.Close();
         }
 
 
-        public void insertJugada(double cantidad_Jugada, Boolean seguimiento_jugada, 
+        public async void insertJugada(double cantidad_Jugada, Boolean seguimiento_jugada, 
             int identificador, string ronda_id)
         {
             SqlParameter pamcantidad = new SqlParameter("@CANTIDAD_JUGADA_PREFLOP", cantidad_Jugada);
@@ -323,7 +323,7 @@ namespace ProyectoMentopoker.Repositories
             this.com.CommandText = "SP_INSERT_JUGADA";
 
             this.cn.Open();
-            this.com.ExecuteNonQuery();
+            await this.com.ExecuteNonQueryAsync();
             this.com.Parameters.Clear();
             this.cn.Close();
 
