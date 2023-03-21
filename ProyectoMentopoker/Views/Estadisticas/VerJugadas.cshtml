@@ -1441,7 +1441,8 @@ var botonCantidad = 0;
 
       $("#icantidadJugada").on("change", function() {
           if ($('#multiFiltro').is(':checked')) {
-
+                  document.getElementById('dCantidadJugada').style.display = "inline-block";
+       
 
               cantidadJugadaValor = $("#icantidadJugada").val();
                 $('#cantidadJugada').val(cantidadJugadaValor);
@@ -1451,26 +1452,27 @@ var botonCantidad = 0;
         });
 
 
-          $("#fechaInicio, #fechaFinal").on("change", function() {
-                // check if the checkbox is checked
+      $("#fechaInicio, #fechaFinal").on("change", function() {
+            // check if the checkbox is checked
 
 
 
-                if ($("#multiFiltro").is(":checked")) {
+            if ($("#multiFiltro").is(":checked")) {
 
-                        
+                //document.getElementById('selectorFecha').style.display = "none";
+
                   
 
-                    // save the value of the datepicker to the corresponding label
-                    if ($(this).attr("id") === "fechaInicio") {
-                        $("#labelFechaInicio").text('Fecha inicio: '+$(this).val());
+                // save the value of the datepicker to the corresponding label
+                if ($(this).attr("id") === "fechaInicio") {
+                    $("#labelFechaInicio").text('Fecha inicio: '+$(this).val());
                            
-                    } else if ($(this).attr("id") === "fechaFinal") {
-                        alert("jl");
-                        $("#labelFechaFinal").text('Fecha final: '+$(this).val());
-                    }
+                } else if ($(this).attr("id") === "fechaFinal") {
+                   
+                    $("#labelFechaFinal").text('Fecha final: '+$(this).val());
                 }
-            });
+            }
+        });
     
           
 
@@ -1614,6 +1616,8 @@ function handleCheckboxChange() {
    
    document.getElementById("bmultiFiltro").style.display = "inline-block";
    document.getElementById("bCantidad").style.display = "none";
+
+
    
     // Checkbox is checked, do something
     document.getElementById("bJugada").style.display = "none";
@@ -1804,7 +1808,7 @@ $('.prueba').click(function() {
 
     if ($('#multiFiltro').is(':checked')) {
 
-  
+          document.getElementById('dJugada').style.display = "none";
          $('#labelCellid').text('Cell ID: ' + cellID);
 
    // alert("Seleccione más filtros y luego pulse en filtrar");
@@ -1835,7 +1839,8 @@ $('.prueba').click(function() {
             if ($.isNumeric(id)) {
 
               if ($('#multiFiltro').is(':checked')) {
-                     
+                      
+          
 
      
                      condicion = $(this).attr('id');
@@ -1845,13 +1850,13 @@ $('.prueba').click(function() {
                         //var texto = $('#condicion').text();
                         //alert(texto);
                          
-                     $('#labelCondicion').text('condicion: ' + id);
+                     $('#labelCondicion').text('Condicion: ' + id);
 
 
                    // alert("seleccione más filtros y luego pulse en filtrar");
                    $('#condicion').val(id);
 
-                    
+                   document.getElementById('dropdowns').style.display = "none";
 
                 } else {
              

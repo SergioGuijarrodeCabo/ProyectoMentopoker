@@ -34,7 +34,11 @@
     <style>
       
 
-   
+   .encabezado{
+    background-color: #212529 !important;
+    width: fit-content;
+    margin-top: 10px;
+        }
 
 
     .container {
@@ -57,6 +61,9 @@
           background-color: #212529 !important;
           padding: 20px;
     }
+
+
+
        
 
      </style>
@@ -1267,23 +1274,28 @@
                 if (inicio == 0) {
 
 
-                    dineroInicial = null;
 
+                    var d = null;
                     do {
-                      dineroInicial = prompt("Introduzca la cantidad inicial con la que va a jugar");
-                    } while (dineroInicial === "" || isNaN(dineroInicial));
+                        d = prompt("Introduzca la cantidad inicial con la que va a jugar");
+                        if (d === null || d.trim() === "") {
+                            alert("Debe introducir una cantidad inicial");
+                        }
+                    } while (d === null || d.trim() === "" || isNaN(d));
 
-
+                    dineroInicial = d;
 
                     dineroActual = dineroInicial;
 
-
-                   $('#encabezado').after('<div class="d-flex justify-content-center align-items-center mt-3">' +
-                        '<p class="text-primary fw-bold h5 mb-0 me-3" id="dineroInicial">Dinero inicial: ' + dineroInicial + '$</p>' +
-                        '<p class="text-primary fw-bold h5 mb-0 me-3" id="dineroActual">Dinero actual: ' + dineroActual + '$</p>' +
-                        '<p class="text-success fw-bold h5 mb-0" id="balance">Balance: ' + balance + '$</p>' +
+                    $('#encabezado').after('<div class="d-flex justify-content-center align-items-center mt-3">' +
+                        '<div class="encabezado">'+
+                        '<p class="fw-bold h5 mb-0 me-3 d-inline" style="color:white" id="dineroInicial">Dinero inicial: ' + dineroInicial + '$</p>' +
+                        '<p class="fw-bold h5 mb-0 me-3 d-inline" style="color:white" id="dineroActual">Dinero actual: ' + dineroActual + '$</p>' +
+                        '<p class=" fw-bold h5 mb-0 d-inline" style="color:white" id="balance">Balance: ' + balance + '$</p>' +
+                        '</div>'+
                         '</div>');
                     inicio = 1;
+                 
 
 
 
@@ -1618,13 +1630,26 @@
             //if (rondaJugada == 1) {
                 
             //    cantidadTotalUltimaRonda = null;
-              do {
-              cantidadTotalRonda = prompt("Introduzca su apuesta final");
-            } while (cantidadTotalRonda === "" || isNaN(cantidadTotalRonda));
 
+           var c = null;
             do {
-              cantidadTotalUltimaRonda = prompt("Introduzca sus ganancias o pérdidas (en negativo) de la última ronda");
-            } while (cantidadTotalUltimaRonda === "" || isNaN(cantidadTotalUltimaRonda));
+                c = prompt("Introduzca su apuesta final");
+                if (c === null || c.trim() === "") {
+                    alert("Debe introducir una apuesta final para continuar. Si vas a pasar, introduzca 0");
+                }
+            } while (c === null || c.trim() === "" || isNaN(c));
+
+            cantidadTotalRonda = c;
+
+            var cT = null;
+            do {
+                cT = prompt("Introduzca sus ganancias o pérdidas (en negativo) de la última ronda");
+                if (cT === null || cT.trim() === "") {
+                    alert("Debe introducir una cifra. Si ha pasado, introduzca 0");
+                }
+            } while (cT === null || cT.trim() === "" || isNaN(cT));
+            cantidadTotalUltimaRonda = cT;
+
 
             //$("#bFinal" + idRondaActual).style.display = "none";
     
@@ -1645,17 +1670,29 @@
 
                 $("#dineroActual").text("Dinero actual: " + dineroActual + "$");
 
-               
-                if (balance <= 0) {
-                  // Add the "danger" class to the balance <p> tag
-                  $('#balance').removeClass('success');
-                  $('#balance').addClass('danger');
+               if (balance <= 0) {
+                  // Set the color to red if the balance is negative or zero
+                  $('#balance').css('color', 'red');
                 } else {
-                  // Remove the "danger" class from the balance <p> tag
-                  $('#balance').removeClass('danger');
-                  $('#balance').addClass('success');
+                  // Set the color to green if the balance is positive
+                  $('#balance').css('color', 'green');
                 }
-               $("#balance").text("Balance: " + balance + "$");
+
+                var balanceStr = balance.toFixed(2).toString();
+
+                // Remove any trailing decimal places if balance is an integer
+                if (balanceStr.indexOf('.') != -1 && balanceStr.split('.')[1].length == 0) {
+                  balanceStr = balanceStr.split('.')[0];
+                }
+
+                $("#balance").text("Balance: " + balanceStr + "$");
+
+
+
+                
+
+
+
 
                 // Update the dJugadasPintadas <p> element
                 $("#dJugadasPintadas" + idRondaActual).text(ultimaMano +  " A: " + cantidadTotalRonda + "$" + " G: " + cantidadTotalUltimaRonda + "$");
@@ -1679,11 +1716,13 @@
 
             
             usuario_id =  $('#userId').text().match(/\d+/)[0];
-           
-            var comentario = "";
+            var comentario;
             do {
                 comentario = prompt("Introduzca algún comentario sobre la partida");
-            } while (comentario.trim() === "");
+                if (comentario === null || comentario.trim() === "") {
+                    alert("Debe introducir un comentario para continuar.");
+                }
+            } while (comentario === null || comentario.trim() === "");
 
             alert(usuario_id);
             $.ajax({
