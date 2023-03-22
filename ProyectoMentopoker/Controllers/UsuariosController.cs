@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProyectoMentopoker.Repositories;
 using ProyectoMentopoker.Models;
+using ProyectoMentopoker.Filters;
+
 namespace ProyectoMentopoker.Controllers
 {
     public class UsuariosController : Controller
@@ -18,7 +20,7 @@ namespace ProyectoMentopoker.Controllers
 
 
 
-
+        [AuthorizeUsers(Policy = "AdminOnly")]
         public IActionResult Crud()
         {
             List<UsuarioModel> usuarios = this.repoLogin.GetUsuarios();
@@ -26,7 +28,7 @@ namespace ProyectoMentopoker.Controllers
         }
 
 
-
+        [AuthorizeUsers(Policy = "AdminOnly")]
         public IActionResult Insert()
         {     
             return View();
@@ -34,7 +36,7 @@ namespace ProyectoMentopoker.Controllers
         }
 
 
-
+        [AuthorizeUsers(Policy = "AdminOnly")]
         [HttpPost]
         public async Task<IActionResult> Insert(UsuarioModel usuario)
         {
@@ -44,8 +46,8 @@ namespace ProyectoMentopoker.Controllers
 
         }
 
-       
 
+        [AuthorizeUsers(Policy = "AdminOnly")]
         public IActionResult Update(string Usuario_id)
         {
             UsuarioModel usuario = this.repoLogin.FindUsuario(Usuario_id);
@@ -53,7 +55,7 @@ namespace ProyectoMentopoker.Controllers
 
         }
 
-
+        [AuthorizeUsers(Policy = "AdminOnly")]
         [HttpPost]
         public async Task<IActionResult> Update(UsuarioModel usuario)
         {
@@ -63,7 +65,7 @@ namespace ProyectoMentopoker.Controllers
 
         }
 
-
+        [AuthorizeUsers(Policy = "AdminOnly")]
         public async Task<IActionResult> Delete(string Usuario_id)
         {
             await this.repoLogin.DeleteUsuario(Usuario_id);

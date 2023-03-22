@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using ProyectoMentopoker.Data;
 using ProyectoMentopoker.Repositories;
@@ -8,9 +9,16 @@ string connectionString =
     builder.Configuration.GetConnectionString("SqlMentopokerClase");
 
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("PERMISOS", policy => policy.RequireRole("user", "admin"));
+    options.AddPolicy("AdminOnly", policy => policy.RequireClaim("ADMIN"));
+});
+
 builder.Services.AddTransient<RepositoryEstadisticas>();
 
 builder.Services.AddTransient<RepositoryLogin>();
+
 
 
 
@@ -30,8 +38,28 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddAntiforgery();
 
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie(
+
+CookieAuthenticationDefaults.AuthenticationScheme,
+
+config =>
+
+{
+
+    config.AccessDeniedPath = "/Managed/ErrorAcceso";
+
+});
+
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+options.EnableEndpointRouting = false)
+    .AddSessionStateTempDataProvider();
 
 var app = builder.Build();
 
@@ -47,12 +75,15 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Login}/{action=Index}/{id?}");
+app.UseMvc(route =>
+{
+    route.MapRoute(
+        name: "default",
+        template: "{controller=Managed}/{action=Login}/{id?}");
+});
 
 app.Run();

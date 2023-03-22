@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProyectoMentopoker.Filters;
 using ProyectoMentopoker.Models;
 using ProyectoMentopoker.Repositories;
 namespace ProyectoMentopoker.Controllers
@@ -14,6 +15,7 @@ namespace ProyectoMentopoker.Controllers
             this.repoStats = repoStats;
         }
 
+        [AuthorizeUsers]
         public IActionResult VerPartidas()
         {
             //var usuario_id = HttpContext.Session.GetString("ID");
@@ -27,7 +29,7 @@ namespace ProyectoMentopoker.Controllers
             return View();
         }
 
-
+        [AuthorizeUsers]
         [HttpPost]
         public IActionResult VerPartidas(DateTime? fechaInicio = null, DateTime? fechaFinal = null)
         {
@@ -44,7 +46,7 @@ namespace ProyectoMentopoker.Controllers
 
         }
 
-
+        [AuthorizeUsers]
         public IActionResult VerJugadas()
         {
             //var usuario_id = HttpContext.Session.GetString("ID");
@@ -58,7 +60,7 @@ namespace ProyectoMentopoker.Controllers
             return View();
         }
 
-
+        [AuthorizeUsers]
         [HttpPost]
         public IActionResult VerJugadas(DateTime? fechaInicio = null, DateTime? fechaFinal = null, string? cell_id = null, int? condicion = null, double? cantidadJugada = null)
         {

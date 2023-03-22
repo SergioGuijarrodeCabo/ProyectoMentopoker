@@ -1,0 +1,26 @@
+﻿@using System.Security.Claims; 
+
+<h1>Perfil usuario</h1> 
+
+  
+
+<ul class="list-group"> 
+
+    <li  class="list-group-item"> 
+
+Rol: @Context.User.FindFirst(ClaimTypes.Role).Value 
+
+    </li> 
+
+<li  class="list-group-item"> 
+
+Email: @Context.User.FindFirst(ClaimTypes.Email).Value 
+
+    </li> 
+
+
+  
+
+
+
+</ul> 
