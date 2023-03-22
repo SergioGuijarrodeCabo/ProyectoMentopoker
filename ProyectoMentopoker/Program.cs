@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using ProyectoMentopoker.Data;
 using ProyectoMentopoker.Repositories;
@@ -30,8 +31,18 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddAntiforgery();
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie();
+
+
+
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(
+   options => options.EnableEndpointRouting = false );
 
 var app = builder.Build();
 
@@ -47,12 +58,20 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Login}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Login}/{action=Index}/{id?}");
+
+app.UseMvc(routes =>
+{
+    routes.MapRoute(
+        name: "Default",
+        template: "{controller=Login}/{action=Index}/{id?}");
+
+});
 
 app.Run();

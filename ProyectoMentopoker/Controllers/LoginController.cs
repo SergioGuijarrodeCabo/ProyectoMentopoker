@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using ProyectoMentopoker.Models;
 using ProyectoMentopoker.Repositories;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace ProyectoMentopoker.Controllers
 {
@@ -11,10 +14,10 @@ namespace ProyectoMentopoker.Controllers
         private RepositoryLogin repoLogin;
 
         public LoginController(ILogger<LoginController> logger, RepositoryLogin repoLogin)
-        {           
+        {
             this.repoLogin = repoLogin;
             _logger = logger;
-            
+
         }
 
 
@@ -34,48 +37,85 @@ namespace ProyectoMentopoker.Controllers
             return View();
         }
 
-        public IActionResult AccesoDenegado()
-        {
-            return View();
-        }
+        
 
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [HttpPost]
-        public IActionResult Index(string email, string password)
+        public async Task<IActionResult> Index(string email, string password)
         {
-            
-            
-            
+
+
+
             UsuarioModel usuario = this.repoLogin.Login(email, password);
-            
-            if(usuario != null)
+
+            if (usuario != null)
             {
-               
-                HttpContext.Session.SetString("EMAIL", usuario.Email);
-                HttpContext.Session.SetString("ID", usuario.Usuario_id);
-                HttpContext.Session.SetString("ROL", usuario.Rol);
-                return RedirectToAction("Index", "Tablas");
+                ClaimsIdentity identity =
+
+                 new ClaimsIdentity
+
+                 (CookieAuthenticationDefaults.AuthenticationScheme,
+
+                 ClaimTypes.Email, ClaimTypes.Role);
+
+                Claim claimEmail = new Claim(ClaimTypes.Email, usuario.Email);
+                Claim claimRol = new Claim(ClaimTypes.Role, usuario.Rol);
+
+                identity.AddClaim(claimEmail);
+                identity.AddClaim(claimRol);
+
+                ClaimsPrincipal userPrincipal =
+
+                new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync
+
+                (CookieAuthenticationDefaults.AuthenticationScheme
+
+                , userPrincipal);
+
+                return RedirectToAction("PerfilUsuarios", "Perfil");
+
             }
+
             else
+
             {
-                ViewData["MENSAJE"] = "Usuario/password incorrectos";
+
+                ViewData["MENSAJE"] = "Usuario/Password incorrectos";
+
                 return View();
+
             }
 
-
-            //if (usuario.ToLower() == "admin" && password.ToLower() == "admin")
-            //{
-            //    //ALMACENAMOS EL USUARIO EN SESSION
-            //    HttpContext.Session.SetString("USUARIO", usuario);
-
-            //    return RedirectToAction("Index", "Tablas");
-            //}
-            //else
-            //{
-            //    ViewData["MENSAJE"] = "Usuario/password incorrectos";
-            //    return View();
-            //}
-            return View();
         }
+
+
+
+        public IActionResult ErrorAcceso()
+
+        {
+
+            return View();
+
+        }
+
+
+
+        public async Task<IActionResult> LogOut()
+
+        {
+
+            await HttpContext.SignOutAsync
+
+            (CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction("Index", "Login");
+
+        }
+
     }
+
+
+
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using ProyectoMentopoker.Filters;
 using ProyectoMentopoker.Models;
 using ProyectoMentopoker.Repositories;
 
@@ -16,6 +16,8 @@ namespace ProyectoMentopoker.Controllers
 
         }
 
+
+        [AuthorizeUsers]
         public IActionResult Jugar()
         {
 
