@@ -1,10 +1,9 @@
-﻿@{
-    var i = 1;
-    var y = 1;
-
-    var id = 0;
-    var usuario_id = Context.Session.GetString("ID");
-    var email = Context.Session.GetString("EMAIL");
+﻿@using System.Security.Claims
+@{
+    var usuario_id = Context.User.FindFirstValue("ID");
+    var email = Context.User.Identity.Name;
+    //var usuario_id = Context.Session.GetString("ID");
+    //var email = Context.Session.GetString("EMAIL");
 }
 
 

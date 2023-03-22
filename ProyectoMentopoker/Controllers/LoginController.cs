@@ -58,11 +58,13 @@ namespace ProyectoMentopoker.Controllers
 
                  ClaimTypes.Email, ClaimTypes.Role);
 
-                Claim claimEmail = new Claim(ClaimTypes.Email, usuario.Email);
+                Claim claimEmail = new Claim(ClaimTypes.Name, usuario.Email);
                 Claim claimRol = new Claim(ClaimTypes.Role, usuario.Rol);
+                Claim claimID =new Claim("ID", usuario.Usuario_id.ToString());
 
                 identity.AddClaim(claimEmail);
                 identity.AddClaim(claimRol);
+                identity.AddClaim(claimID);
 
                 ClaimsPrincipal userPrincipal =
 

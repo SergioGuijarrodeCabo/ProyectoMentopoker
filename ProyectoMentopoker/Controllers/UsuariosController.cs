@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProyectoMentopoker.Repositories;
 using ProyectoMentopoker.Models;
+using ProyectoMentopoker.Filters;
+
 namespace ProyectoMentopoker.Controllers
 {
     public class UsuariosController : Controller
@@ -18,7 +20,7 @@ namespace ProyectoMentopoker.Controllers
 
 
 
-
+        [AuthorizeUsers]
         public IActionResult Crud()
         {
             List<UsuarioModel> usuarios = this.repoLogin.GetUsuarios();
