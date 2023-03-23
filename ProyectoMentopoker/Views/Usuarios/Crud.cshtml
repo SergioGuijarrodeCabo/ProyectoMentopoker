@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ProyectoMentopoker.Models.UsuarioModel>
+﻿@using System.Security.Claims;
+@model IEnumerable<ProyectoMentopoker.Models.UsuarioModel>
 
 @{
     ViewData["Title"] = "Crud";
@@ -36,7 +37,9 @@
             }
            
     </style>
-
+       @if
+                         (@Context.User.FindFirst(ClaimTypes.Role)?.Value == "admin")
+    {
 
     <div class="container" >
         <div>
@@ -93,5 +96,13 @@
 
     </div>
     </div>
+
+    }
+    else
+    {
+
+        <h1>No tienes permisos para acceder a esta funcionalidad</h1>
+    }
+
 </body>
 </html>

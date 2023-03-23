@@ -1,4 +1,5 @@
-﻿@model List<PartidaModel>
+﻿@using System.Security.Claims;
+@model List<PartidaModel>
 
 
 <!doctype html>
@@ -39,61 +40,78 @@
 
     </style>
 
-    <div class="container">
-        
-        
+
+
+    @if
+                         (@Context.User.FindFirst(ClaimTypes.Role)?.Value == "admin")
+    {
 
 
 
 
-        @if (Model != null)
-        {
+        <div class="container">
 
 
-            <div class="table-wrapper" style="padding:50px; height: 600px; overflow: auto;">
-                <table class="table table-dark table-hover">
-                    <thead>
-                        <tr>
-                            <th>Partida_id</th>
-                            <th>Cash_Inicial</th>
-                            <th>Cash_Final</th>
-                            <th>Fecha</th>
-                            <th>Comentarios</th>
-                            <th>Usuario_id</th>
-                            <th>Acciones</th>
-                        </tr>
 
-                    </thead>
-                    <tbody>
-                        @for (var i = 0; i < Model.Count; i += 1)
-                        {
+
+
+
+            @if (Model != null)
+            {
+
+
+                <div class="table-wrapper" style="padding:50px; height: 600px; overflow: auto;">
+                    <table class="table table-dark table-hover">
+                        <thead>
                             <tr>
-                                <td>@Html.DisplayFor(model =>model[i].Partida_id)</td>
-                                <td>@Html.DisplayFor(model => model[i].Cash_Inicial)</td>
-                                <td>@Html.DisplayFor(model => model[i].Cash_Final)</td>
-                                <td>@Html.DisplayFor(model =>model[i].Fecha)</td>
-                                <td>@Html.DisplayFor(model => model[i].Comentarios)</td>
-                                <td>@Html.DisplayFor(model => model[i].Usuario_id)</td>
-                                <td>
-                                <a class="nav-link text-white d-inline mr-3" asp-area="" asp-controller="Partidas" asp-action="Update" asp-route-partida_id="@Model[i].Partida_id"><button class="btn btn-info">Actualizar</button></a>
-                                    <a class="nav-link text-white d-inline" asp-area="" asp-controller="Partidas" asp-action="Delete" asp-route-partida_id="@Model[i].Partida_id"><button class="btn btn-info">Borrar</button></a>
-                                </td>
-
+                                <th>Partida_id</th>
+                                <th>Cash_Inicial</th>
+                                <th>Cash_Final</th>
+                                <th>Fecha</th>
+                                <th>Comentarios</th>
+                                <th>Usuario_id</th>
+                                <th>Acciones</th>
                             </tr>
-                        }
 
-                    </tbody>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.Count; i += 1)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(model =>model[i].Partida_id)</td>
+                                    <td>@Html.DisplayFor(model => model[i].Cash_Inicial)</td>
+                                    <td>@Html.DisplayFor(model => model[i].Cash_Final)</td>
+                                    <td>@Html.DisplayFor(model =>model[i].Fecha)</td>
+                                    <td>@Html.DisplayFor(model => model[i].Comentarios)</td>
+                                    <td>@Html.DisplayFor(model => model[i].Usuario_id)</td>
+                                    <td>
+                                        <a class="nav-link text-white d-inline mr-3" asp-area="" asp-controller="Partidas" asp-action="Update" asp-route-partida_id="@Model[i].Partida_id"><button class="btn btn-info">Actualizar</button></a>
+                                        <a class="nav-link text-white d-inline" asp-area="" asp-controller="Partidas" asp-action="Delete" asp-route-partida_id="@Model[i].Partida_id"><button class="btn btn-info">Borrar</button></a>
+                                    </td>
 
-                </table>
-            </div>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
 
 
 
-        }
+            }
 
 
 
-    </div>
+        </div>
+    }
+    else
+    {
+        
+        <h1>No tienes permisos para acceder a esta funcionalidad</h1>
+    }
+
+
 </body>
 
 

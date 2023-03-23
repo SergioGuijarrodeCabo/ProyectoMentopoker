@@ -1,4 +1,5 @@
-﻿
+﻿@using System.Security.Claims;
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -72,13 +73,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" asp-area="" asp-controller="Estadisticas" asp-action="VerJugadas">Estadísticas jugadas</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" asp-area="" asp-controller="Usuarios" asp-action="Crud">Usuarios</a>
-                    </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link text-white" asp-area="" asp-controller="Partidas" asp-action="Crud">Partidas</a>
-                    </li>
+
+
 
 
 
@@ -87,9 +84,38 @@
                   </div>
 
 
-                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
 
-                        <ul class="navbar-nav ml-auto">
+
+                @if
+                   (@Context.User.FindFirst(ClaimTypes.Role)?.Value =="admin")
+                {
+                    <div class="mx-auto order-0 justify-content-center">
+                        <ul class="navbar-nav flex-grow-1">
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Usuarios" asp-action="Crud">Usuarios</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Partidas" asp-action="Crud">Partidas</a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+
+                }
+
+
+
+                
+                    
+            
+
+
+                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 justify-content-end">
+
+                        <ul class="navbar-nav me-auto">
                         <partial name="_MenuUsuario" />
 
                         </ul>

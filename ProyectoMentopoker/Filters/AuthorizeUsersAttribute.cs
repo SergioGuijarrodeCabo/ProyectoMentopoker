@@ -25,6 +25,23 @@ namespace ProyectoMentopoker.Filters
                 context.Result = this.GetRoute("Login", "Index");
 
             }
+            else
+            {
+                //NOS INTERESA SABER MAS CARACTERISTICAS DEL USUARIO 
+
+                if (user.IsInRole("admin") == false
+                    && user.IsInRole("user") == false
+                    )
+                {
+
+                    context.Result =
+
+                    this.GetRoute("Login", "ErrorAcceso");
+
+                }
+
+
+            }
 
         }
 
