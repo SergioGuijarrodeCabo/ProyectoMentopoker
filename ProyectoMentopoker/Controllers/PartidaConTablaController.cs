@@ -36,11 +36,14 @@ namespace ProyectoMentopoker.Controllers
 
 
 
-        public IActionResult insertarPartida()
+        public IActionResult insertar()
         {
 
             return View();
         }
+
+        
+
 
         [HttpPost]
         public IActionResult insertar(int[] ids_Jugadas, int[] ids_Rondas, double[] ganancias_Rondas, double[] cantidades_Rondas,

@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data;
+using System.Data.SqlClient;
 using ProyectoMentopoker.Models;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -206,48 +207,34 @@ namespace ProyectoMentopoker.Repositories
 
                 
 
-                for (int y=0; y< ids_Jugadas.Length; y++)
-                {
-                    if (numRonda == ids_Jugadas[y])
-                    {
-                        //insercion = true;
-                        //for(int x = 0; x < jugadasInsertadas.Count; x++)
-                        //{
-                        //    if (ids_Jugadas[y] == jugadasInsertadas[x])
-                        //{ insercion = false; }}
-                        //if (insercion == true) { }
+
+                SqlParameter pamcellid = new SqlParameter("@CELL_ID", cell_ids_Jugadas[i]);
+                this.com.Parameters.Add(pamcellid);
+                SqlParameter pamtableid = new SqlParameter("@TABLE_ID", table_ids_Jugadas[i]);
+                this.com.Parameters.Add(pamtableid);
+                this.com.CommandType = System.Data.CommandType.StoredProcedure;
+                this.com.CommandText = "SP_FIND_IDENTIFICADOR";
+                this.cn.Open();
+                int identificador = int.Parse(this.com.ExecuteScalar().ToString());
+                this.com.Parameters.Clear();
+                this.cn.Close();
+
+                string rondaId;
+                this.com.CommandText = "SELECT MAX(CAST(Ronda_id AS INT)) from Rondas";
+                this.com.CommandType = System.Data.CommandType.Text;
+                this.cn.Open();
+                rondaId = this.com.ExecuteScalar().ToString();
+                this.cn.Close();
 
 
 
-                        SqlParameter pamcellid = new SqlParameter("@CELL_ID", cell_ids_Jugadas[y]);
-                        this.com.Parameters.Add(pamcellid);
-                        SqlParameter pamtableid = new SqlParameter("@TABLE_ID", table_ids_Jugadas[y]);
-                        this.com.Parameters.Add(pamtableid);
-                        this.com.CommandType = System.Data.CommandType.StoredProcedure;
-                        this.com.CommandText = "SP_FIND_IDENTIFICADOR";
-                        this.cn.Open();
-                        int identificador = int.Parse(this.com.ExecuteScalar().ToString());
-                        this.com.Parameters.Clear();
-                        this.cn.Close();
-
-                        string rondaId;
-                        this.com.CommandText = "SELECT MAX(CAST(Ronda_id AS INT)) from Rondas";
-                        this.com.CommandType = System.Data.CommandType.Text;
-                        this.cn.Open();
-                        rondaId = this.com.ExecuteScalar().ToString();
-                        this.cn.Close();
-
-
-
-                        this.insertJugada(cantidades_Jugadas[y], seguimiento_jugadas[y], identificador, rondaId);
+                this.insertJugada(cantidades_Jugadas[i], seguimiento_jugadas[i], identificador, rondaId);
                        
 
                         //jugadasInsertadas.Add(ids_Jugadas[y]);
 
                         
-                        
-                    }
-                }
+                  
 
                 numRonda++;
             }
@@ -314,7 +301,7 @@ namespace ProyectoMentopoker.Repositories
             }
             SqlParameter pamseguimiento = new SqlParameter("@SEGUIMIENTO_TABLA", seguimiento);
             this.com.Parameters.Add(pamseguimiento);
-
+            pamseguimiento.SqlDbType = SqlDbType.Bit;
             SqlParameter pamidentificador = new SqlParameter("@IDENTIFICADOR", identificador);
             this.com.Parameters.Add(pamidentificador);
             SqlParameter pamrondaid = new SqlParameter("@RONDA_ID", ronda_id);
