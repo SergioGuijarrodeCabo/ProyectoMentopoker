@@ -35,8 +35,8 @@ namespace ProyectoMentopoker.Controllers
         public IActionResult VerPartidas(DateTime? fechaInicio = null, DateTime? fechaFinal = null)
         {
 
-            var usuario_id = HttpContext.Session.GetString("ID");
-
+            //var usuario_id = HttpContext.Session.GetString("ID");
+            var usuario_id = User.FindFirst("ID")?.Value;
             if (usuario_id == null)
             {
                 usuario_id = "1";
