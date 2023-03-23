@@ -53,6 +53,8 @@
 
     </style>
 
+
+
     <div class="container">
         
         
@@ -70,7 +72,6 @@
           <button class="btn btn-info" id="bJugada">MOSTRAR PARTIDAS</button>
         </form>
 
-
         @if (Model != null)
         {
             <table class="table table-dark table-hover " style="padding:30px;">
@@ -80,17 +81,9 @@
                     <tr><th> <p style="color:white;">Media ganancias partidas: @Math.Round(Model.MediaGananciasPartidas,2)$</p></th></tr>
                     <tr><th><p style="color:white;">Rentabilidad partidas: @Math.Round(Model.RentabilidadPartidas,2) %</p></th></tr>
                 </tbody>
-            </table>
-
-            
-          
-           
-           
+            </table>       
             
         }
-
-
-
 
         @if (Model != null)
         {
@@ -198,18 +191,8 @@
         }
 
 
-
-
-
     </div>
 </body>
-
-
-
-
-
-
-
 
 
 
@@ -289,10 +272,6 @@
                     src2 += subString2 + "R.png";
                 }
 
-                   
-
-
-
             gallery.find('#carta1_' + cellId).attr('src', src1); // Set the src attribute for the first image
             gallery.find('#carta2_' + cellId).attr('src', src2); // Set the src attribute for the second image
             gallery.addClass('show-galeria');
@@ -325,11 +304,6 @@
             // Show only the rows associated with the selected ronda
             $('#jugadas-table tbody tr[data-ronda-id="' + rondaId + '"]').show();
         });
-
-
-
-
-
 
     </script>
 }

@@ -239,26 +239,7 @@ namespace ProyectoMentopoker.Repositories
                 numRonda++;
             }
             numRonda = 1;
-
-
-            for(int i = 0;i< ids_Jugadas.Length; i++)
-            {
-
-
-                SqlParameter pamcellid = new SqlParameter("@CELL_ID", cell_ids_Jugadas[i]);
-                this.com.Parameters.Add(pamcellid);
-                SqlParameter pamtableid = new SqlParameter("@TABLE_ID", table_ids_Jugadas[i]);
-                this.com.Parameters.Add(pamtableid);
-                this.com.CommandType = System.Data.CommandType.StoredProcedure;
-                this.com.CommandText = "SP_FIND_IDENTIFICADOR";
-                this.cn.Open();
-                string identificador = this.com.ExecuteScalar().ToString();
-                this.com.Parameters.Clear();
-                this.cn.Close();
-
-
-            }
-
+ 
            
 
 
