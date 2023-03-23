@@ -5,6 +5,8 @@ using Microsoft.Data.SqlClient;
 using System.Diagnostics.Metrics;
 using System.Reflection.Metadata;
 using System.ComponentModel.Design;
+using System.Linq;
+using Microsoft.AspNetCore.Server.IIS.Core;
 
 #region
 
@@ -186,6 +188,104 @@ namespace ProyectoMentopoker.Repositories
             this.context = context;
         }
 
+        public List<PartidaModel> GetAllPartidas()
+        {
+                var consulta = from datos in this.context.Partidas
+                               select datos;
+                return consulta.ToList();
+
+        }
+
+        public PartidaModel FindPartida(string Partida_id)
+        {
+            var consulta = from datos in this.context.Partidas
+                           where datos.Partida_id == Partida_id
+                           select datos;
+            return consulta.FirstOrDefault();
+        }
+
+        public async Task UpdatePartida(string Partida_id, double Cash_inicial, double Cash_Final, string Comentarios)
+        {
+            PartidaModel partida = this.FindPartida(Partida_id);
+            partida.Cash_Inicial = Cash_inicial;
+            partida.Cash_Final = Cash_Final;
+            partida.Comentarios = Comentarios;
+            await this.context.SaveChangesAsync();
+        }
+
+        //public async Task DeletePartida(string Partida_id)
+        //{
+        //    List<RondaModel> rondasPartida = this.GetRondas(Partida_id);
+        //    List<JugadaModel> jugadasPartida = new List<JugadaModel>();
+        //    for (int i=0;i<rondasPartida.Count; i++)
+        //    {
+        //        jugadasPartida.Add(this.GetJugadas(rondasPartida[i].Ronda_id));
+        //    }
+        //    for (int i = 0; i < jugadasPartida.Count; i++)
+        //    {
+        //        this.context.Jugadas.Remove(jugadasPartida[i]);
+
+        //    }
+        //    for (int i = 0; i < rondasPartida.Count; i++)
+        //    {
+        //        this.context.Rondas.Remove(rondasPartida[i]);
+        //    }
+        //    PartidaModel partida = this.FindPartida(Partida_id);
+        //    this.context.Partidas.Remove(partida);
+        //    await this.context.SaveChangesAsync();
+        //}
+
+
+        public async Task DeletePartida(string Partida_id)
+        {
+          
+            var rondasPartida = this.GetRondas(Partida_id);
+            foreach (var ronda in rondasPartida)
+            {
+                var jugadasRonda = this.GetJugadas(ronda.Ronda_id);
+                foreach (var jugada in jugadasRonda)
+                {
+                    this.context.Jugadas.Remove(jugada);
+                }
+            }
+
+          
+            foreach (var ronda in rondasPartida)
+            {
+                this.context.Rondas.Remove(ronda);
+            }
+
+    
+            var partida = this.FindPartida(Partida_id);
+            this.context.Partidas.Remove(partida);
+
+            await this.context.SaveChangesAsync();
+        }
+
+
+
+        public List<RondaModel> GetRondas(string partida_id)
+        {
+            var consulta = from datos in this.context.Rondas
+                           where datos.Partida_id == partida_id
+                           select datos;
+
+
+            List<RondaModel> rondas = consulta.ToList();
+            return rondas;
+        }
+
+        public List<JugadaModel> GetJugadas(string ronda_id)
+        {
+            var consulta = from datos in this.context.Jugadas
+                           where datos.Ronda_id == ronda_id
+                           select datos;
+
+            return consulta.ToList();
+        }
+
+
+
 
         public ConjuntoPartidasUsuario GetPartidas(int Usuario_id, string peticion, DateTime? fechaInicio = null, DateTime? fechaFinal = null, string? cell_id = null, int? condicion =null, double? cantidadJugada = null)
             {
@@ -252,7 +352,7 @@ namespace ProyectoMentopoker.Repositories
             }
             for (int i = 0; i < rondas.Count; i++)
             {
-                JugadasCalculadasModel jugada = this.GetJugadas(rondas[i].Ronda_id, cell_id, condicion, cantidadJugada);
+                JugadasCalculadasModel jugada = this.GetJugadasCalculadas(rondas[i].Ronda_id, cell_id, condicion, cantidadJugada);
                 if (jugada != null)
                 {
                     jugadas.Add(jugada);
@@ -287,18 +387,8 @@ namespace ProyectoMentopoker.Repositories
 
         }
 
-        public List<RondaModel> GetRondas(string partida_id)
-        {
-            var consulta = from datos in this.context.Rondas
-                           where datos.Partida_id == partida_id
-                           select datos;
-
-            
-            List<RondaModel> rondas = consulta.ToList();
-            return rondas;
-        }
-
-        public JugadasCalculadasModel GetJugadas(string ronda_id, string? cell_id = null, int? condicion = null, double? cantidadJugada = null)
+       
+        public JugadasCalculadasModel GetJugadasCalculadas(string ronda_id, string? cell_id = null, int? condicion = null, double? cantidadJugada = null)
         {
             JugadasCalculadasModel jugada = new JugadasCalculadasModel();
          

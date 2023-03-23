@@ -20,6 +20,7 @@ namespace ProyectoMentopoker.Data
         {
             modelBuilder.Entity<JugadasCalculadasModel>().HasNoKey();
         }
+
       
     }
 }
