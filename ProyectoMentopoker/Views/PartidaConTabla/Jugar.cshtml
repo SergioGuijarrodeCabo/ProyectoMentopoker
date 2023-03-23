@@ -26,6 +26,12 @@
 
     <!-- Custom styles for this template -->
     <link href="~/css/navbar-top-fixed.css" rel="stylesheet">
+
+
+  
+
+
+
 </head>
 <body >
 
@@ -73,7 +79,7 @@
           <div class="col d-inline mr-2">
 
                   
-     
+           
 
     <div id="dropdowns">
 
@@ -1126,7 +1132,31 @@
                     <h2 id="userId" style="display:none;">Id: 1</h2>
                     <h2 id="email" style="display:none;">Usuario: "admin"</h2>
                     }
-                    <a class="btn btn-primary my-2" onclick="this.style.display='none';" id="botonInicio">Iniciar partida</a>
+                    <div id="formchecks" style="padding:10px;">
+                       <div class="form-check">
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="partidaSinTabla" value="1">
+                      <label class="form-check-label" for="flexRadioDefault1" style="color:white">
+                        Partida sin tabla
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="partidaConTablaMixta" checked value="2">
+                      <label class="form-check-label" for="flexRadioDefault2" style="color:white">
+                        Partida con tabla alterna
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="partidaConTablaSiempre" checked value="3">
+                      <label class="form-check-label" for="flexRadioDefault3" style="color:white">
+                        Partida con tabla continua
+                      </label>
+                    </div>
+
+                    </div>
+                 
+                    <a class="btn btn-primary my-2"  id="botonInicio" style="display:none;">Iniciar partida</a>
+
+
                     <a class="btn btn-primary my-2" onclick="finalizarPartida()" id="botonFinal" style="display:none;">Finalizar partida</a>
                 </div>
             </div>
@@ -1179,6 +1209,9 @@
 
 
     <script>
+
+        var tipoPartida=0;
+
         var jugadaSeleccionada = false;
         var idRondaActual = 0;
         var idJugadaActual = 0;
@@ -1215,8 +1248,23 @@
      $(document).ready(function () {
             var inicio = 0;
 
+            $('input[type=radio][name=flexRadioDefault]').change(function() {
+              // Show the "Iniciar partida" button
+              $('#botonInicio').css('display', 'inline');
+  
+              // Store the selected value in a variable
+              tipoPartida = $('input[type=radio][name=flexRadioDefault]:checked').val();
+   
+            });
+
+
+
+
             // initialize the current ID to 0
             $("#botonInicio").click(function () {
+
+                $('#formchecks').css('display', 'none');
+                 $(this).css('display', 'none');
                
                 //  document.getElementById('botonInicio').style.display = "none";
                 idJugadaActual = 0;
@@ -1332,6 +1380,11 @@
             }
         });
 
+
+
+
+
+
         function tutorial() {
      
             alert("1.Dentro de la ronda seleccione nueva jugada\n" +
@@ -1340,32 +1393,6 @@
                   "4.Seleccione nueva ronda o nueva jugada dependiendo de la partida");
           }
 
-          //Swal.fire(
-          //    'Tutorial',
-          //    "1.Dentro de la ronda seleccione nueva jugada\n" +
-          //        "2.Seleccione una condición de partida y una mano a jugar de las tablas\n" +
-          //        "3.Seleccione si va a seguir la tabla, la cantidad a jugar, y pulse en jugar\n" +
-          //        "4.Seleccione nueva ronda o nueva jugada dependiendo de la partida",
-          //    'question'
-          //  )
-
-        //function iniciarPartida() {
-
-        //    //document.getElementById('botonInicio').style.display = "hidden";
-        //    // document.getElementById('divPartida').style.display = "inline-block";
-
-        //    let i = 1;
-        //    this.iniciarRonda(i);
-
-        //    // create the HTML for the new div
-        //    var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + "j" + idRondaActual + '">' +
-
-        //        '</div>';
-
-        //    // append the new div to the "dJugadas" div for the current round
-        //    $("#dJugadas" + idRondaActual).append(divHtml);
-
-        //};
 
         function iniciarRonda(i) {
             if (i == 1) {
@@ -1400,8 +1427,23 @@
                 //var idRondaActual = $(this).attr('id').substring(1);
                 idJugadaActual++;
 
+                var divHtml="";
+                if(tipoPartida==1 || tipoPartida==3){
+                   // create the HTML for the new div
+                 divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idRondaActual + "j" + idJugadaActual + '">' +
+                    //'<p class="card-text">Jugada ' + idJugadaActual + '</p>' +
+                    '<p class="card-text"></p>' +
+
+                    '<input type="number" class="form-control"  id="inputCantidad' + idRondaActual + "j" + idJugadaActual + '" placeholder="Ingrese una cantidad a apostar">' +
+                    '<button type="button" class="btn btn-primary my-2" id="bJugada' + idRondaActual + "j" + idJugadaActual + '" onclick="jugarMano()"> JUGAR</button>' +
+
+                    '</div>';
+                
+                
+                }else{
+
                 // create the HTML for the new div
-                var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idRondaActual + "j" + idJugadaActual + '">' +
+                 divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idRondaActual + "j" + idJugadaActual + '">' +
                     //'<p class="card-text">Jugada ' + idJugadaActual + '</p>' +
                     '<p class="card-text"></p>' +
                     '<p class="card-text">Seguimiento</p>' +
@@ -1418,36 +1460,21 @@
                     '<button type="button" class="btn btn-primary my-2" id="bJugada' + idRondaActual + "j" + idJugadaActual + '" onclick="jugarMano()" style="display: none;">JUGAR</button>' +
 
                     '</div>';
-
-                //// create the HTML for the new div
-                //var divHtml = '<div class="jugada nueva-jugada" id="dJugada' + idJugadaActual + '">' +
-                //    '<p class="card-text">Jugada' + idJugadaActual + '</p>' +
-                //    '<p class="card-text"></p>' +
-                //    '<p class="card-text">Seguimiento</p>' +
-                //    '<div class="form-check">' +
-                //    '<input class="form-check-input" type="radio"   name="partida" id="flexRadioDefaultSi">' +
-                //    '<label class="form-check-label" for="flexRadioDefault1">Sí</label>' +
-                //    '</div>' +
-                //    '<div class="form-check">' +
-                //    '<input class="form-check-input" type="radio"  name="partida" id="flexRadioDefaultNo" >' +
-                //    '<label class="form-check-label" for="flexRadioDefault2">No</label>' +
-
-
-                //    '<input type="number" class="form-control"  id="inputCantidad" placeholder="Ingrese una cantidad a apostar" style="display: none;">' +
-                //    '<button type="button" class="btn btn-warning" id="bJugada' + idJugadaActual + '" onclick="jugarMano()" style="display: none;">JUGAR</button>' +
-
-                //    '</div>';
+                    }
+                
 
                 // append the new div to the "dJugadas" div for the current round
                 $("#dJugadas" + idRondaActual).append(divHtml);
 
+
+                if(tipoPartida==2){
                 // When any radio button is checked, show the input and button
                 $("input[name='partida']").change(function () {
                     if ($(this).prop('checked')) {
                         $("#bJugada" + idRondaActual + "j" + idJugadaActual).show();
                         $("#inputCantidad" + idRondaActual + "j" + idJugadaActual).show();
                     }
-                });
+                });}
 
 
 
@@ -1547,18 +1574,31 @@
                  
                     cantidadTotalRonda += cantidadApostada;
                     
-                    // retrieve the values from the checked boxes
-                    var partidaSi = $("#flexRadioDefaultSi").prop("checked");
-                    var partidaNo = $("#flexRadioDefaultNo").prop("checked");
+                  
 
 
+                    if(tipoPartida==2){
+                        // retrieve the values from the checked boxes
+                        var partidaSi = $("#flexRadioDefaultSi").prop("checked");
+                        var partidaNo = $("#flexRadioDefaultNo").prop("checked");
                     //Se envian los datos a los arrays que harán los insert en la bd
                     if (partidaSi == true) {
-                        seguimiento_Jugadas.push(true)
+                        seguimiento_Jugadas.push(true);
                     } else {
                         seguimiento_Jugadas.push(false);
                     }
+                    
+                    }
 
+                    if(tipoPartida==1){
+                            seguimiento_Jugadas.push(false);
+                    }
+
+
+                     if(tipoPartida==3){
+     
+                            seguimiento_Jugadas.push(true);
+                    }
 
 
                     // get the current ID for the jugada. ESTA LINEA NO SIRVE NI PARA TOMAR POR CULO
@@ -1576,7 +1616,9 @@
                     //$("#dJugadasPintadas" + idRondaActual).text(ultimaMano + " " + textoCondicion + " " + cantidadTotalRonda + "$");
                     $("#dJugadasPintadas" + idRondaActual).text(ultimaMano + " A:" + cantidadTotalRonda + "$");
 
-                    ids_Jugadas.push(idRondaActual);
+
+                    
+                    ids_Jugadas.push(cantidadApostada);
                     //cantidades_Jugadas.push(cantidadApostada);
                     cell_ids_Jugadas.push(ultimaMano);
                     table_ids_Jugadas.push(ultimaCondicion);
@@ -1591,24 +1633,7 @@
                     finalizarRonda();
                     iniciarRonda();
 
-                    //// retrieve the value from the input field
-                    //var cantidad = $("#inputCantidad").val();
-
-                    //cantidadTotalRonda = cantidadTotalRonda + cantidad;
-
-                    //var hasPartida = partidaSi === true;
-                    //manoJugada = 0;
-                    //  jugadaFinalizada = 1;
-                    //  $('.nueva-jugada').remove();
-
-
-                    //// save the values to a data structure or perform any other actions
-                    //var $dJugadasPintadas = $('#dJugadasPintadas'+idRondaActual);
-                    //$dJugadasPintadas.append(" " + cantidadTotalRonda+"$ "+hasPartida);
-                    // $dJugadasPintadas.append("<br/>");
-                    // //$dJugadasPintadas.html($dJugadasPintadas.html() + "<br style='display: block'/>");
-
-                    ////alert(cantidad+" "+ hasPartida);
+               
 
                 } else {
                     var dineroMaximo = dineroActual - cantidadTotalRonda;
@@ -1650,18 +1675,13 @@
             cantidadTotalUltimaRonda = cT;
 
 
-            //$("#bFinal" + idRondaActual).style.display = "none";
-    
-
-
-                ////// Calculate the new dineroActual and balance values
-                ////var nuevoDineroActual = parseInt(dineroActual) + parseInt(cantidadTotalUltimaRonda);
-                ////var nuevoBalance = parseInt(nuevoDineroActual) - parseInt(dineroInicial) ;
 
                 // Calculate the new dineroActual and balance values
                 dineroActual = parseFloat(dineroActual) + parseFloat(cantidadTotalUltimaRonda);
                 balance = parseFloat(dineroActual) - parseFloat(dineroInicial);
 
+              
+               
 
                 ids_Rondas.push(idRondaActual);
                 ganancias_Rondas.push(cantidadTotalUltimaRonda);
@@ -1686,13 +1706,6 @@
 
                 $("#balance").text("Balance: " + balanceStr + "$");
 
-
-
-                
-
-
-
-
                 // Update the dJugadasPintadas <p> element
                 $("#dJugadasPintadas" + idRondaActual).text(ultimaMano +  " A: " + cantidadTotalRonda + "$" + " G: " + cantidadTotalUltimaRonda + "$");
 
@@ -1704,10 +1717,7 @@
 
 
                   $("#tabla td").css("opacity", "1");
-            //} else {
-            //    alert("Debe al menos terminar una jugada antes de iniciar una nueva ronda");
-            //}
-
+       
         }
 
 
@@ -1723,7 +1733,13 @@
                 }
             } while (comentario === null || comentario.trim() === "");
 
-            alert(usuario_id);
+            alert(comentario);
+
+
+
+
+            if(tipoPartida==1 || tipoPartida ==2){
+
             $.ajax({
                 url: '@Url.Action("insertar", "PartidaConTabla")',
                 type: 'POST',
@@ -1762,6 +1778,66 @@
                     alert(xhr + status + error);
                 }
             });
+            
+             
+            }else{
+               
+
+                var seguimientos = [];
+                for(var i=0;i<ids_Jugadas.length;i++){}
+                alert(ids_Jugadas[i]);
+                seguimientos.push(true);
+
+                $.ajax({
+                url: '@Url.Action("insertar", "PartidaConTabla")',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    ids_Jugadas: ids_Jugadas,
+                    ids_Rondas: ids_Rondas,
+                    ganancias_Rondas: ganancias_Rondas, 
+                    cantidades_Rondas: cantidades_Rondas,
+                    cell_ids_Jugadas: cell_ids_Jugadas,
+                    table_ids_Jugadas: table_ids_Jugadas,
+                    cantidades_Jugadas: cantidades_Jugadas,
+                        seguimiento_Jugadas: seguimientos,
+                    dineroActual: dineroActual,
+                    dineroInicial: dineroInicial,
+                    comentario: comentario,
+                    usuario_id: usuario_id
+                },
+                success: function (data) {
+                    if (data.success) {
+                        // The request was successful
+                        //alert(data.message);
+                        if(data.message==1){
+                        alert("Partida insertada correctamente");
+                        }else{
+                               alert("Hubo un error al insertar la partida");
+                        }
+                    } else {
+                        // The request was not successful
+                        alert("Hubo un error al insertar la partida");
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr + status + error);
+                }
+            });
+
+
+
+            }
+
+
+
+
+
+
+
+
             location.reload();
 
 
@@ -1791,21 +1867,9 @@
                 $container.setAttribute("type", "text");
                 $container.setAttribute("value", id);
 
-                //const formData = new FormData(document.getElementById('form1'));
+       
 
-                //formData.append("mappingPorts", JSON.stringify(id));
-
-                //// send the form data to the server using AJAX
-                //const xhr = new XMLHttpRequest();
-                //xhr.open('post', '/Tablas/JugarPartidaConTabla');
-                //xhr.send(formData);
-
-
-                //var datos = {
-                //     id: id
-                // };
-
-
+                if(tipoPartida==1){
                 $.ajax({
                     url: '/PartidaConTabla/Jugar?id=' + id,
                     type: 'POST',
@@ -1821,18 +1885,14 @@
                         //RECORREMOS LOS DATOS
                         $.each(data, function (index, celda) {
 
-                            //var nodopadre = $(this).parent();
-                            //var background_color = $(nodopadre).attr("Background_color");
-                            //var table_id = $(nodopadre).find("Table_id").text();
-                            //var cell_id = $(nodopadre).find("Cell_id").text();
-                            //var text_color = $(nodopadre).find("Text_color").text();
+                 
 
                             if (z == 0) {
                                 html += "<tr>";
                             }
                             //html += "<td style='background-color:"+celda.background_color+"; color:"+celda.text_color+";'  id='"+celda.cell_id+"' value='"+celda.table_id+"'>"+celda.cell_id + "</td>";
 
-                            html += "<td style='background-color:" + celda.background_color + "; color:" + celda.text_color + ";' id='" + celda.id_celda + "' value='" + celda.id_celda + "'>" + "<button id='boton' style='background-color:" + celda.background_color + "; color:" + celda.text_color + "; font-weight:500; border: none;' onclick='botonSeleccionado(" + celda.table_id + ",\"" + celda.id_celda + "\")'>" + celda.id_celda + "</button>" + "</td>";
+                            html += "<td style='background-color:#212529; color:white;' id='" + celda.id_celda + "' value='" + celda.id_celda + "'>" + "<button id='boton' style='background-color:#212529; color:white; font-weight:500; border: none;' onclick='botonSeleccionado(" + celda.table_id + ",\"" + celda.id_celda + "\")'>" + celda.id_celda + "</button>" + "</td>";
 
                             // html += "<td style='background-color:"+celda.background_color+"; color:"+celda.text_color+";'  id='"+celda.id_celda+"' value='"+celda.id_celda+"'>"+"<button id='boton' style='background-color:"+celda.background_color+"; color:"+celda.text_color+"; font-weight:500; border: none;' onclick='botonSeleccionado("+celda.table_id+ ","+celda.id_celda+")'>"+celda.id_celda+"</button>"+"</td>";
 
@@ -1866,7 +1926,54 @@
 
                     }
                 });
+                
+                }else{
+                      $.ajax({
+                    url: '/PartidaConTabla/Jugar?id=' + id,
+                    type: 'POST',
+                    async: false,
+                    //data: datos,
+                    success: function (data) {
+                        
+                        var tabla = document.getElementById("tabla");
+                        var z = 0;
+                        var html = "";
+                        var primeraFila = false;
+                        $("#tabla tbody").empty();
+                        //RECORREMOS LOS DATOS
+                        $.each(data, function (index, celda) {
 
+         
+
+                            if (z == 0) {
+                                html += "<tr>";
+                            }
+                            //html += "<td style='background-color:"+celda.background_color+"; color:"+celda.text_color+";'  id='"+celda.cell_id+"' value='"+celda.table_id+"'>"+celda.cell_id + "</td>";
+
+                            html += "<td style='background-color:" + celda.background_color + "; color:" + celda.text_color + ";' id='" + celda.id_celda + "' value='" + celda.id_celda + "'>" + "<button id='boton' style='background-color:" + celda.background_color + "; color:" + celda.text_color + "; font-weight:500; border: none;' onclick='botonSeleccionado(" + celda.table_id + ",\"" + celda.id_celda + "\")'>" + celda.id_celda + "</button>" + "</td>";
+
+                            if (z == 12 && primeraFila == false) {
+                                html += "</tr>";
+                                primeraFila = true;
+                                z = 0;
+                            }
+
+                            if (z == 13) {
+                                html += "</tr>";
+                                z = 0;
+                            }
+                            z++;
+
+                        });
+
+                        $("#tabla tbody").html(html);
+
+
+
+                    }
+                });
+
+                }
                 
                 if (rondaAMedias == 1 && ultimaMano!="") {
                     $("#tabla td").css("opacity", "0.2");
@@ -1901,11 +2008,7 @@
                     divsPadreDef.push("d" + item)
                 );
 
-                //divsPadreDef.forEach(item =>
-                //    alert(item)
-                //    //if(document.getElementById(item)){
-                //   //document.getElementById(item).style.display = "inline-block"
-                //);
+     
 
                 divsAMostrar = divsPadreDef;
 
