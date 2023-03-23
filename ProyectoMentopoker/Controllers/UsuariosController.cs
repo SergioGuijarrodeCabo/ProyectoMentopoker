@@ -40,7 +40,7 @@ namespace ProyectoMentopoker.Controllers
         [HttpPost]
         public async Task<IActionResult> Insert(UsuarioModel usuario)
         {
-            await this.repoLogin.InsertUsuario(usuario.Email, usuario.Pass, usuario.Rol);
+            await this.repoLogin.InsertUsuario(usuario.Email, usuario.Pass, usuario.Nombre ,usuario.Rol);
 
             return RedirectToAction("Crud");
 
@@ -59,7 +59,7 @@ namespace ProyectoMentopoker.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(UsuarioModel usuario)
         {
-            await this.repoLogin.UpdateUsuario(usuario.Usuario_id, usuario.Email, usuario.Pass, usuario.Rol);
+            await this.repoLogin.UpdateUsuario(usuario.Usuario_id, usuario.Email, usuario.Pass, usuario.Nombre ,usuario.Rol);
 
             return RedirectToAction("Crud");
 

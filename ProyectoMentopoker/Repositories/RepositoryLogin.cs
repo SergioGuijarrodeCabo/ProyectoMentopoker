@@ -60,21 +60,23 @@ namespace ProyectoMentopoker.Repositories
             
         }
 
-        public async Task InsertUsuario(string Email, string Pass, string Rol)
+        public async Task InsertUsuario(string Email, string Pass, string Nombre ,string Rol)
         {
             UsuarioModel usuario = new UsuarioModel();
             usuario.Usuario_id = this.LastId();
             usuario.Email = Email;
             usuario.Pass = Pass;
+            usuario.Nombre = Nombre;
             usuario.Rol = Rol;
             this.context.Usuarios.Add(usuario);
             await this.context.SaveChangesAsync();
         }
-        public async Task UpdateUsuario(string Usuario_id, string Email, string Pass, string Rol)
+        public async Task UpdateUsuario(string Usuario_id, string Email, string Pass, string Nombre, string Rol)
         {
             UsuarioModel usuario = this.FindUsuario(Usuario_id);
             usuario.Email = Email;
             usuario.Pass = Pass;
+            usuario.Nombre = Nombre;
             usuario.Rol = Rol;
             await this.context.SaveChangesAsync();
         }

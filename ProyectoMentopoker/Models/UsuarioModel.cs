@@ -17,6 +17,7 @@ namespace ProyectoMentopoker.Models
         public string Pass { get; set; }
         [Column("Rol")]
         public string Rol { get; set; }
-
+        [Column("Nombre")]
+        public string Nombre { get; set; }
     }
 }
