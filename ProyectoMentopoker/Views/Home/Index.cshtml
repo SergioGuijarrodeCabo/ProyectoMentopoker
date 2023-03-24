@@ -112,6 +112,10 @@
     font-weight: 700;
   }
 
+  .colorTexto{
+      color: white !important;
+  }
+
   .category {
     font-size: 1rem;
     color: $gray;
@@ -163,47 +167,45 @@
 </style>
 
 
-<nav>
+
 
 <section class="gallery">
   <div class="container">
     <div class="grid">
       <div class="column-xs-12 column-md-4">
         <figure class="img-container">
-          <img src="https://source.unsplash.com/8b1cWDyvT7Y" />
+         <a class="nav-link text-white" asp-area="" asp-controller="PartidaConTabla" asp-action="Jugar"> <img src="~/images/imagenPartidas.png" /></a>
           <figcaption class="img-content">
-            <h2 class="title">Smart Watch</h2>
-            <h3 class="category">Showcase</h3>
+            <h2 class="title colorTexto">Simulador partidas</h2>
           </figcaption>
           <span class="img-content-hover">
-            <h2 class="title">Smart Watch</h2>
-            <h3 class="category">Showcase</h3>
+          <h2 class="title colorTexto" >Simulador partidas</h2>
           </span>
         </figure>
       </div>
       <div class="column-xs-12 column-md-4">
         <figure class="img-container">
-          <img src="https://source.unsplash.com/5VXH4RG88gc" />
+          <a class="nav-link text-white" asp-area="" asp-controller="Estadisticas" asp-action="VerPartidas"><img src="~/images/imagenStatsPartidas.png" /></a>
           <figcaption class="img-content">
-            <h2 class="title">Camera Film</h2>
-            <h3 class="category">Showcase</h3>
+            <h2 class="title colorTexto">Estadísticas partidas</h2>
+
           </figcaption>
           <span class="img-content-hover">
-            <h2 class="title">Camera Film</h2>
-            <h3 class="category">Showcase</h3>
+            <h2 class="title colorTexto">Estadísticas partidas</h2>
+
           </span>
         </figure>
       </div>
       <div class="column-xs-12 column-md-4">
         <figure class="img-container">
-          <img src="https://source.unsplash.com/XtUd5SiX464">
+          <a class="nav-link text-white" asp-area="" asp-controller="Estadisticas" asp-action="VerJugadas"><img src="~/images/imagenStatsJugadas.png"></a>
           <figcaption class="img-content">
-            <h2 class="title">Coffee</h2>
-            <h3 class="category">Showcase</h3>
+            <h2 class="title colorTexto">Estadísticas jugadas</h2>
+
           </figcaption>
           <span class="img-content-hover">
-            <h2 class="title">Coffee</h2>
-            <h3 class="category">Showcase</h3>
+            <h2 class="title colorTexto">Estadísticas jugadas</h2>
+ 
           </span>
         </figure>
       </div>
@@ -213,7 +215,9 @@
     </div>
   </div>
 </section>
-<footer>
+
+
+@*<footer>
   <div class="container">
     <div class="grid">
       <div class="column-xs-12">
@@ -227,7 +231,7 @@
     </div>
   </div>
 </footer>
-
+*@
 
 <script>
 
