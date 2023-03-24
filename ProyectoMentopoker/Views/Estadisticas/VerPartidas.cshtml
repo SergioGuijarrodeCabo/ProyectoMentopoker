@@ -112,53 +112,11 @@
                             <td>@Html.DisplayFor(model =>model.partidas.Partidas[i].Fecha)</td>
                             <td>@Html.DisplayFor(model => model.partidas.Partidas[i].Comentarios)</td>
                             <td>@Html.DisplayFor(model => model.partidas.Partidas[i].Usuario_id)</td>
-                            <td> <button class="btn btn-primary my-2" onclick="verRondas('@Model.partidas.Partidas[i].Partida_id')" id="botonRondas">Ver rondas</button></td>
+                            <td> <button class="btn btn-primary my-2"  onclick="verRondas(@Model.partidas.Partidas[i].Partida_id)" id="botonRondas">Ver rondas</button></td>
                         </tr>
                     }
                 </tbody>
             </table>
-
-
-
-
-
-
-@*
-            <div class="table-wrapper" style="padding:50px;">
-                <table class="table table-dark table-hover ">
-                <thead>
-                    <tr>
-                        <th>Partida_id</th>
-                        <th>Cash_Inicial</th>
-                        <th>Cash_Final</th>
-                        <th>Fecha</th>
-                        <th>Comentarios</th>
-                        <th>Usuario_id</th>
-                        <th>Rondas</th>
-                    </tr>
-
-                </thead>
-                <tbody>
-                    @for (var i = 0; i < Model.partidas.Partidas.Count; i += 1)
-                    {
-                        <tr>
-                                <td>@Html.DisplayFor(model =>model.partidas.Partidas[i].Partida_id)</td>
-                                <td>@Html.DisplayFor(model => model.partidas.Partidas[i].Cash_Inicial)</td>
-                            <td>@Html.DisplayFor(model => model.partidas.Partidas[i].Cash_Final)</td>
-                                <td>@Html.DisplayFor(model =>model.partidas.Partidas[i].Fecha)</td>
-                                <td>@Html.DisplayFor(model => model.partidas.Partidas[i].Comentarios)</td>
-                                <td>@Html.DisplayFor(model => model.partidas.Partidas[i].Usuario_id)</td>
-                            <td><button class="btn btn-primary my-2" onclick="verRondas(@Model.partidas.Partidas[i].Partida_id)" id="botonRondas">Ver rondas</button></td>
-                        </tr>
-                    }
-
-                </tbody>
-
-            </table>
-            </div>*@
-
-
-
 
 
 
@@ -179,7 +137,7 @@
                 <tbody>
                         @for (var i = 0; i < Model.partidas.Rondas.Count; i += 1)
                     {
-                            <tr data-partida-id="@Model.partidas.Rondas[i].Partida_id">
+                               <tr data-partida-id="@Model.partidas.Rondas[i].Partida_id">     
                                 <td>@Html.DisplayFor(model =>model.partidas.Rondas[i].Ronda_id)</td>
                                 <td>@Html.DisplayFor(model => model.partidas.Rondas[i].Cantidad_jugada)</td>
                                 <td>@Html.DisplayFor(model => model.partidas.Rondas[i].Ganancias)</td>
@@ -215,7 +173,7 @@
                 <tbody>
                         @for (var i = 0; i < Model.partidas.Jugadas.Count; i += 1)
                     {
-                            <tr data-ronda-id="@Model.partidas.Jugadas[i].Ronda_id">     
+                            <tr data-ronda-id="@Model.partidas.Jugadas[i].Ronda_id">         
                                 <td>@Html.DisplayFor(model =>model.partidas.Jugadas[i].Jugada_id)</td>
                                 <td>@Html.DisplayFor(model => model.partidas.Jugadas[i].Cantidad_jugada_Preflop)</td>
                                 <td>@Html.DisplayFor(model => model.partidas.Jugadas[i].Cantidad_jugada)</td>
@@ -244,9 +202,10 @@
     <script>
 
 
+
         var ultimaRonda = "";
      
-
+        var ultimaPartida = "";
 
 
         function mostrarPartidas(){
@@ -255,70 +214,57 @@
         }
 
 
+      
 
         function verRondas(partidaId) {
+            mostrarPartidas();
+            if(ultimaPartida != "") {
+            $('#rondas_' + ultimaPartida).removeClass('show-rondas');
+            }
+
             // Hide all rows in the rondas table
-            //var partidaId = $(this).data('partida-id');
             document.getElementById('rondas-table').style.display = "inline";
-            document.getElementById('jugadas-table').style.display = "none";
-            $("#" + ultimaRonda).hide();
-            // show new ronda table
-            $("#" + partidaId).show();
-            // set ultimaRonda to the new ronda table ID
-            ultimaRonda = partidaId;
-
-             // Get the partida_id from the button's data attribute
-            
-
-            // Hide all rows in the rondas table
-            $('#rondas-table tbody tr').hide();
 
             // Show only the rows associated with the selected partida
+            $('#rondas-table tbody tr').hide();
             $('#rondas-table tbody tr[data-partida-id="' + partidaId + '"]').show();
 
-            // Hide all rows in the jugadas table
-            $('#jugadas-table tbody tr').hide();
-        }
+            // Set the ultimaPartida variable to the selected partida ID
+            ultimaPartida = partidaId;
 
-        function verJugadas(rondaId) {
+            // Show the rondas associated with the selected partida
+            $('#rondas_' + partidaId).addClass('show-rondas');
+            }
+
+
+             function verJugadas(rondaId) {
+               
             if(ultimaRonda !=""){
-
             $('#gallery_' + ultimaRonda).removeClass('show-galeria');}
-
         
-
             // Hide all rows in the jugadas table
             document.getElementById('jugadas-table').style.display = "inline";
  
             $('#jugadas-table tbody tr').hide();
-
             // Show only the rows associated with the selected ronda
             $('#jugadas-table tbody tr[data-ronda-id="' + rondaId + '"]').show();
-
-
               // Get the ronda_id from the button's data attribute
             //var rondaId = $(this).data('ronda-id');
-
             // Hide all rows in the jugadas table
             $('#jugadas-table tbody tr').hide();
-
             // Show only the rows associated with the selected ronda
             $('#jugadas-table tbody tr[data-ronda-id="' + rondaId + '"]').show();
-
-
             //ESTO ES PARA ESPERAR A QUE CARGE LA TABLA SIGUIENTE Y ASÍ SE PUEDEN GENERAR LAS CARTAS
             setTimeout(function () {
               
             }, 100);
-
             var gallery = $('#gallery_' + rondaId);
             var cellId = gallery.data('info');
-
               
                 // Get the cell ID from the gallery ID
             //alert(info);
-
-                var strInicial = cellId;
+                var strInicial = cellId.toString();
+  
             //alert(strInicial);
             if (strInicial.length === 3) {
                  
@@ -333,10 +279,7 @@
                 if (subString2 == 'T') {
                     subString2 = '10';
                 }
-
                 if (subString3 == 's') {
-
-
                     src1 += subString1 + "R.png";
                     src2 += subString2 + "R.png";
                 } else {
@@ -344,39 +287,59 @@
                     src2 += subString2 + "R.png";
                 }
 
+                    alert(src1);
+               
+                     alert(src2);
             } else {
-            
-                 var subString1 = strInicial.substring(0, 1);
+                
+                var subString1 = strInicial.substring(0, 1);
                 var subString2 = strInicial.substring(1, 2);
            
+             
                 var src1 = "/images/cartas/";
                 var src2 = "/images/cartas/";
                 src1 += subString1 + "R.png";
                 src2 += subString2 + "R.png";
     
-              
-
-            }
-            alert(src1);
+              alert(src1);
                
              alert(src2);
+            }
+            //alert(src1);
                
-
+            // alert(src2);
+               
             gallery.find('#carta1_' + cellId).attr('src', src1); // Set the src attribute for the first image
             gallery.find('#carta2_' + cellId).attr('src', src2); // Set the src attribute for the second image
             gallery.addClass('show-galeria');
-
             ultimaRonda = rondaId;
-
         }
 
-        $('#botonRondas').click(function () {
-           
-        });
+   
 
-        $('#botonJugadas').click(function () {
-          
-        });
+
 
     </script>
 }
+
+
+
+
+
+
+
+
+
+                 @*   else {
+            
+                 var substring1 = strinicial.substring(0, 1);
+                var substring2 = strinicial.substring(1, 2);
+           
+                var src1 = "/images/cartas/";
+                var src2 = "/images/cartas/";
+                src1 += substring1 + "r.png";
+                src2 += substring2 + "r.png";
+    
+              
+
+            }*@
