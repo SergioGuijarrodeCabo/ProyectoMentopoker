@@ -78,8 +78,8 @@ namespace ProyectoMentopoker.Controllers
 
                 , userPrincipal);
 
-                return RedirectToAction("PerfilUsuarios", "Perfil");
-
+                //return RedirectToAction("PerfilUsuarios", "Perfil");
+                return RedirectToAction("Index", "Home");
             }
 
             else
