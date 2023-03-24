@@ -60,63 +60,6 @@ using Microsoft.AspNetCore.Server.IIS.Core;
 
 
 
-//CREATE OR ALTER PROCEDURE GET_IDSTABLAS_JUGADAS
-//(
-//@Jugada_id NVARCHAR(50))
-//AS
-
-//SELECT C.Cell_id, C.Table_id, T.Condicion, J.Cantidad_jugada, J.Seguimiento_Tabla, J.Ronda_id, J.Jugada_Id
-//FROM Celdas C
-//INNER JOIN Tablas T ON C.Table_id = T.Table_id
-//INNER JOIN Jugadas J ON J.Identificador = C.Identificador
-//WHERE j.Jugada_id = @Jugada_id
-
-
-
-
-
-//VAvanzando
-//ALTER PROCEDURE[dbo].[GET_IDSTABLAS_JUGADAS]
-//(@Ronda_id INT, @Cell_id NVARCHAR(4) = NULL)
-//AS
-
-//IF @Cell_id IS NULL  BEGIN
-//SELECT C.Cell_id, C.Table_id, T.Condicion, J.Cantidad_jugada_Preflop, J.Seguimiento_Tabla, J.Ronda_id, J.Jugada_Id, R.Cantidad_jugada, R.Ganancias
-//FROM Celdas C
-//INNER JOIN Tablas T ON C.Table_id = T.Table_id
-//INNER JOIN Jugadas J ON J.Identificador = C.Identificador
-//INNER JOIN Rondas R ON R.Ronda_id = J.Ronda_id
-//WHERE R.Ronda_id = @Ronda_id
-//END
-//ELSE
-//SELECT C.Cell_id, C.Table_id, T.Condicion, J.Cantidad_jugada_Preflop, J.Seguimiento_Tabla, J.Ronda_id, J.Jugada_Id, R.Cantidad_jugada, R.Ganancias
-//FROM Celdas C
-//INNER JOIN Tablas T ON C.Table_id = T.Table_id
-//INNER JOIN Jugadas J ON J.Identificador = C.Identificador
-//INNER JOIN Rondas R ON R.Ronda_id = J.Ronda_id
-//WHERE R.Ronda_id = @Ronda_id AND C.Cell_id = @Cell_id
-
-
-
-//ALTER PROCEDURE[dbo].[GET_IDSTABLAS_JUGADAS]  
-//(
-//    @Ronda_id INT,
-//    @Cell_id NVARCHAR(4) = NULL,
-//    @Table_id INT = NULL
-//)
-//AS
-//BEGIN
-//    SELECT C.Cell_id, C.Table_id, T.Condicion, J.Cantidad_jugada_Preflop, J.Seguimiento_Tabla, J.Ronda_id, J.Jugada_Id, R.Cantidad_jugada, R.Ganancias
-//    FROM Celdas C
-//    INNER JOIN Tablas T ON C.Table_id = T.Table_id
-//    INNER JOIN Jugadas J ON J.Identificador = C.Identificador
-//    INNER JOIN Rondas R ON R.Ronda_id = J.Ronda_id
-//    WHERE R.Ronda_id = @Ronda_id 
-//    AND (@Cell_id IS NULL OR C.Cell_id = @Cell_id)
-//    AND(@Table_id IS NULL OR C.Table_id = @Table_id)
-//END
-
-
 
 
 
@@ -146,6 +89,40 @@ using Microsoft.AspNetCore.Server.IIS.Core;
 
 
 
+
+//CREATE OR ALTER PROCEDURE SP_BORRAR_PARTIDAS
+//(@PARTIDA_ID NVARCHAR(50))
+//AS
+//  DECLARE @rondas_id TABLE (id NVARCHAR(50))
+//  DECLARE @jugadas_id TABLE (id NVARCHAR(50))
+  
+//  --Guardar todas las rondas_id asociadas con la partida
+//  INSERT INTO @rondas_id (id)
+//  SELECT ronda_id FROM Rondas WHERE Partida_id = @PARTIDA_ID
+  
+//  -- Iterar dentro de cada ronda y guardar las jugadas asociadas
+//  DECLARE @ronda_id NVARCHAR(50)
+//  DECLARE cur CURSOR FOR SELECT id FROM @rondas_id
+//  OPEN cur
+//  FETCH NEXT FROM cur INTO @ronda_id
+//  WHILE @@FETCH_STATUS = 0
+//  BEGIN
+//    INSERT INTO @jugadas_id (id)
+//    SELECT jugada_id FROM Jugadas WHERE Ronda_id = @ronda_id
+//    FETCH NEXT FROM cur INTO @ronda_id
+//  END
+//  CLOSE cur
+//  DEALLOCATE cur
+  
+//  --borrar todas las jugadas asociadas con cada ronda
+//  DELETE FROM Jugadas WHERE Ronda_id IN (SELECT id FROM @rondas_id)
+  
+//  --borrar todas las rondas asociadas con cada partida
+//  DELETE FROM Rondas WHERE Partida_id = @PARTIDA_ID
+  
+//  --Borrar la partida asociada con el id de partida
+//  DELETE FROM Partidas WHERE Partida_id = @PARTIDA_ID
+//GO
 
 
 
@@ -181,11 +158,24 @@ namespace ProyectoMentopoker.Repositories
     public class RepositoryEstadisticas 
     {
         private MentopokerContext context;
-
+        private SqlConnection cn;
+        private SqlCommand com;
 
         public RepositoryEstadisticas(MentopokerContext context)
         {
             this.context = context;
+            //Conexión de casa
+            //string connectionString = @"Data Source=DESKTOP-E38C8U3;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+
+            //Conexión de clase
+            string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+
+
+
+            // this.cn = new SqlConnection(HelperConfiguartion.GetConnectionString());
+            this.cn = new SqlConnection(connectionString);
+            this.com = new SqlCommand();
+            this.com.Connection = this.cn;
         }
 
         public List<PartidaModel> GetAllPartidas()
@@ -238,28 +228,19 @@ namespace ProyectoMentopoker.Repositories
 
         public async Task DeletePartida(string Partida_id)
         {
-          
-            var rondasPartida = this.GetRondas(Partida_id);
-            foreach (var ronda in rondasPartida)
-            {
-                var jugadasRonda = this.GetJugadas(ronda.Ronda_id);
-                foreach (var jugada in jugadasRonda)
-                {
-                    this.context.Jugadas.Remove(jugada);
-                }
-            }
 
-          
-            foreach (var ronda in rondasPartida)
-            {
-                this.context.Rondas.Remove(ronda);
-            }
 
-    
-            var partida = this.FindPartida(Partida_id);
-            this.context.Partidas.Remove(partida);
+            SqlParameter pamID = new SqlParameter("@PARTIDA_ID", Partida_id);
+            this.com.Parameters.Add(pamID);
 
-            await this.context.SaveChangesAsync();
+            this.com.CommandType = System.Data.CommandType.StoredProcedure;
+            this.com.CommandText = "SP_BORRAR_PARTIDAS";
+
+            this.cn.Open();
+             await this.com.ExecuteNonQueryAsync();
+            this.com.Parameters.Clear();
+            this.cn.Close();
+
         }
 
 
