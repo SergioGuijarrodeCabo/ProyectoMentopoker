@@ -82,10 +82,10 @@ namespace ProyectoMentopoker.Repositories
         {
 
             //Conexión de casa
-            string connectionString = @"Data Source=DESKTOP-E38C8U3;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+            //string connectionString = @"Data Source=DESKTOP-E38C8U3;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
 
             //Conexión de clase
-            //string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+            string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
 
 
             // string connectionString = @"Data Source = DESKTOP - E38C8U3\SQLEXPRESS; Initial Catalog = MENTOPOKER; Integrated Security = True";
@@ -203,37 +203,9 @@ namespace ProyectoMentopoker.Repositories
 
             for (int i=0; i < ids_Rondas.Length; i++)
             {
-                this.insertRonda(cantidades_Rondas[i], ganancias_Rondas[i], partidaId);
+                this.insertRonda(cantidades_Rondas[i], ganancias_Rondas[i], partidaId, cell_ids_Jugadas[i], table_ids_Jugadas[i], cantidades_Jugadas[i], seguimiento_jugadas[i]);
 
-                
-
-
-                SqlParameter pamcellid = new SqlParameter("@CELL_ID", cell_ids_Jugadas[i]);
-                this.com.Parameters.Add(pamcellid);
-                SqlParameter pamtableid = new SqlParameter("@TABLE_ID", table_ids_Jugadas[i]);
-                this.com.Parameters.Add(pamtableid);
-                this.com.CommandType = System.Data.CommandType.StoredProcedure;
-                this.com.CommandText = "SP_FIND_IDENTIFICADOR";
-                this.cn.Open();
-                int identificador = int.Parse(this.com.ExecuteScalar().ToString());
-                this.com.Parameters.Clear();
-                this.cn.Close();
-
-                string rondaId;
-                this.com.CommandText = "SELECT MAX(CAST(Ronda_id AS INT)) from Rondas";
-                this.com.CommandType = System.Data.CommandType.Text;
-                this.cn.Open();
-                rondaId = this.com.ExecuteScalar().ToString();
-                this.cn.Close();
-
-
-
-                this.insertJugada(cantidades_Jugadas[i], seguimiento_jugadas[i], identificador, rondaId);
-                       
-
-                        //jugadasInsertadas.Add(ids_Jugadas[y]);
-
-                        
+               
                   
 
                 numRonda++;
@@ -247,7 +219,7 @@ namespace ProyectoMentopoker.Repositories
         }
 
 
-        public async void insertRonda(double cantidad_Ronda, double ganancias_Ronda, string partida_id)
+        public async void insertRonda(double cantidad_Ronda, double ganancias_Ronda, string partida_id, string cell_id, int table_id, double cantidad_jugada, Boolean seguimiento_tabla)
         {
 
             SqlParameter pamcantidad = new SqlParameter("@CANTIDAD_RONDA", cantidad_Ronda);
@@ -263,6 +235,28 @@ namespace ProyectoMentopoker.Repositories
             await this.com.ExecuteNonQueryAsync();
             this.com.Parameters.Clear();
             this.cn.Close();
+
+            SqlParameter pamcellid = new SqlParameter("@CELL_ID", cell_id);
+            this.com.Parameters.Add(pamcellid);
+            SqlParameter pamtableid = new SqlParameter("@TABLE_ID", table_id);
+            this.com.Parameters.Add(pamtableid);
+            this.com.CommandType = System.Data.CommandType.StoredProcedure;
+            this.com.CommandText = "SP_FIND_IDENTIFICADOR";
+            this.cn.Open();
+            int identificador = int.Parse(this.com.ExecuteScalar().ToString());
+            this.com.Parameters.Clear();
+            this.cn.Close();
+
+            string rondaId;
+            this.com.CommandText = "SELECT MAX(CAST(Ronda_id AS INT)) from Rondas";
+            this.com.CommandType = System.Data.CommandType.Text;
+            this.cn.Open();
+            rondaId = this.com.ExecuteScalar().ToString();
+            this.cn.Close();
+
+
+
+            this.insertJugada(cantidad_jugada, seguimiento_tabla, identificador, rondaId);
         }
 
 

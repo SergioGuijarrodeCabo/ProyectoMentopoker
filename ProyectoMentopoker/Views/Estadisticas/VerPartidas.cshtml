@@ -258,14 +258,26 @@
 
         function verRondas(partidaId) {
             // Hide all rows in the rondas table
-
+            //var partidaId = $(this).data('partida-id');
             document.getElementById('rondas-table').style.display = "inline";
             document.getElementById('jugadas-table').style.display = "none";
             $("#" + ultimaRonda).hide();
             // show new ronda table
-            $("#" + partida_id).show();
+            $("#" + partidaId).show();
             // set ultimaRonda to the new ronda table ID
-            ultimaRonda = partida_id;
+            ultimaRonda = partidaId;
+
+             // Get the partida_id from the button's data attribute
+            
+
+            // Hide all rows in the rondas table
+            $('#rondas-table tbody tr').hide();
+
+            // Show only the rows associated with the selected partida
+            $('#rondas-table tbody tr[data-partida-id="' + partidaId + '"]').show();
+
+            // Hide all rows in the jugadas table
+            $('#jugadas-table tbody tr').hide();
         }
 
         function verJugadas(rondaId) {
@@ -278,6 +290,16 @@
             // Hide all rows in the jugadas table
             document.getElementById('jugadas-table').style.display = "inline";
  
+            $('#jugadas-table tbody tr').hide();
+
+            // Show only the rows associated with the selected ronda
+            $('#jugadas-table tbody tr[data-ronda-id="' + rondaId + '"]').show();
+
+
+              // Get the ronda_id from the button's data attribute
+            //var rondaId = $(this).data('ronda-id');
+
+            // Hide all rows in the jugadas table
             $('#jugadas-table tbody tr').hide();
 
             // Show only the rows associated with the selected ronda
@@ -297,7 +319,10 @@
             //alert(info);
 
                 var strInicial = cellId;
-                var subString1 = strInicial.substring(0, 1);
+            //alert(strInicial);
+            if (strInicial.length === 3) {
+                 
+                 var subString1 = strInicial.substring(0, 1);
                 var subString2 = strInicial.substring(1, 2);
                 var subString3 = strInicial.substring(2, 3);
                 var src1 = "/images/cartas/";
@@ -319,6 +344,24 @@
                     src2 += subString2 + "R.png";
                 }
 
+            } else {
+            
+                 var subString1 = strInicial.substring(0, 1);
+                var subString2 = strInicial.substring(1, 2);
+           
+                var src1 = "/images/cartas/";
+                var src2 = "/images/cartas/";
+                src1 += subString1 + "R.png";
+                src2 += subString2 + "R.png";
+    
+              
+
+            }
+            alert(src1);
+               
+             alert(src2);
+               
+
             gallery.find('#carta1_' + cellId).attr('src', src1); // Set the src attribute for the first image
             gallery.find('#carta2_' + cellId).attr('src', src2); // Set the src attribute for the second image
             gallery.addClass('show-galeria');
@@ -328,28 +371,11 @@
         }
 
         $('#botonRondas').click(function () {
-            // Get the partida_id from the button's data attribute
-            var partidaId = $(this).data('partida-id');
-
-            // Hide all rows in the rondas table
-            $('#rondas-table tbody tr').hide();
-
-            // Show only the rows associated with the selected partida
-            $('#rondas-table tbody tr[data-partida-id="' + partidaId + '"]').show();
-
-            // Hide all rows in the jugadas table
-            $('#jugadas-table tbody tr').hide();
+           
         });
 
         $('#botonJugadas').click(function () {
-            // Get the ronda_id from the button's data attribute
-            var rondaId = $(this).data('ronda-id');
-
-            // Hide all rows in the jugadas table
-            $('#jugadas-table tbody tr').hide();
-
-            // Show only the rows associated with the selected ronda
-            $('#jugadas-table tbody tr[data-ronda-id="' + rondaId + '"]').show();
+          
         });
 
     </script>
