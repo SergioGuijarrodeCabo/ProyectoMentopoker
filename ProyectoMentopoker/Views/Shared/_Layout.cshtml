@@ -87,7 +87,7 @@
 
 
                 @if
-                   (@Context.User.FindFirst(ClaimTypes.Role)?.Value =="admin")
+              (@Context.User.FindFirst(ClaimTypes.Role)?.Value == "admin")
                 {
                     <div class="mx-auto order-0 justify-content-center">
                         <ul class="navbar-nav flex-grow-1">
@@ -102,9 +102,9 @@
                         </ul>
 
                     </div>
-                }
-              
 
+
+                }
 
                 
                     

@@ -44,8 +44,6 @@ namespace ProyectoMentopoker.Controllers
         public async Task<IActionResult> Index(string email, string password)
         {
 
-
-
             UsuarioModel usuario = this.repoLogin.Login(email, password);
 
             if (usuario != null)

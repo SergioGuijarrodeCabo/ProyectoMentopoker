@@ -2,9 +2,7 @@
 using ProyectoMentopoker.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
-
-
-
+using ProyectoMentopoker.Helpers;
 
 namespace ProyectoMentopoker.Repositories
 {
@@ -19,17 +17,74 @@ namespace ProyectoMentopoker.Repositories
         }
 
 
-        public UsuarioModel Login(string email, string password)
+        private string GetMaxIdUsuario()
         {
-            //UsuarioModel usuario = new UsuarioModel();
-            var consulta = from datos in this.context.Usuarios
-                           where datos.Email == email.ToString() && datos.Pass == password.ToString()
-                           select datos;
-            //usuario =  consulta.First();
+            if (this.context.Usuarios.Count() == 0)
+            {
+                return "1";
+            }
+            else{
+                var maxUsuarioId = this.context.Usuarios.Max(z => z.Usuario_id);
+                var nextUsuarioId = int.Parse(maxUsuarioId) + 1;
+                return nextUsuarioId.ToString();
+            }
+        }
 
-            return consulta.FirstOrDefault();
+
+        public async Task RegisterUsuario(string Email, string Pass, string Nombre, string Rol)
+        {
+            UsuarioModel usuario = new UsuarioModel();
+            usuario.Usuario_id = this.GetMaxIdUsuario();
+            usuario.Email = Email;
+            usuario.Nombre = Nombre;
+            usuario.Rol = Rol;
+
+            usuario.Salt = HelperCryptography.GenerateSalt();
+            usuario.Pass = HelperCryptography.EncryptPassword(Pass, usuario.Salt);          
+            this.context.Usuarios.Add(usuario);
+            await this.context.SaveChangesAsync();
+        }
+
+
+        public UsuarioModel Login(string Email, string Pass)
+        {
+            UsuarioModel usuario = this.context.Usuarios.FirstOrDefault(z => z.Email == Email);
+            if (usuario == null)
+            {
+                return null;
+            }
+            else
+            {
+                byte[] passUsuario = usuario.Pass;
+                string salt = usuario.Salt;
+                byte[] temp = HelperCryptography.EncryptPassword(Pass, salt);
+                bool respuesta = HelperCryptography.CompareArrays(passUsuario, temp);
+                if(respuesta == true)
+                {
+                    return usuario;
+                }
+                else
+                {
+                    return null;
+                }
+
+
+            }
 
         }
+
+
+        //public UsuarioModel Login(string email, string password)
+        //{
+        //    //UsuarioModel usuario = new UsuarioModel();
+        //    var consulta = from datos in this.context.Usuarios
+        //                   where datos.Email == email.ToString() && datos.Pass == password.ToString()
+        //                   select datos;
+        //    //usuario =  consulta.First();
+
+        //    return consulta.FirstOrDefault();
+
+        //}
 
         public List<UsuarioModel> GetUsuarios()
         {
@@ -47,39 +102,17 @@ namespace ProyectoMentopoker.Repositories
 
         }
 
-        public string LastId()
-        {
-            var consulta = (from datos in this.context.Usuarios
-                            orderby datos.Usuario_id descending
-                            select datos.Usuario_id).FirstOrDefault();
+   
 
-            int nuevoId = int.Parse(consulta)+1;
-
-            return nuevoId.ToString();
-          
-            
-        }
-
-        public async Task InsertUsuario(string Email, string Pass, string Nombre ,string Rol)
-        {
-            UsuarioModel usuario = new UsuarioModel();
-            usuario.Usuario_id = this.LastId();
-            usuario.Email = Email;
-            usuario.Pass = Pass;
-            usuario.Nombre = Nombre;
-            usuario.Rol = Rol;
-            this.context.Usuarios.Add(usuario);
-            await this.context.SaveChangesAsync();
-        }
-        public async Task UpdateUsuario(string Usuario_id, string Email, string Pass, string Nombre, string Rol)
-        {
-            UsuarioModel usuario = this.FindUsuario(Usuario_id);
-            usuario.Email = Email;
-            usuario.Pass = Pass;
-            usuario.Nombre = Nombre;
-            usuario.Rol = Rol;
-            await this.context.SaveChangesAsync();
-        }
+        //public async Task UpdateUsuario(string Usuario_id, string Email, string Pass, string Nombre, string Rol)
+        //{
+        //    UsuarioModel usuario = this.FindUsuario(Usuario_id);
+        //    usuario.Email = Email;
+        //    usuario.Pass = Pass;
+        //    usuario.Nombre = Nombre;
+        //    usuario.Rol = Rol;
+        //    await this.context.SaveChangesAsync();
+        //}
 
         public async Task DeleteUsuario(string Usuario_id)
         {

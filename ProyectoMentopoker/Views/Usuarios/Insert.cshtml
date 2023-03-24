@@ -1,5 +1,5 @@
 ﻿@using System.Security.Claims;
-   @if
+  @if
                          (@Context.User.FindFirst(ClaimTypes.Role)?.Value == "admin")
     {
 

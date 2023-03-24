@@ -13,8 +13,10 @@ namespace ProyectoMentopoker.Models
         public string Usuario_id { get; set; }
         [Column("Email")]
         public string Email { get; set; }
-        [Column("Pass")]
-        public string Pass { get; set; }
+        [Column("Password")]
+        public byte[] Pass { get; set; }
+        [Column("Salt")]
+        public string Salt { get; set; }
         [Column("Rol")]
         public string Rol { get; set; }
         [Column("Nombre")]
