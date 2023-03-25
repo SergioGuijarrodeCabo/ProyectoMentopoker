@@ -200,7 +200,7 @@ namespace ProyectoMentopoker.Repositories
             //List<int> jugadasInsertadas = new List<int>();
             //Boolean insercion = true;
 
-            for (int i = 0; i < ids_Rondas.Length; i++)
+            for (int i = 0; i <= ids_Rondas.Length; i++)
             {
                 await this.insertRonda(cantidades_Rondas[i], ganancias_Rondas[i], partidaId, cell_ids_Jugadas[i], table_ids_Jugadas[i], cantidades_Jugadas[i], seguimiento_jugadas[i]);
 

@@ -1767,7 +1767,6 @@
 
 
 
-            if (tipoPartida == 1 || tipoPartida == 2) {
 
                 $.ajax({
                     url: '@Url.Action("insertar", "PartidaConTabla")',
@@ -1809,56 +1808,6 @@
                 });
 
 
-            } else {
-
-
-                var seguimientos = [];
-                for (var i = 0; i < ids_Jugadas.length; i++) { }
-                //alert(ids_Jugadas[i]);
-                seguimientos.push(true);
-
-                $.ajax({
-                    url: '@Url.Action("insertar", "PartidaConTabla")',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        ids_Jugadas: ids_Jugadas,
-                        ids_Rondas: ids_Rondas,
-                        ganancias_Rondas: ganancias_Rondas,
-                        cantidades_Rondas: cantidades_Rondas,
-                        cell_ids_Jugadas: cell_ids_Jugadas,
-                        table_ids_Jugadas: table_ids_Jugadas,
-                        cantidades_Jugadas: cantidades_Jugadas,
-                        seguimiento_Jugadas: seguimientos,
-                        dineroActual: dineroActual,
-                        dineroInicial: dineroInicial,
-                        comentario: comentario,
-                        usuario_id: usuario_id
-                    },
-                    success: function (data) {
-                        if (data.success) {
-                            // The request was successful
-                            //alert(data.message);
-                            if (data.message == 1) {
-                                //alert("Partida insertada correctamente");
-                            } else {
-                                //alert("hola");
-                            }
-                        } else {
-                            // The request was not successful
-                            alert("Hubo un error al insertar la partida");
-                        }
-
-
-                    },
-                    error: function (xhr, status, error) {
-                        alert(xhr + status + error);
-                    }
-                });
-
-
-
-            }
 
 
 
