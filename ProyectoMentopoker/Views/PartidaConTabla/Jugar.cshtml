@@ -1112,8 +1112,8 @@
 
                   <table border="2" id="leyenda2"  class="table table-bordered" style="display:none;">
                   <tbody>
-                     <tr><td style="color: white; background-color: red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: white ;">3BET/REEVALUE</td>
-                    </tr> <tr><td style="color: white; background-color: blue;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: white ;">3BET-CALL/5BET</td>
+                     <tr><td style="color: white; background-color: red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: white ;">3BET/ REEVALUE</td>
+                    </tr> <tr><td style="color: white; background-color: blue;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: white ;">3BET-CALL /5BET</td>
                     </tr> <tr><td style="color: white; background-color: yellow;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: white ;">3 BET BLUFF</td>
                     </tr> <tr><td style="color: white; background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: white ;">CALL</td>
                         </tr> <tr><td style="color: white; background-color: purple;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: white ;">ALL-IN</td>
@@ -1122,7 +1122,7 @@
 
                 <table border="2" id="leyenda3"  class="table table-bordered" style="display:none;">
                   <tbody>
-                     <tr><td style="color: white; background-color: red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: white ;">3BET/5BET</td>
+                     <tr><td style="color: white; background-color: red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: white ;">3BET/ 5BET</td>
                     </tr> <tr><td style="color: white; background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: white ;">CALL</td>
                     </tr> <tr><td style="color: white; background-color: purple;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: white ;">ALL-IN</td>
                   </tr></tbody></table>
@@ -1193,10 +1193,10 @@
 
                       </tr></tbody></table>
 
-                        <table border="2" id="leyenda11" style="display:none;">
+                        <table  id="leyenda11" >
                       <tbody>
-                         <tr><td style="color: white; background-color: transparent;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: transparent ;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        </tr> <tr><td style="color: white; background-color: transparent;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: transparent ;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                         <tr><td style="color: white; background-color: transparent;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: transparent ;">placeholde</td>
+                        </tr> <tr><td style="color: white; background-color: transparent;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: transparent ;">placeholde</td>
                                
 
                       </tr></tbody></table>
@@ -1517,6 +1517,7 @@
 
 
             $("#tabla tbody").html(html);
+            $('#leyenda11').show();
 
             $(".btn-group").hide();
             $("#dInicial").show();
@@ -1856,6 +1857,18 @@
 
 
             $("#tabla td").css("opacity", "1");
+            
+                $('#leyenda1').hide();
+                $('#leyenda2').hide();
+                $('#leyenda3').hide();
+                $('#leyenda4').hide();
+                $('#leyenda5').hide();
+                $('#leyenda6').hide();
+                $('#leyenda7').hide();
+                $('#leyenda8').hide();
+                $('#leyenda9').hide();
+                $('#leyenda10').hide();
+                 $('#leyenda11').show();
 
         }
 
@@ -2068,11 +2081,63 @@
                     $("#" + ultimaMano).css("opacity", "1");
                 }
 
+                $('#leyenda1').hide();
+                $('#leyenda2').hide();
+                $('#leyenda3').hide();
+                $('#leyenda4').hide();
+                $('#leyenda5').hide();
+                $('#leyenda6').hide();
+                $('#leyenda7').hide();
+                $('#leyenda8').hide();
+                $('#leyenda9').hide();
+                $('#leyenda10').hide();
+                $('#leyenda11').hide();
+                
 
-                if(id >=1 || id <=10){
+                if (tipoPartida == 1) {
+                    $('#leyenda11').show();
+                }else{
+
+                if(id >=1 && id <=5){
                      //document.getElementById('leyenda1').style.display = "default";
-                     $("#leyenda1").show();
+                    $("#leyenda1").show();
                 }
+
+                if((id >5 && id <=35) || (id >89 && id <=117)){
+                    $("#leyenda2").show();
+                }
+
+
+                if (id > 37 && id <= 89) {
+                    $("#leyenda3").show();
+                }
+
+                if ((id > 117 && id <= 205) || (id > 214 && id<=226)) {
+                    $("#leyenda5").show();
+                }
+
+                if (id > 205 && id <= 208) {
+                    $("#leyenda4").show();
+                }
+
+                if (id > 208 && id <= 214) {
+                    $("#leyenda10").show();
+                }
+
+                if (id > 226 && id <= 230) {
+                    $("#leyenda6").show();
+                }
+
+                 if (id == 231) {
+                    $("#leyenda7").show();
+                }
+                if ((id >231 && id<=234) || (id > 237 && id<=240) || (id >243 && id<=246) ) {
+                    $("#leyenda8").show();
+                }
+
+                if ((id >234 && id<=237) || (id > 240 && id<=243) || (id >246 && id<=250) ) {
+                    $("#leyenda8").show();
+                } }
 
             } else {
                 // alert("hola");
