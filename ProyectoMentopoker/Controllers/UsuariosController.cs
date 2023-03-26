@@ -57,9 +57,9 @@ namespace ProyectoMentopoker.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Update(string Usuario_id, string Email, string Pass, string Nombre, string Rol)
+        public async Task<IActionResult> Update(string Usuario_id, string Email, string Nombre, string Rol)
         {
-            //await this.repoLogin.u(Usuario_id, usuario.Email, usuario.Pass, usuario.Nombre ,usuario.Rol);
+            await this.repoLogin.UpdateUsuario(Usuario_id, Email, Nombre, Rol);
 
             return RedirectToAction("Crud");
 

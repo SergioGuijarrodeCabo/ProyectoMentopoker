@@ -76,7 +76,36 @@
     </style>
 
     <div class="container">
+
+      
         <div class="principal">
+             <div class="row">
+                <div id="formchecks" style="padding:10px;">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="partidaSinTabla" value="1">
+                        <label class="form-check-label" for="flexRadioDefault1" style="color:white">
+                            Partida sin tabla
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="partidaConTablaMixta" value="2">
+                        <label class="form-check-label" for="flexRadioDefault2" style="color:white">
+                            Partida con tabla alterna
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="partidaConTablaSiempre" value="3">
+                        <label class="form-check-label" for="flexRadioDefault3" style="color:white">
+                            Partida con tabla continua
+                        </label>
+                    </div>
+
+
+                    <a class="btn btn-primary my-2" id="botonInicio" style="display:none;">Iniciar partida</a>
+
+                </div>
+
+                 </div>
             <div class="row">
                 <div class="col d-inline mr-2">
 
@@ -1231,34 +1260,11 @@
                                     }
 
 
-                                    <div id="formchecks" style="padding:10px;">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="partidaSinTabla" value="1">
-                                            <label class="form-check-label" for="flexRadioDefault1" style="color:white">
-                                                Partida sin tabla
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="partidaConTablaMixta" value="2">
-                                            <label class="form-check-label" for="flexRadioDefault2" style="color:white">
-                                                Partida con tabla alterna
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="partidaConTablaSiempre" value="3">
-                                            <label class="form-check-label" for="flexRadioDefault3" style="color:white">
-                                                Partida con tabla continua
-                                            </label>
-                                        </div>
+                                  
 
 
 
-                                    </div>
-
-
-
-                                    <a class="btn btn-primary my-2" id="botonInicio" style="display:none;">Iniciar partida</a>
-
+                                  
 
                                     <a class="btn btn-primary my-2" onclick="finalizarPartida()" id="botonFinal" style="display:none;">Finalizar partida</a>
                                 </div>
@@ -1314,6 +1320,7 @@
     <script>
 
         var tipoPartida = 0;
+        var inicioPartida=0;
 
         var jugadaSeleccionada = false;
         var idRondaActual = 0;
@@ -1370,6 +1377,8 @@
 
                 $('#formchecks').css('display', 'none');
                 $(this).css('display', 'none');
+
+                inicioPartida=1;
 
                 //  document.getElementById('botonInicio').style.display = "none";
                 idJugadaActual = 0;
@@ -1492,10 +1501,17 @@
 
         function tutorial() {
 
-            alert("1.Dentro de la ronda seleccione nueva jugada\n" +
+            alert("1.Seleccione el tipo de partida a jugar\n" +
+                  "-Partida sin tabla: si desea simular una partida sin ver las tablas preflop\n"+
+                  "(Aún así deberá seleccionar las condiciones preflop de cara a guardar los datos)\n"+
+                  "-Partida con seguimiento alterno: si desea simular una partida pero no siempre va\n"+
+                  "a seguir las opciones dadas por la tabla\n"+
+                  "-Partida con seguimiento continuo: si desea simular una partida y va a seguir\n"+
+                  "siempre lo que le indique la tabla\n "+
                 "2.Seleccione una condición de partida y una mano a jugar de las tablas\n" +
-                "3.Seleccione si va a seguir la tabla, la cantidad a jugar, y pulse en jugar\n" +
-                "4.Seleccione nueva ronda o nueva jugada dependiendo de la partida");
+                "3.Seleccione si va a seguir la tabla (si es seguimiento alterno), la cantidad a jugar,\n"+
+                "y pulse en jugar\n" +
+                "4.Seleccione nueva ronda y repita los pasos 2 y 3 hasta que finalize, y pulse en finalizar");
         }
 
 
@@ -1700,9 +1716,15 @@
 
         function jugarMano() {
 
+            var cantidadApostada = parseFloat($("#inputCantidad" + idRondaActual + "j" + idJugadaActual).val());
+            if(cantidadApostada<0){
+                alert("La cantidad apostada no puede ser menor a 0. Si quiere pasar, introduzca 0");
+            }else{
+
             if (manoJugada == 1 || rondaAMedias == 1) {
 
                 var cantidadApostada = parseFloat($("#inputCantidad" + idRondaActual + "j" + idJugadaActual).val());
+
                 var cantidadMaxima = cantidadTotalRonda + cantidadApostada;
 
 
@@ -1787,6 +1809,8 @@
                 alert("Debe seleccionar primero la condición de partida y la mano a jugar");
             }
 
+            }
+
         }
 
 
@@ -1807,6 +1831,11 @@
 
             cantidadTotalRonda = c;
 
+            if (cantidadTotalRonda==0){
+
+                cantidadTotalUltimaRonda=0;
+            }else{
+
             var cT = null;
             do {
                 cT = prompt("Introduzca sus ganancias o pérdidas (en negativo) de la última ronda");
@@ -1814,7 +1843,7 @@
                     alert("Debe introducir una cifra. Si ha pasado, introduzca 0");
                 }
             } while (cT === null || cT.trim() === "" || isNaN(cT));
-            cantidadTotalUltimaRonda = cT;
+            cantidadTotalUltimaRonda = cT;}
 
 
 
@@ -1831,10 +1860,10 @@
 
             $("#dineroActual").text("Dinero actual: " + dineroActual + "$");
 
-            if (balance <= 0) {
+            if (balance < 0) {
                 // Set the color to red if the balance is negative or zero
                 $('#balance').css('color', 'red');
-            } else {
+            } if(balance>0) {
                 // Set the color to green if the balance is positive
                 $('#balance').css('color', 'green');
             }
@@ -1955,6 +1984,9 @@
 
         //Aquí se manejan los dropdowns y el visor
         $('ul.dropdown-menu a').click(function () {
+
+            if(inicioPartida==1){
+
             id = $(this).attr('id');
             var divsAMostrar = [];
             //var nombre = $(this).attr('name');
@@ -2193,6 +2225,8 @@
 
                 // document.getElementById('dBBvsLimp').style.display = "inline-block";
 
+            }}else{
+                alert("Debe seleccionar un tipo de partida e iniciarla antes de elegir la condición");
             }
         });
 

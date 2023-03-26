@@ -520,9 +520,9 @@ namespace ProyectoMentopoker.Repositories
                 if (stats.SeguimientoTipoRondas[i].Equals("si"))
                 {
 
-                    stats.CantidadesJugadas[0] += (rondasACalcular[i].Cantidad_jugada);
+                    stats.CantidadesRondas[0] += (rondasACalcular[i].Cantidad_jugada);
                     stats.GananciasTipoRondas[0] += (rondasACalcular[i].Ganancias);
-                    stats.CantidadesRondas[0] += (JugadasRondas[i].Cantidad_jugada_Preflop);
+                    stats.CantidadesJugadas[0] += (JugadasRondas[i].Cantidad_jugada_Preflop);
                     stats.MediaCantidadesJugadas[0] += (JugadasRondas[i].Cantidad_jugada_Preflop);
 
                     if (rondasACalcular[i].Ganancias < 0)
@@ -539,9 +539,9 @@ namespace ProyectoMentopoker.Repositories
                 }
                 if (stats.SeguimientoTipoRondas[i].Equals("no"))
                 {
-                    stats.CantidadesJugadas[1] += (rondasACalcular[i].Cantidad_jugada);
+                    stats.CantidadesRondas[1] += (rondasACalcular[i].Cantidad_jugada);
                     stats.GananciasTipoRondas[1] += (rondasACalcular[i].Ganancias);
-                    stats.CantidadesRondas[1] += (JugadasRondas[i].Cantidad_jugada_Preflop);
+                    stats.CantidadesJugadas[1] += (JugadasRondas[i].Cantidad_jugada_Preflop);
                     stats.MediaCantidadesJugadas[1] += (JugadasRondas[i].Cantidad_jugada_Preflop);
 
                     if (rondasACalcular[i].Ganancias < 0)

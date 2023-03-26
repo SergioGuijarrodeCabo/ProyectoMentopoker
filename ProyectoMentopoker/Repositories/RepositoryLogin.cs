@@ -74,17 +74,7 @@ namespace ProyectoMentopoker.Repositories
         }
 
 
-        //public UsuarioModel Login(string email, string password)
-        //{
-        //    //UsuarioModel usuario = new UsuarioModel();
-        //    var consulta = from datos in this.context.Usuarios
-        //                   where datos.Email == email.ToString() && datos.Pass == password.ToString()
-        //                   select datos;
-        //    //usuario =  consulta.First();
-
-        //    return consulta.FirstOrDefault();
-
-        //}
+    
 
         public List<UsuarioModel> GetUsuarios()
         {
@@ -102,17 +92,16 @@ namespace ProyectoMentopoker.Repositories
 
         }
 
-   
 
-        //public async Task UpdateUsuario(string Usuario_id, string Email, string Pass, string Nombre, string Rol)
-        //{
-        //    UsuarioModel usuario = this.FindUsuario(Usuario_id);
-        //    usuario.Email = Email;
-        //    usuario.Pass = Pass;
-        //    usuario.Nombre = Nombre;
-        //    usuario.Rol = Rol;
-        //    await this.context.SaveChangesAsync();
-        //}
+
+        public async Task UpdateUsuario(string Usuario_id, string Email, string Nombre, string Rol)
+        {
+            UsuarioModel usuario = this.FindUsuario(Usuario_id);
+            usuario.Email = Email;
+            usuario.Nombre = Nombre;
+            usuario.Rol = Rol;
+            await this.context.SaveChangesAsync();
+        }
 
         public async Task DeleteUsuario(string Usuario_id)
         {
