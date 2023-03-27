@@ -7,20 +7,20 @@ namespace ProyectoMentopoker.Controllers
 {
     public class UsuariosController : Controller
     {
-
+        private RepositoryEstadisticas repoPartidas;
         private RepositoryLogin repoLogin;
 
-        public UsuariosController(RepositoryLogin repoLogin)
+        public UsuariosController(RepositoryLogin repoLogin, RepositoryEstadisticas repoPartidas)
         {
             this.repoLogin = repoLogin;
-           
+            this.repoPartidas = repoPartidas;
 
         }
 
 
 
 
-        [AuthorizeUsers]
+        //[AuthorizeUsers]
         public IActionResult Crud()
         {
             List<UsuarioModel> usuarios = this.repoLogin.GetUsuarios();
@@ -68,7 +68,8 @@ namespace ProyectoMentopoker.Controllers
 
         public async Task<IActionResult> Delete(string Usuario_id)
         {
-            await this.repoLogin.DeleteUsuario(Usuario_id);
+            await this.repoPartidas.BorrarPartidas(Usuario_id);
+             this.repoLogin.DeleteUsuario(Usuario_id);
             return RedirectToAction("Crud");
 
         }

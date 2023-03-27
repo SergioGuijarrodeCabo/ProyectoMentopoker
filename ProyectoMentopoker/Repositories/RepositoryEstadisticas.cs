@@ -59,7 +59,58 @@ using Microsoft.AspNetCore.Server.IIS.Core;
 
 
 
+//SET ANSI_NULLS ON
+//GO
+//SET QUOTED_IDENTIFIER ON
+//GO
+//ALTER PROCEDURE [dbo].[SP_BORRAR_TODAS_PARTIDAS]
+//(@USUARIO_ID NVARCHAR(50))
+//AS
+//  DECLARE @partidas_id TABLE (id NVARCHAR(50))
+//  DECLARE @rondas_id TABLE (id NVARCHAR(50))
+//  DECLARE @jugadas_id TABLE (id NVARCHAR(50))
 
+//  --Guardar todas las partidas_id asociadas con el usuario
+//  INSERT INTO @partidas_id (id)
+//  SELECT partida_id FROM Partidas WHERE Usuario_id = @USUARIO_ID
+
+//  -- Iterar dentro de cada partida y guardar las rondas y jugadas asociadas
+//  DECLARE @partida_id NVARCHAR(50)
+//  DECLARE cur CURSOR FOR SELECT id FROM @partidas_id
+//  OPEN cur
+//  FETCH NEXT FROM cur INTO @partida_id
+//  WHILE @@FETCH_STATUS = 0
+//  BEGIN
+//    -- Guardar todas las rondas_id asociadas con la partida
+//    INSERT INTO @rondas_id (id)
+//    SELECT ronda_id FROM Rondas WHERE Partida_id = @partida_id
+
+//    -- Iterar dentro de cada ronda y guardar las jugadas asociadas
+//    DECLARE @ronda_id NVARCHAR(50)
+//    DECLARE cur2 CURSOR FOR SELECT id FROM @rondas_id
+//    OPEN cur2
+//    FETCH NEXT FROM cur2 INTO @ronda_id
+//    WHILE @@FETCH_STATUS = 0
+//    BEGIN
+//      INSERT INTO @jugadas_id (id)
+//      SELECT jugada_id FROM Jugadas WHERE Ronda_id = @ronda_id
+//      FETCH NEXT FROM cur2 INTO @ronda_id
+//    END
+//    CLOSE cur2
+//    DEALLOCATE cur2
+//  FETCH NEXT FROM cur INTO @partida_id
+//  END
+//  CLOSE cur
+//  DEALLOCATE cur
+
+//  -- Borrar todas las jugadas asociadas con cada ronda
+//  DELETE FROM Jugadas WHERE Ronda_id IN (SELECT id FROM @rondas_id)
+
+//  --Borrar todas las rondas asociadas con cada partida
+//  DELETE FROM Rondas WHERE Partida_id IN (SELECT id FROM @partidas_id)
+
+//  --Borrar las partidas asociadas con el usuario
+//  DELETE FROM Partidas WHERE Usuario_id = @USUARIO_ID
 
 
 
@@ -95,11 +146,11 @@ using Microsoft.AspNetCore.Server.IIS.Core;
 //AS
 //  DECLARE @rondas_id TABLE (id NVARCHAR(50))
 //  DECLARE @jugadas_id TABLE (id NVARCHAR(50))
-  
+
 //  --Guardar todas las rondas_id asociadas con la partida
 //  INSERT INTO @rondas_id (id)
 //  SELECT ronda_id FROM Rondas WHERE Partida_id = @PARTIDA_ID
-  
+
 //  -- Iterar dentro de cada ronda y guardar las jugadas asociadas
 //  DECLARE @ronda_id NVARCHAR(50)
 //  DECLARE cur CURSOR FOR SELECT id FROM @rondas_id
@@ -113,13 +164,13 @@ using Microsoft.AspNetCore.Server.IIS.Core;
 //  END
 //  CLOSE cur
 //  DEALLOCATE cur
-  
+
 //  --borrar todas las jugadas asociadas con cada ronda
 //  DELETE FROM Jugadas WHERE Ronda_id IN (SELECT id FROM @rondas_id)
-  
+
 //  --borrar todas las rondas asociadas con cada partida
 //  DELETE FROM Rondas WHERE Partida_id = @PARTIDA_ID
-  
+
 //  --Borrar la partida asociada con el id de partida
 //  DELETE FROM Partidas WHERE Partida_id = @PARTIDA_ID
 //GO
@@ -193,6 +244,23 @@ namespace ProyectoMentopoker.Repositories
                            where datos.Partida_id == Partida_id
                            select datos;
             return consulta.FirstOrDefault();
+        }
+
+        public async Task BorrarPartidas(string Usuario_id)
+        {
+            SqlParameter pamID = new SqlParameter("@USUARIO_ID", Usuario_id);
+            this.com.Parameters.Add(pamID);
+
+            this.com.CommandTimeout = 60;
+   
+            this.com.CommandType = System.Data.CommandType.StoredProcedure;
+            this.com.CommandText = "SP_BORRAR_TODAS_PARTIDAS";
+
+            this.cn.Open();
+            await this.com.ExecuteNonQueryAsync();
+            this.com.Parameters.Clear();
+            this.cn.Close();
+
         }
 
         public async Task UpdatePartida(string Partida_id, double Cash_inicial, double Cash_Final, string Comentarios)

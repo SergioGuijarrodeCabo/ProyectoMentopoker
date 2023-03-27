@@ -6,7 +6,7 @@ using ProyectoMentopoker.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 string connectionString =
-    builder.Configuration.GetConnectionString("SqlMentopokerClase");
+    builder.Configuration.GetConnectionString("SqlAzure");
 
 
 builder.Services.AddTransient<RepositoryEstadisticas>();

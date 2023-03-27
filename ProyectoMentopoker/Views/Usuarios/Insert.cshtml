@@ -1,7 +1,7 @@
 ﻿@using System.Security.Claims;
-  @if
+@*  @if
                          (@Context.User.FindFirst(ClaimTypes.Role)?.Value == "admin")
-    {
+    {*@
 
 <section class="vh-100 gradient-custom">
   <div class="container py-5 h-100">
@@ -59,9 +59,10 @@
   </div>
 </section>
 
-}
+@*}
 else
 {
 
     <h1>No tienes permisos para acceder a esta funcionalidad</h1>
 }
+*@
