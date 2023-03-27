@@ -1,2 +1,2 @@
-usuario: a
-pass: a
+usuario: admin
+pass: admin
