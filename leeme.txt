@@ -1,2 +1,2 @@
-usuario: admin
+email: admin
 pass: admin
