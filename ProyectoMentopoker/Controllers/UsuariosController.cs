@@ -20,7 +20,7 @@ namespace ProyectoMentopoker.Controllers
 
 
 
-        //[AuthorizeUsers]
+        [AuthorizeUsers]
         public IActionResult Crud()
         {
             List<UsuarioModel> usuarios = this.repoLogin.GetUsuarios();
