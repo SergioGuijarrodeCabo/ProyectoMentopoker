@@ -168,9 +168,10 @@ namespace ProyectoMentopoker.Repositories
             //string connectionString = @"Data Source=DESKTOP-E38C8U3;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
 
             //Conexión de clase
-            string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
+            //string connectionString = @"Data Source=LOCALHOST\DESARROLLO;Initial Catalog=PROYECTOMENTOPOKER;User ID=sa;Password=MCSD2022";
 
-
+            //Conexión azure 
+            string connectionString = @"Data Source=sgserversql.database.windows.net;Initial Catalog=PRIMERADB;User ID=Adminsg;Password=Sgpass1234";
 
             // this.cn = new SqlConnection(HelperConfiguartion.GetConnectionString());
             this.cn = new SqlConnection(connectionString);
