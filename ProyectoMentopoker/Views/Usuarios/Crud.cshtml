@@ -37,8 +37,8 @@
             }
            
     </style>
-    @*
-                        if (@Context.User.FindFirst(ClaimTypes.Role)?.Value == "admin"){*@
+    
+                        if (@Context.User.FindFirst(ClaimTypes.Role)?.Value == "admin"){
 
     <div class="container" >
         <div>
@@ -96,12 +96,12 @@
     </div>
     </div>
 
- @*  }
+   }
     else
     {
 
         <h1>No tienes permisos para acceder a esta funcionalidad</h1>
     }
-*@
+
 </body>
 </html>
